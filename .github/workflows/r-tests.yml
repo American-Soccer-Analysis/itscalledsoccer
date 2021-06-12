@@ -7,5 +7,5 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
       - name: Install R
-      - uses: r-lib/actions/setup-r@v1
+        uses: r-lib/actions/setup-r@v1
       # TODO install dependencies and run tests

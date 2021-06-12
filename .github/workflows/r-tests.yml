@@ -1,0 +1,11 @@
+name: R tests
+on: [push]
+jobs:
+  r:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Install R
+      - uses: r-lib/actions/setup-r@v1
+      # TODO install dependencies and run tests

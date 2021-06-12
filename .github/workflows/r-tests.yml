@@ -1,7 +1,7 @@
 name: R tests
 on: [push]
 jobs:
-  r:
+  rtests:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code

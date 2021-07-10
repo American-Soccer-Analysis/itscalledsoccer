@@ -9,7 +9,7 @@ setup(
     description="Programmatically interact with the ASA API",
     long_description=long_description,
     author="American Soccer Analysis",
-    author_email="",
+    author_email="americansocceranalysis@gmail.com",
     url="https://github.com/American-Soccer-Analysis/asa-package",
     classifiers=[
         "Programming Language :: Python",

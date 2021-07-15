@@ -24,3 +24,7 @@ jobs:
       - name: Test with pytest
         run: |
           pytest tests/python/
+      - name: Behave tests
+        run: |
+          cd tests
+          behave

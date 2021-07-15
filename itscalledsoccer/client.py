@@ -1,3 +1,4 @@
+from os import name
 import re
 import requests
 from typing import Dict, List, Any, Union
@@ -77,28 +78,57 @@ class AmericanSoccerAnalysis:
         matched_id = lookup.get(lookup_id)
         return matched_id
 
-    def get_stadia(self, league: str, ids: List[str] = None) -> List[Dict[str, Any]]:
+    def _convert_names_to_ids(
+        self, type: str, names: Union[str, None]
+    ) -> Union[str, List[str]]:
+        """Converts a name or list of names to an id or list of ids
+
+        :param type: type of name
+        :param names: a name or list of names
+        :returns: an id or list of ids
+        """
+        ids = []
+        if names is None:
+            return None
+        if isinstance(names, str):
+            return self._convert_name_to_id(type, names)
+        else:
+            for n in names:
+                ids.append(self._convert_name_to_id(type, n))
+            return ids
+
+    def get_stadia(
+        self, league: str, names: Union[str, List[str]] = None
+    ) -> List[Dict[str, Any]]:
         """Get information associated with stadia
 
         :param league: league abbreviation
-        :param ids: list of stadium ids (optional)
+        :param names: a single stadium name or a list of stadia names (optional)
         :returns: list of dictionaries
         """
-        if ids:
+        ids = self._convert_names_to_ids("stadium", names)
+        if isinstance(ids, str):
+            stadia_url = f"{self.base_url}{league}/stadia?stadium_id={ids}"
+        elif isinstance(ids, list):
             stadia_url = f"{self.base_url}{league}/stadia?stadium_id={','.join(ids)}"
         else:
             stadia_url = f"{self.base_url}{league}/stadia"
         response = self.session.get(stadia_url)
         return response.json()
 
-    def get_referees(self, league: str, ids: List[str] = None) -> List[Dict[str, Any]]:
+    def get_referees(
+        self, league: str, names: Union[str, List[str]] = None
+    ) -> List[Dict[str, Any]]:
         """Get information associated with referees
 
         :param league: league abbreviation
-        :param ids: list of referee ids (optional)
+        :param names: a single referee name or a list of referee names (optional)
         :returns: list of dictionaries
         """
-        if ids:
+        ids = self._convert_names_to_ids("referee", names)
+        if isinstance(ids, str):
+            referees_url = f"{self.base_url}{league}/referees?referee_id={ids}"
+        elif isinstance(ids, list):
             referees_url = (
                 f"{self.base_url}{league}/referees?referee_id={','.join(ids)}"
             )
@@ -107,14 +137,19 @@ class AmericanSoccerAnalysis:
         response = self.session.get(referees_url)
         return response.json()
 
-    def get_managers(self, league: str, ids: List[str] = None) -> List[Dict[str, Any]]:
+    def get_managers(
+        self, league: str, names: Union[str, List[str]] = None
+    ) -> List[Dict[str, Any]]:
         """Get information associated with managers
 
         :param league: league abbreviation
-        :param ids: list of manager ids (optional)
+        :param names: a single manager name or list of manager names (optional)
         :returns: list of dictionaries
         """
-        if ids:
+        ids = self._convert_names_to_ids("manager", names)
+        if isinstance(ids, str):
+            managers_url = f"{self.base_url}{league}/managers?manager_id={ids}"
+        elif isinstance(ids, list):
             managers_url = (
                 f"{self.base_url}{league}/managers?manager_id={','.join(ids)}"
             )
@@ -123,28 +158,38 @@ class AmericanSoccerAnalysis:
         response = self.session.get(managers_url)
         return response.json()
 
-    def get_teams(self, league: str, ids: List[str]) -> List[Dict[str, Any]]:
+    def get_teams(
+        self, league: str, names: Union[str, List[str]]
+    ) -> List[Dict[str, Any]]:
         """Get information associated with teams
 
         :param league: league abbreviation
-        :param ids: team id (optional)
+        :param names: a single team name or list of team names (optional)
         :returns: list of dictionaries
         """
-        if ids:
+        ids = self._convert_names_to_ids("team", names)
+        if isinstance(ids, str):
+            teams_url = f"{self.base_url}{league}/teams?team_id={ids}"
+        if isinstance(ids, list):
             teams_url = f"{self.base_url}{league}/teams?team_id={','.join(ids)}"
         else:
             teams_url = f"{self.base_url}{league}/teams"
         response = self.session.get(teams_url)
         return response.json()
 
-    def get_players(self, league: str, ids: List[str]) -> List[Dict[str, Any]]:
+    def get_players(
+        self, league: str, names: Union[str, List[str]]
+    ) -> List[Dict[str, Any]]:
         """Get information associated with players
 
         :param league: league abbreviation
-        :param ids: list of player ids (optional)
+        :param names: a single player name or list of player names (optional)
         :returns: list of dictionaries
         """
-        if ids:
+        ids = self._convert_names_to_ids("player", names)
+        if isinstance(ids, str):
+            players_url = f"{self.base_url}{league}/players?player_id={ids}"
+        if isinstance(ids, list):
             players_url = f"{self.base_url}{league}/players?player_id={','.join(ids)}"
         else:
             players_url = f"{self.base_url}{league}/players"

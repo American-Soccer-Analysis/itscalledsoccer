@@ -1,6 +1,8 @@
+import re
 import requests
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Union
 from cachecontrol import CacheControl
+from fuzzywuzzy import fuzz, process
 
 
 class AmericanSoccerAnalysis:
@@ -21,7 +23,7 @@ class AmericanSoccerAnalysis:
         self.teams = self._get_all_ids("team")
         self.stadia = self._get_all_ids("stadia")
         self.managers = self._get_all_ids("manager")
-        self.referess = self._get_all_ids("referee")
+        self.referees = self._get_all_ids("referee")
 
     def _get_all_ids(self, type: str) -> Dict[str, str]:
         """Creates a dictionary where keys are names and values
@@ -39,8 +41,41 @@ class AmericanSoccerAnalysis:
                 url = f"{self.BASE_URL}{league}/{type}s"
             response = self.session.get(url).json()
             for resp in response:
-                all_ids.update({resp[f"{type}_name"]: resp[f"{type}_id"]})
+                name = resp.get(f"{type}_name", "None")
+                name_id = resp.get(f"{type}_id", "None")
+                all_ids.update({name: name_id})
+            if type == "stadium":
+                type = "stadia"
         return all_ids
+
+    def _convert_name_to_id(self, type: str, name: str) -> Union[str, int]:
+        """Converts the name of a player, manager, stadium, referee or team
+        to their corresponding id.
+
+        :param type: type of name to convert
+        :param name: name
+        :returns: either an int or string, depending on the type
+        """
+        if type == "player":
+            lookup = self.players
+            names = self.players.keys()
+        elif type == "manager":
+            lookup = self.managers
+            names = self.managers.keys()
+        elif type == "stadium":
+            lookup = self.stadia
+            names = self.stadia.keys()
+        elif type == "referee":
+            lookup = self.referees
+            names = self.referees.keys()
+        elif type == "team":
+            lookup = self.teams
+            names = self.teams.keys()
+
+        matches = process.extractOne(name, names, scorer=fuzz.partial_ratio)
+        lookup_id = matches[0]
+        matched_id = lookup.get(lookup_id)
+        return matched_id
 
     def get_stadia(self, league: str, ids: List[str] = None) -> List[Dict[str, Any]]:
         """Get information associated with stadia

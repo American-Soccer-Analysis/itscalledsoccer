@@ -2,3 +2,5 @@ requests==2.25.1
 CacheControl==0.12.6
 fuzzywuzzy==0.18.0
 python-Levenshtein==0.12.2
+behave==1.2.6
+pytest==6.2.4

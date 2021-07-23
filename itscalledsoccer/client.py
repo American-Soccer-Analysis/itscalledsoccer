@@ -57,6 +57,7 @@ class AmericanSoccerAnalysis:
         :param name: name
         :returns: either an int or string, depending on the type
         """
+        min_score = 70
         if type == "player":
             lookup = self.players
             names = self.players.keys()
@@ -74,7 +75,15 @@ class AmericanSoccerAnalysis:
             names = self.teams.keys()
 
         matches = process.extractOne(name, names, scorer=fuzz.partial_ratio)
-        lookup_id = matches[0]
+        if matches:
+            if matches[1] > min_score:
+                lookup_id = matches[0]
+            else:
+                print(f"No match found for {name}")
+                return ""
+        else:
+            print(f"No match found for {name}")
+            return ""
         matched_id = lookup.get(lookup_id)
         return matched_id
 

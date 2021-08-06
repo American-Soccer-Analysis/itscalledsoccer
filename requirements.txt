@@ -1,0 +1,4 @@
+requests==2.25.1
+CacheControl==0.12.6
+fuzzywuzzy==0.18.0
+python-Levenshtein==0.12.2

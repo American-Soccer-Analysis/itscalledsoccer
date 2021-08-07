@@ -11,11 +11,31 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         referees = NULL,
         initialize = function() {
             self$BASE_URL <- glue::glue("https://app.americansocceranalysis.com/api/{self$API_VERSION}/")
-            self$players <- get_all_ids("player", self)
-            self$teams <- get_all_ids("team", self)
-            self$stadia <- get_all_ids("stadia", self)
-            self$managers <- get_all_ids("manager", self)
-            self$referees <- get_all_ids("referee", self)
+            self$players <- get_entity("player", self)
+            self$teams <- get_entity("team", self)
+            self$stadia <- get_entity("stadium", self)
+            self$managers <- get_entity("manager", self)
+            self$referees <- get_entity("referee", self)
+        },
+        get_players = function(leagues, ids, names) {
+            players <- filter_entity(self$players, leagues, ids, names)
+            return(players)
+        },
+        get_teams = function(leagues, ids, names) {
+            teams <- filter_entity(self$teams, leagues, ids, names)
+            return(teams)
+        },
+        get_stadia = function(leagues, ids, names) {
+            stadia <- filter_entity(self$stadia, leagues, ids, names)
+            return(stadia)
+        },
+        get_managers = function(leagues, ids, names) {
+            managers <- filter_entity(self$managers, leagues, ids, names)
+            return(managers)
+        },
+        get_referees = function(leagues, ids, names) {
+            referees <- filter_entity(self$referees, leagues, ids, names)
+            return(referees)
         }
     )
 )

@@ -1,9 +1,9 @@
-from os import name
-import re
 import requests
 from typing import Dict, List, Any, Union
 from cachecontrol import CacheControl
 from fuzzywuzzy import fuzz, process
+import pandas as pd
+import json
 
 
 class AmericanSoccerAnalysis:
@@ -20,20 +20,20 @@ class AmericanSoccerAnalysis:
 
         self.session = CACHE_SESSION
         self.base_url = self.BASE_URL
-        self.players = self._get_all_ids("player")
-        self.teams = self._get_all_ids("team")
-        self.stadia = self._get_all_ids("stadia")
-        self.managers = self._get_all_ids("manager")
-        self.referees = self._get_all_ids("referee")
+        self.players = self._get_all("player")
+        self.teams = self._get_all("team")
+        self.stadia = self._get_all("stadia")
+        self.managers = self._get_all("manager")
+        self.referees = self._get_all("referee")
 
-    def _get_all_ids(self, type: str) -> Dict[str, str]:
-        """Creates a dictionary where keys are names and values
-        are corresponding ids.
+    def _get_all(self, type: str) -> pd.DataFrame:
+        """Gets all the data for a specific type and
+        stores it in a dataframe.
 
-        :param type: type of ids to get
-        :returns: dictionary
+        :param type: type of data to get
+        :returns: dataframe
         """
-        all_ids = {}
+        df = pd.DataFrame([])
         for league in self.LEAGUES:
             if type == "stadia":
                 url = f"{self.BASE_URL}{league}/{type}"
@@ -41,13 +41,13 @@ class AmericanSoccerAnalysis:
             else:
                 url = f"{self.BASE_URL}{league}/{type}s"
             response = self.session.get(url).json()
-            for resp in response:
-                name = resp.get(f"{type}_name", "None")
-                name_id = resp.get(f"{type}_id", "None")
-                all_ids.update({name: name_id})
+            # Convert list of objects to JSON
+            df = df.append(
+                pd.read_json(json.dumps(response, default=lambda x: x.__dict__))
+            )
             if type == "stadium":
                 type = "stadia"
-        return all_ids
+        return df
 
     def _convert_name_to_id(self, type: str, name: str) -> Union[str, int]:
         """Converts the name of a player, manager, stadium, referee or team
@@ -60,31 +60,31 @@ class AmericanSoccerAnalysis:
         min_score = 70
         if type == "player":
             lookup = self.players
-            names = self.players.keys()
+            names = self.players["player_name"].to_list()
         elif type == "manager":
             lookup = self.managers
-            names = self.managers.keys()
+            names = self.managers["manager_name"].to_list()
         elif type == "stadium":
             lookup = self.stadia
-            names = self.stadia.keys()
+            names = self.stadia["stadium_name"].to_list()
         elif type == "referee":
             lookup = self.referees
-            names = self.referees.keys()
+            names = self.referees["referee_name"].to_list()
         elif type == "team":
             lookup = self.teams
-            names = self.teams.keys()
-
+            names = self.teams["team_name"].to_list()
+        # logger.debug(f"Calling fuzz with {name} and {names}")
         matches = process.extractOne(name, names, scorer=fuzz.partial_ratio)
         if matches:
-            if matches[1] > min_score:
-                lookup_id = matches[0]
+            if matches[1] >= min_score:
+                name = matches[0]
             else:
-                print(f"No match found for {name}")
+                print(f"No match found for {name} due to score")
                 return ""
         else:
             print(f"No match found for {name}")
             return ""
-        matched_id = lookup.get(lookup_id)
+        matched_id = lookup.loc[lookup[f"{type}_name"] == name, f"{type}_id"].iloc[0]
         return matched_id
 
     def _convert_names_to_ids(

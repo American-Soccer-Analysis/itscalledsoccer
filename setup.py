@@ -10,7 +10,7 @@ setup(
     long_description=long_description,
     author="American Soccer Analysis",
     author_email="americansocceranalysis@gmail.com",
-    url="https://github.com/American-Soccer-Analysis/asa-package",
+    url="https://github.com/American-Soccer-Analysis/itscalledsoccer",
     classifiers=[
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",

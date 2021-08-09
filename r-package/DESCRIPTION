@@ -19,4 +19,5 @@ Imports:
     jsonlite (>= 1.7.0),
     magrittr (>= 2.0.0),
     R6 (>= 2.5.0),
-    tidyr (>= 1.1.1)
+    tidyr (>= 1.1.1),
+    stringi (>= 1.5.3)

@@ -43,8 +43,7 @@ filter_entity <- function(entity_all, leagues, ids, names) {
     }
 
     if (!missing(names)) {
-        entity_filtered <- entity_filtered %>%
-            dplyr::filter(dplyr::if_any(dplyr::ends_with("_name"), ~ . %in% names))
+        entity_filtered <- match_names(entity_filtered, names, return_ids = FALSE)
     }
 
     entity_filtered <- entity_filtered %>%
@@ -52,4 +51,27 @@ filter_entity <- function(entity_all, leagues, ids, names) {
         dplyr::distinct()
 
     return(entity_filtered)
+}
+
+match_names <- function(df, names, return_ids = TRUE) {
+    names_clean <- clean_names(names)
+    names_string <- paste0(names_clean, collapse = "|")
+
+    df <- df %>%
+        dplyr::mutate(dplyr::across(dplyr::matches("(_name|_abbreviation)$"), .fns = list(clean = ~clean_names(.)))) %>%
+        dplyr::filter(dplyr::if_any(dplyr::ends_with("_clean"), ~grepl(names_string, .))) %>%
+        dplyr::select(!dplyr::ends_with("_clean"))
+
+    if (return_ids) {
+        ids <- df %>% dplyr::pull(names(.)[which(grepl("_id$", names(.)))])
+        return(ids)
+    } else {
+        return(df)
+    }
+}
+
+clean_names <- function(names) {
+    names <- stringi::stri_trans_general(str = names, id = "Latin-ASCII")
+    names <- tolower(names)
+    return(names)
 }

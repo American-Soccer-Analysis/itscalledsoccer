@@ -18,23 +18,23 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
             self$referees <- get_entity("referee", self)
         },
         get_players = function(leagues, ids, names) {
-            players <- filter_entity(self$players, leagues, ids, names)
+            players <- filter_entity(self$players, self$LEAGUES, leagues, ids, names)
             return(players)
         },
         get_teams = function(leagues, ids, names) {
-            teams <- filter_entity(self$teams, leagues, ids, names)
+            teams <- filter_entity(self$teams, self$LEAGUES, leagues, ids, names)
             return(teams)
         },
         get_stadia = function(leagues, ids, names) {
-            stadia <- filter_entity(self$stadia, leagues, ids, names)
+            stadia <- filter_entity(self$stadia, self$LEAGUES, leagues, ids, names)
             return(stadia)
         },
         get_managers = function(leagues, ids, names) {
-            managers <- filter_entity(self$managers, leagues, ids, names)
+            managers <- filter_entity(self$managers, self$LEAGUES, leagues, ids, names)
             return(managers)
         },
         get_referees = function(leagues, ids, names) {
-            referees <- filter_entity(self$referees, leagues, ids, names)
+            referees <- filter_entity(self$referees, self$LEAGUES, leagues, ids, names)
             return(referees)
         }
     )

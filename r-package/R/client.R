@@ -36,6 +36,10 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         get_referees = function(leagues, ids, names) {
             referees <- filter_entity(self$referees, self$LEAGUES, leagues, ids, names)
             return(referees)
+        },
+        get_games = function(leagues, game_ids, team_ids, team_names, seasons, stages) {
+            games <- get_games(self, leagues, game_ids, team_ids, team_names, seasons, stages)
+            return(games)
         }
     )
 )

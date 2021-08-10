@@ -15,8 +15,7 @@ get_entity <- function(type, self) {
             jsonlite::fromJSON() %>%
             dplyr::mutate(competition = league)
 
-        entity_all <- entity_all %>%
-            dplyr::bind_rows(response)
+        entity_all <- entity_all %>% dplyr::bind_rows(response)
     }
 
     entity_all <- entity_all %>%
@@ -54,6 +53,43 @@ filter_entity <- function(entity_all, league_options, leagues, ids, names) {
         dplyr::distinct()
 
     return(entity_filtered)
+}
+
+get_games <- function(self, leagues, game_ids, team_ids, team_names, seasons, stages) {
+    .check_leagues(leagues, self$LEAGUES)
+    .check_ids_names(team_ids, team_names)
+
+    if (missing(leagues)) leagues <- self$LEAGUES
+
+    query <- list()
+    if (!missing(game_ids)) query$game_id <- .collapse_query_string(game_ids)
+    if (!missing(team_ids)) query$team_id <- .collapse_query_string(team_ids)
+    if (!missing(team_names)) query$team_id <- .collapse_query_string(.convert_names_to_ids(self$teams, team_names))
+    if (!missing(seasons)) query$season_name <- .collapse_query_string(seasons)
+    if (!missing(stages)) query$stage_name <- .collapse_query_string(stages)
+
+    games <- data.frame()
+
+    for (league in leagues) {
+        url <- glue::glue("{self$BASE_URL}{league}/games")
+
+        r <- httpcache::GET(url, query = query)
+        httr::stop_for_status(r)
+        response <- r %>%
+            httr::content(as = "text", encoding = "UTF-8") %>%
+            jsonlite::fromJSON()
+
+        games <- games %>%
+            dplyr::bind_rows(response) %>%
+            dplyr::arrange(date_time_utc)
+    }
+
+    return(games)
+}
+
+.collapse_query_string <- function(value) {
+    value <- paste0(value, collapse = ",")
+    return(value)
 }
 
 .check_leagues <- function(leagues, league_options) {

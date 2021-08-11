@@ -1,0 +1,27 @@
+Package: itscalledsoccer
+Title: What the Package Does (Title Case)
+Version: 0.0.0.9000
+Author: The package author <yourself@somewhere.net>
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Depends:
+    R (>= 3.2.0)
+Imports: 
+    dplyr (>= 1.0.0),
+    httpcache (>= 1.2.0),
+    glue (>= 1.4.1),
+    httr (>= 1.4.2),
+    jsonlite (>= 1.7.0),
+    magrittr (>= 2.0.0),
+    R6 (>= 2.5.0),
+    tidyr (>= 1.1.1),
+    stringi (>= 1.5.3)
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

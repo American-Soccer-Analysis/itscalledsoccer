@@ -1,6 +1,7 @@
 Package: itscalledsoccer
 Title: What the Package Does (Title Case)
 Version: 0.0.0.9000
+Author: The package author <yourself@somewhere.net>
 Maintainer: The package maintainer <yourself@somewhere.net>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
@@ -21,3 +22,6 @@ Imports:
     R6 (>= 2.5.0),
     tidyr (>= 1.1.1),
     stringi (>= 1.5.3)
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

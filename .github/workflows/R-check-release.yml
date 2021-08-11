@@ -13,20 +13,14 @@ jobs:
       - name: Install R
         uses: r-lib/actions/setup-r@v1
 
-      - name: Print wd
+      - name: Install dependencies
         run: |
-          print(getwd())
-          print(list.files())
+          install.packages(c("remotes", "rcmdcheck"))
+          remotes::install_deps(pkgdir = "./R-package", dependencies = TRUE)
         shell: Rscript {0}
 
-      # - name: Install dependencies
-      #   run: |
-      #     install.packages(c("remotes", "rcmdcheck"))
-      #     remotes::install_deps(pkgdir = "./R-package", dependencies = TRUE)
-      #   shell: Rscript {0}
-      #
-      # - name: Check
-      #   run: |
-      #     options(crayon.enabled = TRUE)
-      #     rcmdcheck::rcmdcheck(path = "./R-package", args = "--no-manual", error_on = "error")
-      #   shell: Rscript {0}
+      - name: Check
+        run: |
+          options(crayon.enabled = TRUE)
+          rcmdcheck::rcmdcheck(path = "./R-package", args = "--no-manual", error_on = "error")
+        shell: Rscript {0}

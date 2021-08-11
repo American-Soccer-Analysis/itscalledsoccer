@@ -8,12 +8,8 @@ get_entity <- function(type, self) {
             url <- glue::glue("{self$BASE_URL}{league}/{type}s")
         }
 
-        r <- httpcache::GET(url)
-        httr::stop_for_status(r)
-        response <- r %>%
-            httr::content(as = "text", encoding = "UTF-8") %>%
-            jsonlite::fromJSON() %>%
-            dplyr::mutate(competition = league)
+        response <- .execute_query(url)
+        response <- response %>% dplyr::mutate(competition = league)
 
         entity_all <- entity_all %>% dplyr::bind_rows(response)
     }
@@ -73,11 +69,7 @@ get_games <- function(self, leagues, game_ids, team_ids, team_names, seasons, st
     for (league in leagues) {
         url <- glue::glue("{self$BASE_URL}{league}/games")
 
-        r <- httpcache::GET(url, query = query)
-        httr::stop_for_status(r)
-        response <- r %>%
-            httr::content(as = "text", encoding = "UTF-8") %>%
-            jsonlite::fromJSON()
+        response <- .execute_query(url, query)
 
         games <- games %>%
             dplyr::bind_rows(response) %>%
@@ -135,4 +127,14 @@ get_games <- function(self, leagues, game_ids, team_ids, team_names, seasons, st
     names <- stringi::stri_trans_general(str = names, id = "Latin-ASCII")
     names <- tolower(names)
     return(names)
+}
+
+.execute_query <- function(url, query = list()) {
+    r <- httpcache::GET(url, query = query)
+    httr::stop_for_status(r)
+    response <- r %>%
+        httr::content(as = "text", encoding = "UTF-8") %>%
+        jsonlite::fromJSON()
+
+    return(response)
 }

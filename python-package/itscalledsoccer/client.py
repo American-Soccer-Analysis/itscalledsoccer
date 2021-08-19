@@ -104,6 +104,10 @@ class AmericanSoccerAnalysis:
             return ids
 
     def _check_leagues(self, leagues: Union[str, List[str]]):
+        """Validates the leagues parameter
+
+        :param leagues: league abbreviation or list of league abbreviations
+        """
         if isinstance(leagues, list):
             if not all(l in leagues for l in self.LEAGUES):
                 print(
@@ -118,6 +122,12 @@ class AmericanSoccerAnalysis:
                 exit()
 
     def _check_ids_names(self, ids, names):
+        """Makes sure only ids or names are passed to a function and verifies
+        they are the right data type.
+
+        :param ids: a single id or list of ids
+        :param names: a single name or list of names
+        """
         if ids and names:
             print("Please specify only IDs or names, not both.")
             exit()
@@ -139,7 +149,15 @@ class AmericanSoccerAnalysis:
         leagues: Union[str, List[str]],
         ids: Union[str, List[str]] = None,
         names: Union[str, List[str]] = None,
-    ):
+    ) -> List[Dict[str, Any]]:
+        """Filters a dataframe based on the arguments given.
+
+        :param entity_all: a dataframe containing the complete set of data
+        :param entity_type: the type of data
+        :param ids: a single id or list of ids
+        :param names: a single name or list of names
+        :returns: list of dictionaries, e.g. a dataframe converted to JSON
+        """
         self._check_leagues(leagues)
         self._check_ids_names(ids, names)
 

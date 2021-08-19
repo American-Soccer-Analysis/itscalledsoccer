@@ -1,5 +1,3 @@
-from re import L
-from numpy import isin
 import requests
 from typing import Dict, List, Any, Union
 from cachecontrol import CacheControl

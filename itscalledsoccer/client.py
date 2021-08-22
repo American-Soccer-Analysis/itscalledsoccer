@@ -121,7 +121,9 @@ class AmericanSoccerAnalysis:
                 )
                 exit()
 
-    def _check_ids_names(self, ids, names):
+    def _check_ids_names(
+        self, ids: Union[str, List[str]], names: Union[str, List[str]]
+    ):
         """Makes sure only ids or names are passed to a function and verifies
         they are the right data type.
 

@@ -1,3 +1,3 @@
-# asa-package
+# itscalledsoccer
 
 R and Python packages that wrap the ASA API

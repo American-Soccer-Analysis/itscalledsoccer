@@ -4,12 +4,12 @@ from itscalledsoccer.client import AmericanSoccerAnalysis
 
 
 class TestASA(TestCase):
-    @patch.object(AmericanSoccerAnalysis, "_get_all_ids", return_value={})
+    @patch.object(AmericanSoccerAnalysis, "_get_all", return_value={})
     def setUp(self, mock_all_ids: Mock) -> None:
         self.soccer = AmericanSoccerAnalysis()
 
     def test_base_url(self):
-        with patch.object(AmericanSoccerAnalysis, "_get_all_ids", return_value={}):
+        with patch.object(AmericanSoccerAnalysis, "_get_all", return_value={}):
             self.assertIn(
                 "https://app.americansocceranalysis.com/api", self.soccer.BASE_URL
             )

@@ -16,6 +16,8 @@ Does not take any arguments to initialize.
 \describe{
 \item{\code{API_VERSION}}{Latest API version.}
 
+\item{\code{MAX_API_LIMIT}}{Maximum number of requests returned by the API by default.}
+
 \item{\code{LEAGUES}}{List of stylized league names.}
 
 \item{\code{BASE_URL}}{API base URL.}
@@ -42,6 +44,15 @@ Does not take any arguments to initialize.
 \item \href{#method-get_managers}{\code{AmericanSoccerAnalysis$get_managers()}}
 \item \href{#method-get_referees}{\code{AmericanSoccerAnalysis$get_referees()}}
 \item \href{#method-get_games}{\code{AmericanSoccerAnalysis$get_games()}}
+\item \href{#method-get_player_xgoals}{\code{AmericanSoccerAnalysis$get_player_xgoals()}}
+\item \href{#method-get_team_xgoals}{\code{AmericanSoccerAnalysis$get_team_xgoals()}}
+\item \href{#method-get_goalkeeper_xgoals}{\code{AmericanSoccerAnalysis$get_goalkeeper_xgoals()}}
+\item \href{#method-get_game_xgoals}{\code{AmericanSoccerAnalysis$get_game_xgoals()}}
+\item \href{#method-get_player_xpass}{\code{AmericanSoccerAnalysis$get_player_xpass()}}
+\item \href{#method-get_team_xpass}{\code{AmericanSoccerAnalysis$get_team_xpass()}}
+\item \href{#method-get_player_goals_added}{\code{AmericanSoccerAnalysis$get_player_goals_added()}}
+\item \href{#method-get_team_goals_added}{\code{AmericanSoccerAnalysis$get_team_goals_added()}}
+\item \href{#method-get_goalkeeper_goals_added}{\code{AmericanSoccerAnalysis$get_goalkeeper_goals_added()}}
 \item \href{#method-clone}{\code{AmericanSoccerAnalysis$clone()}}
 }
 }
@@ -192,7 +203,178 @@ Retrieves a data frame containing game IDs, dates, opponents, scores, and other 
 
 \item{\code{seasons}}{Seasons on which to filter. Accepts a character or integer vector of length >= 1.}
 
-\item{\code{stages}}{Stages (e.g., regular season, playoffs, etc.) on which to filter. See the \url{https://app.americansocceranalysis.com/api/v1/__swagger__/}{API documentation} for possible values. Accepts a character vector of length >= 1.}
+\item{\code{stages}}{Stages (e.g., regular season, playoffs, etc.) on which to filter. See the \href{https://app.americansocceranalysis.com/api/v1/\strong{docs}/}{API documentation} for possible values. Accepts a character vector of length >= 1.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_player_xgoals"></a>}}
+\if{latex}{\out{\hypertarget{method-get_player_xgoals}{}}}
+\subsection{Method \code{get_player_xgoals()}}{
+Retrieves a data frame containing player xG data meeting the specified conditions.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AmericanSoccerAnalysis$get_player_xgoals(leagues, ...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{leagues}}{Leagues on which to filter. Accepts a character vector of length >= 1.}
+
+\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/\strong{docs}/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_team_xgoals"></a>}}
+\if{latex}{\out{\hypertarget{method-get_team_xgoals}{}}}
+\subsection{Method \code{get_team_xgoals()}}{
+Retrieves a data frame containing team xG data meeting the specified conditions.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AmericanSoccerAnalysis$get_team_xgoals(leagues, ...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{leagues}}{Leagues on which to filter. Accepts a character vector of length >= 1.}
+
+\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/\strong{docs}/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_goalkeeper_xgoals"></a>}}
+\if{latex}{\out{\hypertarget{method-get_goalkeeper_xgoals}{}}}
+\subsection{Method \code{get_goalkeeper_xgoals()}}{
+Retrieves a data frame containing goalkeeper xG data meeting the specified conditions.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AmericanSoccerAnalysis$get_goalkeeper_xgoals(leagues, ...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{leagues}}{Leagues on which to filter. Accepts a character vector of length >= 1.}
+
+\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/\strong{docs}/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_game_xgoals"></a>}}
+\if{latex}{\out{\hypertarget{method-get_game_xgoals}{}}}
+\subsection{Method \code{get_game_xgoals()}}{
+Retrieves a data frame containing game xG data meeting the specified conditions.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AmericanSoccerAnalysis$get_game_xgoals(leagues, ...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{leagues}}{Leagues on which to filter. Accepts a character vector of length >= 1.}
+
+\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/\strong{docs}/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_player_xpass"></a>}}
+\if{latex}{\out{\hypertarget{method-get_player_xpass}{}}}
+\subsection{Method \code{get_player_xpass()}}{
+Retrieves a data frame containing player xPass data meeting the specified conditions.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AmericanSoccerAnalysis$get_player_xpass(leagues, ...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{leagues}}{Leagues on which to filter. Accepts a character vector of length >= 1.}
+
+\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/\strong{docs}/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_team_xpass"></a>}}
+\if{latex}{\out{\hypertarget{method-get_team_xpass}{}}}
+\subsection{Method \code{get_team_xpass()}}{
+Retrieves a data frame containing team xPass data meeting the specified conditions.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AmericanSoccerAnalysis$get_team_xpass(leagues, ...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{leagues}}{Leagues on which to filter. Accepts a character vector of length >= 1.}
+
+\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/\strong{docs}/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_player_goals_added"></a>}}
+\if{latex}{\out{\hypertarget{method-get_player_goals_added}{}}}
+\subsection{Method \code{get_player_goals_added()}}{
+Retrieves a data frame containing player goals added (g+) data meeting the specified conditions.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AmericanSoccerAnalysis$get_player_goals_added(leagues, ...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{leagues}}{Leagues on which to filter. Accepts a character vector of length >= 1.}
+
+\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/\strong{docs}/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_team_goals_added"></a>}}
+\if{latex}{\out{\hypertarget{method-get_team_goals_added}{}}}
+\subsection{Method \code{get_team_goals_added()}}{
+Retrieves a data frame containing team goals added (g+) data meeting the specified conditions.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AmericanSoccerAnalysis$get_team_goals_added(leagues, ...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{leagues}}{Leagues on which to filter. Accepts a character vector of length >= 1.}
+
+\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/\strong{docs}/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_goalkeeper_goals_added"></a>}}
+\if{latex}{\out{\hypertarget{method-get_goalkeeper_goals_added}{}}}
+\subsection{Method \code{get_goalkeeper_goals_added()}}{
+Retrieves a data frame containing goalkeeper goals added (g+) data meeting the specified conditions.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AmericanSoccerAnalysis$get_goalkeeper_goals_added(leagues, ...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{leagues}}{Leagues on which to filter. Accepts a character vector of length >= 1.}
+
+\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/\strong{docs}/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
 }
 \if{html}{\out{</div>}}
 }

@@ -100,7 +100,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @param team_ids Team IDs on which to filter. Accepts a character vector of length >= 1.
         #' @param team_names Team names on which to filter. Partial matches and abbreviations are accepted. Accepts a character vector of length >= 1.
         #' @param seasons Seasons on which to filter. Accepts a character or integer vector of length >= 1.
-        #' @param stages Stages (e.g., regular season, playoffs, etc.) on which to filter. See the \url{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. Accepts a character vector of length >= 1.
+        #' @param stages Stages (e.g., regular season, playoffs, etc.) on which to filter. See the \href{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. Accepts a character vector of length >= 1.
         get_games = function(leagues, game_ids, team_ids, team_names, seasons, stages) {
             games <- get_games(self, leagues, game_ids, team_ids, team_names, seasons, stages)
             return(games)
@@ -109,7 +109,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @description
         #' Retrieves a data frame containing player xG data meeting the specified conditions.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
-        #' @param ... See the \url{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All accept a character vector of length >= 1.
+        #' @param ... See the \href{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All arguments accept a vector of length >= 1.
         get_player_xgoals = function(leagues, ...) {
             player_xgoals <- get_stats(self, type = "xgoals", entity = "players", leagues, ...)
             return(player_xgoals)
@@ -118,7 +118,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @description
         #' Retrieves a data frame containing team xG data meeting the specified conditions.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
-        #' @param ... See the \url{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All accept a character vector of length >= 1.
+        #' @param ... See the \href{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All arguments accept a vector of length >= 1.
         get_team_xgoals = function(leagues, ...) {
             team_xgoals <- get_stats(self, type = "xgoals", entity = "teams", leagues, ...)
             return(team_xgoals)
@@ -127,7 +127,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @description
         #' Retrieves a data frame containing goalkeeper xG data meeting the specified conditions.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
-        #' @param ... See the \url{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All accept a character vector of length >= 1.
+        #' @param ... See the \href{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All arguments accept a vector of length >= 1.
         get_goalkeeper_xgoals = function(leagues, ...) {
             goalkeeper_xgoals <- get_stats(self, type = "xgoals", entity = "goalkeepers", leagues, ...)
             return(goalkeeper_xgoals)
@@ -136,7 +136,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @description
         #' Retrieves a data frame containing game xG data meeting the specified conditions.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
-        #' @param ... See the \url{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All accept a character vector of length >= 1.
+        #' @param ... See the \href{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All arguments accept a vector of length >= 1.
         get_game_xgoals = function(leagues, ...) {
             game_xgoals <- get_stats(self, type = "xgoals", entity = "games", leagues, ...)
             return(game_xgoals)
@@ -145,7 +145,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @description
         #' Retrieves a data frame containing player xPass data meeting the specified conditions.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
-        #' @param ... See the \url{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All accept a character vector of length >= 1.
+        #' @param ... See the \href{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All arguments accept a vector of length >= 1.
         get_player_xpass = function(leagues, ...) {
             player_xpass <- get_stats(self, type = "xpass", entity = "players", leagues, ...)
             return(player_xpass)
@@ -154,7 +154,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @description
         #' Retrieves a data frame containing team xPass data meeting the specified conditions.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
-        #' @param ... See the \url{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All accept a character vector of length >= 1.
+        #' @param ... See the \href{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All arguments accept a vector of length >= 1.
         get_team_xpass = function(leagues, ...) {
             team_xpass <- get_stats(self, type = "xpass", entity = "teams", leagues, ...)
             return(team_xpass)
@@ -163,7 +163,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @description
         #' Retrieves a data frame containing player goals added (g+) data meeting the specified conditions.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
-        #' @param ... See the \url{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All accept a character vector of length >= 1.
+        #' @param ... See the \href{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All arguments accept a vector of length >= 1.
         get_player_goals_added = function(leagues, ...) {
             player_goals_added <- get_stats(self, type = "goals-added", entity = "players", leagues, ...)
             return(player_goals_added)
@@ -172,7 +172,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @description
         #' Retrieves a data frame containing team goals added (g+) data meeting the specified conditions.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
-        #' @param ... See the \url{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All accept a character vector of length >= 1.
+        #' @param ... See the \href{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All arguments accept a vector of length >= 1.
         get_team_goals_added = function(leagues, ...) {
             team_goals_added <- get_stats(self, type = "goals-added", entity = "teams", leagues, ...)
             return(team_goals_added)
@@ -181,7 +181,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @description
         #' Retrieves a data frame containing goalkeeper goals added (g+) data meeting the specified conditions.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
-        #' @param ... See the \url{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All accept a character vector of length >= 1.
+        #' @param ... See the \href{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All arguments accept a vector of length >= 1.
         get_goalkeeper_goals_added = function(leagues, ...) {
             goalkeeper_goals_added <- get_stats(self, type = "goals-added", entity = "goalkeepers", leagues, ...)
             return(goalkeeper_goals_added)

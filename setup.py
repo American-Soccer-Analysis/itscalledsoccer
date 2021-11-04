@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 
 with open("README.md", "r") as f:
     long_description = f.read()
@@ -6,7 +6,7 @@ with open("README.md", "r") as f:
 setup(
     name="itscalledsoccer",
     version="0.0.1",
-    description="Programmatically interact with the ASA API",
+    description="Programmatically interact with the American Soccer Analysis API",
     long_description=long_description,
     author="American Soccer Analysis",
     author_email="americansocceranalysis@gmail.com",

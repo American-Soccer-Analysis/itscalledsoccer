@@ -50,11 +50,11 @@ get_stats <- function(self, type, entity, leagues, ...) {
 
 
     if (entity %in% c("players", "goalkeepers") & (exists("player_ids_to_filter") && !is.null(player_ids_to_filter))) {
-        stats <- stats %>% dplyr::filter(player_id %in% player_ids_to_filter)
+        stats <- stats %>% dplyr::filter(rlang::.data$player_id %in% player_ids_to_filter)
     } else if (entity == "teams" & (exists("team_ids_to_filter") && !is.null(team_ids_to_filter))) {
-        stats <- stats %>% dplyr::filter(team_id %in% team_ids_to_filter)
+        stats <- stats %>% dplyr::filter(rlang::.data$team_id %in% team_ids_to_filter)
     } else if (entity == "games" & (exists("game_ids_to_filter") && !is.null(game_ids_to_filter))) {
-        stats <- stats %>% dplyr::filter(game_id %in% game_ids_to_filter)
+        stats <- stats %>% dplyr::filter(rlang::.data$game_id %in% game_ids_to_filter)
     }
 
     return(stats)

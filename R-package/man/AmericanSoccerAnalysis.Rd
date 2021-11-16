@@ -60,13 +60,13 @@ Does not take any arguments to initialize.
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-Creates a new \code{AmericanSoccerAnalysis} object.
+Creates a new `AmericanSoccerAnalysis` object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AmericanSoccerAnalysis$new()}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{
-A new \code{AmericanSoccerAnalysis} object.
+A new `AmericanSoccerAnalysis` object.
 }
 }
 \if{html}{\out{<hr>}}
@@ -203,7 +203,7 @@ Retrieves a data frame containing game IDs, dates, opponents, scores, and other 
 
 \item{\code{seasons}}{Seasons on which to filter. Accepts a character or integer vector of length >= 1.}
 
-\item{\code{stages}}{Stages (e.g., regular season, playoffs, etc.) on which to filter. See the \href{https://app.americansocceranalysis.com/api/v1/\strong{docs}/}{API documentation} for possible values. Accepts a character vector of length >= 1.}
+\item{\code{stages}}{Stages (e.g., regular season, playoffs, etc.) on which to filter. See the \href{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. Accepts a character vector of length >= 1.}
 }
 \if{html}{\out{</div>}}
 }
@@ -222,7 +222,7 @@ Retrieves a data frame containing player xG data meeting the specified condition
 \describe{
 \item{\code{leagues}}{Leagues on which to filter. Accepts a character vector of length >= 1.}
 
-\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/\strong{docs}/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
+\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
 }
 \if{html}{\out{</div>}}
 }
@@ -241,7 +241,7 @@ Retrieves a data frame containing team xG data meeting the specified conditions.
 \describe{
 \item{\code{leagues}}{Leagues on which to filter. Accepts a character vector of length >= 1.}
 
-\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/\strong{docs}/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
+\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
 }
 \if{html}{\out{</div>}}
 }
@@ -260,7 +260,7 @@ Retrieves a data frame containing goalkeeper xG data meeting the specified condi
 \describe{
 \item{\code{leagues}}{Leagues on which to filter. Accepts a character vector of length >= 1.}
 
-\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/\strong{docs}/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
+\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
 }
 \if{html}{\out{</div>}}
 }
@@ -279,7 +279,7 @@ Retrieves a data frame containing game xG data meeting the specified conditions.
 \describe{
 \item{\code{leagues}}{Leagues on which to filter. Accepts a character vector of length >= 1.}
 
-\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/\strong{docs}/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
+\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
 }
 \if{html}{\out{</div>}}
 }
@@ -298,7 +298,7 @@ Retrieves a data frame containing player xPass data meeting the specified condit
 \describe{
 \item{\code{leagues}}{Leagues on which to filter. Accepts a character vector of length >= 1.}
 
-\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/\strong{docs}/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
+\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
 }
 \if{html}{\out{</div>}}
 }
@@ -317,7 +317,7 @@ Retrieves a data frame containing team xPass data meeting the specified conditio
 \describe{
 \item{\code{leagues}}{Leagues on which to filter. Accepts a character vector of length >= 1.}
 
-\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/\strong{docs}/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
+\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
 }
 \if{html}{\out{</div>}}
 }
@@ -336,7 +336,7 @@ Retrieves a data frame containing player goals added (g+) data meeting the speci
 \describe{
 \item{\code{leagues}}{Leagues on which to filter. Accepts a character vector of length >= 1.}
 
-\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/\strong{docs}/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
+\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
 }
 \if{html}{\out{</div>}}
 }
@@ -355,7 +355,7 @@ Retrieves a data frame containing team goals added (g+) data meeting the specifi
 \describe{
 \item{\code{leagues}}{Leagues on which to filter. Accepts a character vector of length >= 1.}
 
-\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/\strong{docs}/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
+\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
 }
 \if{html}{\out{</div>}}
 }
@@ -374,7 +374,7 @@ Retrieves a data frame containing goalkeeper goals added (g+) data meeting the s
 \describe{
 \item{\code{leagues}}{Leagues on which to filter. Accepts a character vector of length >= 1.}
 
-\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/\strong{docs}/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
+\item{\code{...}}{See the \href{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. All arguments accept a vector of length >= 1.}
 }
 \if{html}{\out{</div>}}
 }

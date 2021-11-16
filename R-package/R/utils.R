@@ -30,6 +30,7 @@
 }
 
 .convert_names_to_ids <- function(df, names) {
+    . <- NULL
     names_clean <- .clean_names(names)
     names_string <- paste0(names_clean, collapse = "|")
 

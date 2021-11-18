@@ -83,3 +83,18 @@
 
     return(response)
 }
+
+.format_comma <- function(..., .max = 6) {
+    x <- paste0(...)
+    if (length(x) > .max) {
+        length(x) <- .max
+        x[[.max]] <- "..."
+    }
+
+    paste0(x, collapse = ", ")
+}
+
+.format_args <- function(x) {
+    args <- if (length(x) == 1) "Argument" else "Arguments"
+    glue::glue("{args} {.format_comma(x)}")
+}

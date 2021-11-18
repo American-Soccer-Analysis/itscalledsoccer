@@ -1,11 +1,6 @@
-#' @title
-#' American Soccer Analysis API Client
-#'
-#' @description
-#' Class representing an active session connected to the American Soccer Analysis public API.
-#'
-#' @details
-#' Does not take any arguments to initialize.
+#' @title American Soccer Analysis API Client
+#' @description Class representing an active session connected to the American Soccer Analysis public API.
+#' @details Does not take any arguments to initialize.
 #' @export
 AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
     public = list(
@@ -36,8 +31,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @field referees Data frame containing referees from all leagues.
         referees = NULL,
 
-        #' @description
-        #' Creates a new \code{AmericanSoccerAnalysis} object.
+        #' @description Creates a new \code{AmericanSoccerAnalysis} object.
         #' @return A new \code{AmericanSoccerAnalysis} object.
         initialize = function() {
             self$BASE_URL <- glue::glue("https://app.americansocceranalysis.com/api/{self$API_VERSION}")
@@ -48,8 +42,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
             self$referees <- get_entity(self, "referee")
         },
 
-        #' @description
-        #' Retrieves a data frame containing player names, IDs, and other metadata.
+        #' @description Retrieves a data frame containing player names, IDs, and other metadata.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
         #' @param ids Player IDs on which to filter. Cannot be combined with \code{names}. Accepts a character vector of length >= 1.
         #' @param names Player names on which to filter. Partial matches are accepted. Cannot be combined with \code{ids}. Accepts a character vector of length >= 1.
@@ -58,8 +51,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
             return(players)
         },
 
-        #' @description
-        #' Retrieves a data frame containing team names, abbreviations, and IDs.
+        #' @description Retrieves a data frame containing team names, abbreviations, and IDs.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
         #' @param ids Team IDs on which to filter. Cannot be combined with \code{names}. Accepts a character vector of length >= 1.
         #' @param names Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with \code{ids}. Accepts a character vector of length >= 1.
@@ -68,8 +60,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
             return(teams)
         },
 
-        #' @description
-        #' Retrieves a data frame containing stadium names, IDs, and other metadata.
+        #' @description Retrieves a data frame containing stadium names, IDs, and other metadata.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
         #' @param ids Stadium IDs on which to filter. Cannot be combined with \code{names}. Accepts a character vector of length >= 1.
         #' @param names Stadium names on which to filter. Partial matches are accepted. Cannot be combined with \code{ids}. Accepts a character vector of length >= 1.
@@ -78,8 +69,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
             return(stadia)
         },
 
-        #' @description
-        #' Retrieves a data frame containing manager names and IDs.
+        #' @description Retrieves a data frame containing manager names and IDs.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
         #' @param ids Manager IDs on which to filter. Cannot be combined with \code{names}. Accepts a character vector of length >= 1.
         #' @param names Manager names on which to filter. Partial matches are accepted. Cannot be combined with \code{ids}. Accepts a character vector of length >= 1.
@@ -88,8 +78,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
             return(managers)
         },
 
-        #' @description
-        #' Retrieves a data frame containing referee names and IDs.
+        #' @description Retrieves a data frame containing referee names and IDs.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
         #' @param ids Referee IDs on which to filter. Cannot be combined with \code{names}. Accepts a character vector of length >= 1.
         #' @param names Referee names on which to filter. Partial matches are accepted. Cannot be combined with \code{ids}. Accepts a character vector of length >= 1.
@@ -98,8 +87,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
             return(referees)
         },
 
-        #' @description
-        #' Retrieves a data frame containing game IDs, dates, opponents, scores, and other metadata.
+        #' @description Retrieves a data frame containing game IDs, dates, opponents, scores, and other metadata.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
         #' @param game_ids Game IDs on which to filter. Accepts a character vector of length >= 1.
         #' @param team_ids Team IDs on which to filter. Cannot be combined with \code{team_names}. Accepts a character vector of length >= 1.
@@ -111,8 +99,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
             return(games)
         },
 
-        #' @description
-        #' Retrieves a data frame containing player xG data meeting the specified conditions.
+        #' @description Retrieves a data frame containing player xG data meeting the specified conditions.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
         #' @param ... The following arguments will be parsed:
         #'   \itemize{
@@ -138,8 +125,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
             return(player_xgoals)
         },
 
-        #' @description
-        #' Retrieves a data frame containing player xPass data meeting the specified conditions.
+        #' @description Retrieves a data frame containing player xPass data meeting the specified conditions.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
         #' @param ... The following arguments will be parsed:
         #'   \itemize{
@@ -164,8 +150,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
             return(player_xpass)
         },
 
-        #' @description
-        #' Retrieves a data frame containing player goals added (g+) data meeting the specified conditions.
+        #' @description Retrieves a data frame containing player goals added (g+) data meeting the specified conditions.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
         #' @param ... The following arguments will be parsed:
         #'   \itemize{
@@ -190,8 +175,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
             return(player_goals_added)
         },
 
-        #' @description
-        #' Retrieves a data frame containing goalkeeper xG data meeting the specified conditions.
+        #' @description Retrieves a data frame containing goalkeeper xG data meeting the specified conditions.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
         #' @param ... The following arguments will be parsed:
         #'   \itemize{
@@ -215,8 +199,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
             return(goalkeeper_xgoals)
         },
 
-        #' @description
-        #' Retrieves a data frame containing goalkeeper goals added (g+) data meeting the specified conditions.
+        #' @description Retrieves a data frame containing goalkeeper goals added (g+) data meeting the specified conditions.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
         #' @param ... The following arguments will be parsed:
         #'   \itemize{
@@ -240,8 +223,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
             return(goalkeeper_goals_added)
         },
 
-        #' @description
-        #' Retrieves a data frame containing team xG data meeting the specified conditions.
+        #' @description Retrieves a data frame containing team xG data meeting the specified conditions.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
         #' @param ... The following arguments will be parsed:
         #'   \itemize{
@@ -264,8 +246,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
             return(team_xgoals)
         },
 
-        #' @description
-        #' Retrieves a data frame containing team xPass data meeting the specified conditions.
+        #' @description Retrieves a data frame containing team xPass data meeting the specified conditions.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
         #' @param ... The following arguments will be parsed:
         #'   \itemize{
@@ -286,8 +267,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
             return(team_xpass)
         },
 
-        #' @description
-        #' Retrieves a data frame containing team goals added (g+) data meeting the specified conditions.
+        #' @description Retrieves a data frame containing team goals added (g+) data meeting the specified conditions.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
         #' @param ... The following arguments will be parsed:
         #'   \itemize{
@@ -305,8 +285,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
             return(team_goals_added)
         },
 
-        #' @description
-        #' Retrieves a data frame containing game xG data meeting the specified conditions.
+        #' @description Retrieves a data frame containing game xG data meeting the specified conditions.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
         #' @param ... The following arguments will be parsed:
         #'   \itemize{

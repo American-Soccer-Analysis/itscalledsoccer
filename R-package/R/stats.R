@@ -1,8 +1,13 @@
 get_stats <- function(self, type, entity, leagues, ...) {
+    query <- list(...)
+    if (!all(rlang::have_name(query))) {
+        bad <- which(!rlang::have_name(query)) + 1
+        msg <- glue::glue("{.format_args(bad)} must be named.")
+        stop(msg)
+    }
+
     .check_leagues(leagues, self$LEAGUES)
     if (missing(leagues)) leagues <- self$LEAGUES
-
-    query <- list(...)
 
     if (sum(grepl("player_", names(query))) > 0) {
         .check_ids_names(query[["player_ids"]], query[["player_names"]])

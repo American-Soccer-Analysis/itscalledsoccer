@@ -13,6 +13,7 @@
     - [Stadia](#stadia)
     - [Managers](#managers)
     - [Referees](#referees)
+    - [Games](#games)
   - [Maintainers](#maintainers)
   - [Contributing](#contributing)
   - [License](#license)
@@ -40,6 +41,8 @@ asa = AmericanSoccerAnalysis()
 ### Managers
 
 ### Referees
+
+### Games
 
 ## Maintainers
 

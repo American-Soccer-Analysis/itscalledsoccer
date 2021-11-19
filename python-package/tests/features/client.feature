@@ -4,6 +4,7 @@ Feature: Client
 		Given I have an ASA client
 		Then the API_VERSION should be "v1"
 		And the BASE_URL should be "https://app.americansocceranalysis.com/api/v1/"
+		And the MAX_API_LIMIT should be "1000"
 		And "<league>" should be in LEAGUES
 
 		Examples: Leagues

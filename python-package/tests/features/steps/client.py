@@ -15,6 +15,10 @@ def step_impl(context, value):
 def step_impl(context, value):
     assert context.soccer.BASE_URL == value
 
+@then(u'the MAX_API_LIMIT should be "{value}"')
+def step_impl(context, value):
+    assert context.soccer.MAX_API_LIMIT == int(value)
+
 
 @then(u'"{league}" should be in LEAGUES')
 def step_impl(context, league):

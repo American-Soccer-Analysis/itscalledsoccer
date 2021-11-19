@@ -12,7 +12,7 @@
 }
 
 .check_ids_names <- function(ids, names) {
-    if ((!missing(ids) & !missing(names)) && !is.null(ids) & !is.null(names)) {
+    if ((!missing(ids) & !missing(names)) && (!is.null(ids) & !is.null(names))) {
         stop("Please specify only IDs or names, not both.")
     }
 

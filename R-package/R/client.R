@@ -47,7 +47,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @param ids Player IDs on which to filter. Cannot be combined with \code{names}. Accepts a character vector of length >= 1.
         #' @param names Player names on which to filter. Partial matches are accepted. Cannot be combined with \code{ids}. Accepts a character vector of length >= 1.
         get_players = function(leagues, ids, names) {
-            players <- filter_entity(self$players, self$LEAGUES, leagues, ids, names)
+            players <- filter_entity(self, "players", leagues, ids, names)
             return(players)
         },
 
@@ -56,7 +56,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @param ids Team IDs on which to filter. Cannot be combined with \code{names}. Accepts a character vector of length >= 1.
         #' @param names Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with \code{ids}. Accepts a character vector of length >= 1.
         get_teams = function(leagues, ids, names) {
-            teams <- filter_entity(self$teams, self$LEAGUES, leagues, ids, names)
+            teams <- filter_entity(self, "teams", leagues, ids, names)
             return(teams)
         },
 
@@ -65,7 +65,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @param ids Stadium IDs on which to filter. Cannot be combined with \code{names}. Accepts a character vector of length >= 1.
         #' @param names Stadium names on which to filter. Partial matches are accepted. Cannot be combined with \code{ids}. Accepts a character vector of length >= 1.
         get_stadia = function(leagues, ids, names) {
-            stadia <- filter_entity(self$stadia, self$LEAGUES, leagues, ids, names)
+            stadia <- filter_entity(self, "stadia", leagues, ids, names)
             return(stadia)
         },
 
@@ -74,7 +74,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @param ids Manager IDs on which to filter. Cannot be combined with \code{names}. Accepts a character vector of length >= 1.
         #' @param names Manager names on which to filter. Partial matches are accepted. Cannot be combined with \code{ids}. Accepts a character vector of length >= 1.
         get_managers = function(leagues, ids, names) {
-            managers <- filter_entity(self$managers, self$LEAGUES, leagues, ids, names)
+            managers <- filter_entity(self, "managers", leagues, ids, names)
             return(managers)
         },
 
@@ -83,7 +83,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @param ids Referee IDs on which to filter. Cannot be combined with \code{names}. Accepts a character vector of length >= 1.
         #' @param names Referee names on which to filter. Partial matches are accepted. Cannot be combined with \code{ids}. Accepts a character vector of length >= 1.
         get_referees = function(leagues, ids, names) {
-            referees <- filter_entity(self$referees, self$LEAGUES, leagues, ids, names)
+            referees <- filter_entity(self, "referees", leagues, ids, names)
             return(referees)
         },
 

@@ -1,3 +1,4 @@
+#' @importFrom rlang .data
 get_entity <- function(self, type) {
     entity_all <- data.frame()
 
@@ -16,23 +17,24 @@ get_entity <- function(self, type) {
 
     entity_all <- entity_all %>%
         dplyr::group_by(dplyr::across(c(-dplyr::matches("competition"), -dplyr::starts_with("season"), -dplyr::ends_with("position")))) %>%
-        dplyr::summarize(competitions = list(rlang::.data$competition)) %>%
+        dplyr::summarize(competitions = list(.data$competition)) %>%
         dplyr::ungroup() %>%
         dplyr::arrange(!!as.symbol(glue::glue("{type}_name")))
 
     return(entity_all)
 }
 
-filter_entity <- function(entity_all, league_options, leagues, ids, names) {
-    .check_leagues(leagues, league_options)
+#' @importFrom rlang .data
+filter_entity <- function(self, entity, leagues, ids, names) {
+    .check_leagues(leagues, self$LEAGUES)
     .check_ids_names(ids, names)
 
-    entity_filtered <- entity_all %>%
-        tidyr::unnest(rlang::.data$competitions)
+    entity_filtered <- self[[entity]] %>%
+        tidyr::unnest(.data$competitions)
 
     if (!missing(leagues)) {
         entity_filtered <- entity_filtered %>%
-            dplyr::filter(rlang::.data$competitions %in% leagues)
+            dplyr::filter(.data$competitions %in% leagues)
     }
 
     if (!missing(names)) {
@@ -45,12 +47,13 @@ filter_entity <- function(entity_all, league_options, leagues, ids, names) {
     }
 
     entity_filtered <- entity_filtered %>%
-        dplyr::select(-rlang::.data$competitions) %>%
+        dplyr::select(-.data$competitions) %>%
         dplyr::distinct()
 
     return(entity_filtered)
 }
 
+#' @importFrom rlang .data
 get_games <- function(self, leagues, game_ids, team_ids, team_names, seasons, stages) {
     .check_leagues(leagues, self$LEAGUES)
     .check_ids_names(team_ids, team_names)
@@ -73,7 +76,7 @@ get_games <- function(self, leagues, game_ids, team_ids, team_names, seasons, st
 
         games <- games %>%
             dplyr::bind_rows(response) %>%
-            dplyr::arrange(rlang::.data$date_time_utc)
+            dplyr::arrange(.data$date_time_utc)
     }
 
     return(games)

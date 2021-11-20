@@ -212,11 +212,7 @@ class AmericanSoccerAnalysis:
         :param params: URL query strings
         :returns: Dataframe
         """
-        try:
-            response = self.session.get(url=url,params=params)
-            response.raise_for_status()
-        except requests.exceptions.HTTPError as err:
-            print(err)
+        response = self.session.get(url=url, params=params)
 
         resp_df = pd.read_json(json.dumps(response.json()))
         return resp_df
@@ -327,14 +323,10 @@ class AmericanSoccerAnalysis:
 
         if game_ids:
             query["game_id"] = game_ids
-
-        if team_ids and team_names:
-            query["team_id"] = team_ids + self._convert_names_to_ids("team",team_names)
-        elif team_names:
+        if team_names:
             query["team_id"] = self._convert_names_to_ids("team",team_names)
-        elif team_ids:
+        if team_ids:
             query["team_id"] = team_ids
-
         if seasons:
             query["season_name"] = seasons
         if stages:

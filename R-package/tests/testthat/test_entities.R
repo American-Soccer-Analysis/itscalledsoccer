@@ -658,4 +658,6 @@ test_that("Querying games works properly", {
     expect_gt(.obj, 0)
     expect_equal(.obj, .exp)
 
+    # TODO: Add tests for stages
+
 })

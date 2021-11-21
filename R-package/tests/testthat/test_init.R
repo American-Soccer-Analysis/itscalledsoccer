@@ -10,9 +10,15 @@ test_that("AmericanSoccerAnalysis class initializes successfully", {
     }
 
     # Entity tables populated with data from all leagues -----------------
+    .exp <- length(asa_client$LEAGUES)
+
     for (type in ENTITY_TYPES) {
-        df <- asa_client[[type]] %>% tidyr::unnest(.data$competitions)
-        expect_equal(length(unique(df$competitions)), length(asa_client$LEAGUES))
+        .obj <- asa_client[[type]] %>%
+            tidyr::unnest(.data$competitions) %>%
+            dplyr::distinct(competitions) %>%
+            nrow()
+
+        expect_equal(.obj, .exp)
     }
 
 })

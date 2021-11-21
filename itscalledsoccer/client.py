@@ -213,7 +213,7 @@ class AmericanSoccerAnalysis:
         :returns: Dataframe
         """
         response = self.session.get(url=url, params=params)
-
+        response.raise_for_status()
         resp_df = pd.read_json(json.dumps(response.json()))
         return resp_df
 

@@ -18,7 +18,7 @@ Does not take any arguments to initialize.
 
 \item{\code{LEAGUES}}{List of stylized league names.}
 
-\item{\code{BASE_URL}}{API base URL.}
+\item{\code{base_url}}{API base URL.}
 
 \item{\code{players}}{Data frame containing players from all leagues.}
 

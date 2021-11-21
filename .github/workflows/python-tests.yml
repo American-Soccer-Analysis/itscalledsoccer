@@ -1,6 +1,10 @@
 name: Python tests
 
-on: [push]
+on:
+  push:
+    paths:
+      - "python-package/"
+      - ".github/workflows/python-tests.yml"
 
 jobs:
   python:

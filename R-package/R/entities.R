@@ -17,7 +17,7 @@ get_entity <- function(self, type) {
         i <- i + 1
     }
 
-    entity_all <- data.table::rbindlist(entity_all) %>%
+    entity_all <- data.table::rbindlist(entity_all, fill = TRUE) %>%
         dplyr::group_by(dplyr::across(c(-dplyr::matches("competition"), -dplyr::starts_with("season"), -dplyr::ends_with("position")))) %>%
         dplyr::summarize(competitions = list(.data$competition)) %>%
         dplyr::ungroup() %>%
@@ -81,6 +81,6 @@ get_games <- function(self, leagues, game_ids, team_ids, team_names, seasons, st
         i <- i + 1
     }
 
-    games <- data.table::rbindlist(games) %>% dplyr::arrange(.data$date_time_utc)
+    games <- data.table::rbindlist(games, fill = TRUE) %>% dplyr::arrange(.data$date_time_utc)
     return(games)
 }

@@ -2,5 +2,6 @@
 
 export("%>%")
 export(AmericanSoccerAnalysis)
+importFrom(R6,R6Class)
 importFrom(magrittr,"%>%")
 importFrom(rlang,.data)

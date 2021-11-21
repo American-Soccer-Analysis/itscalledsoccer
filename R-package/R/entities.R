@@ -1,6 +1,7 @@
 #' @importFrom rlang .data
 get_entity <- function(self, type) {
-    entity_all <- data.frame()
+    entity_all <- list()
+    i <- 1
 
     for (league in self$LEAGUES) {
         if (type == "stadium") {
@@ -12,10 +13,11 @@ get_entity <- function(self, type) {
         response <- .execute_query(self, url)
         response <- response %>% dplyr::mutate(competition = league)
 
-        entity_all <- entity_all %>% dplyr::bind_rows(response)
+        entity_all[[i]] <- response
+        i <- i + 1
     }
 
-    entity_all <- entity_all %>%
+    entity_all <- data.table::rbindlist(entity_all) %>%
         dplyr::group_by(dplyr::across(c(-dplyr::matches("competition"), -dplyr::starts_with("season"), -dplyr::ends_with("position")))) %>%
         dplyr::summarize(competitions = list(.data$competition)) %>%
         dplyr::ungroup() %>%
@@ -67,17 +69,18 @@ get_games <- function(self, leagues, game_ids, team_ids, team_names, seasons, st
     if (!missing(seasons)) query$season_name <- seasons
     if (!missing(stages)) query$stage_name <- stages
 
-    games <- data.frame()
+    games <- list()
+    i <- 1
 
     for (league in leagues) {
         url <- glue::glue("{self$base_url}/{league}/games")
 
         response <- .execute_query(self, url, query)
 
-        games <- games %>%
-            dplyr::bind_rows(response)
+        games[[i]] <- response
+        i <- i + 1
     }
 
-    games <- games %>% dplyr::arrange(.data$date_time_utc)
+    games <- data.table::rbindlist(games) %>% dplyr::arrange(.data$date_time_utc)
     return(games)
 }

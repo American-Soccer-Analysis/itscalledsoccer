@@ -43,16 +43,19 @@ get_stats <- function(self, type, entity, leagues, ...) {
     }
 
 
-    stats <- data.frame()
+    stats <- list()
+    i <- 1
 
     for (league in leagues) {
         url <- glue::glue("{self$base_url}/{league}/{entity}/{type}")
 
         response <- .execute_query(self, url, query)
 
-        stats <- stats %>%
-            dplyr::bind_rows(response)
+        stats[[i]] <- response
+        i <- i + 1
     }
+
+    stats <- data.table::rbindlist(stats)
 
 
     if (entity %in% c("players", "goalkeepers") & (exists("player_ids_to_filter") && !is.null(player_ids_to_filter))) {

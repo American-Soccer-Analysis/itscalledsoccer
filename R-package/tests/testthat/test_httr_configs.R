@@ -1,7 +1,7 @@
 test_that("httr configs can successfully be added to and removed from AmericanSoccerAnalysis class", {
 
     # No configs by default ----------------------------------------------
-    expect_null(asa_client$httr_configs)
+    expect_equal(asa_client$httr_configs, list())
 
     # Add httr configs ---------------------------------------------------
     SSL_VERIFYPEER <- 0L
@@ -19,6 +19,6 @@ test_that("httr configs can successfully be added to and removed from AmericanSo
 
     # Reset httr configs -------------------------------------------------
     asa_client$reset_httr_configs()
-    expect_null(asa_client$httr_configs)
+    expect_equal(asa_client$httr_configs, list())
 
 })

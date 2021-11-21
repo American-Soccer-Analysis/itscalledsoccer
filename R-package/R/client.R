@@ -32,12 +32,14 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         referees = NULL,
 
         #' @field httr_configs Configs to pass on to all \code{httr} functions. See \href{https://www.rdocumentation.org/packages/httr/versions/1.4.2/topics/config}{documentation}.
-        httr_configs = NULL,
+        httr_configs = list(),
 
         #' @description Creates a new \code{AmericanSoccerAnalysis} object.
+        #' @param ... Configs to pass on to all \code{httr} functions. See \href{https://www.rdocumentation.org/packages/httr/versions/1.4.2/topics/config}{documentation}.
         #' @return A new \code{AmericanSoccerAnalysis} object.
-        initialize = function() {
+        initialize = function(...) {
             self$base_url <- glue::glue("https://app.americansocceranalysis.com/api/{self$API_VERSION}")
+            self$httr_configs <- list(...)
             self$players <- get_entity(self, "player")
             self$teams <- get_entity(self, "team")
             self$stadia <- get_entity(self, "stadium")
@@ -45,7 +47,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
             self$referees <- get_entity(self, "referee")
         },
 
-        #' @description Adds \code{httr} configs to the existing class.
+        #' @description Appends new \code{httr} configs to the existing class.
         #' @param ... Configs to pass on to all \code{httr} functions. See \href{https://www.rdocumentation.org/packages/httr/versions/1.4.2/topics/config}{documentation}.
         add_httr_configs = function(...) {
             self$httr_configs <- c(self$httr_configs, list(...))
@@ -53,7 +55,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
 
         #' @description Removes all \code{httr} configs from the existing class.
         reset_httr_configs = function() {
-            self$httr_configs <- NULL
+            self$httr_configs <- list()
         },
 
         #' @description Retrieves a data frame containing player names, IDs, and other metadata.

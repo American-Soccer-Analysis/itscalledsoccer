@@ -64,9 +64,16 @@ Does not take any arguments to initialize.
 \subsection{Method \code{new()}}{
 Creates a new \code{AmericanSoccerAnalysis} object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AmericanSoccerAnalysis$new()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{AmericanSoccerAnalysis$new(...)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{Configs to pass on to all \code{httr} functions. See \href{https://www.rdocumentation.org/packages/httr/versions/1.4.2/topics/config}{documentation}.}
+}
+\if{html}{\out{</div>}}
+}
 \subsection{Returns}{
 A new \code{AmericanSoccerAnalysis} object.
 }
@@ -75,7 +82,7 @@ A new \code{AmericanSoccerAnalysis} object.
 \if{html}{\out{<a id="method-add_httr_configs"></a>}}
 \if{latex}{\out{\hypertarget{method-add_httr_configs}{}}}
 \subsection{Method \code{add_httr_configs()}}{
-Adds \code{httr} configs to the existing class.
+Appends new \code{httr} configs to the existing class.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AmericanSoccerAnalysis$add_httr_configs(...)}\if{html}{\out{</div>}}
 }

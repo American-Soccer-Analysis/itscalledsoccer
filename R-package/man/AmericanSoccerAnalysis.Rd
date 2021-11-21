@@ -29,6 +29,8 @@ Does not take any arguments to initialize.
 \item{\code{managers}}{Data frame containing managers from all leagues.}
 
 \item{\code{referees}}{Data frame containing referees from all leagues.}
+
+\item{\code{httr_configs}}{Configs to pass on to all \code{httr} functions. See \href{https://www.rdocumentation.org/packages/httr/versions/1.4.2/topics/config}{documentation}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -36,6 +38,8 @@ Does not take any arguments to initialize.
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{AmericanSoccerAnalysis$new()}}
+\item \href{#method-add_httr_configs}{\code{AmericanSoccerAnalysis$add_httr_configs()}}
+\item \href{#method-reset_httr_configs}{\code{AmericanSoccerAnalysis$reset_httr_configs()}}
 \item \href{#method-get_players}{\code{AmericanSoccerAnalysis$get_players()}}
 \item \href{#method-get_teams}{\code{AmericanSoccerAnalysis$get_teams()}}
 \item \href{#method-get_stadia}{\code{AmericanSoccerAnalysis$get_stadia()}}
@@ -66,6 +70,33 @@ Creates a new \code{AmericanSoccerAnalysis} object.
 \subsection{Returns}{
 A new \code{AmericanSoccerAnalysis} object.
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-add_httr_configs"></a>}}
+\if{latex}{\out{\hypertarget{method-add_httr_configs}{}}}
+\subsection{Method \code{add_httr_configs()}}{
+Adds \code{httr} configs to the existing class.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AmericanSoccerAnalysis$add_httr_configs(...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{Configs to pass on to all \code{httr} functions. See \href{https://www.rdocumentation.org/packages/httr/versions/1.4.2/topics/config}{documentation}.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-reset_httr_configs"></a>}}
+\if{latex}{\out{\hypertarget{method-reset_httr_configs}{}}}
+\subsection{Method \code{reset_httr_configs()}}{
+Removes all \code{httr} configs from the existing class.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AmericanSoccerAnalysis$reset_httr_configs()}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-get_players"></a>}}

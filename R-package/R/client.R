@@ -31,6 +31,9 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @field referees Data frame containing referees from all leagues.
         referees = NULL,
 
+        #' @field httr_configs Configs to pass on to all \code{httr} functions. See \href{https://www.rdocumentation.org/packages/httr/versions/1.4.2/topics/config}{documentation}.
+        httr_configs = NULL,
+
         #' @description Creates a new \code{AmericanSoccerAnalysis} object.
         #' @return A new \code{AmericanSoccerAnalysis} object.
         initialize = function() {
@@ -40,6 +43,17 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
             self$stadia <- get_entity(self, "stadium")
             self$managers <- get_entity(self, "manager")
             self$referees <- get_entity(self, "referee")
+        },
+
+        #' @description Adds \code{httr} configs to the existing class.
+        #' @param ... Configs to pass on to all \code{httr} functions. See \href{https://www.rdocumentation.org/packages/httr/versions/1.4.2/topics/config}{documentation}.
+        add_httr_configs = function(...) {
+            self$httr_configs <- c(self$httr_configs, list(...))
+        },
+
+        #' @description Removes all \code{httr} configs from the existing class.
+        reset_httr_configs = function() {
+            self$httr_configs <- NULL
         },
 
         #' @description Retrieves a data frame containing player names, IDs, and other metadata.

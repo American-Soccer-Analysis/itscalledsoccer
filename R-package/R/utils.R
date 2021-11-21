@@ -49,14 +49,14 @@
     return(names)
 }
 
-.single_request <- function(url, query) {
+.single_request <- function(self, url, query) {
     for (arg_name in names(query)) {
         if (length(query[[arg_name]]) > 1) {
             query[[arg_name]] <- .collapse_query_string(query[[arg_name]])
         }
     }
 
-    r <- httpcache::GET(url = url, query = query)
+    r <- httpcache::GET(url = url, query = query, self$httr_configs)
     httr::stop_for_status(r)
     response <- r %>%
         httr::content(as = "text", encoding = "UTF-8") %>%
@@ -66,7 +66,7 @@
 }
 
 .execute_query <- function(self, url, query = list()) {
-    tmp_response <- .single_request(url, query)
+    tmp_response <- .single_request(self, url, query)
     response <- tmp_response
 
     if (is.data.frame(tmp_response)) {
@@ -74,7 +74,7 @@
 
         while (nrow(tmp_response) == self$MAX_API_LIMIT) {
             query$offset <- offset
-            tmp_response <- .single_request(url, query)
+            tmp_response <- .single_request(self, url, query)
 
             response <- response %>% dplyr::bind_rows(tmp_response)
             offset <- offset + self$MAX_API_LIMIT

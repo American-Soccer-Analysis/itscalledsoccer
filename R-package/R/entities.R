@@ -4,9 +4,9 @@ get_entity <- function(self, type) {
 
     for (league in self$LEAGUES) {
         if (type == "stadium") {
-            url <- glue::glue("{self$BASE_URL}/{league}/stadia")
+            url <- glue::glue("{self$base_url}/{league}/stadia")
         } else {
-            url <- glue::glue("{self$BASE_URL}/{league}/{type}s")
+            url <- glue::glue("{self$base_url}/{league}/{type}s")
         }
 
         response <- .execute_query(self, url)
@@ -26,7 +26,7 @@ get_entity <- function(self, type) {
 
 #' @importFrom rlang .data
 filter_entity <- function(self, entity, leagues, ids, names) {
-    .check_leagues(leagues, self$LEAGUES)
+    .check_leagues(self, leagues)
     .check_ids_names(ids, names)
 
     entity_filtered <- self[[entity]] %>%
@@ -55,7 +55,7 @@ filter_entity <- function(self, entity, leagues, ids, names) {
 
 #' @importFrom rlang .data
 get_games <- function(self, leagues, game_ids, team_ids, team_names, seasons, stages) {
-    .check_leagues(leagues, self$LEAGUES)
+    .check_leagues(self, leagues)
     .check_ids_names(team_ids, team_names)
 
     if (missing(leagues)) leagues <- self$LEAGUES
@@ -70,14 +70,14 @@ get_games <- function(self, leagues, game_ids, team_ids, team_names, seasons, st
     games <- data.frame()
 
     for (league in leagues) {
-        url <- glue::glue("{self$BASE_URL}/{league}/games")
+        url <- glue::glue("{self$base_url}/{league}/games")
 
         response <- .execute_query(self, url, query)
 
         games <- games %>%
-            dplyr::bind_rows(response) %>%
-            dplyr::arrange(.data$date_time_utc)
+            dplyr::bind_rows(response)
     }
 
+    games <- games %>% dplyr::arrange(.data$date_time_utc)
     return(games)
 }

@@ -7,7 +7,7 @@ get_stats <- function(self, type, entity, leagues, ...) {
         stop(msg)
     }
 
-    .check_leagues(leagues, self$LEAGUES)
+    .check_leagues(self, leagues)
     if (missing(leagues)) leagues <- self$LEAGUES
 
     if (sum(grepl("player_", names(query))) > 0) {
@@ -46,7 +46,7 @@ get_stats <- function(self, type, entity, leagues, ...) {
     stats <- data.frame()
 
     for (league in leagues) {
-        url <- glue::glue("{self$BASE_URL}/{league}/{entity}/{type}")
+        url <- glue::glue("{self$base_url}/{league}/{entity}/{type}")
 
         response <- .execute_query(self, url, query)
 

@@ -13,8 +13,8 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @field LEAGUES List of stylized league names.
         LEAGUES = c("nwsl", "mls", "uslc", "usl1", "nasl"),
 
-        #' @field BASE_URL API base URL.
-        BASE_URL = NULL,
+        #' @field base_url API base URL.
+        base_url = NULL,
 
         #' @field players Data frame containing players from all leagues.
         players = NULL,
@@ -34,7 +34,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @description Creates a new \code{AmericanSoccerAnalysis} object.
         #' @return A new \code{AmericanSoccerAnalysis} object.
         initialize = function() {
-            self$BASE_URL <- glue::glue("https://app.americansocceranalysis.com/api/{self$API_VERSION}")
+            self$base_url <- glue::glue("https://app.americansocceranalysis.com/api/{self$API_VERSION}")
             self$players <- get_entity(self, "player")
             self$teams <- get_entity(self, "team")
             self$stadia <- get_entity(self, "stadium")

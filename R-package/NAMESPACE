@@ -3,3 +3,4 @@
 export("%>%")
 export(AmericanSoccerAnalysis)
 importFrom(magrittr,"%>%")
+importFrom(rlang,.data)

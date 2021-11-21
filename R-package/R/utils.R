@@ -3,10 +3,10 @@
     return(value)
 }
 
-.check_leagues <- function(leagues, league_options) {
+.check_leagues <- function(self, leagues) {
     if (!missing(leagues)) {
-        if (any(!leagues %in% league_options)) {
-            stop(glue::glue("Leagues are limited only to the following options: {paste0(league_options, collapse = ', ')}."))
+        if (any(!leagues %in% self$LEAGUES)) {
+            stop(glue::glue("Leagues are limited only to the following options: {paste0(self$LEAGUES, collapse = ', ')}."))
         }
     }
 }

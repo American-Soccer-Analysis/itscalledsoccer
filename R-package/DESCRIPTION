@@ -1,5 +1,5 @@
 Package: itscalledsoccer
-Title: What the Package Does (Title Case)
+Title: American Soccer Analysis API Client
 Version: 0.0.0.9000
 Author: Tyler Richardett <tyler.richardett@gmail.com>
 Maintainer: Tyler Richardett <tyler.richardett@gmail.com>
@@ -21,7 +21,8 @@ Imports:
     R6 (>= 2.5.0),
     tidyr (>= 1.1.1),
     stringi (>= 1.5.3),
-    rlang (>= 0.4.10)
+    rlang (>= 0.4.10),
+    data.table (>= 1.13.0)
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

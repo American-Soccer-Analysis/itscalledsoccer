@@ -13,8 +13,8 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @field LEAGUES List of stylized league names.
         LEAGUES = c("nwsl", "mls", "uslc", "usl1", "nasl"),
 
-        #' @field BASE_URL API base URL.
-        BASE_URL = NULL,
+        #' @field base_url API base URL.
+        base_url = NULL,
 
         #' @field players Data frame containing players from all leagues.
         players = NULL,
@@ -31,10 +31,15 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @field referees Data frame containing referees from all leagues.
         referees = NULL,
 
+        #' @field httr_configs Configs to pass on to all \code{httr} functions. See \href{https://www.rdocumentation.org/packages/httr/versions/1.4.2/topics/config}{documentation}.
+        httr_configs = list(),
+
         #' @description Creates a new \code{AmericanSoccerAnalysis} object.
+        #' @param ... Configs to pass on to all \code{httr} functions. See \href{https://www.rdocumentation.org/packages/httr/versions/1.4.2/topics/config}{documentation}.
         #' @return A new \code{AmericanSoccerAnalysis} object.
-        initialize = function() {
-            self$BASE_URL <- glue::glue("https://app.americansocceranalysis.com/api/{self$API_VERSION}")
+        initialize = function(...) {
+            self$base_url <- glue::glue("https://app.americansocceranalysis.com/api/{self$API_VERSION}")
+            self$httr_configs <- list(...)
             self$players <- get_entity(self, "player")
             self$teams <- get_entity(self, "team")
             self$stadia <- get_entity(self, "stadium")
@@ -42,12 +47,23 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
             self$referees <- get_entity(self, "referee")
         },
 
+        #' @description Appends new \code{httr} configs to the existing class.
+        #' @param ... Configs to pass on to all \code{httr} functions. See \href{https://www.rdocumentation.org/packages/httr/versions/1.4.2/topics/config}{documentation}.
+        add_httr_configs = function(...) {
+            self$httr_configs <- c(self$httr_configs, list(...))
+        },
+
+        #' @description Removes all \code{httr} configs from the existing class.
+        reset_httr_configs = function() {
+            self$httr_configs <- list()
+        },
+
         #' @description Retrieves a data frame containing player names, IDs, and other metadata.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
         #' @param ids Player IDs on which to filter. Cannot be combined with \code{names}. Accepts a character vector of length >= 1.
         #' @param names Player names on which to filter. Partial matches are accepted. Cannot be combined with \code{ids}. Accepts a character vector of length >= 1.
         get_players = function(leagues, ids, names) {
-            players <- filter_entity(self$players, self$LEAGUES, leagues, ids, names)
+            players <- filter_entity(self, "players", leagues, ids, names)
             return(players)
         },
 
@@ -56,7 +72,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @param ids Team IDs on which to filter. Cannot be combined with \code{names}. Accepts a character vector of length >= 1.
         #' @param names Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with \code{ids}. Accepts a character vector of length >= 1.
         get_teams = function(leagues, ids, names) {
-            teams <- filter_entity(self$teams, self$LEAGUES, leagues, ids, names)
+            teams <- filter_entity(self, "teams", leagues, ids, names)
             return(teams)
         },
 
@@ -65,7 +81,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @param ids Stadium IDs on which to filter. Cannot be combined with \code{names}. Accepts a character vector of length >= 1.
         #' @param names Stadium names on which to filter. Partial matches are accepted. Cannot be combined with \code{ids}. Accepts a character vector of length >= 1.
         get_stadia = function(leagues, ids, names) {
-            stadia <- filter_entity(self$stadia, self$LEAGUES, leagues, ids, names)
+            stadia <- filter_entity(self, "stadia", leagues, ids, names)
             return(stadia)
         },
 
@@ -74,7 +90,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @param ids Manager IDs on which to filter. Cannot be combined with \code{names}. Accepts a character vector of length >= 1.
         #' @param names Manager names on which to filter. Partial matches are accepted. Cannot be combined with \code{ids}. Accepts a character vector of length >= 1.
         get_managers = function(leagues, ids, names) {
-            managers <- filter_entity(self$managers, self$LEAGUES, leagues, ids, names)
+            managers <- filter_entity(self, "managers", leagues, ids, names)
             return(managers)
         },
 
@@ -83,7 +99,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #' @param ids Referee IDs on which to filter. Cannot be combined with \code{names}. Accepts a character vector of length >= 1.
         #' @param names Referee names on which to filter. Partial matches are accepted. Cannot be combined with \code{ids}. Accepts a character vector of length >= 1.
         get_referees = function(leagues, ids, names) {
-            referees <- filter_entity(self$referees, self$LEAGUES, leagues, ids, names)
+            referees <- filter_entity(self, "referees", leagues, ids, names)
             return(referees)
         },
 

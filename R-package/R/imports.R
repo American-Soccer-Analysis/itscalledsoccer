@@ -12,3 +12,7 @@
 #' @param rhs A function call using the magrittr semantics.
 #' @return The result of calling `rhs(lhs)`.
 NULL
+
+# Suppress R CMD check note
+#' @importFrom R6 R6Class
+NULL

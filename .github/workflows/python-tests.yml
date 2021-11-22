@@ -1,6 +1,10 @@
 name: Python tests
 
-on: [push]
+on:
+  push:
+    paths:
+      - "python-package/"
+      - ".github/workflows/python-tests.yml"
 
 jobs:
   python:
@@ -20,9 +24,6 @@ jobs:
           python -m pip install --upgrade pip
           cd python-package && pip install --editable .
           if [ -f requirements.dev.txt ]; then pip install -r requirements.dev.txt; fi
-      - name: Test with pytest
-        run: |
-          pytest python-package/tests/
       - name: Behave tests
         run: |
           cd python-package/tests

@@ -22,7 +22,9 @@ Imports:
     tidyr (>= 1.1.1),
     stringi (>= 1.5.3),
     rlang (>= 0.4.10),
-    data.table (>= 1.13.0)
+    data.table (>= 1.13.0),
+    crayon,
+    clisymbols
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

@@ -58,6 +58,13 @@
       "Repository": "CRAN",
       "Hash": "a94ba44cee3ea571e813721e64184172"
     },
+    "clisymbols": {
+      "Package": "clisymbols",
+      "Version": "1.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "96c01552bfd5661b9bbdefbc762f4bcd"
+    },
     "cpp11": {
       "Package": "cpp11",
       "Version": "0.3.1",

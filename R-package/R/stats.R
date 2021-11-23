@@ -14,9 +14,9 @@ get_stats <- function(self, type, entity, leagues, ...) {
         .check_ids_names(query[["player_ids"]], query[["player_names"]])
 
         if (!is.null(query[["player_names"]])) {
-            player_ids_to_filter <- .convert_names_to_ids(self$players, query[["player_names"]])
+            query[["player_id"]] <- .convert_names_to_ids(self$players, query[["player_names"]])
         } else {
-            player_ids_to_filter <- query[["player_ids"]]
+            query[["player_id"]] <- query[["player_ids"]]
         }
 
         query[["player_ids"]] <- NULL
@@ -27,18 +27,17 @@ get_stats <- function(self, type, entity, leagues, ...) {
         .check_ids_names(query[["team_ids"]], query[["team_names"]])
 
         if (!is.null(query[["team_names"]])) {
-            team_ids_to_filter <- .convert_names_to_ids(self$teams, query[["team_names"]])
+            query[["team_id"]] <- .convert_names_to_ids(self$teams, query[["team_names"]])
         } else {
-            team_ids_to_filter <- query[["team_ids"]]
+            query[["team_id"]] <- query[["team_ids"]]
         }
 
-        if (entity %in% c("players", "goalkeepers")) query[["team_id"]] <- team_ids_to_filter
         query[["team_ids"]] <- NULL
         query[["team_names"]] <- NULL
     }
 
     if (!is.null(query[["game_ids"]])) {
-        game_ids_to_filter <- query[["game_ids"]]
+        query[["game_id"]] <- query[["game_ids"]]
         query[["game_ids"]] <- NULL
     }
 
@@ -58,15 +57,5 @@ get_stats <- function(self, type, entity, leagues, ...) {
     }
 
     stats <- data.table::rbindlist(stats, fill = TRUE)
-
-
-    if (entity %in% c("players", "goalkeepers") & (exists("player_ids_to_filter") && !is.null(player_ids_to_filter))) {
-        stats <- stats %>% dplyr::filter(.data$player_id %in% player_ids_to_filter)
-    } else if (entity == "teams" & (exists("team_ids_to_filter") && !is.null(team_ids_to_filter))) {
-        stats <- stats %>% dplyr::filter(.data$team_id %in% team_ids_to_filter)
-    } else if (entity == "games" & (exists("game_ids_to_filter") && !is.null(game_ids_to_filter))) {
-        stats <- stats %>% dplyr::filter(.data$game_id %in% game_ids_to_filter)
-    }
-
     return(stats)
 }

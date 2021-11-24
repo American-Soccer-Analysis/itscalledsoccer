@@ -1,11 +1,5 @@
 from behave import *
 
-
-@given("I have an ASA client")
-def step_impl(context):
-    pass
-
-
 @then(u'the API_VERSION should be "{value}"')
 def step_impl(context, value):
     assert context.soccer.API_VERSION == value

@@ -8,13 +8,6 @@
   - [Table of Contents](#table-of-contents)
   - [Install](#install)
   - [Usage](#usage)
-    - [Teams](#teams)
-    - [Players](#players)
-    - [Stadia](#stadia)
-    - [Managers](#managers)
-    - [Referees](#referees)
-    - [Games](#games)
-  - [Maintainers](#maintainers)
   - [Contributing](#contributing)
   - [License](#license)
 
@@ -24,28 +17,29 @@
 pip install itscalledsoccer
 ```
 
+To install a development version, clone this repo and run the following command.
+
+```sh
+pip install --editable itscalledsoccer/python-package
+```
+
 ## Usage
 
 ```python
 from itscalledsoccer.client import AmericanSoccerAnalysis
 
-asa = AmericanSoccerAnalysis()
+asa_client = AmericanSoccerAnalysis()
 ```
 
-### Teams
-
-### Players
-
-### Stadia
-
-### Managers
-
-### Referees
-
-### Games
-
-## Maintainers
+```python
+# Get all players named "Andre"
+asa_players = asa_client.get_players(names="Andre")
+```
 
 ## Contributing
 
+Feel free to open an issue or submit a pull request.
+
 ## License
+
+MIT © itscalledsoccer authors

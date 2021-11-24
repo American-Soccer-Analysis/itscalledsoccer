@@ -1,7 +1,7 @@
 #' @importFrom rlang .data
 get_entity <- function(self, type) {
     plural_type <- if (type == "stadium") "stadia" else glue::glue("{type}s")
-    cat(glue::glue("Gathering {plural_type}"))
+    cat(glue::glue("  Gathering {plural_type}"))
 
     entity_all <- list()
     i <- 1

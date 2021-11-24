@@ -4,7 +4,7 @@ name: R-CMD-check
 on:
   push:
     paths:
-      - "R-package/"
+      - "R-package/**"
       - ".github/workflows/R-check-release.yml"
 
 jobs:

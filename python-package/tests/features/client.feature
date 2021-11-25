@@ -1,11 +1,14 @@
-Feature: Client
+Feature: Client initialization
 
-	Scenario Outline: When I create a client, it has metadata
-		Given I have an ASA client
+	Scenario: An ASA client has metadata
+		Given there is an ASA client
 		Then the API_VERSION should be "v1"
 		And the BASE_URL should be "https://app.americansocceranalysis.com/api/v1/"
 		And the MAX_API_LIMIT should be "1000"
-		And "<league>" should be in LEAGUES
+
+	Scenario Outline: An ASA client has the correct leagues
+		Given there is an ASA client
+		Then "<league>" should be in LEAGUES
 
 		Examples: Leagues
 			| league |

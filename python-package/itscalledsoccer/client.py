@@ -14,32 +14,37 @@ class AmericanSoccerAnalysis:
     LEAGUES = ["nwsl", "mls", "uslc", "usl1", "nasl"]
     MAX_API_LIMIT = 1000
 
-    def __init__(self) -> None:
-        """Class constructor"""
+    def __init__(self, proxies: dict = None) -> None:
+        """Class constructor
+        
+        :param proxies: A dictionary containing proxy mappings, see https://2.python-requests.org/en/master/user/advanced/#proxies
+        """
         SESSION = requests.session()
+        if proxies:
+            SESSION.proxies.update(proxies)
         CACHE_SESSION = CacheControl(SESSION)
 
         self.session = CACHE_SESSION
         self.base_url = self.BASE_URL
-        self.players = self._get_all("player")
-        self.teams = self._get_all("team")
-        self.stadia = self._get_all("stadia")
-        self.managers = self._get_all("manager")
-        self.referees = self._get_all("referee")
+        self.players = self._get_entity("player")
+        self.teams = self._get_entity("team")
+        self.stadia = self._get_entity("stadia")
+        self.managers = self._get_entity("manager")
+        self.referees = self._get_entity("referee")
+        print("Finished initializing client")
 
-    def _get_all(self, type: str) -> pd.DataFrame:
+    def _get_entity(self, type: str) -> pd.DataFrame:
         """Gets all the data for a specific type and
         stores it in a dataframe.
 
         :param type: type of data to get
         :returns: dataframe
         """
+        plural_type = f"{type}s" if type != "stadia" else f"{type}"
+        print(f"Gathering all {plural_type}")
         df = pd.DataFrame([])
         for league in self.LEAGUES:
-            if type == "stadia":
-                url = f"{self.BASE_URL}{league}/stadia"
-            else:
-                url = f"{self.BASE_URL}{league}/{type}s"
+            url = f"{self.BASE_URL}{league}/{plural_type}"
             response = self.session.get(url).json()
             # Convert list of objects to JSON
             resp_df = pd.read_json(json.dumps(response, default=lambda x: x.__dict__))
@@ -217,6 +222,58 @@ class AmericanSoccerAnalysis:
         resp_df = pd.read_json(json.dumps(response.json()))
         return resp_df
 
+    def _get_stats(self, leagues: Union[str,List[str]], type: str, entity: str, **kwargs) -> pd.DataFrame:
+        """Handles calls to stats APIs
+
+        :param type: the API endpoint to call
+        :param entity: URL query strings
+        :param leagues:
+        :param kwargs: additional keyword arguments
+        :returns: Dataframe
+        """
+        self._check_leagues(leagues)
+        keys_string = ','.join(list(kwargs.keys()))
+
+        if "player_" in keys_string:
+            self._check_ids_names(kwargs["player_ids"], kwargs["player_names"])
+
+            if kwargs["player_names"]:
+                kwargs["player_id"] = self._convert_names_to_ids("player", kwargs["player_names"])
+            else:
+                kwargs["player_id"] = kwargs["player_ids"]
+
+            kwargs.pop("player_ids")
+            kwargs.pop("player_names")
+
+        if "team_" in keys_string:
+            self._check_ids_names(kwargs["team_ids"], kwargs["team_names"])
+
+            if kwargs["team_names"]:
+                kwargs["team_id"] = self._convert_names_to_ids("player", kwargs["team_names"])
+            else:
+                kwargs["team_id"] = kwargs["team_ids"]
+
+            kwargs.pop("team_ids")
+            kwargs.pop("team_names")
+
+        if kwargs.get("game_ids", None):
+            kwargs["game_id"] = kwargs["game_ids"]
+            kwargs.pop("game_ids")
+
+        stats = pd.DataFrame([])
+        if isinstance(leagues, str):
+            url = f"{self.base_url}{leagues}/{entity}/{type}"
+
+            response = self._execute_query(url, kwargs)
+            stats.append(response)
+        elif isinstance(leagues, list):
+            for league in leagues:
+                url = f"{self.base_url}{league}/{entity}/{type}"
+
+                response = self._execute_query(url, kwargs)
+                stats.append(response)
+        return stats
+
     def get_stadia(
         self,
         leagues: Union[str, List[str]],
@@ -346,3 +403,89 @@ class AmericanSoccerAnalysis:
                 games = games.append(response)
 
         return games.sort_values(by=["date_time_utc"], ascending=False)
+
+    def get_player_xgoals(self, leagues: Union[str, List[str]], **kwargs) -> pd.DataFrame:
+        """Retrieves a data frame containing player xG data meeting the specified conditions.
+            :param leagues: League(s) on which to filter. Accepts a string or list of strings.
+            :param kwargs: The following arguments will be parsed:
+                minimum_minutes: Minimum threshold for sum of minutes played.
+                minimum_shots: Minimum threshold for sum of shots.
+                minimum_key_passes: Minimum threshold for sum of key passes.
+                player_ids: Player IDs on which to filter. Cannot be combined with player_names. Accepts a string or list of strings.
+                player_names: Player names on which to filter. Partial matches are accepted. Cannot be combined with player_ids. Accepts a string or list of strings.
+                team_ids: Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
+                team_names: Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
+                season_name: Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
+                start_date: Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+                end_date: End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+                shot_pattern: Describes the possessing actions leading to the shot. Valid keywords include: 'Set piece', 'Corner', 'Free kick', 'Penalty', 'Fastbreak', and 'Regular'. Accepts a string or list of strings.
+                split_by_teams: Logical indicator to group results by team.
+                split_by_seasons: Logical indicator to group results by season.
+                split_by_games: Logical indicator to group results by game.
+                stage_name: Describes the stage of competition in which a game took place. Accepts a string or list of strings.
+                general_position: Describes the most common position played by each player over the specified period of time. Valid keywords include: 'GK', 'CB', 'FB', 'DM', 'CM', 'AM', 'W', and 'ST'. Accepts a string or list of strings.
+            :returns: Dataframe
+        """
+        player_xgoals = self._get_stats(leagues, type="xgoals", entity="players", **kwargs)
+        return player_xgoals
+
+    def get_goalkeeper_xgoals(self, leagues: Union[str, List[str]], **kwargs) -> pd.DataFrame:
+        """Retrieves a data frame containing goalkeeper xG data meeting the specified conditions.
+            :param leagues: League(s) on which to filter. Accepts a string or list of strings.
+            :param kwargs: The following arguments will be parsed:
+                minimum_minutes: Minimum threshold for sum of minutes played.
+                minimum_shots_faced: Minimum threshold for sum of shots faced.
+                player_ids: Player IDs on which to filter. Cannot be combined with player_names. Accepts a string or list of strings.
+                player_names: Player names on which to filter. Partial matches are accepted. Cannot be combined with player_ids. Accepts a string or list of strings.
+                team_ids: Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
+                team_names: Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
+                season_name: Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
+                start_date: Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+                end_date: End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+                shot_pattern: Describes the possessing actions leading to the shot. Valid keywords include: 'Set piece', 'Corner', 'Free kick', 'Penalty', 'Fastbreak', and 'Regular'. Accepts a string or list of strings.
+                split_by_teams: Logical indicator to group results by team.
+                split_by_seasons: Logical indicator to group results by season.
+                split_by_games: Logical indicator to group results by game.
+                stage_name: Describes the stage of competition in which a game took place. Accepts a string or list of strings.
+            :returns: Dataframe
+        """
+        goalkeeper_xgoals = self._get_stats(self, leagues, type="xgoals", entity="goalkeepers", **kwargs)
+        return goalkeeper_xgoals
+
+    def get_team_xgoals(self, leagues: Union[str, List[str]], **kwargs) -> pd.DataFrame:
+        """Retrieves a data frame containing team xG data meeting the specified conditions.
+
+        :param leagues: Leagues on which to filter. Accepts a string or list of strings.
+        :param kwargs: The following arguments will be parsed:
+            team_ids: Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
+            team_names: Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
+            season_name: Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
+            start_date: Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+            end_date: End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+            shot_pattern: Describes the possessing actions leading to the shot. Valid keywords include: 'Set piece', 'Corner', 'Free kick', 'Penalty', 'Fastbreak', and 'Regular'. Accepts a string or list of strings.
+            split_by_seasons: Logical indicator to group results by season.
+            split_by_games: Logical indicator to group results by game.
+            home_only: Logical indicator to only include results from home games.
+            away_only: Logical indicator to only include results from away games.
+            home_adjusted: Logical indicator to adjust certain values based on the share of home games a team has played during the specified duration.
+            even_game_state: Logical indicator to only include shots taken when the score was level.
+            stage_name: Describes the stage of competition in which a game took place. Accepts a string or list of strings.
+        :returns: Dataframe
+        """
+        team_xgoals = self._get_stats(self, leagues, type="xgoals", entity="teams", **kwargs)
+        return team_xgoals
+
+    def get_game_xgoals(self, leagues: Union[str, List[str]], **kwargs) -> pd.DataFrame:
+        """Retrieves a data frame containing game xG data meeting the specified conditions.
+
+        :param leagues: Leagues on which to filter. Accepts a string or list of strings.
+        :param kwargs: The following arguments will be parsed:
+            game_ids: Game IDs on which to filter. Accepts a string or list of strings.
+            season_name: Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
+            start_date: Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+            end_date: End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+            stage_name: Describes the stage of competition in which a game took place. Accepts a string or list of strings.
+        :returns: Dataframe
+        """
+        game_xgoals = self._get_stats(self, leagues, type="xgoals", entity="games", **kwargs)
+        return game_xgoals

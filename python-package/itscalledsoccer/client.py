@@ -40,13 +40,11 @@ class AmericanSoccerAnalysis:
         :param type: type of data to get
         :returns: dataframe
         """
-        print(f"Gathering all {type}(s)")
+        plural_type = f"{type}s" if type != "stadia" else f"{type}"
+        print(f"Gathering all {plural_type}")
         df = pd.DataFrame([])
         for league in self.LEAGUES:
-            if type == "stadia":
-                url = f"{self.BASE_URL}{league}/stadia"
-            else:
-                url = f"{self.BASE_URL}{league}/{type}s"
+            url = f"{self.BASE_URL}{league}/{plural_type}"
             response = self.session.get(url).json()
             # Convert list of objects to JSON
             resp_df = pd.read_json(json.dumps(response, default=lambda x: x.__dict__))

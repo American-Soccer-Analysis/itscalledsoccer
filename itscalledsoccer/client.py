@@ -429,6 +429,30 @@ class AmericanSoccerAnalysis:
         player_xgoals = self._get_stats(leagues, type="xgoals", entity="players", **kwargs)
         return player_xgoals
 
+    def get_player_xpass(self, leagues: Union[str, List[str]], **kwargs) -> pd.DataFrame:
+        """Retrieves a data frame containing player xPass data meeting the specified conditions.
+            :param leagues: League(s) on which to filter. Accepts a string or list of strings.
+            :param kwargs: The following arguments will be parsed:
+                minimum_minutes: Minimum threshold for sum of minutes played.
+                minimum_passes: Minimum threshold for sum of attempted passes.
+                player_ids: Player IDs on which to filter. Cannot be combined with player_names. Accepts a string or list of strings.
+                player_names: Player names on which to filter. Partial matches are accepted. Cannot be combined with player_ids. Accepts a string or list of strings.
+                team_ids: Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
+                team_names: Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
+                season_name: Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
+                start_date: Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+                end_date: End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+                pass_origin_third: Describes the third of the field from which the pass originated. Valid keywords include: 'Attacking', 'Middle', and 'Defensive'. Accepts a string or list of strings.
+                split_by_teams: Logical indicator to group results by team.
+                split_by_seasons: Logical indicator to group results by season.
+                split_by_games: Logical indicator to group results by game.
+                stage_name: Describes the stage of competition in which a game took place. Accepts a string or list of strings.
+                general_position: Describes the most common position played by each player over the specified period of time. Valid keywords include: 'GK', 'CB', 'FB', 'DM', 'CM', 'AM', 'W', and 'ST'. Accepts a string or list of strings.
+            :returns: Dataframe
+        """
+        player_xpass = self._get_stats(leagues, type="xpass", entity="players", **kwargs)
+        return player_xpass
+
     def get_goalkeeper_xgoals(self, leagues: Union[str, List[str]], **kwargs) -> pd.DataFrame:
         """Retrieves a data frame containing goalkeeper xG data meeting the specified conditions.
             :param leagues: League(s) on which to filter. Accepts a string or list of strings.
@@ -474,6 +498,27 @@ class AmericanSoccerAnalysis:
         """
         team_xgoals = self._get_stats(self, leagues, type="xgoals", entity="teams", **kwargs)
         return team_xgoals
+
+    def get_team_xpass(self, leagues: Union[str, List[str]], **kwargs) -> pd.DataFrame:
+        """Retrieves a data frame containing team xPass data meeting the specified conditions.
+
+        :param leagues: Leagues on which to filter. Accepts a string or list of strings.
+        :param kwargs: The following arguments will be parsed:
+            team_ids: Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
+            team_names: Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
+            season_name: Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
+            start_date: Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+            end_date: End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+            pass_origin_third: Describes the third of the field from which the pass originated. Valid keywords include: 'Attacking', 'Middle', and 'Defensive'. Accepts a string or list of strings.
+            split_by_seasons: Logical indicator to group results by season.
+            split_by_games: Logical indicator to group results by game.
+            home_only: Logical indicator to only include results from home games.
+            away_only: Logical indicator to only include results from away games.
+            stage_name: Describes the stage of competition in which a game took place. Accepts a string or list of strings.
+        :returns: Dataframe
+        """
+        team_xpass = self._get_stats(self, leagues, type="xpass", entity="teams", **kwargs)
+        return team_xpass
 
     def get_game_xgoals(self, leagues: Union[str, List[str]], **kwargs) -> pd.DataFrame:
         """Retrieves a data frame containing game xG data meeting the specified conditions.

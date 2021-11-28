@@ -1,6 +1,6 @@
 Feature: xG functions
 
-	Tests that all xG function work correctly
+	Tests that all xG functions work correctly
 
 	Scenario: Querying player-level xG values
 		Given there is an ASA client

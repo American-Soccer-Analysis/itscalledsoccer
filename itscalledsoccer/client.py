@@ -453,6 +453,30 @@ class AmericanSoccerAnalysis:
         player_xpass = self._get_stats(leagues, type="xpass", entity="players", **kwargs)
         return player_xpass
 
+    def get_player_goals_added(self, leagues: Union[str, List[str]], **kwargs) -> pd.DataFrame:
+        """Retrieves a data frame containing player g+ data meeting the specified conditions.
+            :param leagues: League(s) on which to filter. Accepts a string or list of strings.
+            :param kwargs: The following arguments will be parsed:
+                minimum_minutes: Minimum threshold for sum of minutes played.
+                player_ids: Player IDs on which to filter. Cannot be combined with player_names. Accepts a string or list of strings.
+                player_names: Player names on which to filter. Partial matches are accepted. Cannot be combined with player_ids. Accepts a string or list of strings.
+                team_ids: Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
+                team_names: Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
+                season_name: Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
+                start_date: Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+                end_date: End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+                split_by_teams: Logical indicator to group results by team.
+                split_by_seasons: Logical indicator to group results by season.
+                split_by_games: Logical indicator to group results by game.
+                stage_name: Describes the stage of competition in which a game took place. Accepts a string or list of strings.
+                action_type: Describes the goals added (g+) action type. Valid keywords include: 'Dribbling', 'Fouling', 'Interrupting', 'Passing', 'Receiving', and 'Shooting'. Accepts a string or list of strings.
+                general_position: Describes the most common position played by each player over the specified period of time. Valid keywords include: 'GK', 'CB', 'FB', 'DM', 'CM', 'AM', 'W', and 'ST'. Accepts a string or list of strings.
+                above_replacement: Logical indicator to compare players against replacement-level values. This will only return aggregated g+ values, rather than disaggregated g+ values by action type.
+            :returns: Dataframe
+        """
+        player_goals_added = self._get_stats(leagues, type="goals-added", entity="players", **kwargs)
+        return player_goals_added
+
     def get_goalkeeper_xgoals(self, leagues: Union[str, List[str]], **kwargs) -> pd.DataFrame:
         """Retrieves a data frame containing goalkeeper xG data meeting the specified conditions.
             :param leagues: League(s) on which to filter. Accepts a string or list of strings.
@@ -475,6 +499,29 @@ class AmericanSoccerAnalysis:
         """
         goalkeeper_xgoals = self._get_stats(self, leagues, type="xgoals", entity="goalkeepers", **kwargs)
         return goalkeeper_xgoals
+
+    def get_goalkeeper_goals_added(self, leagues: Union[str, List[str]], **kwargs) -> pd.DataFrame:
+        """Retrieves a data frame containing goalkeeper g+ data meeting the specified conditions.
+            :param leagues: League(s) on which to filter. Accepts a string or list of strings.
+            :param kwargs: The following arguments will be parsed:
+                minimum_minutes: Minimum threshold for sum of minutes played.
+                player_ids: Player IDs on which to filter. Cannot be combined with player_names. Accepts a string or list of strings.
+                player_names: Player names on which to filter. Partial matches are accepted. Cannot be combined with player_ids. Accepts a string or list of strings.
+                team_ids: Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
+                team_names: Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
+                season_name: Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
+                start_date: Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+                end_date: End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+                split_by_teams: Logical indicator to group results by team.
+                split_by_seasons: Logical indicator to group results by season.
+                split_by_games: Logical indicator to group results by game.
+                stage_name: Describes the stage of competition in which a game took place. Accepts a string or list of strings.
+                action_type: Describes the goals added (g+) action type. Valid keywords include: 'Dribbling', 'Fouling', 'Interrupting', 'Passing', 'Receiving', and 'Shooting'. Accepts a string or list of strings.
+                above_replacement: Logical indicator to compare players against replacement-level values. This will only return aggregated g+ values, rather than disaggregated g+ values by action type.
+            :returns: Dataframe
+        """
+        goalkeeper_goals_added = self._get_stats(leagues, type="goals-added", entity="goalkeepers", **kwargs)
+        return goalkeeper_goals_added
 
     def get_team_xgoals(self, leagues: Union[str, List[str]], **kwargs) -> pd.DataFrame:
         """Retrieves a data frame containing team xG data meeting the specified conditions.
@@ -519,6 +566,24 @@ class AmericanSoccerAnalysis:
         """
         team_xpass = self._get_stats(self, leagues, type="xpass", entity="teams", **kwargs)
         return team_xpass
+
+    def get_team_goals_added(self, leagues: Union[str, List[str]], **kwargs) -> pd.DataFrame:
+        """Retrieves a data frame containing team g+ data meeting the specified conditions.
+
+        :param leagues: Leagues on which to filter. Accepts a string or list of strings.
+        :param kwargs: The following arguments will be parsed:
+            team_ids: Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
+            team_names: Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
+            season_name: Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
+            split_by_seasons: Logical indicator to group results by season.
+            stage_name: Describes the stage of competition in which a game took place. Accepts a string or list of strings.
+            action_type: Describes the goals added (g+) action type. Valid keywords include: 'Dribbling', 'Fouling', 'Interrupting', 'Passing', 'Receiving', and 'Shooting'. Accepts a string or list of strings.
+            zone: Zone number on pitch. Zones 1-5 are the defensive-most zones, and zones 26-30 are the attacking-most zones. Accepts a number or list of numbers.
+            gamestate_trunc: Integer (score differential) value between -2 and 2, inclusive. Gamestates more extreme than -2 and 2 have been included with -2 and 2, respectively. Accepts a number or list of numbers.
+        :returns: Dataframe
+        """
+        team_goals_added = self._get_stats(self, leagues, type="goals-added", entity="teams", **kwargs)
+        return team_goals_added
 
     def get_game_xgoals(self, leagues: Union[str, List[str]], **kwargs) -> pd.DataFrame:
         """Retrieves a data frame containing game xG data meeting the specified conditions.

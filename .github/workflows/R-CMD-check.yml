@@ -28,6 +28,7 @@ jobs:
         uses: r-lib/actions/setup-r-dependencies@v1
         with:
           extra-packages: rcmdcheck
+          working-directory: ./R-package
 
       - name: R CMD check
         run: |

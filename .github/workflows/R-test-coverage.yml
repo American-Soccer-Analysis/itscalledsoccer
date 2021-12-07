@@ -25,6 +25,7 @@ jobs:
         uses: r-lib/actions/setup-r-dependencies@v1
         with:
           extra-packages: covr
+          working-directory: ./R-package
 
       - name: Test coverage
         run: covr::codecov(path = "./R-package", quiet = FALSE, token = "${{ secrets.CODECOV_TOKEN }}")

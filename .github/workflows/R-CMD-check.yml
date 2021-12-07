@@ -3,7 +3,7 @@
 name: R-CMD-check
 on:
   workflow_dispatch:
-    branches: [ main ]
+    branches: [main]
   push:
     paths:
       - "R-package/**"
@@ -11,22 +11,31 @@ on:
 
 jobs:
   R-CMD-check:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
 
+      - name: Set up pandoc
+        uses: r-lib/actions/setup-pandoc@v1
+
       - name: Install R
         uses: r-lib/actions/setup-r@v1
+        with:
+          use-public-rspm: true
 
       - name: Install dependencies
-        run: |
-          install.packages(c("remotes", "rcmdcheck"))
-          remotes::install_deps(pkgdir = "./R-package", dependencies = TRUE)
-        shell: Rscript {0}
+        uses: r-lib/actions/setup-r-dependencies@v1
+        with:
+          extra-packages: rcmdcheck
 
       - name: R CMD check
         run: |
           options(crayon.enabled = TRUE)
           rcmdcheck::rcmdcheck(path = "./R-package", args = c("--no-manual", "--as-cran"), build_args = "--no-manual", error_on = "warning", check_dir = "check")
         shell: Rscript {0}
+
+      - name: Show testthat output
+        if: always()
+        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
+        shell: bash

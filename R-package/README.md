@@ -1,4 +1,4 @@
-# itscalledsoccer
+# itscalledsoccer <img src="man/figures/logo.png" align="right" height="139"/>
 
 Description TK.
 
@@ -9,7 +9,7 @@ Description TK.
 install.packages("itscalledsoccer")
 
 # Install development version from GitHub
-devtools::install_github("American-Soccer-Analysis/itscalledsoccer")
+devtools::install_github("American-Soccer-Analysis/itscalledsoccer/R-package")
 ```
 
 ## Getting Started

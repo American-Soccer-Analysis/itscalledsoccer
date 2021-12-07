@@ -1,6 +1,10 @@
-# itscalledsoccer <img src="man/figures/logo.png" align="right" height="139"/>
+# itscalledsoccer <img src="man/figures/logo.png" align="right" height="175"/>
 
-Description TK.
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![CRAN status](https://www.r-pkg.org/badges/version/itscalledsoccer)](https://CRAN.R-project.org/package=itscalledsoccer)
+<!-- badges: end -->
+
+`itscalledsoccer` is a wrapper around the same API that powers the [American Soccer Analysis app](https://app.americansocceranalysis.com/). It enables R users to programmatically retrieve game-, season-, or career-level advanced analytics for their favorite [MLS](https://en.wikipedia.org/wiki/Major_League_Soccer), [NWSL](https://en.wikipedia.org/wiki/National_Women%27s_Soccer_League), and [USL](https://en.wikipedia.org/wiki/United_Soccer_League) players and teams.
 
 ## Installation
 
@@ -20,7 +24,7 @@ Initialize the main class with the `new` method.
 asa_client <- AmericanSoccerAnalysis$new()
 ```
 
-If you're in an environment where a proxy server is required, or if you need to need to alter any other `CURL` options, you can pass any number of `httr` configs when initializing the class. Use these at your own discretion.
+If you're in an environment where a proxy server is required, or if you need to need to alter any other `CURL` options, you can pass any number of [`httr` configs](https://www.rdocumentation.org/packages/httr/versions/1.4.2/topics/config) when initializing the class. Use these at your own discretion.
 
 ```r
 asa_client <- AmericanSoccerAnalysis$new(

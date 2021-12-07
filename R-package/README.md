@@ -3,7 +3,7 @@
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/itscalledsoccer)](https://CRAN.R-project.org/package=itscalledsoccer)
 [![R-CMD-check](https://github.com/American-Soccer-Analysis/itscalledsoccer/workflows/R-CMD-check/badge.svg)](https://github.com/American-Soccer-Analysis/itscalledsoccer/actions)
-[![Codecov test coverage](https://codecov.io/gh/American-Soccer-Analysis/itscalledsoccer/branch/main/graph/badge.svg)](https://codecov.io/gh/American-Soccer-Analysis/itscalledsoccer?branch=main)
+[![Codecov test coverage](https://codecov.io/gh/American-Soccer-Analysis/itscalledsoccer/branch/main/graph/badge.svg?token=RUWMM7ZLQ2)](https://codecov.io/gh/American-Soccer-Analysis/itscalledsoccer?branch=main)
 <!-- badges: end -->
 
 `itscalledsoccer` is a wrapper around the same API that powers the [American Soccer Analysis app](https://app.americansocceranalysis.com/). It enables R users to programmatically retrieve game-, season-, or career-level advanced analytics for their favorite [MLS](https://en.wikipedia.org/wiki/Major_League_Soccer), [NWSL](https://en.wikipedia.org/wiki/National_Women%27s_Soccer_League), and [USL](https://en.wikipedia.org/wiki/United_Soccer_League) players and teams.

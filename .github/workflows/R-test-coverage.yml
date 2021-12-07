@@ -1,0 +1,30 @@
+# Workflow derived from https://github.com/r-lib/actions/tree/master/examples
+# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+name: R-test-coverage
+on:
+  workflow_dispatch:
+    branches: [ main ]
+  push:
+    paths:
+      - "R-package/**"
+      - ".github/workflows/R-test-coverage.yml"
+
+jobs:
+  R-test-coverage:
+    runs-on: macos-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Install R
+        uses: r-lib/actions/setup-r@v1
+
+      - name: Install dependencies
+        run: |
+          install.packages("remotes")
+          remotes::install_deps(pkgdir = "./R-package", dependencies = TRUE)
+        shell: Rscript {0}
+
+      - name: Test coverage
+        run: covr::codecov(path = "./R-package", quiet = FALSE, token = "${{ secrets.CODECOV_TOKEN }}")
+        shell: Rscript {0}

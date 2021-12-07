@@ -28,9 +28,5 @@ jobs:
       - name: R CMD check
         run: |
           options(crayon.enabled = TRUE)
-          rcmdcheck::rcmdcheck(path = "./R-package", args = "--no-manual", error_on = "error")
-        shell: Rscript {0}
-
-      - name: Test coverage
-        run: covr::codecov(path = "./R-package", token = "${{ secrets.CODECOV_TOKEN }}")
+          rcmdcheck::rcmdcheck(path = "./R-package", args = c("--no-manual", "--as-cran"), build_args = "--no-manual", error_on = "warning", check_dir = "check")
         shell: Rscript {0}

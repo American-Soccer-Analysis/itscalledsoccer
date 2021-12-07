@@ -1,0 +1,27 @@
+# Workflow derived from https://github.com/r-lib/actions/tree/master/examples
+# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+name: R-test-coverage
+on:
+  push:
+    paths:
+      - "R-package/**"
+      - ".github/workflows/R-test-coverage.yml"
+
+jobs:
+  R-test-coverage:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: r-lib/actions/setup-r@v1
+        with:
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v1
+        with:
+          extra-packages: covr
+
+      - name: Test coverage
+        run: covr::codecov(token = "${{ secrets.CODECOV_TOKEN }}")
+        shell: Rscript {0}

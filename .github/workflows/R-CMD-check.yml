@@ -28,11 +28,11 @@ jobs:
         with:
           use-public-rspm: true
 
-      - name: Install curl
+      - name: Install OS-level dependencies
         run: sudo apt install libcurl4-openssl-dev libssl-dev
         shell: bash
 
-      - name: Install dependencies
+      - name: Install R dependencies
         run: |
           install.packages(c("remotes", "rcmdcheck"))
           remotes::install_deps(dependencies = TRUE)

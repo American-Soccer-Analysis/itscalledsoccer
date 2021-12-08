@@ -25,13 +25,13 @@ jobs:
         with:
           use-public-rspm: true
 
-      - name: Install Curl
+      - name: Install OS-level dependencies
         run: sudo apt install libcurl4-openssl-dev libssl-dev
         shell: bash
 
-      - name: Install dependencies
+      - name: Install R dependencies
         run: |
-          install.packages("covr")
+          install.packages(c("remotes", "covr"))
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
 

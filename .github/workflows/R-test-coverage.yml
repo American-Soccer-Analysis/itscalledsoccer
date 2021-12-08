@@ -25,6 +25,10 @@ jobs:
         with:
           use-public-rspm: true
 
+      - name: Install Curl
+        run: sudo apt install libcurl4-openssl-dev libssl-dev
+        shell: bash
+
       - name: Install dependencies
         run: |
           install.packages("covr")

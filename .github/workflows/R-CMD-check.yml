@@ -28,6 +28,10 @@ jobs:
         with:
           use-public-rspm: true
 
+      - name: Install curl
+        run: sudo apt install libcurl4-openssl-dev libssl-dev
+        shell: bash
+
       - name: Install dependencies
         run: |
           install.packages(c("remotes", "rcmdcheck"))

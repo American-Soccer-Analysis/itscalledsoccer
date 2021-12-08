@@ -12,6 +12,8 @@ on:
 jobs:
   R-CMD-check:
     runs-on: ubuntu-latest
+    defaults:
+      working-directory: R-package
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
@@ -25,16 +27,12 @@ jobs:
           use-public-rspm: true
 
       - name: Install dependencies
-        uses: r-lib/actions/setup-r-dependencies@2049ddf494c475378ff5cf3ff4ac92ec65670148
+        uses: r-lib/actions/setup-r-dependencies@v1
         with:
           extra-packages: rcmdcheck
-          working-directory: ./R-package
 
       - name: R CMD check
-        run: |
-          options(crayon.enabled = TRUE)
-          rcmdcheck::rcmdcheck(path = "./R-package", args = c("--no-manual", "--as-cran"), build_args = "--no-manual", error_on = "warning", check_dir = "check")
-        shell: Rscript {0}
+        uses: r-lib/actions/check-r-package@v1
 
       - name: Show testthat output
         if: always()

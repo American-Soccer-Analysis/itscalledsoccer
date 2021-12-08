@@ -12,6 +12,8 @@ on:
 jobs:
   R-test-coverage:
     runs-on: ubuntu-latest
+    defaults:
+      working-directory: R-package
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
@@ -22,11 +24,10 @@ jobs:
           use-public-rspm: true
 
       - name: Install dependencies
-        uses: r-lib/actions/setup-r-dependencies@2049ddf494c475378ff5cf3ff4ac92ec65670148
+        uses: r-lib/actions/setup-r-dependencies@v1
         with:
           extra-packages: covr
-          working-directory: ./R-package
 
       - name: Test coverage
-        run: covr::codecov(path = "./R-package", quiet = FALSE, token = "${{ secrets.CODECOV_TOKEN }}")
+        run: covr::codecov(quiet = FALSE, token = "${{ secrets.CODECOV_TOKEN }}")
         shell: Rscript {0}

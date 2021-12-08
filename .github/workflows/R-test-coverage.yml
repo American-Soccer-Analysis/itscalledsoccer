@@ -26,9 +26,10 @@ jobs:
           use-public-rspm: true
 
       - name: Install dependencies
-        uses: r-lib/actions/setup-r-dependencies@v1
-        with:
-          extra-packages: covr
+        run: |
+          install.packages("covr")
+          remotes::install_deps(dependencies = TRUE)
+        shell: Rscript {0}
 
       - name: Test coverage
         run: covr::codecov(quiet = FALSE, token = "${{ secrets.CODECOV_TOKEN }}")

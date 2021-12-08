@@ -29,12 +29,21 @@ jobs:
           use-public-rspm: true
 
       - name: Install dependencies
-        uses: r-lib/actions/setup-r-dependencies@v1
-        with:
-          extra-packages: rcmdcheck
+        run: |
+          install.packages(c("remotes", "rcmdcheck"))
+          remotes::install_deps(dependencies = TRUE)
+        shell: Rscript {0}
 
       - name: R CMD check
-        uses: r-lib/actions/check-r-package@v1
+        run: |
+          options(crayon.enabled = TRUE)
+          rcmdcheck::rcmdcheck(
+            args = c("--no-manual", "--as-cran"),
+            build_args = "--no-manual",
+            error_on = "warning",
+            check_dir = "check"
+          )
+        shell: Rscript {0}
 
       - name: Show testthat output
         if: always()

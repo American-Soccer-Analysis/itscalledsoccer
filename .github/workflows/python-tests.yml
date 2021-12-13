@@ -24,6 +24,11 @@ jobs:
           python -m pip install --upgrade pip
           cd python-package && pip install --editable .
           if [ -f requirements.dev.txt ]; then pip install -r requirements.dev.txt; fi
+      - name: Linting
+        run: |
+          cd python-package/
+          mypy itscalledsoccer
+          black itscalledsoccer
       - name: Behave tests
         run: |
           cd python-package/tests

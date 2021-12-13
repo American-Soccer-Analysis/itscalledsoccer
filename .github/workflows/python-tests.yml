@@ -28,7 +28,7 @@ jobs:
         run: |
           cd python-package/
           mypy itscalledsoccer
-          black itscalledsoccer
+          black --check itscalledsoccer
       - name: Behave tests
         run: |
           cd python-package/tests

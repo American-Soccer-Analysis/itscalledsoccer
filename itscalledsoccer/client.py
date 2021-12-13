@@ -267,7 +267,7 @@ class AmericanSoccerAnalysis:
                 kwargs.get("team_ids", None), kwargs.get("team_names", None)
             )
 
-            if kwargs.get("team_names",None):
+            if kwargs.get("team_names", None):
                 kwargs["team_id"] = self._convert_names_to_ids(
                     "team", kwargs["team_names"]
                 )

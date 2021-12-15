@@ -41,6 +41,7 @@ jobs:
           use-public-rspm: true
 
       - name: Install OS-level dependencies
+        if: ${{ matrix.config.os == 'ubuntu-18.04' }}
         run: sudo apt install libcurl4-openssl-dev libssl-dev
         shell: bash
 

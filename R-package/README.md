@@ -1,6 +1,14 @@
-# itscalledsoccer
+# itscalledsoccer <img src="man/figures/logo.png" align="right" height="175"/>
 
-Description TK.
+<!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/itscalledsoccer)](https://CRAN.R-project.org/package=itscalledsoccer)
+[![R-CMD-check](https://github.com/American-Soccer-Analysis/itscalledsoccer/workflows/R-CMD-check/badge.svg)](https://github.com/American-Soccer-Analysis/itscalledsoccer/actions)
+[![Codecov test coverage](https://codecov.io/gh/American-Soccer-Analysis/itscalledsoccer/branch/main/graph/badge.svg?token=RUWMM7ZLQ2)](https://codecov.io/gh/American-Soccer-Analysis/itscalledsoccer?branch=main)
+<!-- badges: end -->
+
+## Overview
+
+`itscalledsoccer` is a wrapper around the same API that powers the [American Soccer Analysis app](https://app.americansocceranalysis.com/). It enables R users to programmatically retrieve advanced analytics for their favorite [MLS](https://en.wikipedia.org/wiki/Major_League_Soccer), [NWSL](https://en.wikipedia.org/wiki/National_Women%27s_Soccer_League), and [USL](https://en.wikipedia.org/wiki/United_Soccer_League) players and teams.
 
 ## Installation
 
@@ -9,7 +17,7 @@ Description TK.
 install.packages("itscalledsoccer")
 
 # Install development version from GitHub
-devtools::install_github("American-Soccer-Analysis/itscalledsoccer")
+devtools::install_github("American-Soccer-Analysis/itscalledsoccer/R-package")
 ```
 
 ## Getting Started
@@ -20,7 +28,7 @@ Initialize the main class with the `new` method.
 asa_client <- AmericanSoccerAnalysis$new()
 ```
 
-If you're in an environment where a proxy server is required, or if you need to need to alter any other `CURL` options, you can pass any number of `httr` configs when initializing the class. Use these at your own discretion.
+If you're in an environment where a proxy server is required, or if you need to need to alter any other `CURL` options, you can pass any number of [`httr` configs](https://www.rdocumentation.org/packages/httr/versions/1.4.2/topics/config) when initializing the class. Use these at your own discretion.
 
 ```r
 asa_client <- AmericanSoccerAnalysis$new(

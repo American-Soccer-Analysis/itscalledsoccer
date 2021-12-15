@@ -65,6 +65,13 @@
       "Repository": "CRAN",
       "Hash": "96c01552bfd5661b9bbdefbc762f4bcd"
     },
+    "covr": {
+      "Package": "covr",
+      "Version": "3.5.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "6d80a9fc3c0c8473153b54fa54719dfd"
+    },
     "cpp11": {
       "Package": "cpp11",
       "Version": "0.3.1",
@@ -226,6 +233,13 @@
       "Repository": "CRAN",
       "Hash": "0bc1b5da1b0eb07cd4b727e95e9ff0b8"
     },
+    "lazyeval": {
+      "Package": "lazyeval",
+      "Version": "0.2.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "d908914ae53b04d4c0c0fd72ecc35370"
+    },
     "lifecycle": {
       "Package": "lifecycle",
       "Version": "1.0.0",
@@ -344,6 +358,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "c1a367437d8a8a44bec4b9d4974cb20c"
+    },
+    "rex": {
+      "Package": "rex",
+      "Version": "1.2.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "ae34cd56890607370665bee5bd17812f"
     },
     "rlang": {
       "Package": "rlang",

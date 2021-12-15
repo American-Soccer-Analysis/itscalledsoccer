@@ -11,7 +11,17 @@ on:
 
 jobs:
   R-CMD-check:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.config.os }}
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: macOS-latest, r: 'release'}
+          - {os: windows-latest, r: 'release'}
+          - {os: ubuntu-18.04, r: 'devel', http-user-agent: 'release'}
+          - {os: ubuntu-18.04, r: 'release'}
+
     defaults:
       run:
         working-directory: R-package
@@ -26,6 +36,8 @@ jobs:
       - name: Install R
         uses: r-lib/actions/setup-r@v1
         with:
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
       - name: Install OS-level dependencies
@@ -53,3 +65,10 @@ jobs:
         if: always()
         run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
         shell: bash
+
+      - name: Upload check results
+        if: failure()
+        uses: actions/upload-artifact@main
+        with:
+          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+          path: check

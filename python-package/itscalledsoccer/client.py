@@ -1,10 +1,11 @@
 import requests
 from typing import Dict, List, Union, Optional
 from cachecontrol import CacheControl
-from fuzzywuzzy import fuzz, process
+from rapidfuzz import fuzz, process
 import pandas as pd
 import json
 from logging import getLogger, getLevelName
+
 
 class AmericanSoccerAnalysis:
     """Wrapper around the ASA Shiny API"""
@@ -15,21 +16,30 @@ class AmericanSoccerAnalysis:
     MAX_API_LIMIT = 1000
     LOGGER = getLogger(__name__)
 
-    def __init__(self, proxies: Optional[dict] = None, logging_level: Optional[str] = "WARNING") -> None:
+    def __init__(
+        self, proxies: Optional[dict] = None, logging_level: Optional[str] = "WARNING"
+    ) -> None:
         """Class constructor
 
         :param proxies: A dictionary containing proxy mappings, see https://2.python-requests.org/en/master/user/advanced/#proxies
-        :param logging_level: A string respresent the logging level of the logger
+        :param logging_level: A string respresenting the logging level of the logger
         """
         SESSION = requests.session()
         if proxies:
             SESSION.proxies.update(proxies)
         CACHE_SESSION = CacheControl(SESSION)
 
-        if logging_level.upper() in ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]:
-            self.LOGGER.setLevel(getLevelName(logging_level.upper()))
-        else:
-            print(f"Logging level {logging_level} not recognized!")
+        if logging_level:
+            if logging_level.upper() in [
+                "DEBUG",
+                "INFO",
+                "WARNING",
+                "ERROR",
+                "CRITICAL",
+            ]:
+                self.LOGGER.setLevel(getLevelName(logging_level.upper()))
+            else:
+                print(f"Logging level {logging_level} not recognized!")
 
         self.session = CACHE_SESSION
         self.base_url = self.BASE_URL
@@ -65,7 +75,7 @@ class AmericanSoccerAnalysis:
 
         :param type: type of name to convert
         :param name: name
-        :returns: either an int or string, depending on the type
+        :returns: a string
         """
         min_score = 70
 
@@ -117,24 +127,25 @@ class AmericanSoccerAnalysis:
                 ids.append(self._convert_name_to_id(type, n))
             return ids
 
-    def _check_leagues(self, leagues: Union[str, List[str]]) -> None:
+    def _check_leagues(self, leagues: Union[str, List[str], None]) -> None:
         """Validates the leagues parameter
 
         :param leagues: league abbreviation or list of league abbreviations
         """
-        if isinstance(leagues, list):
-            for l in leagues:
-                if l not in self.LEAGUES:
+        if leagues:
+            if isinstance(leagues, list):
+                for l in leagues:
+                    if l not in self.LEAGUES:
+                        self.LOGGER.info(
+                            f"Leagues are limited only to the following options: {self.LEAGUES}."
+                        )
+                        raise SystemExit(1)
+            else:
+                if leagues not in self.LEAGUES:
                     self.LOGGER.info(
                         f"Leagues are limited only to the following options: {self.LEAGUES}."
                     )
                     raise SystemExit(1)
-        else:
-            if leagues not in self.LEAGUES:
-                self.LOGGER.info(
-                    f"Leagues are limited only to the following options: {self.LEAGUES}."
-                )
-                raise SystemExit(1)
 
     def _check_ids_names(
         self, ids: Union[str, List[str], None], names: Union[str, List[str], None]
@@ -163,7 +174,7 @@ class AmericanSoccerAnalysis:
         self,
         entity_all: pd.DataFrame,
         entity_type: str,
-        leagues: Union[str, List[str]],
+        leagues: Union[str, List[str], None],
         ids: Union[str, List[str], None] = None,
         names: Union[str, List[str], None] = None,
     ) -> pd.DataFrame:
@@ -190,7 +201,8 @@ class AmericanSoccerAnalysis:
         if isinstance(converted_ids, str):
             converted_ids = [converted_ids]
 
-        entity = entity[entity["competition"].isin(leagues)]
+        if leagues:
+            entity = entity[entity["competition"].isin(leagues)]
 
         if converted_ids:
             entity = entity[entity[f"{entity_type}_id"].isin(converted_ids)]
@@ -293,13 +305,13 @@ class AmericanSoccerAnalysis:
 
                 response = self._execute_query(url, kwargs)
 
-                stats = pd.concat([stats,response])
+                stats = pd.concat([stats, response])
 
         return stats
 
     def get_stadia(
         self,
-        leagues: Union[str, List[str]],
+        leagues: Union[str, List[str]] = None,
         ids: Union[str, List[str]] = None,
         names: Union[str, List[str]] = None,
     ) -> pd.DataFrame:
@@ -315,7 +327,7 @@ class AmericanSoccerAnalysis:
 
     def get_referees(
         self,
-        leagues: Union[str, List[str]],
+        leagues: Union[str, List[str]] = None,
         ids: Union[str, List[str]] = None,
         names: Union[str, List[str]] = None,
     ) -> pd.DataFrame:
@@ -331,7 +343,7 @@ class AmericanSoccerAnalysis:
 
     def get_managers(
         self,
-        leagues: Union[str, List[str]],
+        leagues: Union[str, List[str]] = None,
         ids: Union[str, List[str]] = None,
         names: Union[str, List[str]] = None,
     ) -> pd.DataFrame:
@@ -347,7 +359,7 @@ class AmericanSoccerAnalysis:
 
     def get_teams(
         self,
-        leagues: Union[str, List[str]],
+        leagues: Union[str, List[str]] = None,
         ids: Union[str, List[str]] = None,
         names: Union[str, List[str]] = None,
     ) -> pd.DataFrame:
@@ -363,7 +375,7 @@ class AmericanSoccerAnalysis:
 
     def get_players(
         self,
-        leagues: Union[str, List[str]],
+        leagues: Union[str, List[str]] = None,
         ids: Union[str, List[str]] = None,
         names: Union[str, List[str]] = None,
     ) -> pd.DataFrame:
@@ -379,7 +391,7 @@ class AmericanSoccerAnalysis:
 
     def get_games(
         self,
-        leagues: Union[str, List[str]],
+        leagues: Union[str, List[str]] = None,
         game_ids: Union[str, List[str]] = None,
         team_ids: Union[str, List[str]] = None,
         team_names: Union[str, List[str]] = None,
@@ -411,19 +423,21 @@ class AmericanSoccerAnalysis:
             query["season_name"] = seasons
         if stages:
             query["stage_name"] = stages
+        if not leagues:
+            leagues = self.LEAGUES
 
         games = pd.DataFrame([])
         if isinstance(leagues, str):
             games_url = f"{self.base_url}{leagues}/games"
             response = self._execute_query(games_url, query)
 
-            games = games.append(response)
+            games = response
         elif isinstance(leagues, list):
             for league in leagues:
                 games_url = f"{self.base_url}{league}/games"
                 response = self._execute_query(games_url, query)
 
-                games = games.append(response)
+                games = pd.concat([games,response])
 
         return games.sort_values(by=["date_time_utc"], ascending=False)
 

@@ -437,7 +437,7 @@ class AmericanSoccerAnalysis:
                 games_url = f"{self.base_url}{league}/games"
                 response = self._execute_query(games_url, query)
 
-                games = pd.concat([games,response])
+                games = pd.concat([games, response])
 
         return games.sort_values(by=["date_time_utc"], ascending=False)
 

@@ -51,6 +51,7 @@ Feature: Stats functions
 			| team | shot_pattern=Corner                                    | xgoals |
 			| team | shot_pattern=[Corner,Penalty]                          | xgoals |
 			| team | split_by_seasons=true  season_name=[2015,2016]         | xgoals |
+			# TODO: investigate failure here, API related
 			# | team | split_by_games=true  season_name=2020                  | xgoals |
 			| team | home_only=true  season_name=2013                       | xgoals |
 			| team | away_only=true  season_name=2013                       | xgoals |

@@ -17,3 +17,20 @@ Feature: Client initialization
 			| uslc   |
 			| usl1   |
 			| nasl   |
+
+	Scenario: An ASA client has a default logger
+		Given there is an ASA client
+		Then there is a logger
+		And the logging level is WARNING
+
+	Scenario: An ASA client's logging level is configurable
+		Given there is an ASA client
+		When the logging level is set to "DEBUG"
+		Then there is a logger
+		And the logging level is DEBUG
+
+# TODO: this scenario stalls
+# Scenario: An ASA client's proxy settings are configurable
+# 	Given there is an ASA client
+# 	When the proxy is set to "10.10.1.10"
+# 	Then the session is using a proxy

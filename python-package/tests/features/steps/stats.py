@@ -2,7 +2,7 @@ from behave import *
 
 def split_args(args: str) -> dict:
     kwargs = {}
-    split = args.split(" ")
+    split = args.split("  ")
     if len(split) > 1:
         for s in split:
             captured_args = s.split('=')

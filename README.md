@@ -37,7 +37,6 @@ pip install --editable itscalledsoccer/python-package
 
 ## Usage
 
-
 ```python
 from itscalledsoccer.client import AmericanSoccerAnalysis
 

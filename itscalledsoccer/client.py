@@ -4,11 +4,7 @@ from cachecontrol import CacheControl
 from fuzzywuzzy import fuzz, process
 import pandas as pd
 import json
-import logging
-
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-
+from logging import getLogger, getLevelName
 
 class AmericanSoccerAnalysis:
     """Wrapper around the ASA Shiny API"""
@@ -17,18 +13,23 @@ class AmericanSoccerAnalysis:
     BASE_URL = f"https://app.americansocceranalysis.com/api/{API_VERSION}/"
     LEAGUES = ["nwsl", "mls", "uslc", "usl1", "nasl"]
     MAX_API_LIMIT = 1000
-    LOGGER = logging.getLogger(__name__)
-    LOGGER.setLevel(logging.INFO)
+    LOGGER = getLogger(__name__)
 
-    def __init__(self, proxies: Optional[dict] = None) -> None:
+    def __init__(self, proxies: Optional[dict] = None, logging_level: Optional[str] = "WARNING") -> None:
         """Class constructor
 
         :param proxies: A dictionary containing proxy mappings, see https://2.python-requests.org/en/master/user/advanced/#proxies
+        :param logging_level: A string respresent the logging level of the logger
         """
         SESSION = requests.session()
         if proxies:
             SESSION.proxies.update(proxies)
         CACHE_SESSION = CacheControl(SESSION)
+
+        if logging_level.upper() in ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]:
+            self.LOGGER.setLevel(getLevelName(logging_level.upper()))
+        else:
+            print(f"Logging level {logging_level} not recognized!")
 
         self.session = CACHE_SESSION
         self.base_url = self.BASE_URL
@@ -284,13 +285,16 @@ class AmericanSoccerAnalysis:
         if isinstance(leagues, str):
             url = f"{self.base_url}{leagues}/{entity}/{type}"
             response = self._execute_query(url, kwargs)
-            stats.append(response)
+
+            stats = response
         elif isinstance(leagues, list):
             for league in leagues:
                 url = f"{self.base_url}{league}/{entity}/{type}"
 
                 response = self._execute_query(url, kwargs)
-                stats.append(response)
+
+                stats = pd.concat([stats,response])
+
         return stats
 
     def get_stadia(

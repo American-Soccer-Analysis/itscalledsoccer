@@ -5,7 +5,7 @@ with open("README.md", "r") as f:
 
 setup(
     name="itscalledsoccer",
-    version="0.0.1",
+    version="1.0.0",
     description="Programmatically interact with the American Soccer Analysis API",
     long_description=long_description,
     author="American Soccer Analysis",
@@ -18,6 +18,6 @@ setup(
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
     ],
-    python_requires=">=3.6",
+    python_requires=">=3.7",
     keywords="stats soccer api american machine learning football",
 )

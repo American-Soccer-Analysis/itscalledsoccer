@@ -1,10 +1,11 @@
+import json
+from logging import getLevelName, getLogger
+from typing import Dict, List, Optional, Union
+
+import pandas as pd
 import requests
-from typing import Dict, List, Union, Optional
 from cachecontrol import CacheControl
 from rapidfuzz import fuzz, process
-import pandas as pd
-import json
-from logging import getLogger, getLevelName
 
 
 class AmericanSoccerAnalysis:

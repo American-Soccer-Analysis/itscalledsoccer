@@ -5,7 +5,7 @@ with open("README.md", "r") as f:
 
 setup(
     name="itscalledsoccer",
-    version="1.0.0",
+    version="0.1.0",
     description="Programmatically interact with the American Soccer Analysis API",
     long_description=long_description,
     author="American Soccer Analysis",

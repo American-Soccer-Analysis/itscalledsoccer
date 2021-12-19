@@ -28,6 +28,7 @@ jobs:
         run: |
           cd python-package/
           mypy itscalledsoccer
+          isort --check itscalledsoccer
           black --check itscalledsoccer
       - name: Behave tests
         run: |

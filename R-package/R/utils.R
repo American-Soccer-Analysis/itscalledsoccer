@@ -11,6 +11,14 @@
     }
 }
 
+.check_leagues_salaries <- function(self, leagues) {
+    if (!missing(leagues)) {
+        if (any(leagues != "mls")) {
+            stop("Only MLS salary data is publicly available.")
+        }
+    }
+}
+
 .check_ids_names <- function(ids, names) {
     if ((!missing(ids) & !missing(names)) && (!is.null(ids) & !is.null(names))) {
         stop("Please specify only IDs or names, not both.")
@@ -49,6 +57,20 @@
     return(names)
 }
 
+.stop_for_status <- function(r) {
+    if (r$status_code == 400) {
+        error_message <- r %>%
+            httr::content(as = "text", encoding = "UTF-8") %>%
+            jsonlite::fromJSON() %>%
+            magrittr::extract2("message")
+
+        error_message <- glue::glue("HTTP 400: {error_message}")
+        stop(error_message)
+    } else if (r$status_code != 200) {
+        httr::stop_for_status(r)
+    }
+}
+
 .single_request <- function(self, url, query) {
     for (arg_name in names(query)) {
         if (length(query[[arg_name]]) > 1) {
@@ -57,7 +79,7 @@
     }
 
     r <- httpcache::GET(url = url, query = query, self$httr_configs)
-    httr::stop_for_status(r)
+    .stop_for_status(r)
     response <- r %>%
         httr::content(as = "text", encoding = "UTF-8") %>%
         jsonlite::fromJSON()

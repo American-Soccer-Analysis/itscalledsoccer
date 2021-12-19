@@ -7,8 +7,13 @@ get_stats <- function(self, type, entity, leagues, ...) {
         stop(msg)
     }
 
-    .check_leagues(self, leagues)
-    if (missing(leagues)) leagues <- self$LEAGUES
+    if (type == "salaries") {
+        .check_leagues_salaries(self, leagues)
+        if (missing(leagues)) leagues <- "mls"
+    } else {
+        .check_leagues(self, leagues)
+        if (missing(leagues)) leagues <- self$LEAGUES
+    }
 
     if (sum(grepl("player_", names(query))) > 0) {
         .check_ids_names(query[["player_ids"]], query[["player_names"]])
@@ -45,7 +50,7 @@ get_stats <- function(self, type, entity, leagues, ...) {
     stats <- list()
     i <- 1
 
-    for (league in leagues) {
+    for (league in unique(leagues)) {
         url <- glue::glue("{self$base_url}/{league}/{entity}/{type}")
 
         response <- .execute_query(self, url, query) %>%

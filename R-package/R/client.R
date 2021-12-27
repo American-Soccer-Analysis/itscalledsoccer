@@ -326,7 +326,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         #'     \item \code{team_ids}: Team IDs on which to filter. Cannot be combined with \code{team_names}. Accepts a character vector of length >= 1.
         #'     \item \code{team_names}: Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with \code{team_ids}. Accepts a character vector of length >= 1.
         #'     \item \code{season_name}: Name(s)/year(s) of seasons. Cannot be combined with a date range. See the \href{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. Accepts a character vector of length >= 1.
-        #'     \item \code{split_by_teams}: Logical indicator to group results by team. Results must be grouped by at least one of teams, positions, or seasons.
+        #'     \item \code{split_by_teams}: Logical indicator to group results by team. Results must be grouped by at least one of teams, positions, or seasons. Value is TRUE by default.
         #'     \item \code{split_by_seasons}: Logical indicator to group results by season. Results must be grouped by at least one of teams, positions, or seasons.
         #'     \item \code{split_by_positions}: Logical indicator to group results by positions. Results must be grouped by at least one of teams, positions, or seasons.
         #'   }

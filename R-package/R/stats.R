@@ -10,6 +10,10 @@ get_stats <- function(self, type, entity, leagues, ...) {
     if (type == "salaries") {
         .check_leagues_salaries(self, leagues)
         if (missing(leagues)) leagues <- "mls"
+        if (entity == "teams" &
+            is.null(query[["split_by_teams"]]) &
+            is.null(query[["split_by_seasons"]]) &
+            is.null(query[["split_by_positions"]])) query[["split_by_teams"]] <- TRUE
     } else {
         .check_leagues(self, leagues)
         if (missing(leagues)) leagues <- self$LEAGUES

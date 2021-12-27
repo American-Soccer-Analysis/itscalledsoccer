@@ -556,7 +556,7 @@ test_that("Querying games works properly", {
         dplyr::distinct(.data$team_id) %>%
         nrow()
 
-    expect_equal(.obj, .exp)
+    expect_lte(.obj, .exp)
 
     # Multiple leagues ---------------------------------------------------
     LEAGUES <- c("mls", "uslc")
@@ -573,7 +573,7 @@ test_that("Querying games works properly", {
         dplyr::distinct(.data$team_id) %>%
         nrow()
 
-    expect_equal(.obj, .exp)
+    expect_lte(.obj, .exp)
 
     # Single game ID -----------------------------------------------------
     IDS <- "9z5kdxgKqA"

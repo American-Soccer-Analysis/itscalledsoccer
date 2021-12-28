@@ -75,7 +75,7 @@ get_games <- function(self, leagues, game_ids, team_ids, team_names, seasons, st
     games <- list()
     i <- 1
 
-    for (league in leagues) {
+    for (league in unique(leagues)) {
         url <- glue::glue("{self$base_url}/{league}/games")
 
         response <- .execute_query(self, url, query)

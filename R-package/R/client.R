@@ -191,6 +191,24 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
             return(player_goals_added)
         },
 
+        #' @description Retrieves a data frame containing player salary data meeting the specified conditions.
+        #' @param leagues Leagues on which to filter. Currently, only MLS salary data is publicly available.
+        #' @param ... The following arguments will be parsed:
+        #'   \itemize{
+        #'     \item \code{player_ids}: Player IDs on which to filter. Cannot be combined with \code{player_names}. Accepts a character vector of length >= 1.
+        #'     \item \code{player_names}: Player names on which to filter. Partial matches are accepted. Cannot be combined with \code{player_ids}. Accepts a character vector of length >= 1.
+        #'     \item \code{team_ids}: Team IDs on which to filter. Cannot be combined with \code{team_names}. Accepts a character vector of length >= 1.
+        #'     \item \code{team_names}: Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with \code{team_ids}. Accepts a character vector of length >= 1.
+        #'     \item \code{position}: Describes the general position, as reported by the players' association. Valid keywords include: 'GK', 'D', 'M', and 'F'. Accepts a character vector of length >= 1.
+        #'     \item \code{season_name}: Name(s)/year(s) of seasons. Cannot be combined with a date range. See the \href{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. Accepts a character vector of length >= 1.
+        #'     \item \code{start_date}: Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with \code{season_name}.
+        #'     \item \code{end_date}: End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with \code{season_name}.
+        #'   }
+        get_player_salaries = function(leagues, ...) {
+            player_salaries <- get_stats(self, type = "salaries", entity = "players", leagues, ...)
+            return(player_salaries)
+        },
+
         #' @description Retrieves a data frame containing goalkeeper xG data meeting the specified conditions.
         #' @param leagues Leagues on which to filter. Accepts a character vector of length >= 1.
         #' @param ... The following arguments will be parsed:
@@ -299,6 +317,22 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         get_team_goals_added = function(leagues, ...) {
             team_goals_added <- get_stats(self, type = "goals-added", entity = "teams", leagues, ...)
             return(team_goals_added)
+        },
+
+        #' @description Retrieves a data frame containing team salary data meeting the specified conditions.
+        #' @param leagues Leagues on which to filter. Currently, only MLS salary data is publicly available.
+        #' @param ... The following arguments will be parsed:
+        #'   \itemize{
+        #'     \item \code{team_ids}: Team IDs on which to filter. Cannot be combined with \code{team_names}. Accepts a character vector of length >= 1.
+        #'     \item \code{team_names}: Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with \code{team_ids}. Accepts a character vector of length >= 1.
+        #'     \item \code{season_name}: Name(s)/year(s) of seasons. Cannot be combined with a date range. See the \href{https://app.americansocceranalysis.com/api/v1/__docs__/}{API documentation} for possible values. Accepts a character vector of length >= 1.
+        #'     \item \code{split_by_teams}: Logical indicator to group results by team. Results must be grouped by at least one of teams, positions, or seasons. Value is TRUE by default.
+        #'     \item \code{split_by_seasons}: Logical indicator to group results by season. Results must be grouped by at least one of teams, positions, or seasons.
+        #'     \item \code{split_by_positions}: Logical indicator to group results by positions. Results must be grouped by at least one of teams, positions, or seasons.
+        #'   }
+        get_team_salaries = function(leagues, ...) {
+            team_salaries <- get_stats(self, type = "salaries", entity = "teams", leagues, ...)
+            return(team_salaries)
         },
 
         #' @description Retrieves a data frame containing game xG data meeting the specified conditions.

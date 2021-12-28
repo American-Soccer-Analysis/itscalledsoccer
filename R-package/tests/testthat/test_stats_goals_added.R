@@ -469,7 +469,7 @@ test_that("Querying team-level goals added (g+) values works properly", {
         dplyr::pull(obj) %>%
         mean(na.rm = TRUE)
 
-    expect_equal(.obj, 1)
+    expect_lte(.obj, 1)
 
     # Multiple leagues ---------------------------------------------------
     LEAGUES <- c("mls", "uslc")
@@ -485,7 +485,7 @@ test_that("Querying team-level goals added (g+) values works properly", {
         dplyr::pull(obj) %>%
         mean(na.rm = TRUE)
 
-    expect_equal(.obj, 1)
+    expect_lte(.obj, 1)
 
     # Team IDs and names (invalid) ---------------------------------------
     expect_error(asa_client$get_team_goals_added(team_ids = "abc", team_names = "abc"))

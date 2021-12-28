@@ -565,7 +565,7 @@ test_that("Querying game-level xG values works properly", {
         dplyr::distinct(.data$team_id) %>%
         nrow()
 
-    expect_equal(.obj, .exp)
+    expect_lte(.obj, .exp)
 
     # Multiple leagues ---------------------------------------------------
     LEAGUES <- c("mls", "uslc")
@@ -582,7 +582,7 @@ test_that("Querying game-level xG values works properly", {
         dplyr::distinct(.data$team_id) %>%
         nrow()
 
-    expect_equal(.obj, .exp)
+    expect_lte(.obj, .exp)
 
     # TODO: Add tests for season_name
     # TODO: Add tests for date range

@@ -220,4 +220,39 @@ Feature: Stats functions
 			| team | pass_origin_third=[Defensive,Middle]                   | xpass |
 
 
+		@player_salaries
+		Examples:
+			| type   | args                                                       | stat     |
+			| player | leagues=mls                                                | salaries |
+			| player | leagues=mls  season_name=2020                              | salaries |
+			| player | player_ids=eV5DL18a5K                                      | salaries |
+			| player | player_ids=[vzqo8xZQap,9vQ22BR7QK]                         | salaries |
+			| player | player_names=Glesnes                                       | salaries |
+			| player | player_names=[Glesnes,Bedoya]                              | salaries |
+			| player | team_ids=NWMWlBK5lz                                        | salaries |
+			| player | team_ids=[NWMWlBK5lz,9Yqdwg85vJ]                           | salaries |
+			| player | team_names=Union                                           | salaries |
+			| player | team_names=[Philadelphia,Portland]                         | salaries |
+			| player | start_date=2019-07-01  end_date=2021-07-08                 | salaries |
+			| player | position=M                                                 | salaries |
+			| player | position=[D,M]                                             | salaries |
+			| player | season_name=[2019,2020]                                    | salaries |
+
+
+		@team_salaries
+		Examples:
+			| type   | args                                                       | stat     |
+			| team   | leagues=mls                                                | salaries |
+			| team   | leagues=mls  season_name=2020                              | salaries |
+			| team   | team_ids=NWMWlBK5lz                                        | salaries |
+			| team   | team_ids=[NWMWlBK5lz,9Yqdwg85vJ]                           | salaries |
+			| team   | team_names=Union                                           | salaries |
+			| team   | team_names=[Philadelphia,Portland]                         | salaries |
+			| team   | start_date=2019-07-01  end_date=2021-07-08                 | salaries |
+			| team   | season_name=[2019,2020]                                    | salaries |
+			| team   | split_by_teams=true  season_name=2014                      | salaries |
+			| team   | split_by_seasons=true  season_name=[2015,2016]             | salaries |
+			| team   | split_by_positions=true  season_name=2020                  | salaries |
+
+
 # TODO: Add expected failure scenarios

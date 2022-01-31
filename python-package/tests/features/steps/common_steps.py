@@ -39,6 +39,8 @@ def step_impl(context, function, args):
         context.response = context.soccer.get_player_xpass(**kwargs)
     elif "get_player_goals_added" == function:
         context.response = context.soccer.get_player_goals_added(**kwargs)
+    elif "get_player_salaries" == function:
+        context.response = context.soccer.get_player_salaries(**kwargs)
     elif "get_goalkeeper_xgoals" == function:
         context.response = context.soccer.get_goalkeeper_xgoals(**kwargs)
     elif "get_goalkeeper_goals_added" == function:
@@ -49,6 +51,8 @@ def step_impl(context, function, args):
         context.response = context.soccer.get_team_xpass(**kwargs)
     elif "get_team_goals_added" == function:
         context.response = context.soccer.get_team_goals_added(**kwargs)
+    elif "get_team_salaries" == function:
+        context.response = context.soccer.get_team_salaries(**kwargs)
     elif "get_game_xgoals" == function:
         context.response = context.soccer.get_game_xgoals(**kwargs)
     elif "get_stadia" == function:

@@ -248,7 +248,6 @@ Feature: Stats functions
 			| team   | team_ids=[NWMWlBK5lz,9Yqdwg85vJ]                           | salaries |
 			| team   | team_names=Union                                           | salaries |
 			| team   | team_names=[Philadelphia,Portland]                         | salaries |
-			| team   | start_date=2019-07-01  end_date=2021-07-08                 | salaries |
 			| team   | season_name=[2019,2020]                                    | salaries |
 			| team   | split_by_teams=true  season_name=2014                      | salaries |
 			| team   | split_by_seasons=true  season_name=[2015,2016]             | salaries |

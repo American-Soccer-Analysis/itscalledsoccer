@@ -27,13 +27,13 @@ Feature: Stats functions
 			| player | general_position=AM                                        | xgoals |
 			| player | general_position=[AM,DM]                                   | xgoals |
 			| player | season_name=[2019,2020]                                    | xgoals |
-			| player | shot_pattern=Corner                                        | xgoals |
-			| player | shot_pattern=[Corner,Penalty]                              | xgoals |
+			| player | shot_pattern=Corner  season_name=2018                      | xgoals |
+			| player | shot_pattern=[Corner,Penalty]  season_name=2018            | xgoals |
 			| player | split_by_teams=true  season_name=2014                      | xgoals |
 			| player | split_by_seasons=true  season_name=[2015,2016]             | xgoals |
 			| player | split_by_games=true  season_name=2020  general_position=CB | xgoals |
-			| player | stage_name=Playoffs                                        | xgoals |
-			| player | stage_name=[Playoffs,Regular Season]                       | xgoals |
+			| player | stage_name=Playoffs  leagues=nwsl                          | xgoals |
+			| player | stage_name=[Playoffs,Regular Season]  leagues=mls          | xgoals |
 
 
 		@team_xgoals
@@ -120,9 +120,9 @@ Feature: Stats functions
 			| player | split_by_games=true  season_name=2020  general_position=CB | goals_added |
 			| player | stage_name=Playoffs                                        | goals_added |
 			| player | stage_name=[Playoffs,Regular Season]                       | goals_added |
-			| player | action_type=Passing                                        | goals_added |
-			| player | action_type=[Passing,Shooting]                             | goals_added |
-			| player | above_replacement=true                                     | goals_added |
+			| player | action_type=Passing  leagues=mls                           | goals_added |
+			| player | action_type=[Passing,Shooting]  leagues=mls                | goals_added |
+			| player | above_replacement=true  leagues=mls                        | goals_added |
 
 
 		@team_goals_added
@@ -196,8 +196,8 @@ Feature: Stats functions
 			| player | split_by_games=true  season_name=2020  general_position=CB | xpass |
 			| player | stage_name=Playoffs                                        | xpass |
 			| player | stage_name=[Playoffs,Regular Season]                       | xpass |
-			| player | pass_origin_third=Defensive                                | xpass |
-			| player | pass_origin_third=[Defensive,Middle]                       | xpass |
+			| player | pass_origin_third=Defensive  leagues=mls                   | xpass |
+			| player | pass_origin_third=[Defensive,Middle]  leagues=mls          | xpass |
 
 
 		@team_xpass
@@ -218,6 +218,40 @@ Feature: Stats functions
 			| team | away_only=true  season_name=2013                       | xpass |
 			| team | pass_origin_third=Defensive                            | xpass |
 			| team | pass_origin_third=[Defensive,Middle]                   | xpass |
+
+
+		@player_salaries
+		Examples:
+			| type   | args                                       | stat     |
+			# | player | leagues=mls                                                | salaries |
+			| player | leagues=mls  season_name=2020              | salaries |
+			| player | player_ids=eV5DL18a5K                      | salaries |
+			| player | player_ids=[vzqo8xZQap,9vQ22BR7QK]         | salaries |
+			| player | player_names=Glesnes                       | salaries |
+			| player | player_names=[Glesnes,Bedoya]              | salaries |
+			| player | team_ids=NWMWlBK5lz                        | salaries |
+			| player | team_ids=[NWMWlBK5lz,9Yqdwg85vJ]           | salaries |
+			| player | team_names=Union                           | salaries |
+			| player | team_names=[Philadelphia,Portland]         | salaries |
+			| player | start_date=2020-07-01  end_date=2021-07-08 | salaries |
+			| player | position=M  season_name=2019               | salaries |
+			| player | position=[D,M]  season_name=2018           | salaries |
+			| player | season_name=[2019,2020]                    | salaries |
+
+
+		@team_salaries
+		Examples:
+			| type | args                                                    | stat     |
+			# | team | leagues=mls                                    | salaries |
+			| team | leagues=mls  season_name=2020  split_by_seasons=true    | salaries |
+			| team | team_ids=NWMWlBK5lz  split_by_teams=true                | salaries |
+			| team | team_ids=[NWMWlBK5lz,9Yqdwg85vJ]  split_by_teams=true   | salaries |
+			| team | team_names=Union  split_by_teams=true                   | salaries |
+			| team | team_names=[Philadelphia,Portland]  split_by_teams=true | salaries |
+			| team | season_name=[2019,2020]  split_by_seasons=true          | salaries |
+			| team | split_by_teams=true  season_name=2014                   | salaries |
+			| team | split_by_seasons=true  season_name=[2015,2016]          | salaries |
+			| team | split_by_positions=true  season_name=2020               | salaries |
 
 
 # TODO: Add expected failure scenarios

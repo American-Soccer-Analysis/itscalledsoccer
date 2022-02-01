@@ -148,6 +148,21 @@ class AmericanSoccerAnalysis:
                     )
                     raise SystemExit(1)
 
+    def _check_leagues_salaries(self, leagues: Union[str, List[str], None]) -> None:
+        """Validates the leagues parameter for salary searches
+
+        :param leagues: league abbreviation or list of league abbreviations
+        """
+        if leagues:
+            if isinstance(leagues, list):
+                if any([x != "mls" for x in leagues]):
+                    self.LOGGER.info("Only MLS salary data is publicly available.")
+                    raise SystemExit(1)
+            else:
+                if leagues != "mls":
+                    self.LOGGER.info("Only MLS salary data is publicly available.")
+                    raise SystemExit(1)
+
     def _check_ids_names(
         self, ids: Union[str, List[str], None], names: Union[str, List[str], None]
     ) -> None:
@@ -259,7 +274,18 @@ class AmericanSoccerAnalysis:
         :returns: Dataframe
         """
         self.LOGGER.info(f"get_stats called with {locals()}")
-        self._check_leagues(leagues)
+        if type == "salaries":
+            self._check_leagues_salaries(leagues)
+            if (
+                entity == "teams"
+                and kwargs.get("split_by_teams", None)
+                and kwargs.get("split_by_seasons", None)
+                and kwargs.get("split_by_positions", None)
+            ):
+                kwargs["split_by_teams"] = True
+        else:
+            self._check_leagues(leagues)
+
         keys_string = ",".join(list(kwargs.keys()))
 
         if "player_" in keys_string:
@@ -443,7 +469,7 @@ class AmericanSoccerAnalysis:
         return games.sort_values(by=["date_time_utc"], ascending=False)
 
     def get_player_xgoals(
-        self, leagues: Union[str, List[str]] = "mls", **kwargs
+        self, leagues: Union[str, List[str]] = LEAGUES, **kwargs
     ) -> pd.DataFrame:
         """Retrieves a data frame containing player xG data meeting the specified conditions.
         :param leagues: League(s) on which to filter. Accepts a string or list of strings.
@@ -472,7 +498,7 @@ class AmericanSoccerAnalysis:
         return player_xgoals
 
     def get_player_xpass(
-        self, leagues: Union[str, List[str]] = "mls", **kwargs
+        self, leagues: Union[str, List[str]] = LEAGUES, **kwargs
     ) -> pd.DataFrame:
         """Retrieves a data frame containing player xPass data meeting the specified conditions.
         :param leagues: League(s) on which to filter. Accepts a string or list of strings.
@@ -500,7 +526,7 @@ class AmericanSoccerAnalysis:
         return player_xpass
 
     def get_player_goals_added(
-        self, leagues: Union[str, List[str]] = "mls", **kwargs
+        self, leagues: Union[str, List[str]] = LEAGUES, **kwargs
     ) -> pd.DataFrame:
         """Retrieves a data frame containing player g+ data meeting the specified conditions.
         :param leagues: League(s) on which to filter. Accepts a string or list of strings.
@@ -527,8 +553,30 @@ class AmericanSoccerAnalysis:
         )
         return player_goals_added
 
-    def get_goalkeeper_xgoals(
+    def get_player_salaries(
         self, leagues: Union[str, List[str]] = "mls", **kwargs
+    ) -> pd.DataFrame:
+        """Retrieves a data frame containing player salary data meeting the specified conditions
+
+        :param leagues: Leagues on which to filter. Accepts a string or list of strings.
+        :param kwargs: The following arguments will be parsed:
+            player_ids: Player IDs on which to filter. Cannot be combined with player_names. Accepts a string or list of strings.
+            player_names: Player names on which to filter. Partial matches are accepted. Cannot be combined with player_ids. Accepts a string or list of strings.
+            team_ids: Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
+            team_names: Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
+            position: Describes the general position, as reported by the players' association. Valid keywords include: 'GK', 'D', 'M', and 'F'. Accepts a string or list of strings.
+            season_name: Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
+            start_date: Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+            end_date: End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+        :returns: Dataframe
+        """
+        player_salaries = self._get_stats(
+            leagues, type="salaries", entity="players", **kwargs
+        )
+        return player_salaries
+
+    def get_goalkeeper_xgoals(
+        self, leagues: Union[str, List[str]] = LEAGUES, **kwargs
     ) -> pd.DataFrame:
         """Retrieves a data frame containing goalkeeper xG data meeting the specified conditions.
         :param leagues: League(s) on which to filter. Accepts a string or list of strings.
@@ -555,7 +603,7 @@ class AmericanSoccerAnalysis:
         return goalkeeper_xgoals
 
     def get_goalkeeper_goals_added(
-        self, leagues: Union[str, List[str]] = "mls", **kwargs
+        self, leagues: Union[str, List[str]] = LEAGUES, **kwargs
     ) -> pd.DataFrame:
         """Retrieves a data frame containing goalkeeper g+ data meeting the specified conditions.
         :param leagues: League(s) on which to filter. Accepts a string or list of strings.
@@ -582,7 +630,7 @@ class AmericanSoccerAnalysis:
         return goalkeeper_goals_added
 
     def get_team_xgoals(
-        self, leagues: Union[str, List[str]] = "mls", **kwargs
+        self, leagues: Union[str, List[str]] = LEAGUES, **kwargs
     ) -> pd.DataFrame:
         """Retrieves a data frame containing team xG data meeting the specified conditions.
 
@@ -607,7 +655,7 @@ class AmericanSoccerAnalysis:
         return team_xgoals
 
     def get_team_xpass(
-        self, leagues: Union[str, List[str]] = "mls", **kwargs
+        self, leagues: Union[str, List[str]] = LEAGUES, **kwargs
     ) -> pd.DataFrame:
         """Retrieves a data frame containing team xPass data meeting the specified conditions.
 
@@ -630,7 +678,7 @@ class AmericanSoccerAnalysis:
         return team_xpass
 
     def get_team_goals_added(
-        self, leagues: Union[str, List[str]] = "mls", **kwargs
+        self, leagues: Union[str, List[str]] = LEAGUES, **kwargs
     ) -> pd.DataFrame:
         """Retrieves a data frame containing team g+ data meeting the specified conditions.
 
@@ -651,8 +699,28 @@ class AmericanSoccerAnalysis:
         )
         return team_goals_added
 
-    def get_game_xgoals(
+    def get_team_salaries(
         self, leagues: Union[str, List[str]] = "mls", **kwargs
+    ) -> pd.DataFrame:
+        """Retrieves a data frame containing team salary data meeting the specified conditions.
+
+        :param leagues: Leagues on which to filter. Accepts a string or list of strings.
+        :param kwargs: The following arguments will be parsed:
+            team_ids: Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
+            team_names: Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
+            season_name: Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
+            split_by_teams: Logical indicator to group results by team. Results must be grouped by at least one of teams, positions, or seasons. Value is True by default.
+            split_by_seasons: Logical indicator to group results by season. Results must be grouped by at least one of teams, positions, or seasons.
+            split_by_positions: Logical indicator to group results by positions. Results must be grouped by at least one of teams, positions, or seasons.
+        :returns: Dataframe
+        """
+        team_salaries = self._get_stats(
+            leagues, type="salaries", entity="teams", **kwargs
+        )
+        return team_salaries
+
+    def get_game_xgoals(
+        self, leagues: Union[str, List[str]] = LEAGUES, **kwargs
     ) -> pd.DataFrame:
         """Retrieves a data frame containing game xG data meeting the specified conditions.
 

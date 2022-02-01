@@ -3,7 +3,7 @@
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/itscalledsoccer)](https://CRAN.R-project.org/package=itscalledsoccer)
 [![R-CMD-check](https://github.com/American-Soccer-Analysis/itscalledsoccer/workflows/R-CMD-check/badge.svg)](https://github.com/American-Soccer-Analysis/itscalledsoccer/actions)
-[![Codecov test coverage](https://codecov.io/gh/American-Soccer-Analysis/itscalledsoccer/branch/main/graph/badge.svg?token=RUWMM7ZLQ2)](https://codecov.io/gh/American-Soccer-Analysis/itscalledsoccer?branch=main)
+[![Codecov test coverage](https://app.codecov.io/gh/American-Soccer-Analysis/itscalledsoccer/branch/main/graph/badge.svg?token=RUWMM7ZLQ2)](https://app.codecov.io/gh/American-Soccer-Analysis/itscalledsoccer?branch=main)
 <!-- badges: end -->
 
 ## Overview

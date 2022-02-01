@@ -1,7 +1,8 @@
 name: Python tests
 
 on:
-  push:
+  pull_request:
+    branches: [main]
     paths:
       - "python-package/**"
       - ".github/workflows/python-tests.yml"

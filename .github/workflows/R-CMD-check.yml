@@ -4,9 +4,11 @@ name: R-CMD-check
 on:
   workflow_dispatch:
     branches: [main]
-  push:
+  pull_request:
+    branches: [main]
     paths:
-      - "R-package/**"
+      - "R-package/R/**"
+      - "R-package/tests/**"
       - ".github/workflows/R-CMD-check.yml"
 
 jobs:

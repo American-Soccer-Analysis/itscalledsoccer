@@ -4,9 +4,17 @@ name: R-test-coverage
 on:
   workflow_dispatch:
     branches: [main]
-  push:
+  pull_request:
+    branches: [main]
     paths:
-      - "R-package/**"
+      - "R-package/R/**"
+      - "R-package/tests/**"
+      - ".github/workflows/R-test-coverage.yml"
+  push:
+    branches: [main]
+    paths:
+      - "R-package/R/**"
+      - "R-package/tests/**"
       - ".github/workflows/R-test-coverage.yml"
 
 jobs:
@@ -36,5 +44,5 @@ jobs:
         shell: Rscript {0}
 
       - name: Test coverage
-        run: covr::codecov(quiet = FALSE, token = "${{ secrets.CODECOV_TOKEN }}")
+        run: covr::codecov(quiet = FALSE)
         shell: Rscript {0}

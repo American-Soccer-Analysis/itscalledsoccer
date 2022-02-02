@@ -8,6 +8,7 @@ setup(
     version="0.1.0",
     description="Programmatically interact with the American Soccer Analysis API",
     long_description=long_description,
+    long_description_content_type = "text/markdown",
     author="American Soccer Analysis",
     author_email="americansocceranalysis@gmail.com",
     url="https://github.com/American-Soccer-Analysis/itscalledsoccer",

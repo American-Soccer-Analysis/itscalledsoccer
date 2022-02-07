@@ -15,7 +15,8 @@ Authors@R:
             email = "americansocceranalysis@gmail.com"
         )
     )
-Description: Provides a wrapper around the same API that powers the American Soccer Analysis app.
+Description: Provides a wrapper around the same API <https://app.americansocceranalysis.com/api/v1/__docs__/>
+    that powers the American Soccer Analysis app.
 License: MIT + file LICENSE
 URL: https://github.com/American-Soccer-Analysis/itscalledsoccer/tree/main/R-package
 BugReports: https://github.com/American-Soccer-Analysis/itscalledsoccer/issues

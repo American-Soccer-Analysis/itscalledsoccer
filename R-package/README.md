@@ -1,4 +1,4 @@
-# itscalledsoccer <img src="man/figures/logo.png" align="right" style="height: 175px;"/>
+# itscalledsoccer <img src="man/figures/logo.png" align="right" height="175" style="height: 175px;"/>
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/itscalledsoccer)](https://CRAN.R-project.org/package=itscalledsoccer)

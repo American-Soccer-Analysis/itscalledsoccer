@@ -1,10 +1,11 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open("README.md", "r") as f:
     long_description = f.read()
 
 setup(
     name="itscalledsoccer",
+    packages=find_packages(exclude=["tests", "tests.*"]),
     version="0.1.0",
     description="Programmatically interact with the American Soccer Analysis API",
     long_description=long_description,

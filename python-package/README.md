@@ -1,6 +1,6 @@
 # itscalledsoccer 
 
-<img src="../R-package/man/figures/logo.png" align="right" height="175"/>
+<img src="https://raw.githubusercontent.com/American-Soccer-Analysis/itscalledsoccer/main/R-package/man/figures/logo.png" align="right" height="175"/>
 
 <!-- badges: start -->
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)

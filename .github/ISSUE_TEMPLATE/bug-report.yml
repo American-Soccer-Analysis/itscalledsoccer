@@ -1,0 +1,61 @@
+name: 🐛 Bug Report
+description: File a bug report
+title: "[Bug]: <title>"
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+      placeholder: Tell us what you see!
+      value: "A bug happened!"
+    validations:
+      required: true
+  - type: dropdown
+    id: version
+    attributes:
+      label: Version
+      description: What version of itscalledsoccer are you using?
+      options:
+        - 0.1.0
+        - 0.1.1
+    validations:
+      required: true
+  - type: dropdown
+    id: python-or-r-versions
+    attributes:
+      label: What version of Python or R are you using?
+      multiple: false
+      options:
+        - Python 3.7.x
+        - Python 3.8.x
+        - Python 3.9.x
+        - Python 3.10.x
+        - R 3.5.x
+        - R 3.6.x
+        - R 4.0.x
+        - R 4.1.x
+    validations:
+      required: true
+  - type: dropdown
+    id: operating-system
+    attributes:
+      label: What operating system are you using?
+      multiple: false
+      options:
+        - MacOS
+        - Windows
+        - Linux
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell

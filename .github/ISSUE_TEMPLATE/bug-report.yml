@@ -40,6 +40,7 @@ body:
         - R 3.6.x
         - R 4.0.x
         - R 4.1.x
+        - Other
     validations:
       required: true
   - type: dropdown

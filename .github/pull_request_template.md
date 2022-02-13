@@ -8,6 +8,7 @@ Please explain the changes you made here.
 - [ ] Created tests which fail without the change (if applicable)
 - [ ] All lint and unit tests passing
 - [ ] Extended the README / documentation, if necessary
+  - [ ] Updated NEWS.md if modifying the R package
 
 ### Additional Comments
 

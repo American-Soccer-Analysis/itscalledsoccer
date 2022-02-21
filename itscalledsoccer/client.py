@@ -234,7 +234,7 @@ class AmericanSoccerAnalysis:
         :param params: URL query strings
         :returns: Dataframe
         """
-        for k,v in params.items():
+        for k, v in params.items():
             if isinstance(v, list):
                 params[k] = ",".join(v)
 

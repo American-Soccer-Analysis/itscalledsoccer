@@ -6,7 +6,7 @@ with open("README.md", "r") as f:
 setup(
     name="itscalledsoccer",
     packages=find_packages(exclude=["tests", "tests.*"]),
-    version="0.1.2",
+    version="0.1.3",
     description="Programmatically interact with the American Soccer Analysis API",
     long_description=long_description,
     long_description_content_type = "text/markdown",

@@ -119,7 +119,7 @@ Feature: Stats functions
 			| player | split_by_seasons=true  season_name=[2015,2016]             | goals_added |
 			| player | split_by_games=true  season_name=2020  general_position=CB | goals_added |
 			| player | stage_name=Playoffs                                        | goals_added |
-			| player | stage_name=[Playoffs,Regular Season]                       | goals_added |
+			| player | stage_name=[Playoffs,Regular Season]  season_name=2021     | goals_added |
 			| player | action_type=Passing  leagues=mls                           | goals_added |
 			| player | action_type=[Passing,Shooting]  leagues=mls                | goals_added |
 			| player | above_replacement=true  leagues=mls                        | goals_added |
@@ -195,7 +195,7 @@ Feature: Stats functions
 			| player | split_by_seasons=true  season_name=[2015,2016]             | xpass |
 			| player | split_by_games=true  season_name=2020  general_position=CB | xpass |
 			| player | stage_name=Playoffs                                        | xpass |
-			| player | stage_name=[Playoffs,Regular Season]                       | xpass |
+			| player | stage_name=[Playoffs,Regular Season]  season_name=2021     | xpass |
 			| player | pass_origin_third=Defensive  leagues=mls                   | xpass |
 			| player | pass_origin_third=[Defensive,Middle]  leagues=mls          | xpass |
 
@@ -236,7 +236,7 @@ Feature: Stats functions
 			| player | start_date=2020-07-01  end_date=2021-07-08 | salaries |
 			| player | position=M  season_name=2019               | salaries |
 			| player | position=[D,M]  season_name=2018           | salaries |
-			| player | season_name=[2019,2020]                    | salaries |
+			| player | season_name=[2019,2020]  position=M        | salaries |
 
 
 		@team_salaries
@@ -252,6 +252,16 @@ Feature: Stats functions
 			| team | split_by_teams=true  season_name=2014                   | salaries |
 			| team | split_by_seasons=true  season_name=[2015,2016]          | salaries |
 			| team | split_by_positions=true  season_name=2020               | salaries |
+
+
+	Scenario Outline: Expecting multiple rows of data
+		Given there is an ASA client
+		When the "get_<type>_<stat>" function is called with arguments "<args>"
+		Then there is multiple rows of data
+
+		Examples:
+			| type | args                                         | stat   |
+			| game | leagues=mls  game_id=[aDQ037dpqE,NPqxr10gM9] | xgoals |
 
 
 # TODO: Add expected failure scenarios

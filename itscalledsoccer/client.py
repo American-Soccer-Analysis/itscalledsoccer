@@ -234,6 +234,10 @@ class AmericanSoccerAnalysis:
         :param params: URL query strings
         :returns: Dataframe
         """
+        for k, v in params.items():
+            if isinstance(v, list):
+                params[k] = ",".join(v)
+
         temp_response = self._single_request(url, params)
         response = temp_response
 

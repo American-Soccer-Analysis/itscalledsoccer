@@ -70,20 +70,20 @@ Feature: Entities functions
 
 		@games
 		Examples:
-			| entity | args                                          |
-			| games  | leagues=mls  seasons=2020                     |
-			| games  | leagues=[mls,uslc]  seasons=2020              |
-			| games  | game_ids=9z5kdxgKqA                           |
-			| games  | game_ids=[9z5kdxgKqA,9z5kAnbPQA]              |
-			| games  | team_ids=Vj58weDM8n                           |
-			| games  | team_ids=[Vj58weDM8n,9Yqdwg85vJ]              |
-			| games  | team_names=Union                              |
-			| games  | team_names=[Philadelphia,Portland]            |
-			| games  | leagues=mls  game_ids=[9z5kdxgKqA,9z5kAnbPQA] |
-			| games  | leagues=mls  team_names=Philadelphia Union    |
-			| games  | seasons=2020                                  |
-			| games  | seasons=[2020,2021]                           |
-			| games  | stages=Playoffs                               |
-			| games  | stages=[Playoffs,Regular Season]              |
+			| entity | args                                           |
+			| games  | leagues=mls  seasons=2020                      |
+			| games  | leagues=[mls,uslc]  seasons=2020               |
+			| games  | game_ids=9z5kdxgKqA                            |
+			| games  | game_ids=[9z5kdxgKqA,9z5kAnbPQA]               |
+			| games  | team_ids=Vj58weDM8n                            |
+			| games  | team_ids=[Vj58weDM8n,9Yqdwg85vJ]               |
+			| games  | team_names=Union                               |
+			| games  | team_names=[Philadelphia,Portland]             |
+			| games  | leagues=mls  game_ids=[9z5kdxgKqA,9z5kAnbPQA]  |
+			| games  | leagues=mls  team_names=Philadelphia Union     |
+			| games  | seasons=2020                                   |
+			| games  | seasons=[2020,2021]                            |
+			| games  | stages=Playoffs                                |
+			| games  | stages=[Playoffs,Regular Season]  seasons=2021 |
 
 # TODO: Add expected failure scenarios

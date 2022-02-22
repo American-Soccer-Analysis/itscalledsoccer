@@ -29,6 +29,12 @@ def step_impl(context):
     assert isinstance(context.response, DataFrame)
     assert len(context.response) >= 1
 
+@then("there is multiple rows of data")
+def step_impl(context):
+    assert context.response is not None
+    assert isinstance(context.response, DataFrame)
+    assert len(context.response) >= 2
+
 @when('the "{function}" function is called with arguments "{args}"')
 def step_impl(context, function, args):
     kwargs = split_args(args)

@@ -63,9 +63,7 @@ class AmericanSoccerAnalysis:
         df = pd.DataFrame([])
         for league in self.LEAGUES:
             url = f"{self.BASE_URL}{league}/{plural_type}"
-            response = self.session.get(url).json()
-            # Convert list of objects to JSON
-            resp_df = pd.read_json(json.dumps(response, default=lambda x: x.__dict__))
+            resp_df = self._execute_query(url, {})
             resp_df = resp_df.assign(competition=league)
             df = df.append(resp_df)
         return df
@@ -246,7 +244,7 @@ class AmericanSoccerAnalysis:
 
             while len(temp_response) == self.MAX_API_LIMIT:
                 params["offset"] = str(offset)
-                temp_response = self._execute_query(url, params)
+                temp_response = self._single_request(url, params)
                 response = response.append(temp_response)
                 offset = offset + self.MAX_API_LIMIT
 

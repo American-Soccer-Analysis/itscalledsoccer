@@ -242,7 +242,7 @@ class AmericanSoccerAnalysis:
         if isinstance(response, pd.DataFrame):
             offset = self.MAX_API_LIMIT
 
-            while len(temp_response) == self.MAX_API_LIMIT:
+            while len(temp_response.index) == self.MAX_API_LIMIT:
                 params["offset"] = str(offset)
                 temp_response = self._single_request(url, params)
                 response = response.append(temp_response)

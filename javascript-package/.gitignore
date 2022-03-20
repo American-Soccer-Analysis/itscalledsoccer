@@ -1,5 +1,0 @@
-dist/
-node_modules/
-*.out
-*.code-workspace
-coverage/

@@ -5,7 +5,7 @@ export const validateLeagues = ({ leagues }) => {
     leagues.every((league) => Object.values(LEAGUES).includes(league)),
     `leagues must be an array of ${Object.values(LEAGUES).join(
       ", "
-    )}, fetchEntity got ${leagues}`
+    )}, got ${leagues} instead`
   );
 };
 
@@ -26,7 +26,7 @@ export const validateUrlParameters = ({
       validParameters.has(arg),
       `Url parameters must be one of ${Array.from(
         validParameters.values()
-      ).join(", ")}, got ${arg}`
+      ).join(", ")}, got ${arg} instead`
     );
   });
 };

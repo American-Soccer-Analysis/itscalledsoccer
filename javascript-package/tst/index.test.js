@@ -61,7 +61,7 @@ describe("client", () => {
 
       expect(console.assert).toHaveBeenCalledWith(
         false,
-        `leagues must be an array of nwsl, mls, uslc, usl1, nasl, fetchEntity got ${mockLeague}`
+        `leagues must be an array of nwsl, mls, uslc, usl1, nasl, got ${mockLeague} instead`
       );
     });
 
@@ -85,7 +85,7 @@ describe("client", () => {
         false,
         `Url parameters must be one of ${Array.from(
           playersXgoalsParameters.values()
-        ).join(", ")}, got ${mockKey}`
+        ).join(", ")}, got ${mockKey} instead`
       );
     });
   });

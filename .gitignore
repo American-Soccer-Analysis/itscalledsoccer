@@ -629,3 +629,7 @@ FodyWeavers.xsd
 *.tlog
 
 # End of https://www.toptal.com/developers/gitignore/api/r,python,macos,windows,visualstudio,visualstudiocode
+
+javascript-package/node_modules/
+javascript-package/dist/
+javascript-package/coverage/

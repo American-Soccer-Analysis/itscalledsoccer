@@ -1,0 +1,43 @@
+{
+  "name": "itscalledsoccer",
+  "version": "1.0.0",
+  "description": "A library for interacting with the ASA api",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "babel src -d dist",
+    "watch": "chokidar \"src/*.js\" -c \"npm run build\"",
+    "test": "npm run lint && jest tst/*.test.js",
+    "prepublishOnly": "npm run build && npm run test",
+    "lint": "eslint src/**.js tst/**.js",
+    "watch-unit-test": "jest tst/*.test.js --watchAll",
+    "unit-test": "jest tst/*.test.js"
+  },
+  "keywords": [
+    "soccer"
+  ],
+  "author": "Doug Wade <doug@dougwade.io>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/doug-wade/itscalledsoccer"
+  },
+  "dependencies": {
+    "change-case": "^4.1.2",
+    "core-js": "^3.21.1",
+    "fuse.js": "^6.5.3",
+    "isomorphic-fetch": "^3.0.0",
+    "regenerator-runtime": "^0.13.9"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.5",
+    "@babel/preset-env": "^7.16.11",
+    "chokidar-cli": "^3.0.0",
+    "eslint": "^8.11.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-jest": "^26.1.1",
+    "jest": "^27.5.1",
+    "jest-fail-on-console": "^2.2.3",
+    "prettier": "2.5.1"
+  }
+}

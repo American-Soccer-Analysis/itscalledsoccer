@@ -1,6 +1,6 @@
 {
   "name": "itscalledsoccer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A library for interacting with the ASA api",
   "main": "dist/index.js",
   "scripts": {

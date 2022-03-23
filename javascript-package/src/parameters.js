@@ -1,4 +1,10 @@
-export const playersXgoalsParameters = new Set([
+import { camelCase } from "change-case";
+
+const parameterize = (parametersArray) => {
+  return new Set(parametersArray.map(camelCase));
+};
+
+export const playersXgoalsParameters = parameterize([
   "minimum_minutes",
   "minimum_shots",
   "minimum_key_passes",
@@ -15,7 +21,7 @@ export const playersXgoalsParameters = new Set([
   "general_position",
 ]);
 
-export const playersXpassParameters = new Set([
+export const playersXpassParameters = parameterize([
   "minimum_minutes",
   "minimum_passes",
   "player_id",
@@ -31,7 +37,7 @@ export const playersXpassParameters = new Set([
   "general_position",
 ]);
 
-export const playersGoalsAddedParameters = new Set([
+export const playersGoalsAddedParameters = parameterize([
   "minimum_minutes",
   "player_id",
   "team_id",
@@ -47,7 +53,7 @@ export const playersGoalsAddedParameters = new Set([
   "above_replacement",
 ]);
 
-export const playersSalariesParameters = new Set([
+export const playersSalariesParameters = parameterize([
   "player_id",
   "team_id",
   "position",
@@ -56,7 +62,7 @@ export const playersSalariesParameters = new Set([
   "end_date",
 ]);
 
-export const goalkeepersXgoalsParameters = new Set([
+export const goalkeepersXgoalsParameters = parameterize([
   "minimum_minutes",
   "minimum_shots_faced",
   "player_id",
@@ -71,7 +77,7 @@ export const goalkeepersXgoalsParameters = new Set([
   "stage_name",
 ]);
 
-export const goalkeepersGoalsAddedParameters = new Set([
+export const goalkeepersGoalsAddedParameters = parameterize([
   "minimum_minutes",
   "player_id",
   "team_id",
@@ -86,7 +92,7 @@ export const goalkeepersGoalsAddedParameters = new Set([
   "above_replacement",
 ]);
 
-export const teamsXgoalsParameters = new Set([
+export const teamsXgoalsParameters = parameterize([
   "team_id",
   "season_name",
   "start_date",
@@ -102,7 +108,7 @@ export const teamsXgoalsParameters = new Set([
   "stage_name",
 ]);
 
-export const teamsXpassParameters = new Set([
+export const teamsXpassParameters = parameterize([
   "team_id",
   "season_name",
   "start_date",
@@ -116,7 +122,7 @@ export const teamsXpassParameters = new Set([
   "stage_name",
 ]);
 
-export const teamsGoalsAddedParameters = new Set([
+export const teamsGoalsAddedParameters = parameterize([
   "team_id",
   "season_name",
   "split_by_seasons",
@@ -126,7 +132,7 @@ export const teamsGoalsAddedParameters = new Set([
   "gamestate_trunc",
 ]);
 
-export const teamsSalariesParameters = new Set([
+export const teamsSalariesParameters = parameterize([
   "team_id",
   "season_name",
   "split_by_teams",
@@ -134,14 +140,14 @@ export const teamsSalariesParameters = new Set([
   "split_by_games",
 ]);
 
-export const gamesParameters = new Set([
+export const gamesParameters = parameterize([
   "game_id",
   "team_id",
   "season_name",
   "stage_name",
 ]);
 
-export const gamesXgoalsParameters = new Set([
+export const gamesXgoalsParameters = parameterize([
   "game_id",
   "season_name",
   "start_date",

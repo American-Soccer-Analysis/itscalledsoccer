@@ -1,4 +1,5 @@
 import { LEAGUES } from "./constants";
+import { camelCase } from "change-case";
 
 export const validateLeagues = ({ leagues }) => {
   console.assert(
@@ -25,7 +26,7 @@ export const validateUrlParameters = ({
     console.assert(
       validParameters.has(arg),
       `Url parameters must be one of ${Array.from(
-        validParameters.values()
+        Array.from(validParameters.values()).map(camelCase)
       ).join(", ")}, got ${arg} instead`
     );
   });

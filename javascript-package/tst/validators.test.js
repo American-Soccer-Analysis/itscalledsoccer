@@ -3,6 +3,7 @@ import {
   validateUrlParameters,
   validateLeagues,
 } from "../src/validators";
+import { camelCase } from "change-case";
 
 describe("validators", () => {
   beforeEach(() => {
@@ -28,7 +29,7 @@ describe("validators", () => {
 
   it("asserts that leagues is an array of leagues", () => {
     const leagues = ["la liga"];
-    const message = `leagues must be an array of nwsl, mls, uslc, usl1, nasl, fetchEntity got ${leagues}`;
+    const message = `leagues must be an array of nwsl, mls, uslc, usl1, nasl, got ${leagues} instead`;
 
     validateLeagues({ leagues });
 
@@ -37,15 +38,15 @@ describe("validators", () => {
 
   it("asserts that url parameters are correct", () => {
     const providedArguments = { jordanMorris: 13, cristianRoldan: 7 };
-    const validParameters = new Set(["jordanMorris"]);
+    const validParameters = new Set(["jordan_morris"]);
 
     validateUrlParameters({ validParameters, providedArguments });
 
     expect(console.assert).toHaveBeenCalledWith(
       false,
       `Url parameters must be one of ${Array.from(
-        validParameters.values()
-      ).join(", ")}, got cristianRoldan`
+        Array.from(validParameters.values()).map(camelCase)
+      ).join(", ")}, got cristianRoldan instead`
     );
   });
 });

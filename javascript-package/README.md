@@ -1,14 +1,16 @@
 # itscalledsoccer
 
-American Soccer Analysis [released a library](https://www.americansocceranalysis.com/home/2022/2/9/introducing-itscalledsoccer) for interacting with their API for R and Python. This is a Javascript implementation of the same library.
+`itscalledsoccer` is a wrapper around the same API that powers the [American Soccer Analysis app](https://app.americansocceranalysis.com/). It enables Node users to programmatically retrieve advanced analytics for their favorite [MLS](https://en.wikipedia.org/wiki/Major_League_Soccer), [NWSL](https://en.wikipedia.org/wiki/National_Women%27s_Soccer_League), and [USL](https://en.wikipedia.org/wiki/United_Soccer_League) players and teams.
 
-## Getting Started
+## Installation Getting Started
 
 Install the library
 
 ```shell
 $ npm i -S itscalledsoccer
 ```
+
+## Getting Started
 
 import the library
 

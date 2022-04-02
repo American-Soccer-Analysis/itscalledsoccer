@@ -13,7 +13,9 @@
     "unit-test": "jest tst/*.test.js"
   },
   "keywords": [
-    "soccer"
+    "soccer",
+    "itscalledsoccer",
+    "soccer-api"
   ],
   "author": "Doug Wade <douglas.b.wade@gmail.com>",
   "license": "MIT",

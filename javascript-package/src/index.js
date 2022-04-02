@@ -94,7 +94,7 @@ export default class Client {
     );
   }
 
-  async #fetchEntity({ leagues, entityType, ids }) {
+  async #fetchEntity({ leagues, entityType, ids = [] }) {
     const results = await Promise.all(
       leagues.map(async (league) => {
         const url = `${BASE_URL}${league}/${pluralize(entityType)}${

@@ -11,7 +11,7 @@ AmericanSoccerAnalysis <- R6::R6Class("AmericanSoccerAnalysis",
         MAX_API_LIMIT = 1000,
 
         #' @field LEAGUES List of stylized league names.
-        LEAGUES = c("nwsl", "mls", "uslc", "usl1", "nasl"),
+        LEAGUES = c("nwsl", "mls", "uslc", "usl1", "nasl", "mlsnp"),
 
         #' @field base_url API base URL.
         base_url = NULL,

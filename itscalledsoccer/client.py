@@ -93,7 +93,7 @@ class AmericanSoccerAnalysis:
         elif type == "team":
             lookup = self.teams
             names = self.teams["team_name"].to_list()
-        
+
         # Getting back nan from the API for some names
         names = [n for n in names if pd.isnull(n) == False]
 

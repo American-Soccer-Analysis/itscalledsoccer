@@ -1,0 +1,26 @@
+export default [
+  {
+    player_id: "0Oq6woOxQ6",
+    team_id: "mKAqBBmqbg",
+    minutes_played: 304,
+    shots_faced: 5,
+    goals_conceded: 2,
+    saves: 2,
+    share_headed_shots: 0.2,
+    xgoals_gk_faced: 1.9221,
+    goals_minus_xgoals_gk: 0.0779,
+    goals_divided_by_xgoals_gk: 1.0405,
+  },
+  {
+    player_id: "0x5g1BmQ7O",
+    team_id: "9z5k7Yg5A3",
+    minutes_played: 879,
+    shots_faced: 33,
+    goals_conceded: 13,
+    saves: 17,
+    share_headed_shots: 0.2424,
+    xgoals_gk_faced: 11.3395,
+    goals_minus_xgoals_gk: 1.6605,
+    goals_divided_by_xgoals_gk: 1.1464,
+  },
+];

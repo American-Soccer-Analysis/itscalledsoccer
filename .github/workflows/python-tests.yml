@@ -4,8 +4,8 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - "python-package/**"
-      - ".github/workflows/python-tests.yml"
+      - "python-package/itscalledsoccer/**"
+      - "python-package/tests/**"
 
 jobs:
   python:

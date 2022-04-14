@@ -9,13 +9,6 @@ on:
     paths:
       - "R-package/R/**"
       - "R-package/tests/**"
-      - ".github/workflows/R-test-coverage.yml"
-  push:
-    branches: [main]
-    paths:
-      - "R-package/R/**"
-      - "R-package/tests/**"
-      - ".github/workflows/R-test-coverage.yml"
 
 jobs:
   R-test-coverage:

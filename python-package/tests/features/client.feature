@@ -17,6 +17,7 @@ Feature: Client initialization
 			| uslc   |
 			| usl1   |
 			| nasl   |
+			| mlsnp  |
 
 	Scenario: An ASA client has a default logger
 		Given there is an ASA client

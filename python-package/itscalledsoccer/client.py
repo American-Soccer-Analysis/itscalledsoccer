@@ -13,7 +13,7 @@ class AmericanSoccerAnalysis:
 
     API_VERSION = "v1"
     BASE_URL = f"https://app.americansocceranalysis.com/api/{API_VERSION}/"
-    LEAGUES = ["nwsl", "mls", "uslc", "usl1", "nasl"]
+    LEAGUES = ["nwsl", "mls", "uslc", "usl1", "nasl", "mlsnp"]
     MAX_API_LIMIT = 1000
     LOGGER = getLogger(__name__)
 
@@ -93,6 +93,9 @@ class AmericanSoccerAnalysis:
         elif type == "team":
             lookup = self.teams
             names = self.teams["team_name"].to_list()
+
+        # Getting back nan from the API for some names
+        names = [n for n in names if pd.isnull(n) == False]
 
         matches = process.extractOne(name, names, scorer=fuzz.partial_ratio)
         if matches:

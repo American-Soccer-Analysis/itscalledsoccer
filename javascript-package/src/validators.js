@@ -6,7 +6,7 @@ export const validateLeagues = ({ leagues }) => {
     leagues.every((league) => Object.values(LEAGUES).includes(league)),
     `leagues must be an array of ${Object.values(LEAGUES).join(
       ", "
-    )}, got ${leagues} instead`
+    )}; got ${leagues} instead`
   );
 };
 

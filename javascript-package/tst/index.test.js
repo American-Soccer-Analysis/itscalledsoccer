@@ -61,7 +61,7 @@ describe("client", () => {
 
       expect(console.assert).toHaveBeenCalledWith(
         false,
-        `leagues must be an array of nwsl, mls, uslc, usl1, nasl, got ${mockLeague} instead`
+        `leagues must be an array of nwsl, mls, uslc, usl1, nasl, mlsnp; got ${mockLeague} instead`
       );
     });
 

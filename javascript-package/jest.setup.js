@@ -1,3 +1,7 @@
 import failOnConsole from "jest-fail-on-console";
 
-failOnConsole();
+failOnConsole({
+  shouldFailOnAssert: true,
+  shouldFailOnInfo: true,
+  shouldFailOnLog: true,
+});

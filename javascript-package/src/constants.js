@@ -8,6 +8,7 @@ export const LEAGUES = Object.freeze({
   USLC: "uslc",
   USL1: "usl1",
   NASL: "nasl",
+  MLSNP: "mlsnp",
 });
 
 export const ENTITY_TYPES = Object.freeze({

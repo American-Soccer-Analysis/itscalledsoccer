@@ -29,7 +29,7 @@ describe("validators", () => {
 
   it("asserts that leagues is an array of leagues", () => {
     const leagues = ["la liga"];
-    const message = `leagues must be an array of nwsl, mls, uslc, usl1, nasl, got ${leagues} instead`;
+    const message = `leagues must be an array of nwsl, mls, uslc, usl1, nasl, mlsnp; got ${leagues} instead`;
 
     validateLeagues({ leagues });
 

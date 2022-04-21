@@ -215,7 +215,7 @@ describe("client", () => {
             },
           })
         );
-        const mockLeague = LEAGUES.USLC;
+        const mockLeague = LEAGUES.MLSNP;
         const mockSeasonName = "2021";
 
         const client = new Client();

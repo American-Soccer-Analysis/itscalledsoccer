@@ -39,7 +39,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-jest": "^26.1.1",
     "jest": "^27.5.1",
-    "jest-fail-on-console": "^2.2.3",
+    "jest-fail-on-console": "^2.4.1",
     "prettier": "2.5.1"
   }
 }

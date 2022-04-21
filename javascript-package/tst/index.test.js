@@ -216,22 +216,16 @@ describe("client", () => {
           })
         );
         const mockLeague = LEAGUES.USLC;
-        const mockMinimumPasses = 42;
-        const mockMinimumMinutes = 1000;
         const mockSeasonName = "2021";
-        const mockGeneralPosition = "W";
 
         const client = new Client();
         await client[method]({
           leagues: [mockLeague],
-          minimumPasses: mockMinimumPasses,
-          minimumMinutes: mockMinimumMinutes,
           seasonName: mockSeasonName,
-          generalPosition: mockGeneralPosition,
         });
 
         expect(fetch).toHaveBeenCalledWith(
-          `${BASE_URL}${mockLeague}${urlFragment}?minimum_passes=${mockMinimumPasses}&minimum_minutes=${mockMinimumMinutes}&season_name=${mockSeasonName}&general_position=${mockGeneralPosition}`
+          `${BASE_URL}${mockLeague}${urlFragment}?season_name=${mockSeasonName}`
         );
       }
     );

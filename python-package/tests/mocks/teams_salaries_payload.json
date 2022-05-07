@@ -1,0 +1,241 @@
+[
+	{
+		"team_id": "0KPqjA456v",
+		"count_players": 281,
+		"total_guaranteed_compensation": 71816158,
+		"avg_guaranteed_compensation": 255573.516,
+		"median_guaranteed_compensation": 148333,
+		"std_dev_guaranteed_compensation": 289424.9164
+	},
+	{
+		"team_id": "19vQ2095K6",
+		"count_players": 258,
+		"total_guaranteed_compensation": 75234971.6,
+		"avg_guaranteed_compensation": 291608.4171,
+		"median_guaranteed_compensation": 135833.5,
+		"std_dev_guaranteed_compensation": 473794.2221
+	},
+	{
+		"team_id": "4wM42l4qjB",
+		"count_players": 75,
+		"total_guaranteed_compensation": 7861261,
+		"avg_guaranteed_compensation": 104816.8133,
+		"median_guaranteed_compensation": 80004,
+		"std_dev_guaranteed_compensation": 81590.1739
+	},
+	{
+		"team_id": "9z5k7Yg5A3",
+		"count_players": 283,
+		"total_guaranteed_compensation": 68227593.8,
+		"avg_guaranteed_compensation": 241086.9039,
+		"median_guaranteed_compensation": 125093,
+		"std_dev_guaranteed_compensation": 300566.1162
+	},
+	{
+		"team_id": "a2lqR4JMr0",
+		"count_players": 277,
+		"total_guaranteed_compensation": 72194717,
+		"avg_guaranteed_compensation": 260630.7473,
+		"median_guaranteed_compensation": 131254,
+		"std_dev_guaranteed_compensation": 345715.5213
+	},
+	{
+		"team_id": "a2lqRX2Mr0",
+		"count_players": 279,
+		"total_guaranteed_compensation": 77644401,
+		"avg_guaranteed_compensation": 278295.3441,
+		"median_guaranteed_compensation": 123745,
+		"std_dev_guaranteed_compensation": 514291.4914
+	},
+	{
+		"team_id": "APk5LGOMOW",
+		"count_players": 299,
+		"total_guaranteed_compensation": 86756836.2,
+		"avg_guaranteed_compensation": 290156.6428,
+		"median_guaranteed_compensation": 129811,
+		"std_dev_guaranteed_compensation": 546371.6301
+	},
+	{
+		"team_id": "EKXMeX3Q64",
+		"count_players": 279,
+		"total_guaranteed_compensation": 68016325.6,
+		"avg_guaranteed_compensation": 243786.1133,
+		"median_guaranteed_compensation": 130000,
+		"std_dev_guaranteed_compensation": 343623.0395
+	},
+	{
+		"team_id": "eVq3ya6MWO",
+		"count_players": 131,
+		"total_guaranteed_compensation": 62624937.1,
+		"avg_guaranteed_compensation": 478052.955,
+		"median_guaranteed_compensation": 170000,
+		"std_dev_guaranteed_compensation": 1080858.2968
+	},
+	{
+		"team_id": "gpMOLwl5zy",
+		"count_players": 32,
+		"total_guaranteed_compensation": 12863851,
+		"avg_guaranteed_compensation": 401995.3438,
+		"median_guaranteed_compensation": 250000,
+		"std_dev_guaranteed_compensation": 543257.7077
+	},
+	{
+		"team_id": "jYQJ19EqGR",
+		"count_players": 278,
+		"total_guaranteed_compensation": 115634784.3,
+		"avg_guaranteed_compensation": 415952.4615,
+		"median_guaranteed_compensation": 118500,
+		"std_dev_guaranteed_compensation": 805985.2647
+	},
+	{
+		"team_id": "jYQJ8EW5GR",
+		"count_players": 233,
+		"total_guaranteed_compensation": 92525881.2,
+		"avg_guaranteed_compensation": 397106.7863,
+		"median_guaranteed_compensation": 137465,
+		"std_dev_guaranteed_compensation": 974309.3102
+	},
+	{
+		"team_id": "kaDQ0wRqEv",
+		"count_players": 279,
+		"total_guaranteed_compensation": 154266728.7,
+		"avg_guaranteed_compensation": 552927.343,
+		"median_guaranteed_compensation": 130000,
+		"std_dev_guaranteed_compensation": 1200049.5992
+	},
+	{
+		"team_id": "KAqBN0Vqbg",
+		"count_players": 173,
+		"total_guaranteed_compensation": 70284379.3,
+		"avg_guaranteed_compensation": 406268.0884,
+		"median_guaranteed_compensation": 150000,
+		"std_dev_guaranteed_compensation": 643048.8733
+	},
+	{
+		"team_id": "kRQabn8MKZ",
+		"count_players": 293,
+		"total_guaranteed_compensation": 181850080.6,
+		"avg_guaranteed_compensation": 620648.7392,
+		"median_guaranteed_compensation": 125000,
+		"std_dev_guaranteed_compensation": 1484337.5783
+	},
+	{
+		"team_id": "kRQand1MKZ",
+		"count_players": 161,
+		"total_guaranteed_compensation": 50572450,
+		"avg_guaranteed_compensation": 314114.5963,
+		"median_guaranteed_compensation": 208761,
+		"std_dev_guaranteed_compensation": 343872.6602
+	},
+	{
+		"team_id": "lgpMOvnQzy",
+		"count_players": 299,
+		"total_guaranteed_compensation": 73381832.9,
+		"avg_guaranteed_compensation": 245424.1903,
+		"median_guaranteed_compensation": 132000,
+		"std_dev_guaranteed_compensation": 305209.5286
+	},
+	{
+		"team_id": "mKAqBBmqbg",
+		"count_players": 289,
+		"total_guaranteed_compensation": 71359727.4,
+		"avg_guaranteed_compensation": 246919.472,
+		"median_guaranteed_compensation": 136000,
+		"std_dev_guaranteed_compensation": 312902.3329
+	},
+	{
+		"team_id": "mvzqoLZQap",
+		"count_players": 279,
+		"total_guaranteed_compensation": 75267949,
+		"avg_guaranteed_compensation": 269777.595,
+		"median_guaranteed_compensation": 142500,
+		"std_dev_guaranteed_compensation": 336064.6244
+	},
+	{
+		"team_id": "NPqxKXZ59d",
+		"count_players": 2,
+		"total_guaranteed_compensation": 154252,
+		"avg_guaranteed_compensation": 77126,
+		"median_guaranteed_compensation": 77126,
+		"std_dev_guaranteed_compensation": 19203.606
+	},
+	{
+		"team_id": "NWMWlBK5lz",
+		"count_players": 106,
+		"total_guaranteed_compensation": 43576057.5,
+		"avg_guaranteed_compensation": 411094.8821,
+		"median_guaranteed_compensation": 214252,
+		"std_dev_guaranteed_compensation": 537673.9568
+	},
+	{
+		"team_id": "pzeQZ6xQKw",
+		"count_players": 279,
+		"total_guaranteed_compensation": 69731088.3,
+		"avg_guaranteed_compensation": 249932.2161,
+		"median_guaranteed_compensation": 116625,
+		"std_dev_guaranteed_compensation": 379786.2191
+	},
+	{
+		"team_id": "Vj58weDM8n",
+		"count_players": 208,
+		"total_guaranteed_compensation": 111550230.2,
+		"avg_guaranteed_compensation": 536299.1837,
+		"median_guaranteed_compensation": 170250,
+		"std_dev_guaranteed_compensation": 1151005.6917
+	},
+	{
+		"team_id": "vzqoOgNqap",
+		"count_players": 70,
+		"total_guaranteed_compensation": 23219734.7,
+		"avg_guaranteed_compensation": 331710.4957,
+		"median_guaranteed_compensation": 155250,
+		"std_dev_guaranteed_compensation": 368016.5913
+	},
+	{
+		"team_id": "WBLMvYAQxe",
+		"count_players": 275,
+		"total_guaranteed_compensation": 86438959.9,
+		"avg_guaranteed_compensation": 314323.4905,
+		"median_guaranteed_compensation": 150000,
+		"std_dev_guaranteed_compensation": 448760.2808
+	},
+	{
+		"team_id": "X0Oq66zq6D",
+		"count_players": 278,
+		"total_guaranteed_compensation": 97256662.6,
+		"avg_guaranteed_compensation": 349844.1101,
+		"median_guaranteed_compensation": 125000,
+		"std_dev_guaranteed_compensation": 710942.3653
+	},
+	{
+		"team_id": "YgOMngl5wN",
+		"count_players": 272,
+		"total_guaranteed_compensation": 62636020.1,
+		"avg_guaranteed_compensation": 230279.4857,
+		"median_guaranteed_compensation": 160625,
+		"std_dev_guaranteed_compensation": 250005.2586
+	},
+	{
+		"team_id": "Z2vQ1xlqrA",
+		"count_players": 282,
+		"total_guaranteed_compensation": 81893036.9,
+		"avg_guaranteed_compensation": 290400.8401,
+		"median_guaranteed_compensation": 128756,
+		"std_dev_guaranteed_compensation": 366206.9294
+	},
+	{
+		"team_id": "zeQZkL1MKw",
+		"count_players": 65,
+		"total_guaranteed_compensation": 32602949,
+		"avg_guaranteed_compensation": 501583.8308,
+		"median_guaranteed_compensation": 170833,
+		"std_dev_guaranteed_compensation": 932783.2593
+	},
+	{
+		"count_players": 47,
+		"total_guaranteed_compensation": 20969896,
+		"avg_guaranteed_compensation": 446168,
+		"median_guaranteed_compensation": 85444,
+		"std_dev_guaranteed_compensation": 1046093.7911
+	}
+]

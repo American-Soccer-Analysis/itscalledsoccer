@@ -1,5 +1,6 @@
 from behave import *
-from pandas import DataFrame
+from pandas import DataFrame, read_json
+from pathlib import Path
 
 def split_args(args: str) -> dict:
     kwargs = {}
@@ -38,41 +39,43 @@ def step_impl(context):
 @when('the "{function}" function is called with arguments "{args}"')
 def step_impl(context, function, args):
     kwargs = split_args(args)
+    cwd = Path.cwd()
     print(kwargs)
     if "get_player_xgoals" == function:
-        context.response = context.soccer.get_player_xgoals(**kwargs)
+        f = Path(cwd, "./mocks/players_xgoals_payload.json")
     elif "get_player_xpass" == function:
-        context.response = context.soccer.get_player_xpass(**kwargs)
+        f = Path(cwd, "./mocks/players_xpass_payload.json")
     elif "get_player_goals_added" == function:
-        context.response = context.soccer.get_player_goals_added(**kwargs)
+        f = Path(cwd,"./mocks/players_goals_added_payload.json")
     elif "get_player_salaries" == function:
-        context.response = context.soccer.get_player_salaries(**kwargs)
+        f = Path(cwd,"./mocks/players_salaries_payload.json")
     elif "get_goalkeeper_xgoals" == function:
-        context.response = context.soccer.get_goalkeeper_xgoals(**kwargs)
+        f = Path("./mocks/goalkeepers_xgoals_payload.json")
     elif "get_goalkeeper_goals_added" == function:
-        context.response = context.soccer.get_goalkeeper_goals_added(**kwargs)
+        f = Path(cwd,"./mocks/goalkeepers_goals_added_payload.json")
     elif "get_team_xgoals" == function:
-        context.response = context.soccer.get_team_xgoals(**kwargs)
+        f = Path(cwd,"./mocks/teams_xgoals_payload.json")
     elif "get_team_xpass" == function:
-        context.response = context.soccer.get_team_xpass(**kwargs)
+        f = Path("./mocks/teams_xpass_payload.json")
     elif "get_team_goals_added" == function:
-        context.response = context.soccer.get_team_goals_added(**kwargs)
+        f = Path(cwd,"./mocks/teams_goals_added_payload.json")
     elif "get_team_salaries" == function:
-        context.response = context.soccer.get_team_salaries(**kwargs)
+        f = Path(cwd,"./mocks/teams_salaries_payload.json")
     elif "get_game_xgoals" == function:
-        context.response = context.soccer.get_game_xgoals(**kwargs)
+        f = Path(cwd,"./mocks/games_xgoals_payload.json")
     elif "get_stadia" == function:
-        context.response = context.soccer.get_stadia(**kwargs)
+        f = Path(cwd,"./mocks/stadia_payload.json")
     elif "get_referees" == function:
-        context.response = context.soccer.get_referees(**kwargs)
+        f = Path(cwd,"./mocks/referees_payload.json")
     elif "get_managers" == function:
-        context.response = context.soccer.get_managers(**kwargs)
+        f = Path(cwd,"./mocks/managers_payload.json")
     elif "get_teams" == function:
-        context.response = context.soccer.get_teams(**kwargs)
+        f = Path(cwd,"./mocks/teams_payload.json")
     elif "get_players" == function:
-        context.response = context.soccer.get_players(**kwargs)
+        f = Path(cwd,"./mocks/players_payload.json")
     elif "get_games" == function:
-        context.response = context.soccer.get_games(**kwargs)
+        f = Path(cwd,"./mocks/games_payload.json")
     else:
         print("Function not recognized")
         raise NameError
+    context.response = read_json(f.open())

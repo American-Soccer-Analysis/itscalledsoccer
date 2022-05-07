@@ -1,0 +1,489 @@
+[
+	{
+		"manager_id": "0Oq6e7A56D",
+		"manager_name": "Rob Valentino",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "0Oq6mNP56D",
+		"manager_name": "Josh Wolff",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "0Oq6mxd56D",
+		"manager_name": "Marc Dos Santos",
+		"nationality": "Canada"
+	},
+	{
+		"manager_id": "0Oq6VPgq6D",
+		"manager_name": "Robin Fraser",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "0Oq6vPrq6D",
+		"manager_name": "Jim Curtin",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "0Oq6zkzq6D",
+		"manager_name": "Bob Bradley",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "0x5gDGXq7O",
+		"manager_name": "Rémi Garde",
+		"nationality": "France"
+	},
+	{
+		"manager_id": "0x5ggrR57O",
+		"manager_name": "Stephen Glass",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "0x5gN9PM7O",
+		"manager_name": "Gregg Berhalter",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "0x5gX4jq7O",
+		"manager_name": "Kerry Zavagnin",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "2lqRa4D5r0",
+		"manager_name": "Ronny Deila",
+		"nationality": "Norway"
+	},
+	{
+		"manager_id": "2lqREgJ5r0",
+		"manager_name": "Steve Ralston",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "2lqRNjxqr0",
+		"manager_name": "José Luis Real",
+		"nationality": "Mexico"
+	},
+	{
+		"manager_id": "2lqRo8AQr0",
+		"manager_name": "Craig Dalrymple"
+	},
+	{
+		"manager_id": "2vQ10jwqrA",
+		"manager_name": "Matías Almeyda",
+		"nationality": "Argentina"
+	},
+	{
+		"manager_id": "2vQ1A60QrA",
+		"manager_name": "Ezra Hendrickson",
+		"nationality": "St. Vincent and the Grenadines"
+	},
+	{
+		"manager_id": "2vQ1m6bQrA",
+		"manager_name": "Marco Ferruzzi",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "2vQ1vgxMrA",
+		"manager_name": "Jeff Cassar",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "2vQ1vR0MrA",
+		"manager_name": "Patrick Vieira",
+		"nationality": "France"
+	},
+	{
+		"manager_id": "315V07YQ9x",
+		"manager_name": "Davy Arnaud"
+	},
+	{
+		"manager_id": "315VavvM9x",
+		"manager_name": "Robert Warzycha"
+	},
+	{
+		"manager_id": "315VKkEq9x",
+		"manager_name": "Marco Schällibaum",
+		"nationality": "Switzerland"
+	},
+	{
+		"manager_id": "4JMA4X9QKg",
+		"manager_name": "Dominic Kinnear"
+	},
+	{
+		"manager_id": "4JMAEj1MKg",
+		"manager_name": "Brad Friedel",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "4wM4AAk5jB",
+		"manager_name": "Tab Ramos",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "4wM4vOAqjB",
+		"manager_name": "Pablo Mastroeni",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "4wM4zRlqjB",
+		"manager_name": "Frank Yallop"
+	},
+	{
+		"manager_id": "7vQ7m6Y5D1",
+		"manager_name": "Gonzalo Pineda",
+		"nationality": "Mexico"
+	},
+	{
+		"manager_id": "7vQ7mJE5D1",
+		"manager_name": "Daryl Shore",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "7vQ7z0dqD1",
+		"manager_name": "Gerardo Martino",
+		"nationality": "Argentina"
+	},
+	{
+		"manager_id": "7VqG6WY5vW",
+		"manager_name": "Diego Alonso",
+		"nationality": "Uruguay"
+	},
+	{
+		"manager_id": "7VqGG2eqvW",
+		"manager_name": "Mark Watson",
+		"nationality": "Canada"
+	},
+	{
+		"manager_id": "7VqGPRYQvW",
+		"manager_name": "Javier Perez",
+		"nationality": "Spain"
+	},
+	{
+		"manager_id": "9vQ2z7xQK6",
+		"manager_name": "Curt Onalfo"
+	},
+	{
+		"manager_id": "9Yqd8woqvJ",
+		"manager_name": "Raphaël Wicky",
+		"nationality": "Switzerland"
+	},
+	{
+		"manager_id": "9z5kJ0jMA3",
+		"manager_name": "Jay Heaps",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "9z5kKNb5A3",
+		"manager_name": "Gerhard Struber",
+		"nationality": "Austria"
+	},
+	{
+		"manager_id": "9z5krNlMA3"
+	},
+	{
+		"manager_id": "a35rDbGQL6",
+		"manager_name": "Ron Jans",
+		"nationality": "Netherlands"
+	},
+	{
+		"manager_id": "a35rDN4QL6",
+		"manager_name": "Schellas Hyndman"
+	},
+	{
+		"manager_id": "aDQ009EQEv",
+		"manager_name": "Mike Petke",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "aDQ0rwR5Ev",
+		"manager_name": "Conor Casey"
+	},
+	{
+		"manager_id": "aDQ0zmB5Ev",
+		"manager_name": "José Luis Sánchez",
+		"nationality": "Mexico"
+	},
+	{
+		"manager_id": "BLMvDGBqxe",
+		"manager_name": "Yoann Damet"
+	},
+	{
+		"manager_id": "BLMvnZlMxe",
+		"manager_name": "Bobby Murphy"
+	},
+	{
+		"manager_id": "BLMvXrjqxe",
+		"manager_name": "Chris Leitch"
+	},
+	{
+		"manager_id": "e7Mz3GG5r0",
+		"manager_name": "Frank de Boer",
+		"nationality": "Netherlands"
+	},
+	{
+		"manager_id": "e7MzE8XQr0",
+		"manager_name": "Hernán Pablo Losada",
+		"nationality": "Argentina"
+	},
+	{
+		"manager_id": "e7MzXZPqr0",
+		"manager_name": "Omid Namazi"
+	},
+	{
+		"manager_id": "EGMPL0yMaY",
+		"manager_name": "Wilmer Cabrera",
+		"nationality": "Colombia"
+	},
+	{
+		"manager_id": "eV5DNVJQKn",
+		"manager_name": "Luchi Gonzalez",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "eV5DWdEMKn",
+		"manager_name": "Jaap Stam",
+		"nationality": "Netherlands"
+	},
+	{
+		"manager_id": "eVq3ArXMWO",
+		"manager_name": "Ian Russell",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "eVq3mZVMWO",
+		"manager_name": "James O’Connor",
+		"nationality": "Republic of Ireland"
+	},
+	{
+		"manager_id": "eVq3zow5WO",
+		"manager_name": "Jason Kreis"
+	},
+	{
+		"manager_id": "gjMNEpkQKp",
+		"manager_name": "Alan Koch",
+		"nationality": "South Africa"
+	},
+	{
+		"manager_id": "gjMNG4k5Kp",
+		"manager_name": "Miguel Ángel Ramírez"
+	},
+	{
+		"manager_id": "gjMNk0Y5Kp",
+		"manager_name": "Ryan Nelsen",
+		"nationality": "New Zealand"
+	},
+	{
+		"manager_id": "gjMNk8v5Kp",
+		"manager_name": "Oscar Pareja",
+		"nationality": "Colombia"
+	},
+	{
+		"manager_id": "gOMnBPJMwN",
+		"manager_name": "Frank Klopas",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "gOMnDkAqwN",
+		"manager_name": "Gary Smith",
+		"nationality": "England"
+	},
+	{
+		"manager_id": "gOMnwJm5wN",
+		"manager_name": "Wade Barrett",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "gpMOYJ7qzy",
+		"manager_name": "Phil Neville",
+		"nationality": "England"
+	},
+	{
+		"manager_id": "gpMOYv1qzy",
+		"manager_name": "Giovanni Savarese",
+		"nationality": "Venezuela"
+	},
+	{
+		"manager_id": "jYQJA3yqGR",
+		"manager_name": "Gabriel Heinze",
+		"nationality": "Argentina"
+	},
+	{
+		"manager_id": "jYQJlGW5GR",
+		"manager_name": "Paulo Nagamura",
+		"nationality": "Brazil"
+	},
+	{
+		"manager_id": "jYQJozVMGR",
+		"manager_name": "Domènec Torrent",
+		"nationality": "Spain"
+	},
+	{
+		"manager_id": "KAqB3DmQbg",
+		"manager_name": "Carl Robinson",
+		"nationality": "Wales"
+	},
+	{
+		"manager_id": "KAqB4dVMbg",
+		"manager_name": "Owen Coyle",
+		"nationality": "Republic of Ireland"
+	},
+	{
+		"manager_id": "KAqBPJ7Mbg",
+		"manager_name": "Mike Lapper"
+	},
+	{
+		"manager_id": "KAqBwv7Qbg",
+		"manager_name": "Nico Estévez",
+		"nationality": "Spain"
+	},
+	{
+		"manager_id": "KPqjO38Q6v",
+		"manager_name": "Wilfried Nancy",
+		"nationality": "France"
+	},
+	{
+		"manager_id": "kRQa99OQKZ",
+		"manager_name": "Anthony Hudson",
+		"nationality": "New Zealand"
+	},
+	{
+		"manager_id": "kRQa9zmQKZ",
+		"manager_name": "Freddy Juarez",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "kRQaRD1MKZ",
+		"manager_name": "Brian Bliss"
+	},
+	{
+		"manager_id": "KXMeab1M64",
+		"manager_name": "Siegfried Schmid"
+	},
+	{
+		"manager_id": "KXMeAPkM64",
+		"manager_name": "John Hackworth",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "LeVq3j5WOJ",
+		"manager_name": "Bruce Arena",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "ljqEkkAMx0",
+		"manager_name": "Rob Valentino",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "ljqEWzAMx0",
+		"manager_name": "Martin Rennie",
+		"nationality": "Scotland"
+	},
+	{
+		"manager_id": "ljqExEA5x0",
+		"manager_name": "Veljko Paunovic",
+		"nationality": "Serbia"
+	},
+	{
+		"manager_id": "N6MmpyLQEG",
+		"manager_name": "Peter Vermes",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "NPqxkDY59d",
+		"manager_name": "Caleb Porter",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "NWMWx1D5lz",
+		"manager_name": "Mauro Biello",
+		"nationality": "Canada"
+	},
+	{
+		"manager_id": "NWMWxKe5lz",
+		"manager_name": "Steven Cherundolo",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "odMXaNo5YL",
+		"manager_name": "Tom Soehn",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "odMXaYo5YL",
+		"manager_name": "Mikael Stahre",
+		"nationality": "Sweden"
+	},
+	{
+		"manager_id": "odMXxreMYL",
+		"manager_name": "Brian Schmetzer",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "OlMlYvy5Lz",
+		"manager_name": "Adrian Heath",
+		"nationality": "England"
+	},
+	{
+		"manager_id": "p6qbk3BQ0G",
+		"manager_name": "Chad Ashton",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "Pk5LWONMOW",
+		"manager_name": "Vanni Sartini",
+		"nationality": "Italy"
+	},
+	{
+		"manager_id": "Vj58mVDq8n",
+		"manager_name": "Steve Cooke",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "Vj58mwJq8n"
+	},
+	{
+		"manager_id": "vzqo2dv5ap",
+		"manager_name": "Chris Armas",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "vzqoAjJMap",
+		"manager_name": "Ben Olsen",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "vzqokNkqap",
+		"manager_name": "Thierry Henry",
+		"nationality": "France"
+	},
+	{
+		"manager_id": "vzqozWB5ap",
+		"manager_name": "Pat Noonan"
+	},
+	{
+		"manager_id": "Xj5Yre0qbd",
+		"manager_name": "Jesse Marsch",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "Xj5Yrklqbd",
+		"manager_name": "Guillermo Barros Schelotto",
+		"nationality": "Argentina"
+	},
+	{
+		"manager_id": "Xj5Yx60Mbd",
+		"manager_name": "Greg Vanney",
+		"nationality": "USA"
+	},
+	{
+		"manager_id": "xW5pXLG5g1",
+		"manager_name": "Tyrone Marshall",
+		"nationality": "Jamaica"
+	},
+	{
+		"manager_id": "zeQZVw1QKw",
+		"manager_name": "Bradley Carnell"
+	}
+]

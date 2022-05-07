@@ -1,0 +1,992 @@
+[
+	{
+		"player_id": "0Oq6lp3AM6",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2013,
+		"position": "F",
+		"base_salary": 48400,
+		"guaranteed_compensation": 48400,
+		"mlspa_release": "2013-05-01"
+	},
+	{
+		"player_id": "0Oq6lp3AM6",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2013,
+		"position": "F",
+		"base_salary": 48400,
+		"guaranteed_compensation": 48400,
+		"mlspa_release": "2013-08-01"
+	},
+	{
+		"player_id": "0Oq6lp3AM6",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2013,
+		"position": "F",
+		"base_salary": 48400,
+		"guaranteed_compensation": 48400,
+		"mlspa_release": "2013-09-15"
+	},
+	{
+		"player_id": "0Oq6lp3AM6",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2014,
+		"position": "F",
+		"base_salary": 54450,
+		"guaranteed_compensation": 54450,
+		"mlspa_release": "2014-04-01"
+	},
+	{
+		"player_id": "0Oq6lp3AM6",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2014,
+		"position": "F",
+		"base_salary": 54450,
+		"guaranteed_compensation": 54450,
+		"mlspa_release": "2014-09-15"
+	},
+	{
+		"player_id": "0Oq6lp3AM6",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2015,
+		"position": "F",
+		"base_salary": 60000,
+		"guaranteed_compensation": 60000,
+		"mlspa_release": "2015-07-15"
+	},
+	{
+		"player_id": "0Oq6lp3AM6",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2015,
+		"position": "F",
+		"base_salary": 60000,
+		"guaranteed_compensation": 60000,
+		"mlspa_release": "2015-09-15"
+	},
+	{
+		"player_id": "0Oq6LpLgM6",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2021,
+		"position": "D",
+		"base_salary": 63547,
+		"guaranteed_compensation": 71615,
+		"mlspa_release": "2021-04-15"
+	},
+	{
+		"player_id": "0Oq6LpLgM6",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2021,
+		"position": "D",
+		"base_salary": 63547,
+		"guaranteed_compensation": 71615,
+		"mlspa_release": "2021-09-30"
+	},
+	{
+		"player_id": "0x5g1BmQ7O",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2014,
+		"position": "GK",
+		"base_salary": 240000,
+		"guaranteed_compensation": 240000,
+		"mlspa_release": "2014-09-15"
+	},
+	{
+		"player_id": "0x5g1BmQ7O",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2015,
+		"position": "GK",
+		"base_salary": 350000,
+		"guaranteed_compensation": 350000,
+		"mlspa_release": "2015-07-15"
+	},
+	{
+		"player_id": "0x5g2K9mM7",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2015,
+		"position": "F",
+		"base_salary": 60000,
+		"guaranteed_compensation": 75000,
+		"mlspa_release": "2015-07-15"
+	},
+	{
+		"player_id": "0x5g2K9mM7",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2015,
+		"position": "F",
+		"base_salary": 60000,
+		"guaranteed_compensation": 75000,
+		"mlspa_release": "2015-09-15"
+	},
+	{
+		"player_id": "0x5g2KPRM7",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2018,
+		"position": "D",
+		"base_salary": 54500,
+		"guaranteed_compensation": 54500,
+		"mlspa_release": "2018-05-01"
+	},
+	{
+		"player_id": "0x5g2KPRM7",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2018,
+		"position": "D",
+		"base_salary": 54500,
+		"guaranteed_compensation": 54500,
+		"mlspa_release": "2018-09-15"
+	},
+	{
+		"player_id": "0x5g2KPRM7",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2019,
+		"position": "D",
+		"base_salary": 57225,
+		"guaranteed_compensation": 57225,
+		"mlspa_release": "2019-06-01"
+	},
+	{
+		"player_id": "0x5g2KPRM7",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2019,
+		"position": "D",
+		"base_salary": 57225,
+		"guaranteed_compensation": 57225,
+		"mlspa_release": "2019-09-13"
+	},
+	{
+		"player_id": "0x5g2KPRM7",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2020,
+		"position": "D",
+		"base_salary": 81375,
+		"guaranteed_compensation": 81375,
+		"mlspa_release": "2020-12-01"
+	},
+	{
+		"player_id": "0x5g2KPRM7",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2021,
+		"position": "D",
+		"base_salary": 90000,
+		"guaranteed_compensation": 90000,
+		"mlspa_release": "2021-04-15"
+	},
+	{
+		"player_id": "0x5g2KPRM7",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2021,
+		"position": "D",
+		"base_salary": 90000,
+		"guaranteed_compensation": 90000,
+		"mlspa_release": "2021-09-30"
+	},
+	{
+		"player_id": "0x5gPeBPq7",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2017,
+		"position": "D",
+		"base_salary": 65004,
+		"guaranteed_compensation": 78337.3,
+		"mlspa_release": "2017-04-15"
+	},
+	{
+		"player_id": "0x5gPeBPq7",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2017,
+		"position": "D",
+		"base_salary": 65004,
+		"guaranteed_compensation": 78337.3,
+		"mlspa_release": "2017-09-15"
+	},
+	{
+		"player_id": "0x5gvbjM7O",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2015,
+		"position": "D",
+		"base_salary": 400000,
+		"guaranteed_compensation": 400000,
+		"mlspa_release": "2015-07-15"
+	},
+	{
+		"player_id": "0x5gvbjM7O",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2015,
+		"position": "D",
+		"base_salary": 400000,
+		"guaranteed_compensation": 400000,
+		"mlspa_release": "2015-09-15"
+	},
+	{
+		"player_id": "2lqR7pJQr0",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2013,
+		"position": "M",
+		"base_salary": 495000,
+		"guaranteed_compensation": 495000,
+		"mlspa_release": "2013-05-01"
+	},
+	{
+		"player_id": "2lqR7pJQr0",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2013,
+		"position": "M",
+		"base_salary": 495000,
+		"guaranteed_compensation": 495000,
+		"mlspa_release": "2013-08-01"
+	},
+	{
+		"player_id": "2lqR7pJQr0",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2013,
+		"position": "M",
+		"base_salary": 495000,
+		"guaranteed_compensation": 495000,
+		"mlspa_release": "2013-09-15"
+	},
+	{
+		"player_id": "2lqRjL12qr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2021,
+		"position": "D",
+		"base_salary": 65000,
+		"guaranteed_compensation": 77825,
+		"mlspa_release": "2021-04-15"
+	},
+	{
+		"player_id": "2lqRjL12qr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2021,
+		"position": "M",
+		"base_salary": 65000,
+		"guaranteed_compensation": 77825,
+		"mlspa_release": "2021-09-30"
+	},
+	{
+		"player_id": "2lqRkdg4Qr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2015,
+		"position": "D",
+		"base_salary": 60000,
+		"guaranteed_compensation": 60000,
+		"mlspa_release": "2015-07-15"
+	},
+	{
+		"player_id": "2lqRkoYxQr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2016,
+		"position": "D",
+		"base_salary": 51500,
+		"guaranteed_compensation": 51500,
+		"mlspa_release": "2016-05-15"
+	},
+	{
+		"player_id": "2lqRkoYxQr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2016,
+		"position": "D",
+		"base_salary": 51500,
+		"guaranteed_compensation": 51500,
+		"mlspa_release": "2016-09-15"
+	},
+	{
+		"player_id": "2lqRO1AQr0",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2013,
+		"position": "F",
+		"base_salary": 46500,
+		"guaranteed_compensation": 46500,
+		"mlspa_release": "2013-09-15"
+	},
+	{
+		"player_id": "2lqRRj84qr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2019,
+		"position": "GK",
+		"base_salary": 144000,
+		"guaranteed_compensation": 144000,
+		"mlspa_release": "2019-09-13"
+	},
+	{
+		"player_id": "2lqRRj84qr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2020,
+		"position": "GK",
+		"base_salary": 200000,
+		"guaranteed_compensation": 200000,
+		"mlspa_release": "2020-12-01"
+	},
+	{
+		"player_id": "2lqRRj84qr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2021,
+		"position": "GK",
+		"base_salary": 200000,
+		"guaranteed_compensation": 200000,
+		"mlspa_release": "2021-04-15"
+	},
+	{
+		"player_id": "2lqRRj84qr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2021,
+		"position": "GK",
+		"base_salary": 200000,
+		"guaranteed_compensation": 200000,
+		"mlspa_release": "2021-09-30"
+	},
+	{
+		"player_id": "2lqRRrj0qr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2013,
+		"position": "M",
+		"base_salary": 46500,
+		"guaranteed_compensation": 46500,
+		"mlspa_release": "2013-05-01"
+	},
+	{
+		"player_id": "2lqRRrj0qr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2013,
+		"position": "M",
+		"base_salary": 46500,
+		"guaranteed_compensation": 46500,
+		"mlspa_release": "2013-08-01"
+	},
+	{
+		"player_id": "2lqRRrj0qr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2013,
+		"position": "M",
+		"base_salary": 46500,
+		"guaranteed_compensation": 46500,
+		"mlspa_release": "2013-09-15"
+	},
+	{
+		"player_id": "2vQ14B6Kqr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2020,
+		"position": "M",
+		"base_salary": 125000,
+		"guaranteed_compensation": 140125,
+		"mlspa_release": "2020-12-01"
+	},
+	{
+		"player_id": "2vQ14B6Kqr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2021,
+		"position": "M",
+		"base_salary": 225000,
+		"guaranteed_compensation": 251250,
+		"mlspa_release": "2021-04-15"
+	},
+	{
+		"player_id": "2vQ14B6Kqr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2021,
+		"position": "M",
+		"base_salary": 225000,
+		"guaranteed_compensation": 251250,
+		"mlspa_release": "2021-09-30"
+	},
+	{
+		"player_id": "2vQ1L20Oqr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2015,
+		"position": "GK",
+		"base_salary": 50000,
+		"guaranteed_compensation": 56250,
+		"mlspa_release": "2015-07-15"
+	},
+	{
+		"player_id": "2vQ1L20Oqr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2015,
+		"position": "GK",
+		"base_salary": 60000,
+		"guaranteed_compensation": 66250,
+		"mlspa_release": "2015-09-15"
+	},
+	{
+		"player_id": "2vQ1L20Oqr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2016,
+		"position": "GK",
+		"base_salary": 79000,
+		"guaranteed_compensation": 85250,
+		"mlspa_release": "2016-05-15"
+	},
+	{
+		"player_id": "2vQ1L20Oqr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2016,
+		"position": "GK",
+		"base_salary": 79000,
+		"guaranteed_compensation": 88250,
+		"mlspa_release": "2016-09-15"
+	},
+	{
+		"player_id": "2vQ1L20Oqr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2017,
+		"position": "GK",
+		"base_salary": 86500,
+		"guaranteed_compensation": 95750,
+		"mlspa_release": "2017-04-15"
+	},
+	{
+		"player_id": "2vQ1L20Oqr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2017,
+		"position": "GK",
+		"base_salary": 86500,
+		"guaranteed_compensation": 95750,
+		"mlspa_release": "2017-09-15"
+	},
+	{
+		"player_id": "2vQ1L20Oqr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2018,
+		"position": "GK",
+		"base_salary": 95000,
+		"guaranteed_compensation": 104250,
+		"mlspa_release": "2018-05-01"
+	},
+	{
+		"player_id": "2vQ1L20Oqr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2018,
+		"position": "GK",
+		"base_salary": 95000,
+		"guaranteed_compensation": 104250,
+		"mlspa_release": "2018-09-15"
+	},
+	{
+		"player_id": "2vQ1L4XOqr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2015,
+		"position": "F",
+		"base_salary": 125000,
+		"guaranteed_compensation": 142000,
+		"mlspa_release": "2015-07-15"
+	},
+	{
+		"player_id": "2vQ1L4XOqr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2015,
+		"position": "F",
+		"base_salary": 125000,
+		"guaranteed_compensation": 142000,
+		"mlspa_release": "2015-09-15"
+	},
+	{
+		"player_id": "2vQ1L4XOqr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2016,
+		"position": "F",
+		"base_salary": 225000,
+		"guaranteed_compensation": 225000,
+		"mlspa_release": "2016-05-15"
+	},
+	{
+		"player_id": "2vQ1L4XOqr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2016,
+		"position": "F",
+		"base_salary": 225000,
+		"guaranteed_compensation": 225000,
+		"mlspa_release": "2016-09-15"
+	},
+	{
+		"player_id": "2vQ1L4XOqr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2017,
+		"position": "F",
+		"base_salary": 300000,
+		"guaranteed_compensation": 300000,
+		"mlspa_release": "2017-04-15"
+	},
+	{
+		"player_id": "2vQ1L4XOqr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2017,
+		"position": "F",
+		"base_salary": 300000,
+		"guaranteed_compensation": 300000,
+		"mlspa_release": "2017-09-15"
+	},
+	{
+		"player_id": "2vQ1L4XOqr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2018,
+		"position": "F",
+		"base_salary": 525000,
+		"guaranteed_compensation": 525000,
+		"mlspa_release": "2018-05-01"
+	},
+	{
+		"player_id": "2vQ1L4XOqr",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2018,
+		"position": "F",
+		"base_salary": 525000,
+		"guaranteed_compensation": 525000,
+		"mlspa_release": "2018-09-15"
+	},
+	{
+		"player_id": "315VeN4YM9",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2016,
+		"position": "D",
+		"base_salary": 150000,
+		"guaranteed_compensation": 165833,
+		"mlspa_release": "2016-05-15"
+	},
+	{
+		"player_id": "315VeN4YM9",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2016,
+		"position": "D",
+		"base_salary": 150000,
+		"guaranteed_compensation": 174167,
+		"mlspa_release": "2016-09-15"
+	},
+	{
+		"player_id": "315VX0x7Q9",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2016,
+		"position": "M",
+		"base_salary": 51500,
+		"guaranteed_compensation": 51500,
+		"mlspa_release": "2016-05-15"
+	},
+	{
+		"player_id": "315VX0x7Q9",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2016,
+		"position": "M",
+		"base_salary": 51500,
+		"guaranteed_compensation": 51500,
+		"mlspa_release": "2016-09-15"
+	},
+	{
+		"player_id": "315VXGwYQ9",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2017,
+		"position": "D",
+		"base_salary": 53004,
+		"guaranteed_compensation": 53004,
+		"mlspa_release": "2017-04-15"
+	},
+	{
+		"player_id": "315VXGwYQ9",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2017,
+		"position": "D",
+		"base_salary": 53004,
+		"guaranteed_compensation": 53004,
+		"mlspa_release": "2017-09-15"
+	},
+	{
+		"player_id": "315VXNkGQ9",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2019,
+		"position": "GK",
+		"base_salary": 132000,
+		"guaranteed_compensation": 148425,
+		"mlspa_release": "2019-06-01"
+	},
+	{
+		"player_id": "4wM4aeBz5j",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2017,
+		"position": "GK",
+		"base_salary": 53004,
+		"guaranteed_compensation": 53004,
+		"mlspa_release": "2017-04-15"
+	},
+	{
+		"player_id": "4wM4aeBz5j",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2017,
+		"position": "GK",
+		"base_salary": 53004,
+		"guaranteed_compensation": 53004,
+		"mlspa_release": "2017-09-15"
+	},
+	{
+		"player_id": "4wM4aeBz5j",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2018,
+		"position": "GK",
+		"base_salary": 55654.2,
+		"guaranteed_compensation": 55654.2,
+		"mlspa_release": "2018-05-01"
+	},
+	{
+		"player_id": "4wM4aeBz5j",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2018,
+		"position": "GK",
+		"base_salary": 55654.2,
+		"guaranteed_compensation": 55654.2,
+		"mlspa_release": "2018-09-15"
+	},
+	{
+		"player_id": "7vQ7r6LqD1",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2013,
+		"position": "GK",
+		"base_salary": 46500,
+		"guaranteed_compensation": 46500,
+		"mlspa_release": "2013-08-01"
+	},
+	{
+		"player_id": "7vQ7r6LqD1",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2013,
+		"position": "GK",
+		"base_salary": 46500,
+		"guaranteed_compensation": 46500,
+		"mlspa_release": "2013-09-15"
+	},
+	{
+		"player_id": "7vQ7rmxEqD",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2019,
+		"position": "M",
+		"base_salary": 516000,
+		"guaranteed_compensation": 569200,
+		"mlspa_release": "2019-06-01"
+	},
+	{
+		"player_id": "7vQ7rmxEqD",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2019,
+		"position": "M",
+		"base_salary": 618000,
+		"guaranteed_compensation": 671200,
+		"mlspa_release": "2019-09-13"
+	},
+	{
+		"player_id": "7vQ7rmxEqD",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2020,
+		"position": "M",
+		"base_salary": 1300000,
+		"guaranteed_compensation": 1476250,
+		"mlspa_release": "2020-12-01"
+	},
+	{
+		"player_id": "7vQ7rmxEqD",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2021,
+		"position": "M",
+		"base_salary": 1300000,
+		"guaranteed_compensation": 1476250,
+		"mlspa_release": "2021-04-15"
+	},
+	{
+		"player_id": "7vQ7rmxEqD",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2021,
+		"position": "M",
+		"base_salary": 1300000,
+		"guaranteed_compensation": 1476250,
+		"mlspa_release": "2021-09-30"
+	},
+	{
+		"player_id": "7VqG0O76Qv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2021,
+		"position": "M",
+		"base_salary": 63547,
+		"guaranteed_compensation": 70026,
+		"mlspa_release": "2021-04-15"
+	},
+	{
+		"player_id": "7VqG0O76Qv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2021,
+		"position": "M",
+		"base_salary": 63547,
+		"guaranteed_compensation": 70026,
+		"mlspa_release": "2021-09-30"
+	},
+	{
+		"player_id": "7VqG1rWMvW",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2015,
+		"position": "M",
+		"base_salary": 624000,
+		"guaranteed_compensation": 661500,
+		"mlspa_release": "2015-09-15"
+	},
+	{
+		"player_id": "7VqG1rWMvW",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2016,
+		"position": "M",
+		"base_salary": 650000,
+		"guaranteed_compensation": 687500,
+		"mlspa_release": "2016-05-15"
+	},
+	{
+		"player_id": "7VqG1rWMvW",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2016,
+		"position": "M",
+		"base_salary": 650000,
+		"guaranteed_compensation": 709100,
+		"mlspa_release": "2016-09-15"
+	},
+	{
+		"player_id": "7VqGmebWMv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2013,
+		"position": "M",
+		"base_salary": 35125,
+		"guaranteed_compensation": 35125,
+		"mlspa_release": "2013-05-01"
+	},
+	{
+		"player_id": "7VqGmebWMv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2013,
+		"position": "M",
+		"base_salary": 35125,
+		"guaranteed_compensation": 35125,
+		"mlspa_release": "2013-08-01"
+	},
+	{
+		"player_id": "7VqGmebWMv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2013,
+		"position": "M",
+		"base_salary": 35125,
+		"guaranteed_compensation": 35125,
+		"mlspa_release": "2013-09-15"
+	},
+	{
+		"player_id": "7VqGmebWMv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2014,
+		"position": "M",
+		"base_salary": 48500,
+		"guaranteed_compensation": 48500,
+		"mlspa_release": "2014-04-01"
+	},
+	{
+		"player_id": "7VqGmebWMv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2014,
+		"position": "M",
+		"base_salary": 48500,
+		"guaranteed_compensation": 48500,
+		"mlspa_release": "2014-09-15"
+	},
+	{
+		"player_id": "7VqGmebWMv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2015,
+		"position": "M",
+		"base_salary": 60000,
+		"guaranteed_compensation": 60000,
+		"mlspa_release": "2015-07-15"
+	},
+	{
+		"player_id": "7VqGmebWMv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2015,
+		"position": "M",
+		"base_salary": 60000,
+		"guaranteed_compensation": 60000,
+		"mlspa_release": "2015-09-15"
+	},
+	{
+		"player_id": "7VqGmebWMv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2016,
+		"position": "M",
+		"base_salary": 63000,
+		"guaranteed_compensation": 63000,
+		"mlspa_release": "2016-05-15"
+	},
+	{
+		"player_id": "7VqGmebWMv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2016,
+		"position": "M",
+		"base_salary": 63000,
+		"guaranteed_compensation": 63000,
+		"mlspa_release": "2016-09-15"
+	},
+	{
+		"player_id": "7VqGmGZzMv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2015,
+		"position": "M",
+		"base_salary": 60000,
+		"guaranteed_compensation": 60000,
+		"mlspa_release": "2015-07-15"
+	},
+	{
+		"player_id": "7VqGmGZzMv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2015,
+		"position": "M",
+		"base_salary": 60000,
+		"guaranteed_compensation": 60000,
+		"mlspa_release": "2015-09-15"
+	},
+	{
+		"player_id": "7VqGmlO3Mv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2016,
+		"position": "GK",
+		"base_salary": 75000,
+		"guaranteed_compensation": 80625,
+		"mlspa_release": "2016-05-15"
+	},
+	{
+		"player_id": "7VqGmlO3Mv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2016,
+		"position": "GK",
+		"base_salary": 75000,
+		"guaranteed_compensation": 80625,
+		"mlspa_release": "2016-09-15"
+	},
+	{
+		"player_id": "7VqGmob3Mv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2014,
+		"position": "GK",
+		"base_salary": 75000,
+		"guaranteed_compensation": 113000,
+		"mlspa_release": "2014-04-01"
+	},
+	{
+		"player_id": "7VqGmob3Mv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2014,
+		"position": "GK",
+		"base_salary": 75000,
+		"guaranteed_compensation": 113000,
+		"mlspa_release": "2014-09-15"
+	},
+	{
+		"player_id": "7VqGmob3Mv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2015,
+		"position": "GK",
+		"base_salary": 85000,
+		"guaranteed_compensation": 123000,
+		"mlspa_release": "2015-07-15"
+	},
+	{
+		"player_id": "7VqGmob3Mv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2015,
+		"position": "GK",
+		"base_salary": 85000,
+		"guaranteed_compensation": 123000,
+		"mlspa_release": "2015-09-15"
+	},
+	{
+		"player_id": "7VqGmob3Mv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2016,
+		"position": "GK",
+		"base_salary": 100000,
+		"guaranteed_compensation": 138000,
+		"mlspa_release": "2016-05-15"
+	},
+	{
+		"player_id": "7VqGmob3Mv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2016,
+		"position": "GK",
+		"base_salary": 100000,
+		"guaranteed_compensation": 138000,
+		"mlspa_release": "2016-09-15"
+	},
+	{
+		"player_id": "7VqGmob3Mv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2017,
+		"position": "GK",
+		"base_salary": 148500,
+		"guaranteed_compensation": 186500,
+		"mlspa_release": "2017-04-15"
+	},
+	{
+		"player_id": "7VqGmob3Mv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2017,
+		"position": "GK",
+		"base_salary": 148500,
+		"guaranteed_compensation": 186500,
+		"mlspa_release": "2017-09-15"
+	},
+	{
+		"player_id": "7VqGmob3Mv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2018,
+		"position": "GK",
+		"base_salary": 450000,
+		"guaranteed_compensation": 500000,
+		"mlspa_release": "2018-05-01"
+	},
+	{
+		"player_id": "7VqGmob3Mv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2018,
+		"position": "GK",
+		"base_salary": 450000,
+		"guaranteed_compensation": 500000,
+		"mlspa_release": "2018-09-15"
+	},
+	{
+		"player_id": "7VqGmob3Mv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2019,
+		"position": "GK",
+		"base_salary": 500004,
+		"guaranteed_compensation": 550004,
+		"mlspa_release": "2019-06-01"
+	},
+	{
+		"player_id": "7VqGmob3Mv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2019,
+		"position": "GK",
+		"base_salary": 500004,
+		"guaranteed_compensation": 550004,
+		"mlspa_release": "2019-09-13"
+	},
+	{
+		"player_id": "7VqGmob3Mv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2020,
+		"position": "GK",
+		"base_salary": 550008,
+		"guaranteed_compensation": 600008,
+		"mlspa_release": "2020-12-01"
+	},
+	{
+		"player_id": "7VqGmob3Mv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2021,
+		"position": "GK",
+		"base_salary": 600000,
+		"guaranteed_compensation": 650000,
+		"mlspa_release": "2021-04-15"
+	},
+	{
+		"player_id": "7VqGmob3Mv",
+		"team_id": "9z5k7Yg5A3",
+		"season_name": 2021,
+		"position": "GK",
+		"base_salary": 600000,
+		"guaranteed_compensation": 650000,
+		"mlspa_release": "2021-09-30"
+	}
+]

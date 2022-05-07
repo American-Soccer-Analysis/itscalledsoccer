@@ -1,0 +1,389 @@
+[
+	{
+		"player_id": "0x5g1BmQ7O",
+		"team_id": "9z5k7Yg5A3",
+		"minutes_played": 879,
+		"data": [
+			{
+				"action_type": "Claiming",
+				"goals_added_raw": -0.0276,
+				"goals_added_above_avg": -0.0188,
+				"count_actions": 17
+			},
+			{
+				"action_type": "Fielding",
+				"goals_added_raw": 0.0147,
+				"goals_added_above_avg": 0.0667,
+				"count_actions": 105
+			},
+			{
+				"action_type": "Handling",
+				"goals_added_raw": -0.0269,
+				"goals_added_above_avg": -0.0333,
+				"count_actions": 17
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 0.5188,
+				"goals_added_above_avg": -0.0627,
+				"count_actions": 255
+			},
+			{
+				"action_type": "Shotstopping",
+				"goals_added_raw": -1.6605,
+				"goals_added_above_avg": -1.4141,
+				"count_actions": 30
+			},
+			{
+				"action_type": "Sweeping",
+				"goals_added_raw": 0.0376,
+				"goals_added_above_avg": 0.0511,
+				"count_actions": 20
+			}
+		]
+	},
+	{
+		"player_id": "2lqRRj84qr",
+		"team_id": "9z5k7Yg5A3",
+		"minutes_played": 343,
+		"data": [
+			{
+				"action_type": "Claiming",
+				"goals_added_raw": -0.2493,
+				"goals_added_above_avg": -0.2459,
+				"count_actions": 5
+			},
+			{
+				"action_type": "Fielding",
+				"goals_added_raw": -0.0075,
+				"goals_added_above_avg": 0.0127,
+				"count_actions": 54
+			},
+			{
+				"action_type": "Handling",
+				"goals_added_raw": -0.0242,
+				"goals_added_above_avg": -0.0268,
+				"count_actions": 6
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 0.2307,
+				"goals_added_above_avg": 0.0038,
+				"count_actions": 93
+			},
+			{
+				"action_type": "Shotstopping",
+				"goals_added_raw": -0.2597,
+				"goals_added_above_avg": -0.1636,
+				"count_actions": 11
+			},
+			{
+				"action_type": "Sweeping",
+				"goals_added_raw": -0.1467,
+				"goals_added_above_avg": -0.1415,
+				"count_actions": 4
+			}
+		]
+	},
+	{
+		"player_id": "2vQ1L20Oqr",
+		"team_id": "9z5k7Yg5A3",
+		"minutes_played": 2045,
+		"data": [
+			{
+				"action_type": "Claiming",
+				"goals_added_raw": -0.1851,
+				"goals_added_above_avg": -0.1646,
+				"count_actions": 33
+			},
+			{
+				"action_type": "Fielding",
+				"goals_added_raw": -0.6927,
+				"goals_added_above_avg": -0.5719,
+				"count_actions": 189
+			},
+			{
+				"action_type": "Handling",
+				"goals_added_raw": 0.0929,
+				"goals_added_above_avg": 0.0779,
+				"count_actions": 64
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 1.0303,
+				"goals_added_above_avg": -0.3227,
+				"count_actions": 555
+			},
+			{
+				"action_type": "Shotstopping",
+				"goals_added_raw": -2.7252,
+				"goals_added_above_avg": -2.1519,
+				"count_actions": 97
+			},
+			{
+				"action_type": "Sweeping",
+				"goals_added_raw": -0.3922,
+				"goals_added_above_avg": -0.3609,
+				"count_actions": 31
+			}
+		]
+	},
+	{
+		"player_id": "315VXNkGQ9",
+		"team_id": "9z5k7Yg5A3",
+		"minutes_played": 351,
+		"data": [
+			{
+				"action_type": "Claiming",
+				"goals_added_raw": -0.18,
+				"goals_added_above_avg": -0.1765,
+				"count_actions": 4
+			},
+			{
+				"action_type": "Fielding",
+				"goals_added_raw": 0.022,
+				"goals_added_above_avg": 0.0427,
+				"count_actions": 47
+			},
+			{
+				"action_type": "Handling",
+				"goals_added_raw": 0.01,
+				"goals_added_above_avg": 0.0074,
+				"count_actions": 9
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 0.2103,
+				"goals_added_above_avg": -0.022,
+				"count_actions": 100
+			},
+			{
+				"action_type": "Shotstopping",
+				"goals_added_raw": 1.8287,
+				"goals_added_above_avg": 1.9271,
+				"count_actions": 11
+			},
+			{
+				"action_type": "Sweeping",
+				"goals_added_raw": 0.0106,
+				"goals_added_above_avg": 0.016,
+				"count_actions": 11
+			}
+		]
+	},
+	{
+		"player_id": "7VqGmlO3Mv",
+		"team_id": "9z5k7Yg5A3",
+		"minutes_played": 97,
+		"data": [
+			{
+				"action_type": "Claiming",
+				"goals_added_raw": -0.1609,
+				"goals_added_above_avg": -0.1599,
+				"count_actions": 2
+			},
+			{
+				"action_type": "Fielding",
+				"goals_added_raw": -0.0003,
+				"goals_added_above_avg": 0.0055,
+				"count_actions": 8
+			},
+			{
+				"action_type": "Handling",
+				"goals_added_raw": 0.0272,
+				"goals_added_above_avg": 0.0265,
+				"count_actions": 2
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 0.0393,
+				"goals_added_above_avg": -0.0249,
+				"count_actions": 22
+			},
+			{
+				"action_type": "Shotstopping",
+				"goals_added_raw": -1.6583,
+				"goals_added_above_avg": -1.6311,
+				"count_actions": 4
+			},
+			{
+				"action_type": "Sweeping",
+				"goals_added_raw": -0.1943,
+				"goals_added_above_avg": -0.1928,
+				"count_actions": 2
+			}
+		]
+	},
+	{
+		"player_id": "7VqGmob3Mv",
+		"team_id": "9z5k7Yg5A3",
+		"minutes_played": 18408,
+		"data": [
+			{
+				"action_type": "Claiming",
+				"goals_added_raw": -0.2767,
+				"goals_added_above_avg": -0.0921,
+				"count_actions": 287
+			},
+			{
+				"action_type": "Fielding",
+				"goals_added_raw": -1.1668,
+				"goals_added_above_avg": -0.0791,
+				"count_actions": 2343
+			},
+			{
+				"action_type": "Handling",
+				"goals_added_raw": -0.7646,
+				"goals_added_above_avg": -0.8999,
+				"count_actions": 583
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 11.7034,
+				"goals_added_above_avg": -0.4758,
+				"count_actions": 5388
+			},
+			{
+				"action_type": "Shotstopping",
+				"goals_added_raw": 0.0403,
+				"goals_added_above_avg": 5.201,
+				"count_actions": 824
+			},
+			{
+				"action_type": "Sweeping",
+				"goals_added_raw": -0.4404,
+				"goals_added_above_avg": -0.1582,
+				"count_actions": 378
+			}
+		]
+	},
+	{
+		"player_id": "BLMvl7ORqx",
+		"team_id": "9z5k7Yg5A3",
+		"minutes_played": 1157,
+		"data": [
+			{
+				"action_type": "Claiming",
+				"goals_added_raw": -0.0236,
+				"goals_added_above_avg": -0.012,
+				"count_actions": 13
+			},
+			{
+				"action_type": "Fielding",
+				"goals_added_raw": 0.0061,
+				"goals_added_above_avg": 0.0744,
+				"count_actions": 76
+			},
+			{
+				"action_type": "Handling",
+				"goals_added_raw": 0.0489,
+				"goals_added_above_avg": 0.0404,
+				"count_actions": 31
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 0.6217,
+				"goals_added_above_avg": -0.1438,
+				"count_actions": 279
+			},
+			{
+				"action_type": "Shotstopping",
+				"goals_added_raw": -0.4335,
+				"goals_added_above_avg": -0.1091,
+				"count_actions": 50
+			},
+			{
+				"action_type": "Sweeping",
+				"goals_added_raw": 0.237,
+				"goals_added_above_avg": 0.2548,
+				"count_actions": 9
+			}
+		]
+	},
+	{
+		"player_id": "odMXRoXoqY",
+		"team_id": "9z5k7Yg5A3",
+		"minutes_played": 1238,
+		"data": [
+			{
+				"action_type": "Claiming",
+				"goals_added_raw": 0.0091,
+				"goals_added_above_avg": 0.0216,
+				"count_actions": 7
+			},
+			{
+				"action_type": "Fielding",
+				"goals_added_raw": -0.3917,
+				"goals_added_above_avg": -0.3185,
+				"count_actions": 129
+			},
+			{
+				"action_type": "Handling",
+				"goals_added_raw": 0.2471,
+				"goals_added_above_avg": 0.238,
+				"count_actions": 32
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 0.5948,
+				"goals_added_above_avg": -0.2243,
+				"count_actions": 312
+			},
+			{
+				"action_type": "Shotstopping",
+				"goals_added_raw": -2.645,
+				"goals_added_above_avg": -2.298,
+				"count_actions": 48
+			},
+			{
+				"action_type": "Sweeping",
+				"goals_added_raw": 0.0666,
+				"goals_added_above_avg": 0.0855,
+				"count_actions": 11
+			}
+		]
+	},
+	{
+		"player_id": "xW5pxy3l5g",
+		"team_id": "9z5k7Yg5A3",
+		"minutes_played": 6146,
+		"data": [
+			{
+				"action_type": "Claiming",
+				"goals_added_raw": -0.6566,
+				"goals_added_above_avg": -0.5949,
+				"count_actions": 140
+			},
+			{
+				"action_type": "Fielding",
+				"goals_added_raw": -0.2031,
+				"goals_added_above_avg": 0.1601,
+				"count_actions": 829
+			},
+			{
+				"action_type": "Handling",
+				"goals_added_raw": 0.9724,
+				"goals_added_above_avg": 0.9272,
+				"count_actions": 178
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 5.3227,
+				"goals_added_above_avg": 1.2563,
+				"count_actions": 1987
+			},
+			{
+				"action_type": "Shotstopping",
+				"goals_added_raw": 1.1693,
+				"goals_added_above_avg": 2.8923,
+				"count_actions": 265
+			},
+			{
+				"action_type": "Sweeping",
+				"goals_added_raw": 0.4773,
+				"goals_added_above_avg": 0.5715,
+				"count_actions": 199
+			}
+		]
+	}
+]

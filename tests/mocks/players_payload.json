@@ -1,0 +1,999 @@
+[
+	{
+		"player_id": "0Oq6006M6D",
+		"player_name": "Ugo Ihemelu",
+		"birth_date": "1983-04-03",
+		"height_ft": 6,
+		"height_in": 0,
+		"weight_lb": 179,
+		"nationality": "USA",
+		"season_name": {}
+	},
+	{
+		"player_id": "0Oq60APM6D",
+		"player_name": "Jason Hernandez",
+		"birth_date": "1983-08-26",
+		"height_ft": 5,
+		"height_in": 11,
+		"weight_lb": 172,
+		"nationality": "USA",
+		"primary_broad_position": "DF",
+		"primary_general_position": "CB",
+		"season_name": [
+			"2013",
+			"2014",
+			"2015",
+			"2016",
+			"2017",
+			"2018"
+		]
+	},
+	{
+		"player_id": "0Oq60VgM6D",
+		"player_name": "Jeff Larentowicz",
+		"birth_date": "1983-08-05",
+		"height_ft": 6,
+		"height_in": 1,
+		"weight_lb": 176,
+		"nationality": "USA",
+		"primary_broad_position": "MF",
+		"primary_general_position": "DM",
+		"secondary_general_position": "CM",
+		"season_name": [
+			"2013",
+			"2014",
+			"2015",
+			"2016",
+			"2017",
+			"2018",
+			"2019",
+			"2020"
+		]
+	},
+	{
+		"player_id": "0Oq630dXQ6",
+		"player_name": "Kevin Cabral",
+		"birth_date": "1999-07-10",
+		"nationality": "France",
+		"primary_broad_position": "MF",
+		"primary_general_position": "W",
+		"season_name": [
+			"2021",
+			"2022"
+		]
+	},
+	{
+		"player_id": "0Oq632k7Q6",
+		"player_name": "Danny Leyva",
+		"birth_date": "2003-05-05",
+		"height_ft": 5,
+		"height_in": 10,
+		"weight_lb": 139,
+		"nationality": "USA",
+		"primary_broad_position": "MF",
+		"primary_general_position": "DM",
+		"secondary_general_position": "CM",
+		"season_name": [
+			"2019",
+			"2020",
+			"2021",
+			"2022"
+		]
+	},
+	{
+		"player_id": "0Oq633dAQ6",
+		"player_name": "Griffin Yow",
+		"birth_date": "2002-09-25",
+		"height_ft": 5,
+		"height_in": 8,
+		"weight_lb": 141,
+		"nationality": "USA",
+		"primary_broad_position": "MF",
+		"primary_general_position": "W",
+		"season_name": [
+			"2019",
+			"2020",
+			"2021",
+			"2022"
+		]
+	},
+	{
+		"player_id": "0Oq638a6Q6",
+		"player_name": "Dominick Hernandez",
+		"birth_date": "1998-09-21",
+		"nationality": "USA",
+		"season_name": {}
+	},
+	{
+		"player_id": "0Oq63JA7Q6",
+		"player_name": "Wyatt Omsberg",
+		"birth_date": "1995-09-21",
+		"height_ft": 6,
+		"height_in": 4,
+		"weight_lb": 181,
+		"nationality": "USA",
+		"primary_broad_position": "DF",
+		"primary_general_position": "CB",
+		"season_name": [
+			"2018",
+			"2020",
+			"2021",
+			"2022"
+		]
+	},
+	{
+		"player_id": "0Oq63n7Q6D",
+		"player_name": "Eric Hassli",
+		"birth_date": "1981-05-03",
+		"height_ft": 6,
+		"height_in": 4,
+		"weight_lb": 201,
+		"nationality": "France",
+		"primary_broad_position": "FW",
+		"primary_general_position": "ST",
+		"season_name": "2013"
+	},
+	{
+		"player_id": "0Oq63oxzQ6",
+		"player_name": "Aiden McFadden",
+		"birth_date": "1998-09-28",
+		"height_ft": 5,
+		"height_in": 9,
+		"weight_lb": 165,
+		"nationality": "USA",
+		"primary_broad_position": "FW",
+		"primary_general_position": "W",
+		"season_name": "2022"
+	},
+	{
+		"player_id": "0Oq63P32Q6",
+		"player_name": "Nkosi Burgess",
+		"birth_date": "1997-03-23",
+		"height_ft": 6,
+		"height_in": 4,
+		"weight_lb": 185,
+		"nationality": "USA",
+		"primary_broad_position": "DF",
+		"primary_general_position": "CB",
+		"season_name": [
+			"2021",
+			"2022"
+		]
+	},
+	{
+		"player_id": "0Oq63pJdQ6",
+		"player_name": "Steeven Saba",
+		"birth_date": "1993-02-24",
+		"height_ft": 5,
+		"height_in": 7,
+		"nationality": "Haiti",
+		"season_name": {}
+	},
+	{
+		"player_id": "0Oq63v4rQ6",
+		"player_name": "Casey Walls",
+		"birth_date": "2003-01-10",
+		"height_ft": 6,
+		"height_in": 2,
+		"weight_lb": 172,
+		"nationality": "USA",
+		"season_name": {}
+	},
+	{
+		"player_id": "0Oq63Ym2Q6",
+		"player_name": "Ryan Spaulding",
+		"birth_date": "1998-09-10",
+		"height_ft": 5,
+		"height_in": 8,
+		"weight_lb": 165,
+		"nationality": "USA",
+		"primary_broad_position": "DF",
+		"primary_general_position": "FB",
+		"season_name": "2022"
+	},
+	{
+		"player_id": "0Oq67EgQ6D",
+		"player_name": "Matt Besler",
+		"birth_date": "1987-02-11",
+		"height_ft": 6,
+		"height_in": 0,
+		"weight_lb": 172,
+		"nationality": "USA",
+		"primary_broad_position": "DF",
+		"primary_general_position": "CB",
+		"season_name": [
+			"2013",
+			"2014",
+			"2015",
+			"2016",
+			"2017",
+			"2018",
+			"2019",
+			"2020",
+			"2021"
+		]
+	},
+	{
+		"player_id": "0Oq67k7Q6D",
+		"player_name": "Tristan Bowen",
+		"birth_date": "1991-01-31",
+		"height_ft": 5,
+		"height_in": 11,
+		"weight_lb": 172,
+		"nationality": "USA",
+		"primary_broad_position": "FW",
+		"primary_general_position": "ST",
+		"secondary_broad_position": "MF",
+		"secondary_general_position": "W",
+		"season_name": [
+			"2013",
+			"2014"
+		]
+	},
+	{
+		"player_id": "0Oq67xxQ6D",
+		"player_name": "Brandon Barklage",
+		"birth_date": "1986-11-02",
+		"height_ft": 5,
+		"height_in": 11,
+		"weight_lb": 165,
+		"nationality": "USA",
+		"primary_broad_position": "DF",
+		"primary_general_position": "FB",
+		"season_name": [
+			"2013",
+			"2014"
+		]
+	},
+	{
+		"player_id": "0Oq6aoX56D",
+		"player_name": "Cedrick",
+		"birth_date": "1992-03-08",
+		"height_ft": 5,
+		"height_in": 6,
+		"weight_lb": 137,
+		"nationality": "DR Congo",
+		"primary_broad_position": "MF",
+		"primary_general_position": "W",
+		"season_name": [
+			"2015",
+			"2016"
+		]
+	},
+	{
+		"player_id": "0Oq6bAPq6D",
+		"player_name": "Douglas Costa",
+		"birth_date": "1990-09-14",
+		"height_ft": 5,
+		"height_in": 8,
+		"weight_lb": 154,
+		"nationality": "Brazil",
+		"primary_broad_position": "MF",
+		"primary_general_position": "W",
+		"season_name": "2022"
+	},
+	{
+		"player_id": "0Oq6BKAq6D",
+		"player_name": "Caleb Patterson-Sewell",
+		"birth_date": "1987-05-20",
+		"height_ft": 6,
+		"height_in": 3,
+		"weight_lb": 183,
+		"nationality": "USA",
+		"season_name": {}
+	},
+	{
+		"player_id": "0Oq6ebd56D",
+		"player_name": "Marco Pappa",
+		"birth_date": "1987-11-15",
+		"height_ft": 5,
+		"height_in": 10,
+		"weight_lb": 157,
+		"nationality": "Guatemala",
+		"primary_broad_position": "MF",
+		"primary_general_position": "W",
+		"season_name": [
+			"2014",
+			"2015",
+			"2016"
+		]
+	},
+	{
+		"player_id": "0Oq6ENn256",
+		"player_name": "Danny Musovski",
+		"birth_date": "1995-11-30",
+		"height_ft": 6,
+		"height_in": 0,
+		"weight_lb": 161,
+		"nationality": "USA",
+		"primary_broad_position": "FW",
+		"primary_general_position": "ST",
+		"season_name": [
+			"2020",
+			"2021",
+			"2022"
+		]
+	},
+	{
+		"player_id": "0Oq6ERe256",
+		"player_name": "Patrick Metcalfe",
+		"birth_date": "1998-11-11",
+		"height_ft": 5,
+		"height_in": 8,
+		"weight_lb": 165,
+		"nationality": "Canada",
+		"primary_broad_position": "MF",
+		"primary_general_position": "CM",
+		"season_name": [
+			"2020",
+			"2021"
+		]
+	},
+	{
+		"player_id": "0Oq6Ervr56",
+		"player_name": "Shaft Brewer",
+		"birth_date": "1999-10-28",
+		"height_ft": 5,
+		"height_in": 9,
+		"weight_lb": 154,
+		"nationality": "USA",
+		"primary_broad_position": "DF",
+		"primary_general_position": "FB",
+		"season_name": [
+			"2018",
+			"2019"
+		]
+	},
+	{
+		"player_id": "0Oq6l2JzM6",
+		"player_name": "Armando Cooper",
+		"birth_date": "1987-11-26",
+		"height_ft": 5,
+		"height_in": 9,
+		"weight_lb": 150,
+		"nationality": "Panama",
+		"primary_broad_position": "MF",
+		"primary_general_position": "CM",
+		"season_name": [
+			"2016",
+			"2017"
+		]
+	},
+	{
+		"player_id": "0Oq6l8YgM6",
+		"player_name": "Romain Métanire",
+		"birth_date": "1990-03-28",
+		"height_ft": 5,
+		"height_in": 10,
+		"weight_lb": 159,
+		"nationality": "Madagascar",
+		"primary_broad_position": "DF",
+		"primary_general_position": "FB",
+		"season_name": [
+			"2019",
+			"2020",
+			"2021",
+			"2022"
+		]
+	},
+	{
+		"player_id": "0Oq6la47M6",
+		"player_name": "Pecka",
+		"birth_date": "1989-05-02",
+		"height_ft": 5,
+		"height_in": 8,
+		"weight_lb": 152,
+		"nationality": "Brazil",
+		"primary_broad_position": "MF",
+		"primary_general_position": "DM",
+		"secondary_general_position": "CM",
+		"season_name": "2015"
+	},
+	{
+		"player_id": "0Oq6lagAM6",
+		"player_name": "Mark Pais",
+		"birth_date": "1991-06-03",
+		"height_ft": 6,
+		"height_in": 4,
+		"weight_lb": 201,
+		"nationality": "USA",
+		"season_name": {}
+	},
+	{
+		"player_id": "0Oq6lakAM6",
+		"player_name": "Ben Newnam",
+		"birth_date": "1991-04-18",
+		"height_ft": 5,
+		"height_in": 10,
+		"weight_lb": 165,
+		"nationality": "USA",
+		"primary_broad_position": "DF",
+		"primary_general_position": "FB",
+		"season_name": "2015"
+	},
+	{
+		"player_id": "0Oq6lB9PM6",
+		"player_name": "Christiano François",
+		"birth_date": "1993-07-17",
+		"height_ft": 5,
+		"height_in": 7,
+		"weight_lb": 141,
+		"nationality": "USA",
+		"season_name": {}
+	},
+	{
+		"player_id": "0Oq6lBP2M6",
+		"player_name": "Schillo Tshuma",
+		"birth_date": "1992-09-21",
+		"height_ft": 5,
+		"height_in": 10,
+		"weight_lb": 161,
+		"nationality": "Zimbabwe",
+		"season_name": {}
+	},
+	{
+		"player_id": "0Oq6lDAgM6",
+		"player_name": "Deian Boldor",
+		"birth_date": "1995-02-03",
+		"height_ft": 6,
+		"height_in": 2,
+		"weight_lb": 174,
+		"nationality": "Romania",
+		"primary_broad_position": "DF",
+		"primary_general_position": "CB",
+		"season_name": "2017"
+	},
+	{
+		"player_id": "0Oq6lE7xM6",
+		"player_name": "Bernardo Añor",
+		"birth_date": "1988-05-24",
+		"height_ft": 6,
+		"height_in": 1,
+		"weight_lb": 179,
+		"nationality": "Venezuela",
+		"primary_broad_position": "MF",
+		"primary_general_position": "W",
+		"season_name": [
+			"2013",
+			"2014",
+			"2015"
+		]
+	},
+	{
+		"player_id": "0Oq6lgl6M6",
+		"player_name": "Nicolai Næss",
+		"birth_date": "1993-01-18",
+		"height_ft": 6,
+		"height_in": 0,
+		"weight_lb": 181,
+		"nationality": "Norway",
+		"primary_broad_position": "DF",
+		"primary_general_position": "CB",
+		"season_name": [
+			"2016",
+			"2017"
+		]
+	},
+	{
+		"player_id": "0Oq6lj26M6",
+		"player_name": "Samuel",
+		"birth_date": "1991-02-25",
+		"height_ft": 6,
+		"height_in": 1,
+		"weight_lb": 192,
+		"nationality": "Brazil",
+		"primary_broad_position": "FW",
+		"primary_general_position": "ST",
+		"season_name": "2014"
+	},
+	{
+		"player_id": "0Oq6lJPzM6",
+		"player_name": "Joe Corona",
+		"birth_date": "1990-07-09",
+		"height_ft": 5,
+		"height_in": 8,
+		"weight_lb": 161,
+		"nationality": "USA",
+		"primary_broad_position": "MF",
+		"primary_general_position": "CM",
+		"secondary_general_position": "DM",
+		"season_name": [
+			"2019",
+			"2020",
+			"2021"
+		]
+	},
+	{
+		"player_id": "0Oq6lLZgM6",
+		"player_name": "Maximiliano Urruti",
+		"birth_date": "1991-02-22",
+		"height_ft": 6,
+		"height_in": 0,
+		"weight_lb": 165,
+		"nationality": "Argentina",
+		"primary_broad_position": "FW",
+		"primary_general_position": "ST",
+		"season_name": [
+			"2013",
+			"2014",
+			"2015",
+			"2016",
+			"2017",
+			"2018",
+			"2019",
+			"2020",
+			"2021",
+			"2022"
+		]
+	},
+	{
+		"player_id": "0Oq6lm4zM6",
+		"player_name": "Rodolfo Pizarro",
+		"birth_date": "1994-02-15",
+		"height_ft": 5,
+		"height_in": 10,
+		"weight_lb": 143,
+		"nationality": "Mexico",
+		"primary_broad_position": "MF",
+		"primary_general_position": "AM",
+		"season_name": [
+			"2020",
+			"2021"
+		]
+	},
+	{
+		"player_id": "0Oq6ln0zM6",
+		"player_name": "Emery Welshman",
+		"birth_date": "1991-11-09",
+		"height_ft": 5,
+		"height_in": 11,
+		"weight_lb": 181,
+		"nationality": "USA",
+		"primary_broad_position": "FW",
+		"primary_general_position": "ST",
+		"season_name": "2013"
+	},
+	{
+		"player_id": "0Oq6lnBrM6",
+		"player_name": "Luis Solignac",
+		"birth_date": "1991-02-16",
+		"height_ft": 6,
+		"height_in": 0,
+		"weight_lb": 176,
+		"nationality": "Argentina",
+		"primary_broad_position": "MF",
+		"primary_general_position": "W",
+		"secondary_broad_position": "FW",
+		"secondary_general_position": "ST",
+		"season_name": [
+			"2015",
+			"2016",
+			"2017",
+			"2018"
+		]
+	},
+	{
+		"player_id": "0Oq6lnlrM6",
+		"player_name": "José Van Rankin",
+		"birth_date": "1993-03-14",
+		"height_ft": 5,
+		"height_in": 9,
+		"weight_lb": 152,
+		"nationality": "Mexico",
+		"primary_broad_position": "DF",
+		"primary_general_position": "FB",
+		"season_name": [
+			"2021",
+			"2022"
+		]
+	},
+	{
+		"player_id": "0Oq6lp3AM6",
+		"player_name": "Antoine Hoppenot",
+		"birth_date": "1990-11-23",
+		"height_ft": 5,
+		"height_in": 8,
+		"weight_lb": 157,
+		"nationality": "USA",
+		"primary_broad_position": "FW",
+		"primary_general_position": "ST",
+		"secondary_broad_position": "MF",
+		"secondary_general_position": "W",
+		"season_name": [
+			"2013",
+			"2014",
+			"2015"
+		]
+	},
+	{
+		"player_id": "0Oq6lp3XM6",
+		"player_name": "Enzo Martinez",
+		"birth_date": "1990-09-29",
+		"height_ft": 5,
+		"height_in": 7,
+		"weight_lb": 161,
+		"nationality": "Uruguay",
+		"primary_broad_position": "MF",
+		"primary_general_position": "CM",
+		"season_name": "2018"
+	},
+	{
+		"player_id": "0Oq6LpLgM6",
+		"player_name": "Gino Portella",
+		"birth_date": "2001-03-19",
+		"nationality": "Italy",
+		"season_name": {}
+	},
+	{
+		"player_id": "0Oq6lrerM6",
+		"player_name": "Gastón Giménez",
+		"birth_date": "1991-07-27",
+		"height_ft": 6,
+		"height_in": 2,
+		"weight_lb": 181,
+		"nationality": "Argentina",
+		"primary_broad_position": "MF",
+		"primary_general_position": "DM",
+		"season_name": [
+			"2020",
+			"2021",
+			"2022"
+		]
+	},
+	{
+		"player_id": "0Oq6lw6M6D",
+		"player_name": "Frank Lampard",
+		"birth_date": "1978-06-20",
+		"height_ft": 6,
+		"height_in": 0,
+		"weight_lb": 196,
+		"nationality": "England",
+		"primary_broad_position": "MF",
+		"primary_general_position": "CM",
+		"season_name": [
+			"2015",
+			"2016"
+		]
+	},
+	{
+		"player_id": "0Oq6lWB2M6",
+		"player_name": "Mohammed Saeid",
+		"birth_date": "1990-12-24",
+		"height_ft": 5,
+		"height_in": 7,
+		"weight_lb": 141,
+		"nationality": "Sweden",
+		"primary_broad_position": "MF",
+		"primary_general_position": "DM",
+		"season_name": [
+			"2015",
+			"2016",
+			"2017"
+		]
+	},
+	{
+		"player_id": "0Oq6lYbAM6",
+		"player_name": "Luiz Camargo",
+		"birth_date": "1987-05-04",
+		"height_ft": 5,
+		"height_in": 8,
+		"weight_lb": 174,
+		"nationality": "Brazil",
+		"primary_broad_position": "MF",
+		"primary_general_position": "CM",
+		"season_name": "2013"
+	},
+	{
+		"player_id": "0Oq6lyNdM6",
+		"player_name": "Wil Trapp",
+		"birth_date": "1993-01-15",
+		"height_ft": 5,
+		"height_in": 8,
+		"weight_lb": 152,
+		"nationality": "USA",
+		"primary_broad_position": "MF",
+		"primary_general_position": "DM",
+		"season_name": [
+			"2013",
+			"2014",
+			"2015",
+			"2016",
+			"2017",
+			"2018",
+			"2019",
+			"2020",
+			"2021",
+			"2022"
+		]
+	},
+	{
+		"player_id": "0Oq6lyX7M6",
+		"player_name": "Amando Moreno",
+		"birth_date": "1995-09-10",
+		"height_ft": 5,
+		"height_in": 7,
+		"weight_lb": 154,
+		"nationality": "USA",
+		"primary_broad_position": "MF",
+		"primary_general_position": "W",
+		"secondary_general_position": "DM",
+		"season_name": [
+			"2013",
+			"2019"
+		]
+	},
+	{
+		"player_id": "0Oq6m0z56D",
+		"player_name": "Javier Morales",
+		"birth_date": "1980-01-10",
+		"height_ft": 5,
+		"height_in": 9,
+		"weight_lb": 152,
+		"nationality": "Argentina",
+		"primary_broad_position": "MF",
+		"primary_general_position": "AM",
+		"season_name": [
+			"2013",
+			"2014",
+			"2015",
+			"2016",
+			"2017"
+		]
+	},
+	{
+		"player_id": "0Oq6O0XQ6D",
+		"player_name": "Emmanuel Ledesma",
+		"birth_date": "1988-05-24",
+		"height_ft": 5,
+		"height_in": 11,
+		"weight_lb": 170,
+		"nationality": "Argentina",
+		"primary_broad_position": "MF",
+		"primary_general_position": "W",
+		"season_name": "2019"
+	},
+	{
+		"player_id": "0Oq6oePQ6D",
+		"player_name": "Arévalo Ríos",
+		"birth_date": "1982-01-01",
+		"height_ft": 5,
+		"height_in": 7,
+		"weight_lb": 150,
+		"nationality": "Uruguay",
+		"primary_broad_position": "MF",
+		"primary_general_position": "CM",
+		"season_name": "2013"
+	},
+	{
+		"player_id": "0Oq6w1LrQ6",
+		"player_name": "Walter Cabrera",
+		"birth_date": "1990-01-07",
+		"height_ft": 6,
+		"height_in": 0,
+		"weight_lb": 176,
+		"nationality": "Paraguay",
+		"season_name": {}
+	},
+	{
+		"player_id": "0Oq6w947Q6",
+		"player_name": "Michael Baldisimo",
+		"birth_date": "2000-04-13",
+		"height_ft": 5,
+		"height_in": 6,
+		"weight_lb": 154,
+		"nationality": "Canada",
+		"primary_broad_position": "MF",
+		"primary_general_position": "DM",
+		"secondary_general_position": "CM",
+		"season_name": [
+			"2020",
+			"2021",
+			"2022"
+		]
+	},
+	{
+		"player_id": "0Oq6w9J2Q6",
+		"player_name": "Augustine Williams",
+		"birth_date": "1997-08-03",
+		"height_ft": 6,
+		"height_in": 2,
+		"weight_lb": 165,
+		"nationality": "Sierra Leone",
+		"primary_broad_position": "FW",
+		"primary_general_position": "ST",
+		"season_name": "2021"
+	},
+	{
+		"player_id": "0Oq6wB7zQ6",
+		"player_name": "Brady Scott",
+		"birth_date": "1999-06-30",
+		"height_ft": 6,
+		"height_in": 2,
+		"weight_lb": 174,
+		"nationality": "USA",
+		"season_name": {}
+	},
+	{
+		"player_id": "0Oq6we8zQ6",
+		"player_name": "Joshua Drack",
+		"birth_date": "1999-09-22",
+		"height_ft": 5,
+		"height_in": 8,
+		"weight_lb": 152,
+		"nationality": "USA",
+		"primary_broad_position": "MF",
+		"primary_general_position": "DM",
+		"season_name": "2021"
+	},
+	{
+		"player_id": "0Oq6weerQ6",
+		"player_name": "Andrew Wheeler-Omiunu",
+		"birth_date": "1994-12-01",
+		"height_ft": 5,
+		"height_in": 9,
+		"weight_lb": 174,
+		"nationality": "USA",
+		"primary_broad_position": "MF",
+		"primary_general_position": "CM",
+		"season_name": "2018"
+	},
+	{
+		"player_id": "0Oq6wel7Q6",
+		"player_name": "Cameron Duke",
+		"birth_date": "2001-02-13",
+		"height_ft": 5,
+		"height_in": 7,
+		"weight_lb": 135,
+		"nationality": "USA",
+		"primary_broad_position": "MF",
+		"primary_general_position": "CM",
+		"season_name": [
+			"2020",
+			"2021",
+			"2022"
+		]
+	},
+	{
+		"player_id": "0Oq6weYXQ6",
+		"player_name": "Bruno Miranda",
+		"birth_date": "1998-02-10",
+		"height_ft": 5,
+		"height_in": 11,
+		"weight_lb": 146,
+		"nationality": "Bolivia",
+		"primary_broad_position": "MF",
+		"primary_general_position": "W",
+		"secondary_general_position": "CM",
+		"season_name": [
+			"2017",
+			"2018"
+		]
+	},
+	{
+		"player_id": "0Oq6wjLrQ6",
+		"player_name": "Jake Mulraney",
+		"birth_date": "1996-04-05",
+		"height_ft": 5,
+		"height_in": 8,
+		"weight_lb": 141,
+		"nationality": "Republic of Ireland",
+		"primary_broad_position": "DF",
+		"primary_general_position": "FB",
+		"secondary_broad_position": "MF",
+		"secondary_general_position": "W",
+		"season_name": [
+			"2020",
+			"2021",
+			"2022"
+		]
+	},
+	{
+		"player_id": "0Oq6wjlzQ6",
+		"player_name": "Jack Skahan",
+		"birth_date": "1998-02-07",
+		"height_ft": 5,
+		"height_in": 10,
+		"weight_lb": 165,
+		"nationality": "USA",
+		"primary_broad_position": "MF",
+		"primary_general_position": "CM",
+		"season_name": [
+			"2020",
+			"2021"
+		]
+	},
+	{
+		"player_id": "0Oq6wjm2Q6",
+		"player_name": "Axel Sjöberg",
+		"birth_date": "1992-09-15",
+		"height_ft": 6,
+		"height_in": 7,
+		"weight_lb": 201,
+		"nationality": "USA",
+		"primary_broad_position": "DF",
+		"primary_general_position": "CB",
+		"season_name": [
+			"2015",
+			"2016",
+			"2017",
+			"2018",
+			"2019",
+			"2020"
+		]
+	},
+	{
+		"player_id": "0Oq6wjvPQ6",
+		"player_name": "James Rogers",
+		"birth_date": "1993-06-27",
+		"height_ft": 5,
+		"height_in": 8,
+		"weight_lb": 150,
+		"nationality": "USA",
+		"season_name": {}
+	},
+	{
+		"player_id": "0Oq6wjzgQ6",
+		"player_name": "Abu Danladi",
+		"birth_date": "1995-10-18",
+		"height_ft": 5,
+		"height_in": 10,
+		"weight_lb": 170,
+		"nationality": "Ghana",
+		"primary_broad_position": "FW",
+		"primary_general_position": "ST",
+		"secondary_broad_position": "MF",
+		"secondary_general_position": "W",
+		"season_name": [
+			"2017",
+			"2018",
+			"2019",
+			"2020",
+			"2021",
+			"2022"
+		]
+	},
+	{
+		"player_id": "0Oq6wl42Q6",
+		"player_name": "Darwin Jones",
+		"birth_date": "1992-04-04",
+		"height_ft": 5,
+		"height_in": 9,
+		"weight_lb": 176,
+		"nationality": "USA",
+		"primary_broad_position": "FW",
+		"primary_general_position": "ST",
+		"season_name": [
+			"2015",
+			"2016"
+		]
+	},
+	{
+		"player_id": "0Oq6woOxQ6",
+		"player_name": "Maarten Paes",
+		"birth_date": "1998-05-14",
+		"height_ft": 6,
+		"height_in": 3,
+		"weight_lb": 181,
+		"nationality": "Netherlands",
+		"primary_broad_position": "GK",
+		"primary_general_position": "GK",
+		"season_name": "2022"
+	},
+	{
+		"player_id": "0Oq6wPXPQ6",
+		"player_name": "Lamar Batista",
+		"birth_date": "1998-03-07",
+		"height_ft": 6,
+		"height_in": 6,
+		"weight_lb": 165,
+		"nationality": "USA",
+		"season_name": {}
+	},
+	{
+		"player_id": "0Oq6wRzgQ6",
+		"player_name": "Billy Heavner",
+		"birth_date": "1993-11-12",
+		"nationality": "USA",
+		"season_name": {}
+	}
+]

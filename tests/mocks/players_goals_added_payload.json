@@ -1,0 +1,970 @@
+[
+	{
+		"player_id": "0Oq6lp3AM6",
+		"team_id": "9z5k7Yg5A3",
+		"general_position": "ST",
+		"minutes_played": 1167,
+		"data": [
+			{
+				"action_type": "Dribbling",
+				"goals_added_raw": 0.3953,
+				"goals_added_above_avg": 0.3444,
+				"count_actions": 288
+			},
+			{
+				"action_type": "Fouling",
+				"goals_added_raw": 0.492,
+				"goals_added_above_avg": 0.3888,
+				"count_actions": 51
+			},
+			{
+				"action_type": "Interrupting",
+				"goals_added_raw": 0.1127,
+				"goals_added_above_avg": -0.4349,
+				"count_actions": 58
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": -0.5722,
+				"goals_added_above_avg": -0.5429,
+				"count_actions": 279
+			},
+			{
+				"action_type": "Receiving",
+				"goals_added_raw": 1.4612,
+				"goals_added_above_avg": -0.0513,
+				"count_actions": 350
+			},
+			{
+				"action_type": "Shooting",
+				"goals_added_raw": 0.6358,
+				"goals_added_above_avg": 0.0121,
+				"count_actions": 23
+			}
+		]
+	},
+	{
+		"player_id": "0x5g2KPRM7",
+		"team_id": "9z5k7Yg5A3",
+		"general_position": "FB",
+		"minutes_played": 1247,
+		"data": [
+			{
+				"action_type": "Dribbling",
+				"goals_added_raw": 0.0007,
+				"goals_added_above_avg": -0.1091,
+				"count_actions": 146
+			},
+			{
+				"action_type": "Fouling",
+				"goals_added_raw": -0.0292,
+				"goals_added_above_avg": -0.0049,
+				"count_actions": 28
+			},
+			{
+				"action_type": "Interrupting",
+				"goals_added_raw": -0.079,
+				"goals_added_above_avg": -0.8331,
+				"count_actions": 197
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 0.1246,
+				"goals_added_above_avg": -0.3505,
+				"count_actions": 606
+			},
+			{
+				"action_type": "Receiving",
+				"goals_added_raw": 0.1875,
+				"goals_added_above_avg": -0.3165,
+				"count_actions": 408
+			},
+			{
+				"action_type": "Shooting",
+				"goals_added_raw": 0.2257,
+				"goals_added_above_avg": -0.0264,
+				"count_actions": 9
+			}
+		]
+	},
+	{
+		"player_id": "0x5gPeBPq7",
+		"team_id": "9z5k7Yg5A3",
+		"general_position": "FB",
+		"minutes_played": 1232,
+		"data": [
+			{
+				"action_type": "Dribbling",
+				"goals_added_raw": -0.2662,
+				"goals_added_above_avg": -0.3676,
+				"count_actions": 136
+			},
+			{
+				"action_type": "Fouling",
+				"goals_added_raw": -0.0202,
+				"goals_added_above_avg": 0.0429,
+				"count_actions": 44
+			},
+			{
+				"action_type": "Interrupting",
+				"goals_added_raw": 0.5276,
+				"goals_added_above_avg": -0.2434,
+				"count_actions": 190
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 0.5244,
+				"goals_added_above_avg": -0.0125,
+				"count_actions": 504
+			},
+			{
+				"action_type": "Receiving",
+				"goals_added_raw": 0.2094,
+				"goals_added_above_avg": -0.0544,
+				"count_actions": 287
+			},
+			{
+				"action_type": "Shooting",
+				"goals_added_raw": 0.0648,
+				"goals_added_above_avg": -0.0746,
+				"count_actions": 3
+			}
+		]
+	},
+	{
+		"player_id": "0x5gvbjM7O",
+		"team_id": "9z5k7Yg5A3",
+		"general_position": "CB",
+		"minutes_played": 1701,
+		"data": [
+			{
+				"action_type": "Dribbling",
+				"goals_added_raw": -0.0507,
+				"goals_added_above_avg": -0.0804,
+				"count_actions": 110
+			},
+			{
+				"action_type": "Fouling",
+				"goals_added_raw": -0.0417,
+				"goals_added_above_avg": 0.1435,
+				"count_actions": 41
+			},
+			{
+				"action_type": "Interrupting",
+				"goals_added_raw": 1.7121,
+				"goals_added_above_avg": 0.4107,
+				"count_actions": 313
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 0.5108,
+				"goals_added_above_avg": -0.4141,
+				"count_actions": 479
+			},
+			{
+				"action_type": "Receiving",
+				"goals_added_raw": 0.1811,
+				"goals_added_above_avg": -0.2022,
+				"count_actions": 273
+			},
+			{
+				"action_type": "Shooting",
+				"goals_added_raw": 0.055,
+				"goals_added_above_avg": -0.1329,
+				"count_actions": 3
+			}
+		]
+	},
+	{
+		"player_id": "2lqR7pJQr0",
+		"team_id": "9z5k7Yg5A3",
+		"general_position": "CM",
+		"minutes_played": 587,
+		"data": [
+			{
+				"action_type": "Dribbling",
+				"goals_added_raw": 0.2226,
+				"goals_added_above_avg": 0.1829,
+				"count_actions": 80
+			},
+			{
+				"action_type": "Fouling",
+				"goals_added_raw": -0.0508,
+				"goals_added_above_avg": -0.0723,
+				"count_actions": 12
+			},
+			{
+				"action_type": "Interrupting",
+				"goals_added_raw": 0.3618,
+				"goals_added_above_avg": 0.0221,
+				"count_actions": 52
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 0.4325,
+				"goals_added_above_avg": 0.3141,
+				"count_actions": 293
+			},
+			{
+				"action_type": "Receiving",
+				"goals_added_raw": 0.4223,
+				"goals_added_above_avg": -0.0638,
+				"count_actions": 238
+			},
+			{
+				"action_type": "Shooting",
+				"goals_added_raw": 0.3637,
+				"goals_added_above_avg": 0.1414,
+				"count_actions": 24
+			}
+		]
+	},
+	{
+		"player_id": "2lqRkdg4Qr",
+		"team_id": "9z5k7Yg5A3",
+		"general_position": "FB",
+		"minutes_played": 19,
+		"data": [
+			{
+				"action_type": "Dribbling",
+				"goals_added_raw": -0.0013,
+				"goals_added_above_avg": -0.0029,
+				"count_actions": 1
+			},
+			{
+				"action_type": "Fouling",
+				"goals_added_raw": -0.0029,
+				"goals_added_above_avg": -0.0019,
+				"count_actions": 1
+			},
+			{
+				"action_type": "Interrupting",
+				"goals_added_raw": -0.0087,
+				"goals_added_above_avg": -0.0206,
+				"count_actions": 2
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": -0.0007,
+				"goals_added_above_avg": -0.009,
+				"count_actions": 8
+			},
+			{
+				"action_type": "Receiving",
+				"goals_added_raw": 0.0015,
+				"goals_added_above_avg": -0.0026,
+				"count_actions": 2
+			},
+			{
+				"action_type": "Shooting",
+				"goals_added_raw": 0,
+				"goals_added_above_avg": -0.0022,
+				"count_actions": 0
+			}
+		]
+	},
+	{
+		"player_id": "2vQ14B6Kqr",
+		"team_id": "9z5k7Yg5A3",
+		"general_position": "DM",
+		"minutes_played": 4680,
+		"data": [
+			{
+				"action_type": "Dribbling",
+				"goals_added_raw": 0.1104,
+				"goals_added_above_avg": -0.4647,
+				"count_actions": 832
+			},
+			{
+				"action_type": "Fouling",
+				"goals_added_raw": -0.4679,
+				"goals_added_above_avg": -0.2774,
+				"count_actions": 156
+			},
+			{
+				"action_type": "Interrupting",
+				"goals_added_raw": 4.8023,
+				"goals_added_above_avg": 1.2631,
+				"count_actions": 829
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 2.2733,
+				"goals_added_above_avg": 0.0125,
+				"count_actions": 2400
+			},
+			{
+				"action_type": "Receiving",
+				"goals_added_raw": 0.4215,
+				"goals_added_above_avg": -0.9308,
+				"count_actions": 1769
+			},
+			{
+				"action_type": "Shooting",
+				"goals_added_raw": 0.8712,
+				"goals_added_above_avg": -0.0141,
+				"count_actions": 60
+			}
+		]
+	},
+	{
+		"player_id": "2vQ1L4XOqr",
+		"team_id": "9z5k7Yg5A3",
+		"general_position": "ST",
+		"minutes_played": 10350,
+		"data": [
+			{
+				"action_type": "Dribbling",
+				"goals_added_raw": -4.9748,
+				"goals_added_above_avg": -3.7926,
+				"count_actions": 1506
+			},
+			{
+				"action_type": "Fouling",
+				"goals_added_raw": 2.0803,
+				"goals_added_above_avg": 0.6447,
+				"count_actions": 457
+			},
+			{
+				"action_type": "Interrupting",
+				"goals_added_raw": 3.3585,
+				"goals_added_above_avg": -0.3368,
+				"count_actions": 439
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": -4.645,
+				"goals_added_above_avg": -1.4857,
+				"count_actions": 2516
+			},
+			{
+				"action_type": "Receiving",
+				"goals_added_raw": 26.1612,
+				"goals_added_above_avg": 5.877,
+				"count_actions": 2778
+			},
+			{
+				"action_type": "Shooting",
+				"goals_added_raw": 6.5841,
+				"goals_added_above_avg": -0.804,
+				"count_actions": 227
+			}
+		]
+	},
+	{
+		"player_id": "315VeN4YM9",
+		"team_id": "9z5k7Yg5A3",
+		"general_position": "CB",
+		"minutes_played": 96,
+		"data": [
+			{
+				"action_type": "Dribbling",
+				"goals_added_raw": -0.0026,
+				"goals_added_above_avg": -0.0043,
+				"count_actions": 2
+			},
+			{
+				"action_type": "Fouling",
+				"goals_added_raw": 0.0027,
+				"goals_added_above_avg": 0.0132,
+				"count_actions": 2
+			},
+			{
+				"action_type": "Interrupting",
+				"goals_added_raw": 0.1786,
+				"goals_added_above_avg": 0.1052,
+				"count_actions": 14
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 0.038,
+				"goals_added_above_avg": -0.0142,
+				"count_actions": 24
+			},
+			{
+				"action_type": "Receiving",
+				"goals_added_raw": 0.0005,
+				"goals_added_above_avg": -0.0211,
+				"count_actions": 13
+			},
+			{
+				"action_type": "Shooting",
+				"goals_added_raw": 0.0356,
+				"goals_added_above_avg": 0.025,
+				"count_actions": 1
+			}
+		]
+	},
+	{
+		"player_id": "4JMAoL97qK",
+		"team_id": "9z5k7Yg5A3",
+		"general_position": "ST",
+		"minutes_played": 358,
+		"data": [
+			{
+				"action_type": "Dribbling",
+				"goals_added_raw": -0.4853,
+				"goals_added_above_avg": -0.4244,
+				"count_actions": 50
+			},
+			{
+				"action_type": "Fouling",
+				"goals_added_raw": 0.0974,
+				"goals_added_above_avg": 0.0447,
+				"count_actions": 22
+			},
+			{
+				"action_type": "Interrupting",
+				"goals_added_raw": 0.2297,
+				"goals_added_above_avg": 0.1101,
+				"count_actions": 23
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 0.0093,
+				"goals_added_above_avg": 0.1433,
+				"count_actions": 79
+			},
+			{
+				"action_type": "Receiving",
+				"goals_added_raw": 1.3008,
+				"goals_added_above_avg": 0.5378,
+				"count_actions": 92
+			},
+			{
+				"action_type": "Shooting",
+				"goals_added_raw": 0.2616,
+				"goals_added_above_avg": -0.0081,
+				"count_actions": 10
+			}
+		]
+	},
+	{
+		"player_id": "7vQ7rmxEqD",
+		"team_id": "9z5k7Yg5A3",
+		"general_position": "CM",
+		"minutes_played": 7728,
+		"data": [
+			{
+				"action_type": "Dribbling",
+				"goals_added_raw": -0.1065,
+				"goals_added_above_avg": -1.04,
+				"count_actions": 1600
+			},
+			{
+				"action_type": "Fouling",
+				"goals_added_raw": 0.6654,
+				"goals_added_above_avg": 0.3078,
+				"count_actions": 305
+			},
+			{
+				"action_type": "Interrupting",
+				"goals_added_raw": 3.9435,
+				"goals_added_above_avg": -0.5439,
+				"count_actions": 837
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 4.8323,
+				"goals_added_above_avg": 2.4467,
+				"count_actions": 4100
+			},
+			{
+				"action_type": "Receiving",
+				"goals_added_raw": 5.3335,
+				"goals_added_above_avg": -0.2502,
+				"count_actions": 3586
+			},
+			{
+				"action_type": "Shooting",
+				"goals_added_raw": 2.7653,
+				"goals_added_above_avg": -0.1544,
+				"count_actions": 136
+			}
+		]
+	},
+	{
+		"player_id": "7VqG1rWMvW",
+		"team_id": "9z5k7Yg5A3",
+		"general_position": "AM",
+		"minutes_played": 3394,
+		"data": [
+			{
+				"action_type": "Dribbling",
+				"goals_added_raw": 1.6519,
+				"goals_added_above_avg": 1.1233,
+				"count_actions": 746
+			},
+			{
+				"action_type": "Fouling",
+				"goals_added_raw": 0.0392,
+				"goals_added_above_avg": -0.2321,
+				"count_actions": 142
+			},
+			{
+				"action_type": "Interrupting",
+				"goals_added_raw": 1.1237,
+				"goals_added_above_avg": -0.6262,
+				"count_actions": 216
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 0.7534,
+				"goals_added_above_avg": -0.3264,
+				"count_actions": 1750
+			},
+			{
+				"action_type": "Receiving",
+				"goals_added_raw": 2.9325,
+				"goals_added_above_avg": -0.0596,
+				"count_actions": 1414
+			},
+			{
+				"action_type": "Shooting",
+				"goals_added_raw": 1.6153,
+				"goals_added_above_avg": 0.0772,
+				"count_actions": 81
+			}
+		]
+	},
+	{
+		"player_id": "7VqGmebWMv",
+		"team_id": "9z5k7Yg5A3",
+		"general_position": "W",
+		"minutes_played": 1375,
+		"data": [
+			{
+				"action_type": "Dribbling",
+				"goals_added_raw": -0.1479,
+				"goals_added_above_avg": -0.3499,
+				"count_actions": 225
+			},
+			{
+				"action_type": "Fouling",
+				"goals_added_raw": 0.1702,
+				"goals_added_above_avg": 0.0763,
+				"count_actions": 49
+			},
+			{
+				"action_type": "Interrupting",
+				"goals_added_raw": 0.869,
+				"goals_added_above_avg": 0.1497,
+				"count_actions": 130
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": -0.0533,
+				"goals_added_above_avg": -0.2827,
+				"count_actions": 471
+			},
+			{
+				"action_type": "Receiving",
+				"goals_added_raw": 2.4655,
+				"goals_added_above_avg": 1.1974,
+				"count_actions": 431
+			},
+			{
+				"action_type": "Shooting",
+				"goals_added_raw": 1.0244,
+				"goals_added_above_avg": 0.4141,
+				"count_actions": 38
+			}
+		]
+	},
+	{
+		"player_id": "7VqGnBd5vW",
+		"team_id": "9z5k7Yg5A3",
+		"general_position": "AM",
+		"minutes_played": 2617,
+		"data": [
+			{
+				"action_type": "Dribbling",
+				"goals_added_raw": 1.0706,
+				"goals_added_above_avg": 0.6919,
+				"count_actions": 501
+			},
+			{
+				"action_type": "Fouling",
+				"goals_added_raw": 0.0075,
+				"goals_added_above_avg": -0.214,
+				"count_actions": 47
+			},
+			{
+				"action_type": "Interrupting",
+				"goals_added_raw": 1.3091,
+				"goals_added_above_avg": -0.0144,
+				"count_actions": 164
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 1.4829,
+				"goals_added_above_avg": 0.5222,
+				"count_actions": 1865
+			},
+			{
+				"action_type": "Receiving",
+				"goals_added_raw": 1.5686,
+				"goals_added_above_avg": -0.7516,
+				"count_actions": 1549
+			},
+			{
+				"action_type": "Shooting",
+				"goals_added_raw": 0.9183,
+				"goals_added_above_avg": -0.2833,
+				"count_actions": 44
+			}
+		]
+	},
+	{
+		"player_id": "9vQ2djYr5K",
+		"team_id": "9z5k7Yg5A3",
+		"general_position": "DM",
+		"minutes_played": 1190,
+		"data": [
+			{
+				"action_type": "Dribbling",
+				"goals_added_raw": 0.3462,
+				"goals_added_above_avg": 0.1437,
+				"count_actions": 176
+			},
+			{
+				"action_type": "Fouling",
+				"goals_added_raw": 0.0148,
+				"goals_added_above_avg": -0.0624,
+				"count_actions": 35
+			},
+			{
+				"action_type": "Interrupting",
+				"goals_added_raw": 0.6434,
+				"goals_added_above_avg": -0.0067,
+				"count_actions": 93
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 0.0947,
+				"goals_added_above_avg": -0.1837,
+				"count_actions": 473
+			},
+			{
+				"action_type": "Receiving",
+				"goals_added_raw": 0.9226,
+				"goals_added_above_avg": -0.0728,
+				"count_actions": 422
+			},
+			{
+				"action_type": "Shooting",
+				"goals_added_raw": 0.7337,
+				"goals_added_above_avg": 0.2257,
+				"count_actions": 29
+			}
+		]
+	},
+	{
+		"player_id": "9vQ2zAYQK6",
+		"team_id": "9z5k7Yg5A3",
+		"general_position": "W",
+		"minutes_played": 8447,
+		"data": [
+			{
+				"action_type": "Dribbling",
+				"goals_added_raw": -0.0336,
+				"goals_added_above_avg": -1.0864,
+				"count_actions": 1154
+			},
+			{
+				"action_type": "Fouling",
+				"goals_added_raw": 0.6932,
+				"goals_added_above_avg": -0.2089,
+				"count_actions": 138
+			},
+			{
+				"action_type": "Interrupting",
+				"goals_added_raw": 4.014,
+				"goals_added_above_avg": 0.1973,
+				"count_actions": 731
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 2.4385,
+				"goals_added_above_avg": 2.7289,
+				"count_actions": 3381
+			},
+			{
+				"action_type": "Receiving",
+				"goals_added_raw": 11.0389,
+				"goals_added_above_avg": 0.3734,
+				"count_actions": 2689
+			},
+			{
+				"action_type": "Shooting",
+				"goals_added_raw": 3.7653,
+				"goals_added_above_avg": -0.9371,
+				"count_actions": 149
+			}
+		]
+	},
+	{
+		"player_id": "9Yqd6yrkMv",
+		"team_id": "9z5k7Yg5A3",
+		"general_position": "ST",
+		"minutes_played": 4413,
+		"data": [
+			{
+				"action_type": "Dribbling",
+				"goals_added_raw": -1.3831,
+				"goals_added_above_avg": -0.9519,
+				"count_actions": 697
+			},
+			{
+				"action_type": "Fouling",
+				"goals_added_raw": 0.9138,
+				"goals_added_above_avg": 0.3398,
+				"count_actions": 182
+			},
+			{
+				"action_type": "Interrupting",
+				"goals_added_raw": 3.0112,
+				"goals_added_above_avg": 1.3407,
+				"count_actions": 265
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": -1.9966,
+				"goals_added_above_avg": -0.9459,
+				"count_actions": 1078
+			},
+			{
+				"action_type": "Receiving",
+				"goals_added_raw": 11.5011,
+				"goals_added_above_avg": 3.3478,
+				"count_actions": 1217
+			},
+			{
+				"action_type": "Shooting",
+				"goals_added_raw": 3.8286,
+				"goals_added_above_avg": 0.8144,
+				"count_actions": 131
+			}
+		]
+	},
+	{
+		"player_id": "9YqdxKjqvJ",
+		"team_id": "9z5k7Yg5A3",
+		"general_position": "CB",
+		"minutes_played": 2082,
+		"data": [
+			{
+				"action_type": "Dribbling",
+				"goals_added_raw": -0.129,
+				"goals_added_above_avg": -0.1653,
+				"count_actions": 165
+			},
+			{
+				"action_type": "Fouling",
+				"goals_added_raw": -0.2842,
+				"goals_added_above_avg": -0.0574,
+				"count_actions": 60
+			},
+			{
+				"action_type": "Interrupting",
+				"goals_added_raw": 1.3142,
+				"goals_added_above_avg": -0.2787,
+				"count_actions": 348
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 0.8125,
+				"goals_added_above_avg": -0.3195,
+				"count_actions": 776
+			},
+			{
+				"action_type": "Receiving",
+				"goals_added_raw": 1.0436,
+				"goals_added_above_avg": 0.5744,
+				"count_actions": 499
+			},
+			{
+				"action_type": "Shooting",
+				"goals_added_raw": 0.3101,
+				"goals_added_above_avg": 0.0801,
+				"count_actions": 14
+			}
+		]
+	},
+	{
+		"player_id": "9z5kabkaQA",
+		"team_id": "9z5k7Yg5A3",
+		"general_position": "W",
+		"minutes_played": 341,
+		"data": [
+			{
+				"action_type": "Dribbling",
+				"goals_added_raw": 0.1503,
+				"goals_added_above_avg": 0.1,
+				"count_actions": 54
+			},
+			{
+				"action_type": "Fouling",
+				"goals_added_raw": 0.0117,
+				"goals_added_above_avg": -0.0022,
+				"count_actions": 8
+			},
+			{
+				"action_type": "Interrupting",
+				"goals_added_raw": -0.07,
+				"goals_added_above_avg": -0.2569,
+				"count_actions": 49
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 0.114,
+				"goals_added_above_avg": 0.0338,
+				"count_actions": 135
+			},
+			{
+				"action_type": "Receiving",
+				"goals_added_raw": 0.0731,
+				"goals_added_above_avg": -0.1881,
+				"count_actions": 101
+			},
+			{
+				"action_type": "Shooting",
+				"goals_added_raw": 0.0676,
+				"goals_added_above_avg": -0.0616,
+				"count_actions": 6
+			}
+		]
+	},
+	{
+		"player_id": "9z5kabNlQA",
+		"team_id": "9z5k7Yg5A3",
+		"general_position": "W",
+		"minutes_played": 2160,
+		"data": [
+			{
+				"action_type": "Dribbling",
+				"goals_added_raw": 0.8881,
+				"goals_added_above_avg": 0.5103,
+				"count_actions": 429
+			},
+			{
+				"action_type": "Fouling",
+				"goals_added_raw": 0.0326,
+				"goals_added_above_avg": -0.121,
+				"count_actions": 87
+			},
+			{
+				"action_type": "Interrupting",
+				"goals_added_raw": 1.2538,
+				"goals_added_above_avg": 0.1099,
+				"count_actions": 256
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 1.2734,
+				"goals_added_above_avg": 0.9345,
+				"count_actions": 1080
+			},
+			{
+				"action_type": "Receiving",
+				"goals_added_raw": 0.9104,
+				"goals_added_above_avg": -1.0094,
+				"count_actions": 879
+			},
+			{
+				"action_type": "Shooting",
+				"goals_added_raw": 0.8336,
+				"goals_added_above_avg": -0.1285,
+				"count_actions": 40
+			}
+		]
+	},
+	{
+		"player_id": "9z5knaeMA3",
+		"team_id": "9z5k7Yg5A3",
+		"general_position": "CM",
+		"minutes_played": 1853,
+		"data": [
+			{
+				"action_type": "Dribbling",
+				"goals_added_raw": 0.5624,
+				"goals_added_above_avg": 0.3512,
+				"count_actions": 306
+			},
+			{
+				"action_type": "Fouling",
+				"goals_added_raw": -0.0241,
+				"goals_added_above_avg": -0.0819,
+				"count_actions": 58
+			},
+			{
+				"action_type": "Interrupting",
+				"goals_added_raw": 0.6321,
+				"goals_added_above_avg": -0.498,
+				"count_actions": 184
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 1.0692,
+				"goals_added_above_avg": 0.6003,
+				"count_actions": 967
+			},
+			{
+				"action_type": "Receiving",
+				"goals_added_raw": 0.5696,
+				"goals_added_above_avg": -0.6792,
+				"count_actions": 779
+			},
+			{
+				"action_type": "Shooting",
+				"goals_added_raw": 0.6452,
+				"goals_added_above_avg": -0.0017,
+				"count_actions": 27
+			}
+		]
+	},
+	{
+		"player_id": "a35r6225L6",
+		"team_id": "9z5k7Yg5A3",
+		"general_position": "CB",
+		"minutes_played": 278,
+		"data": [
+			{
+				"action_type": "Dribbling",
+				"goals_added_raw": 0.0017,
+				"goals_added_above_avg": -0.0032,
+				"count_actions": 14
+			},
+			{
+				"action_type": "Fouling",
+				"goals_added_raw": -0.03,
+				"goals_added_above_avg": 0.0002,
+				"count_actions": 5
+			},
+			{
+				"action_type": "Interrupting",
+				"goals_added_raw": 0.2562,
+				"goals_added_above_avg": 0.0435,
+				"count_actions": 63
+			},
+			{
+				"action_type": "Passing",
+				"goals_added_raw": 0.0599,
+				"goals_added_above_avg": -0.0912,
+				"count_actions": 63
+			},
+			{
+				"action_type": "Receiving",
+				"goals_added_raw": 0.0533,
+				"goals_added_above_avg": -0.0094,
+				"count_actions": 37
+			},
+			{
+				"action_type": "Shooting",
+				"goals_added_raw": 0.0434,
+				"goals_added_above_avg": 0.0127,
+				"count_actions": 1
+			}
+		]
+	}
+]

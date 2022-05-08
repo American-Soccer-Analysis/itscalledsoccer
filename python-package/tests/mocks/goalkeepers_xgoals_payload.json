@@ -1,0 +1,110 @@
+[
+	{
+		"player_id": "0x5g1BmQ7O",
+		"team_id": "9z5k7Yg5A3",
+		"minutes_played": 879,
+		"shots_faced": 33,
+		"goals_conceded": 13,
+		"saves": 17,
+		"share_headed_shots": 0.2424,
+		"xgoals_gk_faced": 11.3395,
+		"goals_minus_xgoals_gk": 1.6605,
+		"goals_divided_by_xgoals_gk": 1.1464
+	},
+	{
+		"player_id": "2lqRRj84qr",
+		"team_id": "9z5k7Yg5A3",
+		"minutes_played": 343,
+		"shots_faced": 11,
+		"goals_conceded": 5,
+		"saves": 6,
+		"share_headed_shots": 0.0909,
+		"xgoals_gk_faced": 4.7403,
+		"goals_minus_xgoals_gk": 0.2597,
+		"goals_divided_by_xgoals_gk": 1.0548
+	},
+	{
+		"player_id": "2vQ1L20Oqr",
+		"team_id": "9z5k7Yg5A3",
+		"minutes_played": 2045,
+		"shots_faced": 100,
+		"goals_conceded": 33,
+		"saves": 64,
+		"share_headed_shots": 0.14,
+		"xgoals_gk_faced": 30.2748,
+		"goals_minus_xgoals_gk": 2.7252,
+		"goals_divided_by_xgoals_gk": 1.09
+	},
+	{
+		"player_id": "315VXNkGQ9",
+		"team_id": "9z5k7Yg5A3",
+		"minutes_played": 351,
+		"shots_faced": 11,
+		"goals_conceded": 2,
+		"saves": 9,
+		"share_headed_shots": 0,
+		"xgoals_gk_faced": 3.8287,
+		"goals_minus_xgoals_gk": -1.8287,
+		"goals_divided_by_xgoals_gk": 0.5224
+	},
+	{
+		"player_id": "7VqGmlO3Mv",
+		"team_id": "9z5k7Yg5A3",
+		"minutes_played": 97,
+		"shots_faced": 5,
+		"goals_conceded": 2,
+		"saves": 2,
+		"share_headed_shots": 0.4,
+		"xgoals_gk_faced": 0.3417,
+		"goals_minus_xgoals_gk": 1.6583,
+		"goals_divided_by_xgoals_gk": 5.8528
+	},
+	{
+		"player_id": "7VqGmob3Mv",
+		"team_id": "9z5k7Yg5A3",
+		"minutes_played": 18408,
+		"shots_faced": 836,
+		"goals_conceded": 241,
+		"saves": 583,
+		"share_headed_shots": 0.1567,
+		"xgoals_gk_faced": 241.04,
+		"goals_minus_xgoals_gk": -0.0403,
+		"goals_divided_by_xgoals_gk": 0.9998
+	},
+	{
+		"player_id": "BLMvl7ORqx",
+		"team_id": "9z5k7Yg5A3",
+		"minutes_played": 1157,
+		"shots_faced": 51,
+		"goals_conceded": 19,
+		"saves": 31,
+		"share_headed_shots": 0.1373,
+		"xgoals_gk_faced": 18.5665,
+		"goals_minus_xgoals_gk": 0.4335,
+		"goals_divided_by_xgoals_gk": 1.0233
+	},
+	{
+		"player_id": "odMXRoXoqY",
+		"team_id": "9z5k7Yg5A3",
+		"minutes_played": 1238,
+		"shots_faced": 51,
+		"goals_conceded": 16,
+		"saves": 32,
+		"share_headed_shots": 0.1765,
+		"xgoals_gk_faced": 13.355,
+		"goals_minus_xgoals_gk": 2.645,
+		"goals_divided_by_xgoals_gk": 1.1981
+	},
+	{
+		"player_id": "xW5pxy3l5g",
+		"team_id": "9z5k7Yg5A3",
+		"minutes_played": 6146,
+		"shots_faced": 272,
+		"goals_conceded": 87,
+		"saves": 178,
+		"share_headed_shots": 0.136,
+		"xgoals_gk_faced": 88.1693,
+		"goals_minus_xgoals_gk": -1.1693,
+		"goals_divided_by_xgoals_gk": 0.9867
+	}
+]

@@ -1,0 +1,176 @@
+[
+	{
+		"team_id": "0KPqjA456v",
+		"team_name": "San Jose Earthquakes",
+		"team_short_name": "San Jose",
+		"team_abbreviation": "SJE"
+	},
+	{
+		"team_id": "19vQ2095K6",
+		"team_name": "New England Revolution",
+		"team_short_name": "New England",
+		"team_abbreviation": "NER"
+	},
+	{
+		"team_id": "4wM42l4qjB",
+		"team_name": "Chivas USA",
+		"team_short_name": "Chivas",
+		"team_abbreviation": "CHV"
+	},
+	{
+		"team_id": "9z5k7Yg5A3",
+		"team_name": "Philadelphia Union",
+		"team_short_name": "Philadelphia",
+		"team_abbreviation": "PHI"
+	},
+	{
+		"team_id": "a2lqR4JMr0",
+		"team_name": "Real Salt Lake",
+		"team_short_name": "Salt Lake",
+		"team_abbreviation": "RSL"
+	},
+	{
+		"team_id": "a2lqRX2Mr0",
+		"team_name": "New York Red Bulls",
+		"team_short_name": "New York",
+		"team_abbreviation": "NYRB"
+	},
+	{
+		"team_id": "APk5LGOMOW",
+		"team_name": "CF Montréal",
+		"team_short_name": "Montréal",
+		"team_abbreviation": "MTL"
+	},
+	{
+		"team_id": "EKXMeX3Q64",
+		"team_name": "D.C. United",
+		"team_short_name": "D.C. United",
+		"team_abbreviation": "DCU"
+	},
+	{
+		"team_id": "eVq3ya6MWO",
+		"team_name": "Los Angeles FC",
+		"team_short_name": "Los Angeles FC",
+		"team_abbreviation": "LAFC"
+	},
+	{
+		"team_id": "gpMOLwl5zy",
+		"team_name": "Austin FC",
+		"team_short_name": "Austin",
+		"team_abbreviation": "ATX"
+	},
+	{
+		"team_id": "jYQJ19EqGR",
+		"team_name": "Seattle Sounders FC",
+		"team_short_name": "Seattle",
+		"team_abbreviation": "SEA"
+	},
+	{
+		"team_id": "jYQJ8EW5GR",
+		"team_name": "Orlando City SC",
+		"team_short_name": "Orlando City",
+		"team_abbreviation": "ORL"
+	},
+	{
+		"team_id": "kaDQ0wRqEv",
+		"team_name": "LA Galaxy",
+		"team_short_name": "LA Galaxy",
+		"team_abbreviation": "LAG"
+	},
+	{
+		"team_id": "KAqBN0Vqbg",
+		"team_name": "Atlanta United FC",
+		"team_short_name": "Atlanta",
+		"team_abbreviation": "ATL"
+	},
+	{
+		"team_id": "kRQabn8MKZ",
+		"team_name": "Toronto FC",
+		"team_short_name": "Toronto",
+		"team_abbreviation": "TOR"
+	},
+	{
+		"team_id": "kRQand1MKZ",
+		"team_name": "Minnesota United FC",
+		"team_short_name": "Minnesota",
+		"team_abbreviation": "MIN"
+	},
+	{
+		"team_id": "lgpMOvnQzy",
+		"team_name": "Vancouver Whitecaps FC",
+		"team_short_name": "Vancouver",
+		"team_abbreviation": "VAN"
+	},
+	{
+		"team_id": "mKAqBBmqbg",
+		"team_name": "FC Dallas",
+		"team_short_name": "Dallas",
+		"team_abbreviation": "FCD"
+	},
+	{
+		"team_id": "mvzqoLZQap",
+		"team_name": "Columbus Crew",
+		"team_short_name": "Columbus",
+		"team_abbreviation": "CLB"
+	},
+	{
+		"team_id": "NPqxKXZ59d",
+		"team_name": "Charlotte FC",
+		"team_short_name": "Charlotte",
+		"team_abbreviation": "CLT"
+	},
+	{
+		"team_id": "NWMWlBK5lz",
+		"team_name": "FC Cincinnati",
+		"team_short_name": "Cincinnati",
+		"team_abbreviation": "CIN"
+	},
+	{
+		"team_id": "pzeQZ6xQKw",
+		"team_name": "Colorado Rapids",
+		"team_short_name": "Colorado",
+		"team_abbreviation": "COL"
+	},
+	{
+		"team_id": "Vj58weDM8n",
+		"team_name": "New York City FC",
+		"team_short_name": "New York City",
+		"team_abbreviation": "NYC"
+	},
+	{
+		"team_id": "vzqoOgNqap",
+		"team_name": "Nashville SC",
+		"team_short_name": "Nashville",
+		"team_abbreviation": "NSH"
+	},
+	{
+		"team_id": "WBLMvYAQxe",
+		"team_name": "Portland Timbers FC",
+		"team_short_name": "Portland",
+		"team_abbreviation": "POR"
+	},
+	{
+		"team_id": "X0Oq66zq6D",
+		"team_name": "Chicago Fire FC",
+		"team_short_name": "Chicago",
+		"team_abbreviation": "CHI"
+	},
+	{
+		"team_id": "YgOMngl5wN",
+		"team_name": "Houston Dynamo FC",
+		"team_short_name": "Houston",
+		"team_abbreviation": "HOU"
+	},
+	{
+		"team_id": "Z2vQ1xlqrA",
+		"team_name": "Sporting Kansas City",
+		"team_short_name": "Kansas City",
+		"team_abbreviation": "SKC"
+	},
+	{
+		"team_id": "zeQZkL1MKw",
+		"team_name": "Inter Miami CF",
+		"team_short_name": "Miami",
+		"team_abbreviation": "MIA"
+	}
+]

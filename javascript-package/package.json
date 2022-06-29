@@ -40,6 +40,6 @@
     "eslint-plugin-jest": "^26.1.1",
     "jest": "^28.0.3",
     "jest-fail-on-console": "^2.4.1",
-    "prettier": "2.6.2"
+    "prettier": "2.7.1"
   }
 }

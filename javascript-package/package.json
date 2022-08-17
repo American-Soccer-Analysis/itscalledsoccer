@@ -41,5 +41,6 @@
     "jest": "^28.0.3",
     "jest-fail-on-console": "^2.4.1",
     "prettier": "2.7.1"
-  }
+  },
+  "types": "./src/index.d.ts"
 }

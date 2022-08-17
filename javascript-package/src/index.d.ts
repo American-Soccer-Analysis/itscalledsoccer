@@ -88,149 +88,149 @@ export default class Client {
  * Parameters
  */
 type PlayersXGoalParameters = [
-  "minimum_minutes",
-  "minimum_shots",
-  "minimum_key_passes",
-  "player_id",
-  "team_id",
-  "season_name",
-  "start_date",
-  "end_date",
-  "shot_pattern",
-  "split_by_teams",
-  "split_by_seasons",
-  "split_by_games",
-  "stage_name",
-  "general_position"
+  "minimumMinutes",
+  "minimumShots",
+  "minimumKeyPasses",
+  "playerId",
+  "teamId",
+  "seasonName",
+  "startDate",
+  "endDate",
+  "shotPattern",
+  "splitByTeams",
+  "splitBySeasons",
+  "splitByGames",
+  "stageName",
+  "generalPosition"
 ];
 
 type PlayerXPassParameters = [
-  "minimum_minutes",
-  "minimum_passes",
-  "player_id",
-  "team_id",
-  "season_name",
-  "start_date",
-  "end_date",
-  "pass_origin_third",
-  "split_by_teams",
-  "split_by_seasons",
-  "split_by_games",
-  "stage_name",
-  "general_position"
+  "minimumMinutes",
+  "minimumPasses",
+  "playerId",
+  "teamId",
+  "seasonName",
+  "startDate",
+  "endDate",
+  "passOriginThird",
+  "splitByTeams",
+  "splitBySeasons",
+  "splitByGames",
+  "stageName",
+  "generalPosition"
 ];
 
 type PlayersGoalsAddedParameters = [
-  "minimum_minutes",
-  "player_id",
-  "team_id",
-  "season_name",
-  "start_date",
-  "end_date",
-  "split_by_teams",
-  "split_by_seasons",
-  "split_by_games",
-  "stage_name",
-  "general_position",
-  "action_type",
-  "above_replacement"
+  "minimumMinutes",
+  "playerId",
+  "teamId",
+  "seasonName",
+  "startDate",
+  "endDate",
+  "splitByTeams",
+  "splitBySeasons",
+  "splitByGames",
+  "stageName",
+  "generalPosition",
+  "actionType",
+  "aboveReplacement"
 ];
 
 type PlayersSalariesParameters = [
-  "player_id",
-  "team_id",
+  "playerId",
+  "teamId",
   "position",
-  "season_name",
-  "start_date",
-  "end_date"
+  "seasonName",
+  "startDate",
+  "endDate"
 ];
 
 type GoalkeepersXgoalsParameters = [
-  "minimum_minutes",
-  "minimum_shots_faced",
-  "player_id",
-  "team_id",
-  "season_name",
-  "start_date",
-  "end_date",
-  "shot_pattern",
-  "split_by_teams",
-  "split_by_seasons",
-  "split_by_games",
-  "stage_name"
+  "minimumMinutes",
+  "minimumShotsFaced",
+  "playerId",
+  "teamId",
+  "seasonName",
+  "startDate",
+  "endDate",
+  "shotPattern",
+  "splitByTeams",
+  "splitBySeasons",
+  "splitByGames",
+  "stageName"
 ];
 
 type GoalkeepersGoalsAddedParameters = [
-  "minimum_minutes",
-  "player_id",
-  "team_id",
-  "season_name",
-  "start_date",
-  "end_date",
-  "split_by_teams",
-  "split_by_seasons",
-  "split_by_games",
-  "stage_name",
-  "action_type",
-  "above_replacement"
+  "minimumMinutes",
+  "playerId",
+  "teamId",
+  "seasonName",
+  "startDate",
+  "endDate",
+  "splitByTeams",
+  "splitBySeasons",
+  "splitByGames",
+  "stageName",
+  "actionType",
+  "aboveReplacement"
 ];
 
 type TeamsXgoalsParameters = [
-  "team_id",
-  "season_name",
-  "start_date",
-  "end_date",
-  "shot_pattern",
-  "split_by_teams",
-  "split_by_seasons",
-  "split_by_games",
-  "home_only",
-  "away_only",
-  "home_adjusted",
-  "even_game_state",
-  "stage_name"
+  "teamId",
+  "seasonName",
+  "startDate",
+  "endDate",
+  "shotPattern",
+  "splitByTeams",
+  "splitBySeasons",
+  "splitByGames",
+  "homeOnly",
+  "awayOnly",
+  "homeAdjusted",
+  "evenGameState",
+  "stageName"
 ];
 
 type TeamsXpassParameters = [
-  "team_id",
-  "season_name",
-  "start_date",
-  "end_date",
-  "pass_origin_third",
-  "split_by_teams",
-  "split_by_seasons",
-  "split_by_games",
-  "home_only",
-  "away_only",
-  "stage_name"
+  "teamId",
+  "seasonName",
+  "startDate",
+  "endDate",
+  "passOriginThird",
+  "splitByTeams",
+  "splitBySeasons",
+  "splitByGames",
+  "homeOnly",
+  "awayOnly",
+  "stageName"
 ];
 
 type TeamsGoalsAddedParameters = [
-  "team_id",
-  "season_name",
-  "split_by_seasons",
-  "stage_name",
-  "action_type",
+  "teamId",
+  "seasonName",
+  "splitBySeasons",
+  "stageName",
+  "actionType",
   "zone",
-  "gamestate_trunc"
+  "gamestateTrunc"
 ];
 
 type TeamsSalariesParameters = [
-  "team_id",
-  "season_name",
-  "split_by_teams",
-  "split_by_seasons",
-  "split_by_games"
+  "teamId",
+  "seasonName",
+  "splitByTeams",
+  "splitBySeasons",
+  "splitByGames"
 ];
 
-type GamesParameters = ["game_id", "team_id", "season_name", "stage_name"];
+type GamesParameters = ["gameId", "teamId", "seasonName", "stageName"];
 
 type GamesXgoalsParameters = [
-  "game_id",
-  "season_name",
-  "start_date",
-  "end_date",
-  "stage_name"
+  "gameId",
+  "seasonName",
+  "startDate",
+  "endDate",
+  "stageName"
 ];
 
 /**

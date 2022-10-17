@@ -37,7 +37,7 @@
     "chokidar-cli": "^3.0.0",
     "eslint": "^8.11.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-jest": "^26.1.1",
+    "eslint-plugin-jest": "^27.1.2",
     "jest": "^28.0.3",
     "jest-fail-on-console": "^2.4.1",
     "prettier": "2.7.1"

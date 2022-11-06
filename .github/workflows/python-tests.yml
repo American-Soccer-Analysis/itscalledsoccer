@@ -1,0 +1,33 @@
+name: Python tests
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.7", "3.8", "3.9"]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install --editable .
+          if [ -f requirements.dev.txt ]; then pip install -r requirements.dev.txt; fi
+      - name: Linting
+        run: |
+          mypy itscalledsoccer
+          isort --check itscalledsoccer
+          black --check itscalledsoccer
+      - name: Behave tests
+        run: |
+          cd tests
+          behave

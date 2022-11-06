@@ -1,4 +1,4 @@
-# itscalledsoccer 
+# itscalledsoccer
 
 <img src="https://raw.githubusercontent.com/American-Soccer-Analysis/itscalledsoccer/main/R-package/man/figures/logo.png" align="right" height="175"/>
 
@@ -8,6 +8,15 @@
 ![Python tests](https://github.com/American-Soccer-Analysis/itscalledsoccer/actions/workflows/python-tests.yml/badge.svg)
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 <!-- badges: end -->
+
+---
+
+:warning: `itscalledsoccer` has been split up into multiple repositories. If you're looking for the R or JavaScript version, check out the links below :warning::
+
+- [itscalledsoccer-r](https://github.com/American-Soccer-Analysis/itscalledsoccer-r)
+- [itscalledsoccer-js](https://github.com/American-Soccer-Analysis/itscalledsoccer-js)
+
+---
 
 ## Table of Contents
 

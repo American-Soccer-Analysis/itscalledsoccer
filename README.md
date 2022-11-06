@@ -11,7 +11,7 @@
 
 ---
 
-:warning: `itscalledsoccer` has been split up into multiple repositories. If you're looking for the R or JavaScript version, check out the links below :warning::
+:warning: **`itscalledsoccer` has been split up into multiple repositories. If you're looking for the R or JavaScript version, check out the links below** :warning::
 
 - [itscalledsoccer-r](https://github.com/American-Soccer-Analysis/itscalledsoccer-r)
 - [itscalledsoccer-js](https://github.com/American-Soccer-Analysis/itscalledsoccer-js)

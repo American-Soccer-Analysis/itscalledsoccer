@@ -6,10 +6,10 @@ with open("README.md", "r") as f:
 setup(
     name="itscalledsoccer",
     packages=find_packages(exclude=["tests", "tests.*"]),
-    version="0.2.1",
+    version="1.0.0",
     description="Programmatically interact with the American Soccer Analysis API",
     long_description=long_description,
-    long_description_content_type = "text/markdown",
+    long_description_content_type="text/markdown",
     author="American Soccer Analysis",
     author_email="americansocceranalysis@gmail.com",
     url="https://github.com/American-Soccer-Analysis/itscalledsoccer",
@@ -21,12 +21,12 @@ setup(
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
     ],
-    python_requires=">=3.7",
+    python_requires=">=3.8",
     keywords="stats soccer api american machine learning football",
     install_requires=[
         "requests==2.30.0",
         "CacheControl==0.12.11",
         "rapidfuzz==3.0.0",
-        "pandas==2.0.1"
-    ]
+        "pandas==2.0.1",
+    ],
 )

@@ -65,7 +65,7 @@ class AmericanSoccerAnalysis:
             url = f"{self.BASE_URL}{league}/{plural_type}"
             resp_df = self._execute_query(url, {})
             resp_df = resp_df.assign(competition=league)
-            df = df.append(resp_df)
+            df = pd.concat([df, resp_df], ignore_index=True)
         return df
 
     def _convert_name_to_id(self, type: str, name: str) -> str:
@@ -248,7 +248,7 @@ class AmericanSoccerAnalysis:
             while len(temp_response.index) == self.MAX_API_LIMIT:
                 params["offset"] = str(offset)
                 temp_response = self._single_request(url, params)
-                response = response.append(temp_response)
+                response = pd.concat([response,temp_response], ignore_index=True)
                 offset = offset + self.MAX_API_LIMIT
 
         return response

@@ -343,9 +343,9 @@ class AmericanSoccerAnalysis:
 
     def get_stadia(
         self,
-        leagues: Union[str, List[str]] = None,
-        ids: Union[str, List[str]] = None,
-        names: Union[str, List[str]] = None,
+        leagues: Union[str, List[str], None] = None,
+        ids: Union[str, List[str], None] = None,
+        names: Union[str, List[str], None] = None,
     ) -> pd.DataFrame:
         """Get information associated with stadia
 
@@ -359,9 +359,9 @@ class AmericanSoccerAnalysis:
 
     def get_referees(
         self,
-        leagues: Union[str, List[str]] = None,
-        ids: Union[str, List[str]] = None,
-        names: Union[str, List[str]] = None,
+        leagues: Union[str, List[str], None] = None,
+        ids: Union[str, List[str], None] = None,
+        names: Union[str, List[str], None] = None,
     ) -> pd.DataFrame:
         """Get information associated with referees
 
@@ -375,9 +375,9 @@ class AmericanSoccerAnalysis:
 
     def get_managers(
         self,
-        leagues: Union[str, List[str]] = None,
-        ids: Union[str, List[str]] = None,
-        names: Union[str, List[str]] = None,
+        leagues: Union[str, List[str], None] = None,
+        ids: Union[str, List[str], None] = None,
+        names: Union[str, List[str], None] = None,
     ) -> pd.DataFrame:
         """Get information associated with managers
 
@@ -391,9 +391,9 @@ class AmericanSoccerAnalysis:
 
     def get_teams(
         self,
-        leagues: Union[str, List[str]] = None,
-        ids: Union[str, List[str]] = None,
-        names: Union[str, List[str]] = None,
+        leagues: Union[str, List[str], None] = None,
+        ids: Union[str, List[str], None] = None,
+        names: Union[str, List[str], None] = None,
     ) -> pd.DataFrame:
         """Get information associated with teams
 
@@ -407,9 +407,9 @@ class AmericanSoccerAnalysis:
 
     def get_players(
         self,
-        leagues: Union[str, List[str]] = None,
-        ids: Union[str, List[str]] = None,
-        names: Union[str, List[str]] = None,
+        leagues: Union[str, List[str], None] = None,
+        ids: Union[str, List[str], None] = None,
+        names: Union[str, List[str], None] = None,
     ) -> pd.DataFrame:
         """Get information associated with players
 
@@ -423,12 +423,12 @@ class AmericanSoccerAnalysis:
 
     def get_games(
         self,
-        leagues: Union[str, List[str]] = None,
-        game_ids: Union[str, List[str]] = None,
-        team_ids: Union[str, List[str]] = None,
-        team_names: Union[str, List[str]] = None,
-        seasons: Union[str, List[str]] = None,
-        stages: Union[str, List[str]] = None,
+        leagues: Union[str, List[str], None] = None,
+        game_ids: Union[str, List[str], None] = None,
+        team_ids: Union[str, List[str], None] = None,
+        team_names: Union[str, List[str], None] = None,
+        seasons: Union[str, List[str], None] = None,
+        stages: Union[str, List[str], None] = None,
     ) -> pd.DataFrame:
         """Get information related to games
 

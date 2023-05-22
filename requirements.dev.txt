@@ -1,4 +1,4 @@
-requests==2.30.0
+requests==2.31.0
 types-requests==2.30.0.0
 CacheControl==0.12.11
 rapidfuzz==3.0.0

@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 
 class Game:
@@ -58,8 +58,8 @@ class Player:
         nationality: str,
         primary_broad_position: str,
         primary_general_position: str,
-        secondary_broad_position: str = None,
-        secondary_general_position: str = None,
+        secondary_broad_position: Optional[str] = None,
+        secondary_general_position: Optional[str] = None,
         season_name: List[str] = [],
     ) -> None:
         self.player_id = player_id
@@ -88,19 +88,19 @@ class Stadium:
         self,
         stadium_id: str,
         stadium_name: str,
-        capacity: int = None,
-        year_built: int = None,
-        roof: bool = None,
-        turf: bool = None,
-        street: str = None,
-        city: str = None,
-        province: str = None,
-        country: str = None,
-        postal_code: str = None,
-        latitude: float = None,
-        longitude: float = None,
-        field_x: int = None,
-        field_y: int = None,
+        capacity: Optional[int] = None,
+        year_built: Optional[int] = None,
+        roof: Optional[bool] = None,
+        turf: Optional[bool] = None,
+        street: Optional[str] = None,
+        city: Optional[str] = None,
+        province: Optional[str] = None,
+        country: Optional[str] = None,
+        postal_code: Optional[str] = None,
+        latitude: Optional[float] = None,
+        longitude: Optional[float] = None,
+        field_x: Optional[int] = None,
+        field_y: Optional[int] = None,
     ) -> None:
         self.stadium_id = stadium_id
         self.stadium_name = stadium_name

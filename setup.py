@@ -25,7 +25,7 @@ setup(
     keywords="stats soccer api american machine learning football",
     install_requires=[
         "requests==2.31.0",
-        "CacheControl==0.12.11",
+        "CacheControl==0.13.0",
         "rapidfuzz==3.0.0",
         "pandas==2.0.2",
     ],

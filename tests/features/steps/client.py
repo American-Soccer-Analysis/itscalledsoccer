@@ -1,5 +1,6 @@
 from behave import *
 from itscalledsoccer.client import AmericanSoccerAnalysis
+from unittest.mock import patch
 
 @then(u'the API_VERSION should be "{value}"')
 def step_impl(context, value):
@@ -32,7 +33,8 @@ def step_impl(context):
 
 @when(u'the logging level is set to "{level}"')
 def step_impl(context, level):
-    context.soccer = AmericanSoccerAnalysis(logging_level=level)
+    with patch('itscalledsoccer.client.AmericanSoccerAnalysis._get_entity'):
+        context.soccer = AmericanSoccerAnalysis(logging_level=level)
 
 @when(u'the proxy is set to "{url}"')
 def step_impl(context, url):

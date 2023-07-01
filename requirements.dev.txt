@@ -1,6 +1,6 @@
 requests==2.31.0
 types-requests==2.31.0.1
-CacheControl==0.13.0
+CacheControl==0.13.1
 rapidfuzz==3.0.0
 behave==1.2.6
 pandas==2.0.2

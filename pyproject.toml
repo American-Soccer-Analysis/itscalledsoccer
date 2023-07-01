@@ -36,7 +36,7 @@ Repository = "https://github.com/American-Soccer-Analysis/itscalledsoccer"
 
 [project.optional-dependencies]
 test = [
-    'types-requests==2.30.0.0',
+    'types-requests==2.31.0.1',
     'behave==1.2.6',
     'black==23.3.0',
     'mypy==1.4.1',

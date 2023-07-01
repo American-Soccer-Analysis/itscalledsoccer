@@ -5,5 +5,5 @@ rapidfuzz==3.0.0
 behave==1.2.6
 pandas==2.0.2
 black==23.3.0
-mypy==1.3.0
+mypy==1.4.1
 isort==5.12.0

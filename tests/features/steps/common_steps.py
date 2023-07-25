@@ -1,6 +1,8 @@
 from behave import *
 from pandas import DataFrame, read_json
 from pathlib import Path
+from itscalledsoccer.client import AmericanSoccerAnalysis
+from unittest.mock import patch
 
 def split_args(args: str) -> dict:
     kwargs = {}
@@ -22,7 +24,8 @@ def split_args(args: str) -> dict:
 
 @given("there is an ASA client")
 def step_impl(context):
-    pass
+    with patch('itscalledsoccer.client.AmericanSoccerAnalysis._get_entity'):
+        context.soccer = AmericanSoccerAnalysis()
 
 @then("there is data")
 def step_impl(context):

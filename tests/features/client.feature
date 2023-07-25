@@ -30,8 +30,13 @@ Feature: Client initialization
 		Then there is a logger
 		And the logging level is DEBUG
 
-# TODO: this scenario stalls
-# Scenario: An ASA client's proxy settings are configurable
-# 	Given there is an ASA client
-# 	When the proxy is set to "10.10.1.10"
-# 	Then the session is using a proxy
+	# TODO: this scenario stalls
+	# Scenario: An ASA client's proxy settings are configurable
+	# 	Given there is an ASA client
+	# 	When the proxy is set to "10.10.1.10"
+	# 	Then the session is using a proxy
+
+	Scenario: An ASA client's cache can be cleared
+		Given there is an ASA client
+		When the cache is cleared
+		Then the cache is empty

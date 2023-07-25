@@ -341,6 +341,11 @@ class AmericanSoccerAnalysis:
 
         return stats
 
+    def clear_cache(self) -> None:
+        """Clears the session cache"""
+        for adapter in self.session.adapters:
+            adapter.cache.data = {}
+
     def get_stadia(
         self,
         leagues: Union[str, List[str], None] = None,

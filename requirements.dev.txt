@@ -1,5 +1,5 @@
 requests==2.31.0
-types-requests==2.31.0.1
+types-requests==2.31.0.2
 CacheControl==0.13.1
 rapidfuzz==3.1.2
 behave==1.2.6

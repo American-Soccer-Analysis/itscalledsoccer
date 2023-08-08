@@ -7,6 +7,7 @@
 ![PyPi Version](https://img.shields.io/pypi/v/itscalledsoccer.svg)
 ![Python tests](https://github.com/American-Soccer-Analysis/itscalledsoccer/actions/workflows/python-tests.yml/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PyPI download month](https://img.shields.io/pypi/dm/itscalledsoccer.svg)](https://pypi.python.org/pypi/itscalledsoccer/)
 <!-- badges: end -->
 
 ---

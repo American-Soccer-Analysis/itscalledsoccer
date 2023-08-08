@@ -52,11 +52,3 @@ def step_impl(context):
     }
     assert context.soccer.SESSION.proxies == proxies
 
-@when(u'the cache is cleared')
-def step_impl(context):
-    context.soccer.clear_cache()
-
-@then(u'the cache is empty')
-def step_impl(context):
-    for adapter in context.soccer.session.adapters:
-        assert adapter.cache.data == {}

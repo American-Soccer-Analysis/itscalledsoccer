@@ -53,6 +53,7 @@ itscalledsoccer = ["tests","tests.*"]
 [[tool.mypy.overrides]]
 module = [
     'cachecontrol',
+    'cachecontrol.heuristics',
     'fuzzywuzzy',
     'pandas',
     'setuptools',

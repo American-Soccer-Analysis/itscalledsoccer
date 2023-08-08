@@ -36,7 +36,3 @@ Feature: Client initialization
 	# 	When the proxy is set to "10.10.1.10"
 	# 	Then the session is using a proxy
 
-	Scenario: An ASA client's cache can be cleared
-		Given there is an ASA client
-		When the cache is cleared
-		Then the cache is empty

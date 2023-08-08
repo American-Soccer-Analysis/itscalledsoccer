@@ -5,6 +5,7 @@ from typing import Dict, List, Optional, Union
 import pandas as pd
 import requests
 from cachecontrol import CacheControl
+from cachecontrol.heuristics import ExpiresAfter
 from rapidfuzz import fuzz, process
 
 
@@ -28,7 +29,7 @@ class AmericanSoccerAnalysis:
         SESSION = requests.session()
         if proxies:
             SESSION.proxies.update(proxies)
-        CACHE_SESSION = CacheControl(SESSION)
+        CACHE_SESSION = CacheControl(SESSION, heuristic=ExpiresAfter(days=1))
 
         if logging_level:
             if logging_level.upper() in [
@@ -340,11 +341,6 @@ class AmericanSoccerAnalysis:
                 stats = pd.concat([stats, response])
 
         return stats
-
-    def clear_cache(self) -> None:
-        """Clears the session cache"""
-        for adapter in self.session.adapters:
-            adapter.cache.data = {}
 
     def get_stadia(
         self,

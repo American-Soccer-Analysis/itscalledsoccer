@@ -42,7 +42,7 @@ pip install itscalledsoccer
 To install a development version, clone this repo and run the following command.
 
 ```sh
-pip install --editable itscalledsoccer/python-package
+pip install --editable .
 ```
 
 ## Usage

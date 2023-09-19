@@ -8,12 +8,12 @@ authors = [
   { name = "American Soccer Analysis", email = "americansocceranalysis@gmail.com" },
 ]
 keywords = [
-    "stats",
-    "soccer",
-    "api",
-    "football",
-    "american",
-    "machine learning"
+  "stats",
+  "soccer",
+  "api",
+  "football",
+  "american",
+  "machine learning",
 ]
 classifiers = [
   "Programming Language :: Python",
@@ -21,13 +21,13 @@ classifiers = [
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11"
+  "Programming Language :: Python :: 3.11",
 ]
 dependencies = [
-    "requests==2.31.0",
-    "CacheControl==0.13.1",
-    "rapidfuzz==3.2.0",
-    "pandas==2.1.0"
+  "requests~=2.31.0",
+  "CacheControl~=0.13.1",
+  "rapidfuzz~=3.2.0",
+  "pandas~=2.0.3",
 ]
 version = "1.1.0"
 
@@ -36,11 +36,11 @@ Repository = "https://github.com/American-Soccer-Analysis/itscalledsoccer"
 
 [project.optional-dependencies]
 test = [
-    'types-requests==2.31.0.2',
-    'behave==1.2.6',
-    'black==23.7.0',
-    'mypy==1.5.1',
-    'isort==5.12.0'
+  'types-requests~=2.31.0.2',
+  'behave~=1.2.6',
+  'black~=23.7.0',
+  'mypy~=1.5.1',
+  'isort~=5.12.0',
 ]
 
 [build-system]
@@ -48,15 +48,15 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.exclude-package-data]
-itscalledsoccer = ["tests","tests.*"]
+itscalledsoccer = ["tests", "tests.*"]
 
 [[tool.mypy.overrides]]
 module = [
-    'cachecontrol',
-    'cachecontrol.heuristics',
-    'fuzzywuzzy',
-    'pandas',
-    'setuptools',
-    'rapidfuxx'
+  'cachecontrol',
+  'cachecontrol.heuristics',
+  'fuzzywuzzy',
+  'pandas',
+  'setuptools',
+  'rapidfuxx',
 ]
 ignore_missing_imports = true

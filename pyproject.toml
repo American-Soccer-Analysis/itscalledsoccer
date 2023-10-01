@@ -27,7 +27,7 @@ dependencies = [
   "requests~=2.31.0",
   "CacheControl~=0.13.1",
   "rapidfuzz~=3.2.0",
-  "pandas~=2.0.3",
+  "pandas>=2.0.3,<2.2.0",
 ]
 version = "1.1.0"
 

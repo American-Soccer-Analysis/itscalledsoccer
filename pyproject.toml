@@ -38,7 +38,7 @@ Repository = "https://github.com/American-Soccer-Analysis/itscalledsoccer"
 test = [
   'types-requests~=2.31.0.2',
   'behave~=1.2.6',
-  'black~=23.7.0',
+  'black>=23.7,<23.10',
   'mypy~=1.5.1',
   'isort~=5.12.0',
 ]

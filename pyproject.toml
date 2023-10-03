@@ -24,10 +24,10 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
 ]
 dependencies = [
-  "requests~=2.31.0",
-  "CacheControl~=0.13.1",
-  "rapidfuzz~=3.2.0",
-  "pandas~=2.0.3",
+  "requests>=2.31.0",
+  "CacheControl>=0.13.1",
+  "rapidfuzz>=3.2.0",
+  "pandas>=2.0.3",
 ]
 version = "1.1.0"
 
@@ -36,11 +36,14 @@ Repository = "https://github.com/American-Soccer-Analysis/itscalledsoccer"
 
 [project.optional-dependencies]
 test = [
-  'types-requests~=2.31.0.2',
-  'behave~=1.2.6',
-  'black~=23.7.0',
-  'mypy~=1.5.1',
-  'isort~=5.12.0',
+  "types-requests",
+  "behave",
+  "black",
+  "mypy",
+  "ruff",
+  "mkdocs",
+  "mkdocstrings[python]",
+  "mkdocs-material",
 ]
 
 [build-system]
@@ -52,11 +55,14 @@ itscalledsoccer = ["tests", "tests.*"]
 
 [[tool.mypy.overrides]]
 module = [
-  'cachecontrol',
-  'cachecontrol.heuristics',
-  'fuzzywuzzy',
-  'pandas',
-  'setuptools',
-  'rapidfuxx',
+  "cachecontrol",
+  "cachecontrol.heuristics",
+  "fuzzywuzzy",
+  "pandas",
+  "setuptools",
+  "rapidfuzz",
 ]
 ignore_missing_imports = true
+
+[tool.ruff]
+ignore = ["E501"]

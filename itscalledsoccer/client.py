@@ -23,8 +23,8 @@ class AmericanSoccerAnalysis:
     ) -> None:
         """Class constructor
 
-        :param proxies: A dictionary containing proxy mappings, see https://2.python-requests.org/en/master/user/advanced/#proxies
-        :param logging_level: A string respresenting the logging level of the logger
+        :param proxies: A dictionary containing proxy mappings, see https://docs.python-requests.org/en/latest/user/advanced/#proxies
+        :param logging_level: A string representing the logging level of the logger
         """
         SESSION = requests.session()
         if proxies:
@@ -96,7 +96,7 @@ class AmericanSoccerAnalysis:
             names = self.teams["team_name"].to_list()
 
         # Getting back nan from the API for some names
-        names = [n for n in names if pd.isnull(n) == False]
+        names = [n for n in names if pd.isnull(n) is False]
 
         matches = process.extractOne(name, names, scorer=fuzz.partial_ratio)
         if matches:
@@ -137,8 +137,8 @@ class AmericanSoccerAnalysis:
         """
         if leagues:
             if isinstance(leagues, list):
-                for l in leagues:
-                    if l not in self.LEAGUES:
+                for league in leagues:
+                    if league not in self.LEAGUES:
                         self.LOGGER.info(
                             f"Leagues are limited only to the following options: {self.LEAGUES}."
                         )

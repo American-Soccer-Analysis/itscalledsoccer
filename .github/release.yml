@@ -1,0 +1,9 @@
+changelog:
+  categories:
+    - title: What's new ✨
+    - title: Deprecations 🌆
+    - title: Bug Fixes 🐛
+    - title: Documentation 📚
+    - title: Dependencies 📌
+      labels:
+        - dependencies

@@ -3,8 +3,10 @@ repo_url: https://github.com/American-Soccer-Analysis/itscalledsoccer
 repo_name: itscalledsoccer
 theme:
   name: "material"
-  icon: img/logo.png
-  favicon: img/favicon.png
+  logo: assets/images/logo.png
+  icon:
+    repo: fontawesome/brands/github
+  favicon: assets/images/logo.png
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"

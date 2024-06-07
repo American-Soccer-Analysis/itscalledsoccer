@@ -2,7 +2,7 @@ import json
 from logging import getLevelName, getLogger
 from typing import Dict, List, Optional, Union
 
-import pandas as pd
+from pandas import DataFrame, read_json, isnull, concat
 import requests
 from cachecontrol import CacheControl
 from cachecontrol.heuristics import ExpiresAfter
@@ -23,8 +23,9 @@ class AmericanSoccerAnalysis:
     ) -> None:
         """Class constructor
 
-        :param proxies: A dictionary containing proxy mappings, see https://docs.python-requests.org/en/latest/user/advanced/#proxies
-        :param logging_level: A string representing the logging level of the logger
+        Args:
+            proxies (Optional[dict], optional): A dictionary containing proxy mappings, see https://docs.python-requests.org/en/latest/user/advanced/#proxies. Defaults to None.
+            logging_level (Optional[str], optional): A string representing the logging level of the logger. Defaults to "WARNING".
         """
         SESSION = requests.session()
         if proxies:
@@ -52,30 +53,36 @@ class AmericanSoccerAnalysis:
         self.referees = self._get_entity("referee")
         print("Finished initializing client")
 
-    def _get_entity(self, type: str) -> pd.DataFrame:
+    def _get_entity(self, type: str) -> DataFrame:
         """Gets all the data for a specific type and
-        stores it in a dataframe.
+        stores it in a DataFrame.
 
-        :param type: type of data to get
-        :returns: dataframe
+        Args:
+            type (str): type of data to get
+
+        Returns:
+            DataFrame: _description_
         """
         plural_type = f"{type}s" if type != "stadia" else f"{type}"
         print(f"Gathering all {plural_type}")
-        df = pd.DataFrame([])
+        df = DataFrame([])
         for league in self.LEAGUES:
             url = f"{self.BASE_URL}{league}/{plural_type}"
             resp_df = self._execute_query(url, {})
             resp_df = resp_df.assign(competition=league)
-            df = pd.concat([df, resp_df], ignore_index=True)
+            df = concat([df, resp_df], ignore_index=True)
         return df
 
     def _convert_name_to_id(self, type: str, name: str) -> str:
         """Converts the name of a player, manager, stadium, referee or team
         to their corresponding id.
 
-        :param type: type of name to convert
-        :param name: name
-        :returns: a string
+        Args:
+            type (str): type of name to convert
+            name (str): name
+
+        Returns:
+          str: the matched id
         """
         min_score = 70
 
@@ -96,7 +103,7 @@ class AmericanSoccerAnalysis:
             names = self.teams["team_name"].to_list()
 
         # Getting back nan from the API for some names
-        names = [n for n in names if pd.isnull(n) is False]
+        names = [n for n in names if isnull(n) is False]
 
         matches = process.extractOne(name, names, scorer=fuzz.partial_ratio)
         if matches:
@@ -116,9 +123,12 @@ class AmericanSoccerAnalysis:
     ) -> Union[str, List[str], None]:
         """Converts a name or list of names to an id or list of ids
 
-        :param type: type of name
-        :param names: a name or list of names
-        :returns: an id or list of ids
+        Args:
+            type (str): type of name
+            names (str,List[str]): a name or list of names
+
+        Returns:
+            str or List[str]: the matched ids
         """
         ids: List[str] = []
         if names is None:
@@ -133,7 +143,8 @@ class AmericanSoccerAnalysis:
     def _check_leagues(self, leagues: Union[str, List[str], None]) -> None:
         """Validates the leagues parameter
 
-        :param leagues: league abbreviation or list of league abbreviations
+        Args:
+            leagues (str, List[str], None): league abbreviation or list of league abbreviations
         """
         if leagues:
             if isinstance(leagues, list):
@@ -153,7 +164,8 @@ class AmericanSoccerAnalysis:
     def _check_leagues_salaries(self, leagues: Union[str, List[str], None]) -> None:
         """Validates the leagues parameter for salary searches
 
-        :param leagues: league abbreviation or list of league abbreviations
+        Args:
+            leagues (str, List[str], None): league abbreviation or list of league abbreviations
         """
         if leagues:
             if isinstance(leagues, list):
@@ -171,8 +183,9 @@ class AmericanSoccerAnalysis:
         """Makes sure only ids or names are passed to a function and verifies
         they are the right data type.
 
-        :param ids: a single id or list of ids
-        :param names: a single name or list of names
+        Args:
+            ids (str, List[str], None): a single id or list of ids
+            names (str, List[str], None): a single name or list of names
         """
         if ids and names:
             self.LOGGER.info("Please specify only IDs or names, not both.")
@@ -190,19 +203,22 @@ class AmericanSoccerAnalysis:
 
     def _filter_entity(
         self,
-        entity_all: pd.DataFrame,
+        entity_all: DataFrame,
         entity_type: str,
         leagues: Union[str, List[str], None],
         ids: Union[str, List[str], None] = None,
         names: Union[str, List[str], None] = None,
-    ) -> pd.DataFrame:
-        """Filters a dataframe based on the arguments given.
+    ) -> DataFrame:
+        """Filters a DataFrame based on the arguments given.
 
-        :param entity_all: a dataframe containing the complete set of data
-        :param entity_type: the type of data
-        :param ids: a single id or list of ids
-        :param names: a single name or list of names
-        :returns: list of dictionaries, e.g. a dataframe converted to JSON
+        Args:
+            entity_all (DataFrame): a DataFrame containing the complete set of data
+            entity_type (str): the type of data
+            leagues (Union[str, List[str], None]): league abbreviation or list of league abbreviations
+            ids (str, List[str], None): a single id or list of ids
+            names (str, List[str], None): a single name or list of names
+        Returns:
+            DataFrame
         """
         self._check_leagues(leagues)
         self._check_ids_names(ids, names)
@@ -229,12 +245,15 @@ class AmericanSoccerAnalysis:
 
     def _execute_query(
         self, url: str, params: Dict[str, Union[str, List[str], None]]
-    ) -> pd.DataFrame:
+    ) -> DataFrame:
         """Executes a query while handling the max number of responses from the API
 
-        :param url: the API endpoint to call
-        :param params: URL query strings
-        :returns: Dataframe
+        Args:
+            url (str): the API endpoint to call
+            params (Dict[str, Union[str, List[str], None]): URL query strings
+
+        Returns:
+            DataFrame
         """
         for k, v in params.items():
             if isinstance(v, list):
@@ -243,41 +262,56 @@ class AmericanSoccerAnalysis:
         temp_response = self._single_request(url, params)
         response = temp_response
 
-        if isinstance(response, pd.DataFrame):
+        if isinstance(response, DataFrame):
             offset = self.MAX_API_LIMIT
 
             while len(temp_response.index) == self.MAX_API_LIMIT:
                 params["offset"] = str(offset)
                 temp_response = self._single_request(url, params)
-                response = pd.concat([response, temp_response], ignore_index=True)
+                response = concat([response, temp_response], ignore_index=True)
                 offset = offset + self.MAX_API_LIMIT
 
         return response
 
     def _single_request(
         self, url: str, params: Dict[str, Union[str, List[str], None]]
-    ) -> pd.DataFrame:
+    ) -> DataFrame:
         """Handles single call to the API
 
-        :param url: the API endpoint to call
-        :param params: URL query strings
-        :returns: Dataframe
+        Args:
+            url (str): the API endpoint to call
+            params (Dict[str, Union[str, List[str], None]): URL query strings
+
+        Returns:
+            DataFrame
         """
         response = self.session.get(url=url, params=params)
         response.raise_for_status()
-        resp_df = pd.read_json(json.dumps(response.json()))
+        resp_df = read_json(json.dumps(response.json()))
         return resp_df
 
     def _get_stats(
         self, leagues: Union[str, List[str]], type: str, entity: str, **kwargs
-    ) -> pd.DataFrame:
+    ) -> DataFrame:
         """Handles calls to stats APIs
 
-        :param type: the API endpoint to call
-        :param entity: URL query strings
-        :param leagues:
-        :param kwargs: additional keyword arguments
-        :returns: Dataframe
+        Args:
+            type (str): the API endpoint to call
+            entity (str): URL query strings
+            leagues (str, List[str], None): league abbreviation or list of league abbreviations
+
+        Keyword Args:
+            split_by_teams (bool): Logical indicator to group results by team.
+            split_by_seasons (bool): Logical indicator to group results by season.
+            split_by_positions (bool): Logical indicator to group results by positions. Results must be grouped by at least one of teams, positions, or seasons.
+            player_ids (Union[str, List[str]]): Player IDs on which to filter. Cannot be combined with player_names. Accepts a string or list of strings.
+            player_names (Union[str, List[str]]): Player names on which to filter. Partial matches are accepted. Cannot be combined with player_ids. Accepts a string or list of strings.
+            team_ids (Union[str, List[str]]): Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
+            team_names (Union[str, List[str]]): Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
+            game_ids (Union[str, List[str]]): Game IDs on which to filter. Accepts a string or list of strings.
+
+        Returns:
+            DataFrame
         """
         self.LOGGER.info(f"get_stats called with {locals()}")
         if type == "salaries":
@@ -326,7 +360,7 @@ class AmericanSoccerAnalysis:
             kwargs["game_id"] = kwargs["game_ids"]
             kwargs.pop("game_ids")
 
-        stats = pd.DataFrame([])
+        stats = DataFrame([])
         if isinstance(leagues, str):
             url = f"{self.base_url}{leagues}/{entity}/{type}"
             response = self._execute_query(url, kwargs)
@@ -338,7 +372,7 @@ class AmericanSoccerAnalysis:
 
                 response = self._execute_query(url, kwargs)
 
-                stats = pd.concat([stats, response])
+                stats = concat([stats, response])
 
         return stats
 
@@ -347,13 +381,16 @@ class AmericanSoccerAnalysis:
         leagues: Union[str, List[str], None] = None,
         ids: Union[str, List[str], None] = None,
         names: Union[str, List[str], None] = None,
-    ) -> pd.DataFrame:
+    ) -> DataFrame:
         """Get information associated with stadia
 
-        :param leagues: league abbreviation or a list of league abbreviations
-        :param ids: a single stadium id or a list of stadia ids (optional)
-        :param names: a single stadium name or a list of stadia names (optional)
-        :returns: Dataframe
+        Args:
+            leagues (Union[str, List[str], None], optional): league abbreviation or list of league abbreviations. Defaults to None.
+            ids (Union[str, List[str], None], optional): a single id or list of ids. Defaults to None.
+            names (Union[str, List[str], None], optional): a single name or list of names. Defaults to None.
+
+        Returns:
+            DataFrame
         """
         stadia = self._filter_entity(self.stadia, "stadium", leagues, ids, names)
         return stadia
@@ -363,13 +400,16 @@ class AmericanSoccerAnalysis:
         leagues: Union[str, List[str], None] = None,
         ids: Union[str, List[str], None] = None,
         names: Union[str, List[str], None] = None,
-    ) -> pd.DataFrame:
+    ) -> DataFrame:
         """Get information associated with referees
 
-        :param leagues: league abbreviation or a list of league abbreviations
-        :param ids: a single referee id or a list of referee ids (optional)
-        :param names: a single referee name or a list of referee names (optional)
-        :returns: Dataframe
+        Args:
+            leagues (Union[str, List[str], None], optional): league abbreviation or a list of league abbreviations. Defaults to None.
+            ids (Union[str, List[str], None], optional): a single referee id or a list of referee ids. Defaults to None.
+            names (Union[str, List[str], None], optional): a single referee name or a list of referee names. Defaults to None.
+
+        Returns:
+            DataFrame
         """
         referees = self._filter_entity(self.referees, "referee", leagues, ids, names)
         return referees
@@ -379,13 +419,16 @@ class AmericanSoccerAnalysis:
         leagues: Union[str, List[str], None] = None,
         ids: Union[str, List[str], None] = None,
         names: Union[str, List[str], None] = None,
-    ) -> pd.DataFrame:
+    ) -> DataFrame:
         """Get information associated with managers
 
-        :param leagues: league abbreviation or a list of league abbreviations
-        :param ids: a single referee id or a list of referee ids (optional)
-        :param names: a single referee name or a list of referee names (optional)
-        :returns: Dataframe
+        Args:
+            leagues (Union[str, List[str], None], optional): league abbreviation or a list of league abbreviations. Defaults to None.
+            ids (Union[str, List[str], None], optional): a single manager id or a list of manager ids. Defaults to None.
+            names (Union[str, List[str], None], optional): a single manager name or a list of manager names. Defaults to None.
+
+        Returns:
+            DataFrame_
         """
         managers = self._filter_entity(self.managers, "manager", leagues, ids, names)
         return managers
@@ -395,13 +438,16 @@ class AmericanSoccerAnalysis:
         leagues: Union[str, List[str], None] = None,
         ids: Union[str, List[str], None] = None,
         names: Union[str, List[str], None] = None,
-    ) -> pd.DataFrame:
+    ) -> DataFrame:
         """Get information associated with teams
 
-        :param leagues: league abbreviation or a list of league abbreviations
-        :param ids: a single team id or a list of team ids (optional)
-        :param names: a single team name or a list of team names (optional)
-        :returns: Dataframe
+        Args:
+            leagues (Union[str, List[str], None], optional): league abbreviation or a list of league abbreviations. Defaults to None.
+            ids (Union[str, List[str], None], optional): a single team id or a list of team ids. Defaults to None.
+            names (Union[str, List[str], None], optional): a single team name or a list of team names. Defaults to None.
+
+        Returns:
+            DataFrame_
         """
         teams = self._filter_entity(self.teams, "team", leagues, ids, names)
         return teams
@@ -411,13 +457,16 @@ class AmericanSoccerAnalysis:
         leagues: Union[str, List[str], None] = None,
         ids: Union[str, List[str], None] = None,
         names: Union[str, List[str], None] = None,
-    ) -> pd.DataFrame:
+    ) -> DataFrame:
         """Get information associated with players
 
-        :param league: league abbreviation or a list of league abbreviations
-        :param ids: a single player id or a list of player ids (optional)
-        :param names: a single player name or a list of player names (optional)
-        :returns: Dataframe
+        Args:
+            leagues (Union[str, List[str], None], optional): league abbreviation or a list of league abbreviations. Defaults to None.
+            ids (Union[str, List[str], None], optional): a single player id or a list of player ids. Defaults to None.
+            names (Union[str, List[str], None], optional): a single player name or a list of player names. Defaults to None.
+
+        Returns:
+            DataFrame_
         """
         players = self._filter_entity(self.players, "player", leagues, ids, names)
         return players
@@ -430,16 +479,19 @@ class AmericanSoccerAnalysis:
         team_names: Union[str, List[str], None] = None,
         seasons: Union[str, List[str], None] = None,
         stages: Union[str, List[str], None] = None,
-    ) -> pd.DataFrame:
+    ) -> DataFrame:
         """Get information related to games
 
-        :param leagues: league abbreviation or a list of league abbreviations
-        :param game_ids: a single game id or a list of game ids
-        :param team_ids: a single team id or a list of team ids
-        :param team_names: a single team name or a list of team names
-        :param seasons: a single year of a league season or a list of years
-        :param stages: a single stage of competition in which a game took place or list of stages
-        :returns: Dataframe
+        Args:
+            leagues (Union[str, List[str], None], optional): league abbreviation or a list of league abbreviations. Defaults to None.
+            game_ids (Union[str, List[str], None], optional): a single game id or a list of game ids. Defaults to None.
+            team_ids (Union[str, List[str], None], optional): a single team id or a list of team ids. Defaults to None.
+            team_names (Union[str, List[str], None], optional): a single team name or a list of team names. Defaults to None.
+            seasons (Union[str, List[str], None], optional): a single year of a league season or a list of years. Defaults to None.
+            stages (Union[str, List[str], None], optional): a single stage of competition in which a game took place or list of stages. Defaults to None.
+
+        Returns:
+            DataFrame_
         """
         self._check_leagues(leagues)
         self._check_ids_names(team_ids, team_names)
@@ -459,7 +511,7 @@ class AmericanSoccerAnalysis:
         if not leagues:
             leagues = self.LEAGUES
 
-        games = pd.DataFrame([])
+        games = DataFrame([])
         if isinstance(leagues, str):
             games_url = f"{self.base_url}{leagues}/games"
             response = self._execute_query(games_url, query)
@@ -470,33 +522,38 @@ class AmericanSoccerAnalysis:
                 games_url = f"{self.base_url}{league}/games"
                 response = self._execute_query(games_url, query)
 
-                games = pd.concat([games, response])
+                games = concat([games, response])
 
         return games.sort_values(by=["date_time_utc"], ascending=False)
 
     def get_player_xgoals(
         self, leagues: Union[str, List[str]] = LEAGUES, **kwargs
-    ) -> pd.DataFrame:
-        """Retrieves a data frame containing player xG data meeting the specified conditions.
-        :param leagues: League(s) on which to filter. Accepts a string or list of strings.
-        :param kwargs: The following arguments will be parsed:
-            minimum_minutes: Minimum threshold for sum of minutes played.
-            minimum_shots: Minimum threshold for sum of shots.
-            minimum_key_passes: Minimum threshold for sum of key passes.
-            player_ids: Player IDs on which to filter. Cannot be combined with player_names. Accepts a string or list of strings.
-            player_names: Player names on which to filter. Partial matches are accepted. Cannot be combined with player_ids. Accepts a string or list of strings.
-            team_ids: Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
-            team_names: Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
-            season_name: Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
-            start_date: Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
-            end_date: End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
-            shot_pattern: Describes the possessing actions leading to the shot. Valid keywords include: 'Set piece', 'Corner', 'Free kick', 'Penalty', 'Fastbreak', and 'Regular'. Accepts a string or list of strings.
-            split_by_teams: Logical indicator to group results by team.
-            split_by_seasons: Logical indicator to group results by season.
-            split_by_games: Logical indicator to group results by game.
-            stage_name: Describes the stage of competition in which a game took place. Accepts a string or list of strings.
-            general_position: Describes the most common position played by each player over the specified period of time. Valid keywords include: 'GK', 'CB', 'FB', 'DM', 'CM', 'AM', 'W', and 'ST'. Accepts a string or list of strings.
-        :returns: Dataframe
+    ) -> DataFrame:
+        """Retrieves a DataFrame containing player xG data meeting the specified conditions.
+
+        Args:
+            leagues (Union[str, List[str]], optional): League(s) on which to filter. Accepts a string or list of strings.
+
+        Keyword Args:
+            minimum_minutes (int): Minimum threshold for sum of minutes played.
+            minimum_shots (int): Minimum threshold for sum of shots.
+            minimum_key_passes (int): Minimum threshold for sum of key passes.
+            player_ids (Union[str, List[str]]): Player IDs on which to filter. Cannot be combined with player_names. Accepts a string or list of strings.
+            player_names (Union[str, List[str]]): Player names on which to filter. Partial matches are accepted. Cannot be combined with player_ids. Accepts a string or list of strings.
+            team_ids (Union[str, List[str]]): Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
+            team_names (Union[str, List[str]]): Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
+            season_name (Union[str, List[str]]): Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
+            start_date (str): Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+            end_date (str): End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+            shot_pattern (Union[str, List[str]]): Describes the possessing actions leading to the shot. Valid keywords include: 'Set piece', 'Corner', 'Free kick', 'Penalty', 'Fastbreak', and 'Regular'. Accepts a string or list of strings.
+            split_by_teams (bool): Logical indicator to group results by team.
+            split_by_seasons (bool): Logical indicator to group results by season.
+            split_by_games (bool): Logical indicator to group results by game.
+            stage_name (Union[str, List[str]]): Describes the stage of competition in which a game took place. Accepts a string or list of strings.
+            general_position (Union[str, List[str]]): Describes the most common position played by each player over the specified period of time. Valid keywords include: 'GK', 'CB', 'FB', 'DM', 'CM', 'AM', 'W', and 'ST'. Accepts a string or list of strings.
+
+        Returns:
+            DataFrame
         """
         player_xgoals = self._get_stats(
             leagues, type="xgoals", entity="players", **kwargs
@@ -505,26 +562,31 @@ class AmericanSoccerAnalysis:
 
     def get_player_xpass(
         self, leagues: Union[str, List[str]] = LEAGUES, **kwargs
-    ) -> pd.DataFrame:
-        """Retrieves a data frame containing player xPass data meeting the specified conditions.
-        :param leagues: League(s) on which to filter. Accepts a string or list of strings.
-        :param kwargs: The following arguments will be parsed:
-            minimum_minutes: Minimum threshold for sum of minutes played.
-            minimum_passes: Minimum threshold for sum of attempted passes.
-            player_ids: Player IDs on which to filter. Cannot be combined with player_names. Accepts a string or list of strings.
-            player_names: Player names on which to filter. Partial matches are accepted. Cannot be combined with player_ids. Accepts a string or list of strings.
-            team_ids: Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
-            team_names: Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
-            season_name: Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
-            start_date: Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
-            end_date: End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
-            pass_origin_third: Describes the third of the field from which the pass originated. Valid keywords include: 'Attacking', 'Middle', and 'Defensive'. Accepts a string or list of strings.
-            split_by_teams: Logical indicator to group results by team.
-            split_by_seasons: Logical indicator to group results by season.
-            split_by_games: Logical indicator to group results by game.
-            stage_name: Describes the stage of competition in which a game took place. Accepts a string or list of strings.
-            general_position: Describes the most common position played by each player over the specified period of time. Valid keywords include: 'GK', 'CB', 'FB', 'DM', 'CM', 'AM', 'W', and 'ST'. Accepts a string or list of strings.
-        :returns: Dataframe
+    ) -> DataFrame:
+        """Retrieves a DataFrame containing player xPass data meeting the specified conditions.
+
+        Args:
+            leagues (Union[str, List[str]], optional): League(s) on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
+
+        Keyword Args:
+            minimum_minutes (int): Minimum threshold for sum of minutes played.
+            minimum_passes (int): Minimum threshold for sum of attempted passes.
+            player_ids (Union[str, List[str]]): Player IDs on which to filter. Cannot be combined with player_names. Accepts a string or list of strings.
+            player_names (Union[str, List[str]]): Player names on which to filter. Partial matches are accepted. Cannot be combined with player_ids. Accepts a string or list of strings.
+            team_ids (Union[str, List[str]]): Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
+            team_names (Union[str, List[str]]): Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
+            season_name (Union[str, List[str]]): Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
+            start_date (str): Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+            end_date (str): End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+            pass_origin_third (Union[str, List[str]]): Describes the third of the field from which the pass originated. Valid keywords include: 'Attacking', 'Middle', and 'Defensive'. Accepts a string or list of strings.
+            split_by_teams (bool): Logical indicator to group results by team.
+            split_by_seasons (bool): Logical indicator to group results by season.
+            split_by_games (bool): Logical indicator to group results by game.
+            stage_name (Union[str, List[str]]): Describes the stage of competition in which a game took place. Accepts a string or list of strings.
+            general_position (Union[str, List[str]]): Describes the most common position played by each player over the specified period of time. Valid keywords include: 'GK', 'CB', 'FB', 'DM', 'CM', 'AM', 'W', and 'ST'. Accepts a string or list of strings.
+
+        Returns:
+            DataFrame
         """
         player_xpass = self._get_stats(
             leagues, type="xpass", entity="players", **kwargs
@@ -533,26 +595,31 @@ class AmericanSoccerAnalysis:
 
     def get_player_goals_added(
         self, leagues: Union[str, List[str]] = LEAGUES, **kwargs
-    ) -> pd.DataFrame:
-        """Retrieves a data frame containing player g+ data meeting the specified conditions.
-        :param leagues: League(s) on which to filter. Accepts a string or list of strings.
-        :param kwargs: The following arguments will be parsed:
-            minimum_minutes: Minimum threshold for sum of minutes played.
-            player_ids: Player IDs on which to filter. Cannot be combined with player_names. Accepts a string or list of strings.
-            player_names: Player names on which to filter. Partial matches are accepted. Cannot be combined with player_ids. Accepts a string or list of strings.
-            team_ids: Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
-            team_names: Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
-            season_name: Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
-            start_date: Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
-            end_date: End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
-            split_by_teams: Logical indicator to group results by team.
-            split_by_seasons: Logical indicator to group results by season.
-            split_by_games: Logical indicator to group results by game.
-            stage_name: Describes the stage of competition in which a game took place. Accepts a string or list of strings.
-            action_type: Describes the goals added (g+) action type. Valid keywords include: 'Dribbling', 'Fouling', 'Interrupting', 'Passing', 'Receiving', and 'Shooting'. Accepts a string or list of strings.
-            general_position: Describes the most common position played by each player over the specified period of time. Valid keywords include: 'GK', 'CB', 'FB', 'DM', 'CM', 'AM', 'W', and 'ST'. Accepts a string or list of strings.
-            above_replacement: Logical indicator to compare players against replacement-level values. This will only return aggregated g+ values, rather than disaggregated g+ values by action type.
-        :returns: Dataframe
+    ) -> DataFrame:
+        """Retrieves a DataFrame containing player g+ data meeting the specified conditions.
+
+        Args:
+            leagues (Union[str, List[str]], optional): League(s) on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
+
+        Keyword Args:
+            minimum_minutes (int): Minimum threshold for sum of minutes played.
+            player_ids (Union[str, List[str]]): Player IDs on which to filter. Cannot be combined with player_names. Accepts a string or list of strings.
+            player_names (Union[str, List[str]]): Player names on which to filter. Partial matches are accepted. Cannot be combined with player_ids. Accepts a string or list of strings.
+            team_ids (Union[str, List[str]]): Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
+            team_names (Union[str, List[str]]): Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
+            season_name (Union[str, List[str]]): Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
+            start_date (str): Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+            end_date (str): End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+            split_by_teams (bool): Logical indicator to group results by team.
+            split_by_seasons (bool): Logical indicator to group results by season.
+            split_by_games (bool): Logical indicator to group results by game.
+            stage_name (Union[str, List[str]]): Describes the stage of competition in which a game took place. Accepts a string or list of strings.
+            action_type (Union[str, List[str]]): Describes the goals added (g+) action type. Valid keywords include: 'Dribbling', 'Fouling', 'Interrupting', 'Passing', 'Receiving', and 'Shooting'. Accepts a string or list of strings.
+            general_position (Union[str, List[str]]): Describes the most common position played by each player over the specified period of time. Valid keywords include: 'GK', 'CB', 'FB', 'DM', 'CM', 'AM', 'W', and 'ST'. Accepts a string or list of strings.
+            above_replacement (bool): Logical indicator to compare players against replacement-level values. This will only return aggregated g+ values, rather than disaggregated g+ values by action type.
+
+        Returns:
+            DataFrame
         """
         player_goals_added = self._get_stats(
             leagues, type="goals-added", entity="players", **kwargs
@@ -561,20 +628,24 @@ class AmericanSoccerAnalysis:
 
     def get_player_salaries(
         self, leagues: Union[str, List[str]] = "mls", **kwargs
-    ) -> pd.DataFrame:
-        """Retrieves a data frame containing player salary data meeting the specified conditions
+    ) -> DataFrame:
+        """Retrieves a DataFrame containing player salary data meeting the specified conditions
 
-        :param leagues: Leagues on which to filter. Accepts a string or list of strings.
-        :param kwargs: The following arguments will be parsed:
-            player_ids: Player IDs on which to filter. Cannot be combined with player_names. Accepts a string or list of strings.
-            player_names: Player names on which to filter. Partial matches are accepted. Cannot be combined with player_ids. Accepts a string or list of strings.
-            team_ids: Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
-            team_names: Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
-            position: Describes the general position, as reported by the players' association. Valid keywords include: 'GK', 'D', 'M', and 'F'. Accepts a string or list of strings.
-            season_name: Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
-            start_date: Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
-            end_date: End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
-        :returns: Dataframe
+        Args:
+            leagues (Union[str, List[str]], optional): Leagues on which to filter. Accepts a string or list of strings. Defaults to 'mls'.
+
+        Keyword Args:
+            player_ids (Union[str, List[str]]): Player IDs on which to filter. Cannot be combined with player_names. Accepts a string or list of strings.
+            player_names (Union[str, List[str]]): Player names on which to filter. Partial matches are accepted. Cannot be combined with player_ids. Accepts a string or list of strings.
+            team_ids (Union[str, List[str]]): Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
+            team_names (Union[str, List[str]]): Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
+            position (Union[str, List[str]]): Describes the general position, as reported by the players' association. Valid keywords include: 'GK', 'D', 'M', and 'F'. Accepts a string or list of strings.
+            season_name (Union[str, List[str]]): Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
+            start_date (str): Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+            end_date (str): End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+
+        Returns:
+            DataFrame
         """
         player_salaries = self._get_stats(
             leagues, type="salaries", entity="players", **kwargs
@@ -583,25 +654,30 @@ class AmericanSoccerAnalysis:
 
     def get_goalkeeper_xgoals(
         self, leagues: Union[str, List[str]] = LEAGUES, **kwargs
-    ) -> pd.DataFrame:
-        """Retrieves a data frame containing goalkeeper xG data meeting the specified conditions.
-        :param leagues: League(s) on which to filter. Accepts a string or list of strings.
-        :param kwargs: The following arguments will be parsed:
-            minimum_minutes: Minimum threshold for sum of minutes played.
-            minimum_shots_faced: Minimum threshold for sum of shots faced.
-            player_ids: Player IDs on which to filter. Cannot be combined with player_names. Accepts a string or list of strings.
-            player_names: Player names on which to filter. Partial matches are accepted. Cannot be combined with player_ids. Accepts a string or list of strings.
-            team_ids: Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
-            team_names: Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
-            season_name: Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
-            start_date: Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
-            end_date: End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
-            shot_pattern: Describes the possessing actions leading to the shot. Valid keywords include: 'Set piece', 'Corner', 'Free kick', 'Penalty', 'Fastbreak', and 'Regular'. Accepts a string or list of strings.
-            split_by_teams: Logical indicator to group results by team.
-            split_by_seasons: Logical indicator to group results by season.
-            split_by_games: Logical indicator to group results by game.
-            stage_name: Describes the stage of competition in which a game took place. Accepts a string or list of strings.
-        :returns: Dataframe
+    ) -> DataFrame:
+        """Retrieves a DataFrame containing goalkeeper xG data meeting the specified conditions.
+
+        Args:
+         leagues (Union[str, List[str]], optional): League(s) on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
+
+        Keyword Args:
+            minimum_minutes (int): Minimum threshold for sum of minutes played.
+            minimum_shots_faced (int): Minimum threshold for sum of shots faced.
+            player_ids (Union[str, List[str]]): Player IDs on which to filter. Cannot be combined with player_names. Accepts a string or list of strings.
+            player_names (Union[str, List[str]]): Player names on which to filter. Partial matches are accepted. Cannot be combined with player_ids. Accepts a string or list of strings.
+            team_ids (Union[str, List[str]]): Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
+            team_names (Union[str, List[str]]): Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
+            season_name (Union[str, List[str]]): Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
+            start_date (str): Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+            end_date (str): End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+            shot_pattern (Union[str, List[str]]): Describes the possessing actions leading to the shot. Valid keywords include: 'Set piece', 'Corner', 'Free kick', 'Penalty', 'Fastbreak', and 'Regular'. Accepts a string or list of strings.
+            split_by_teams (bool): Logical indicator to group results by team.
+            split_by_seasons (bool): Logical indicator to group results by season.
+            split_by_games (bool): Logical indicator to group results by game.
+            stage_name (Union[str, List[str]]): Describes the stage of competition in which a game took place. Accepts a string or list of strings.
+
+        Returns:
+            DataFrame
         """
         goalkeeper_xgoals = self._get_stats(
             leagues, type="xgoals", entity="goalkeepers", **kwargs
@@ -610,25 +686,30 @@ class AmericanSoccerAnalysis:
 
     def get_goalkeeper_goals_added(
         self, leagues: Union[str, List[str]] = LEAGUES, **kwargs
-    ) -> pd.DataFrame:
-        """Retrieves a data frame containing goalkeeper g+ data meeting the specified conditions.
-        :param leagues: League(s) on which to filter. Accepts a string or list of strings.
-        :param kwargs: The following arguments will be parsed:
-            minimum_minutes: Minimum threshold for sum of minutes played.
-            player_ids: Player IDs on which to filter. Cannot be combined with player_names. Accepts a string or list of strings.
-            player_names: Player names on which to filter. Partial matches are accepted. Cannot be combined with player_ids. Accepts a string or list of strings.
-            team_ids: Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
-            team_names: Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
-            season_name: Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
-            start_date: Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
-            end_date: End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
-            split_by_teams: Logical indicator to group results by team.
-            split_by_seasons: Logical indicator to group results by season.
-            split_by_games: Logical indicator to group results by game.
-            stage_name: Describes the stage of competition in which a game took place. Accepts a string or list of strings.
-            action_type: Describes the goals added (g+) action type. Valid keywords include: 'Dribbling', 'Fouling', 'Interrupting', 'Passing', 'Receiving', and 'Shooting'. Accepts a string or list of strings.
-            above_replacement: Logical indicator to compare players against replacement-level values. This will only return aggregated g+ values, rather than disaggregated g+ values by action type.
-        :returns: Dataframe
+    ) -> DataFrame:
+        """Retrieves a DataFrame containing goalkeeper g+ data meeting the specified conditions.
+
+        Args:
+            leagues (Union[str, List[str]], optional): League(s) on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
+
+        Keyword Args:
+            minimum_minutes (int): Minimum threshold for sum of minutes played.
+            player_ids (Union[str, List[str]]): Player IDs on which to filter. Cannot be combined with player_names. Accepts a string or list of strings.
+            player_names (Union[str, List[str]]): Player names on which to filter. Partial matches are accepted. Cannot be combined with player_ids. Accepts a string or list of strings.
+            team_ids (Union[str, List[str]]): Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
+            team_names (Union[str, List[str]]): Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
+            season_name (Union[str, List[str]]): Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
+            start_date (str): Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+            end_date (str): End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+            split_by_teams (bool): Logical indicator to group results by team.
+            split_by_seasons (bool): Logical indicator to group results by season.
+            split_by_games (bool): Logical indicator to group results by game.
+            stage_name (Union[str, List[str]]): Describes the stage of competition in which a game took place. Accepts a string or list of strings.
+            action_type (Union[str, List[str]]): Describes the goals added (g+) action type. Valid keywords include: 'Dribbling', 'Fouling', 'Interrupting', 'Passing', 'Receiving', and 'Shooting'. Accepts a string or list of strings.
+            above_replacement (bool): Logical indicator to compare players against replacement-level values. This will only return aggregated g+ values, rather than disaggregated g+ values by action type.
+
+        Returns:
+            DataFrame
         """
         goalkeeper_goals_added = self._get_stats(
             leagues, type="goals-added", entity="goalkeepers", **kwargs
@@ -637,68 +718,80 @@ class AmericanSoccerAnalysis:
 
     def get_team_xgoals(
         self, leagues: Union[str, List[str]] = LEAGUES, **kwargs
-    ) -> pd.DataFrame:
-        """Retrieves a data frame containing team xG data meeting the specified conditions.
+    ) -> DataFrame:
+        """Retrieves a DataFrame containing team xG data meeting the specified conditions.
 
-        :param leagues: Leagues on which to filter. Accepts a string or list of strings.
-        :param kwargs: The following arguments will be parsed:
-            team_ids: Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
-            team_names: Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
-            season_name: Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
-            start_date: Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
-            end_date: End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
-            shot_pattern: Describes the possessing actions leading to the shot. Valid keywords include: 'Set piece', 'Corner', 'Free kick', 'Penalty', 'Fastbreak', and 'Regular'. Accepts a string or list of strings.
-            split_by_seasons: Logical indicator to group results by season.
-            split_by_games: Logical indicator to group results by game.
-            home_only: Logical indicator to only include results from home games.
-            away_only: Logical indicator to only include results from away games.
-            home_adjusted: Logical indicator to adjust certain values based on the share of home games a team has played during the specified duration.
-            even_game_state: Logical indicator to only include shots taken when the score was level.
-            stage_name: Describes the stage of competition in which a game took place. Accepts a string or list of strings.
-        :returns: Dataframe
+        Args:
+            leagues (Union[str, List[str]], optional): Leagues on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
+
+        Keyword Args:
+            team_ids (Union[str, List[str]]): Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
+            team_names (Union[str, List[str]]): Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
+            season_name (Union[str, List[str]]): Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
+            start_date (str): Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+            end_date (str): End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+            shot_pattern (Union[str, List[str]]): Describes the possessing actions leading to the shot. Valid keywords include: 'Set piece', 'Corner', 'Free kick', 'Penalty', 'Fastbreak', and 'Regular'. Accepts a string or list of strings.
+            split_by_seasons (bool): Logical indicator to group results by season.
+            split_by_games (bool): Logical indicator to group results by game.
+            home_only (bool): Logical indicator to only include results from home games.
+            away_only (bool): Logical indicator to only include results from away games.
+            home_adjusted (bool): Logical indicator to adjust certain values based on the share of home games a team has played during the specified duration.
+            even_game_state (bool): Logical indicator to only include shots taken when the score was level.
+            stage_name (Union[str, List[str]]): Describes the stage of competition in which a game took place. Accepts a string or list of strings.
+
+        Returns:
+            DataFrame
         """
         team_xgoals = self._get_stats(leagues, type="xgoals", entity="teams", **kwargs)
         return team_xgoals
 
     def get_team_xpass(
         self, leagues: Union[str, List[str]] = LEAGUES, **kwargs
-    ) -> pd.DataFrame:
-        """Retrieves a data frame containing team xPass data meeting the specified conditions.
+    ) -> DataFrame:
+        """Retrieves a DataFrame containing team xPass data meeting the specified conditions.
 
-        :param leagues: Leagues on which to filter. Accepts a string or list of strings.
-        :param kwargs: The following arguments will be parsed:
-            team_ids: Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
-            team_names: Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
-            season_name: Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
-            start_date: Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
-            end_date: End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
-            pass_origin_third: Describes the third of the field from which the pass originated. Valid keywords include: 'Attacking', 'Middle', and 'Defensive'. Accepts a string or list of strings.
-            split_by_seasons: Logical indicator to group results by season.
-            split_by_games: Logical indicator to group results by game.
-            home_only: Logical indicator to only include results from home games.
-            away_only: Logical indicator to only include results from away games.
-            stage_name: Describes the stage of competition in which a game took place. Accepts a string or list of strings.
-        :returns: Dataframe
+        Args:
+            leagues (Union[str, List[str]], optional): Leagues on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
+
+        Keyword Args:
+            team_ids (Union[str, List[str]]): Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
+            team_names (Union[str, List[str]]): Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
+            season_name (Union[str, List[str]]): Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
+            start_date (str): Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+            end_date (str): End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+            pass_origin_third (Union[str, List[str]]): Describes the third of the field from which the pass originated. Valid keywords include: 'Attacking', 'Middle', and 'Defensive'. Accepts a string or list of strings.
+            split_by_seasons (bool): Logical indicator to group results by season.
+            split_by_games (bool): Logical indicator to group results by game.
+            home_only (bool): Logical indicator to only include results from home games.
+            away_only (bool): Logical indicator to only include results from away games.
+            stage_name (Union[str, List[str]]): Describes the stage of competition in which a game took place. Accepts a string or list of strings.
+
+        Returns:
+            DataFrame
         """
         team_xpass = self._get_stats(leagues, type="xpass", entity="teams", **kwargs)
         return team_xpass
 
     def get_team_goals_added(
         self, leagues: Union[str, List[str]] = LEAGUES, **kwargs
-    ) -> pd.DataFrame:
-        """Retrieves a data frame containing team g+ data meeting the specified conditions.
+    ) -> DataFrame:
+        """Retrieves a DataFrame containing team g+ data meeting the specified conditions.
 
-        :param leagues: Leagues on which to filter. Accepts a string or list of strings.
-        :param kwargs: The following arguments will be parsed:
-            team_ids: Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
-            team_names: Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
-            season_name: Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
-            split_by_seasons: Logical indicator to group results by season.
-            stage_name: Describes the stage of competition in which a game took place. Accepts a string or list of strings.
-            action_type: Describes the goals added (g+) action type. Valid keywords include: 'Dribbling', 'Fouling', 'Interrupting', 'Passing', 'Receiving', and 'Shooting'. Accepts a string or list of strings.
-            zone: Zone number on pitch. Zones 1-5 are the defensive-most zones, and zones 26-30 are the attacking-most zones. Accepts a number or list of numbers.
-            gamestate_trunc: Integer (score differential) value between -2 and 2, inclusive. Gamestates more extreme than -2 and 2 have been included with -2 and 2, respectively. Accepts a number or list of numbers.
-        :returns: Dataframe
+        Args:
+            leagues (Union[str, List[str]], optional): Leagues on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
+
+        Keyword Args:
+            team_ids (Union[str, List[str]]): Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
+            team_names (Union[str, List[str]]): Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
+            season_name (Union[str, List[str]]): Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
+            split_by_seasons (bool): Logical indicator to group results by season.
+            stage_name (Union[str, List[str]]): Describes the stage of competition in which a game took place. Accepts a string or list of strings.
+            action_type (Union[str, List[str]]): Describes the goals added (g+) action type. Valid keywords include: 'Dribbling', 'Fouling', 'Interrupting', 'Passing', 'Receiving', and 'Shooting'. Accepts a string or list of strings.
+            zone (Union[int, List[int]]): Zone number on pitch. Zones 1-5 are the defensive-most zones, and zones 26-30 are the attacking-most zones. Accepts a number or list of numbers.
+            gamestate_trunc (Union[int, List[int]]): Integer (score differential) value between -2 and 2, inclusive. Gamestates more extreme than -2 and 2 have been included with -2 and 2, respectively. Accepts a number or list of numbers.
+
+        Returns:
+            DataFrame
         """
         team_goals_added = self._get_stats(
             leagues, type="goals-added", entity="teams", **kwargs
@@ -707,18 +800,22 @@ class AmericanSoccerAnalysis:
 
     def get_team_salaries(
         self, leagues: Union[str, List[str]] = "mls", **kwargs
-    ) -> pd.DataFrame:
-        """Retrieves a data frame containing team salary data meeting the specified conditions.
+    ) -> DataFrame:
+        """Retrieves a DataFrame containing team salary data meeting the specified conditions.
 
-        :param leagues: Leagues on which to filter. Accepts a string or list of strings.
-        :param kwargs: The following arguments will be parsed:
-            team_ids: Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
-            team_names: Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
-            season_name: Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
-            split_by_teams: Logical indicator to group results by team. Results must be grouped by at least one of teams, positions, or seasons. Value is True by default.
-            split_by_seasons: Logical indicator to group results by season. Results must be grouped by at least one of teams, positions, or seasons.
-            split_by_positions: Logical indicator to group results by positions. Results must be grouped by at least one of teams, positions, or seasons.
-        :returns: Dataframe
+        Args:
+            leagues (Union[str, List[str]], optional): Leagues on which to filter. Accepts a string or list of strings. Defaults to 'mls'.
+
+        Keyword Args:
+            team_ids (Union[str, List[str]]): Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
+            team_names (Union[str, List[str]]): Team names on which to filter. Partial matches and abbreviations are accepted. Cannot be combined with team_ids. Accepts a string or list of strings.
+            season_name (Union[str, List[str]]): Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
+            split_by_teams (bool): Logical indicator to group results by team. Results must be grouped by at least one of teams, positions, or seasons. Value is True by default.
+            split_by_seasons (bool): Logical indicator to group results by season. Results must be grouped by at least one of teams, positions, or seasons.
+            split_by_positions (bool): Logical indicator to group results by positions. Results must be grouped by at least one of teams, positions, or seasons.
+
+        Returns:
+            DataFrame
         """
         team_salaries = self._get_stats(
             leagues, type="salaries", entity="teams", **kwargs
@@ -727,17 +824,21 @@ class AmericanSoccerAnalysis:
 
     def get_game_xgoals(
         self, leagues: Union[str, List[str]] = LEAGUES, **kwargs
-    ) -> pd.DataFrame:
-        """Retrieves a data frame containing game xG data meeting the specified conditions.
+    ) -> DataFrame:
+        """Retrieves a DataFrame containing game xG data meeting the specified conditions.
 
-        :param leagues: Leagues on which to filter. Accepts a string or list of strings.
-        :param kwargs: The following arguments will be parsed:
-            game_ids: Game IDs on which to filter. Accepts a string or list of strings.
-            season_name: Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
-            start_date: Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
-            end_date: End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
-            stage_name: Describes the stage of competition in which a game took place. Accepts a string or list of strings.
-        :returns: Dataframe
+        Args:
+            leagues (Union[str, List[str]], optional): Leagues on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
+
+        Keyword Args:
+            game_ids (Union[str, List[str]]): Game IDs on which to filter. Accepts a string or list of strings.
+            season_name (Union[str, List[str]]): Name(s)/year(s) of seasons. Cannot be combined with a date range. Accepts a string or list of strings.
+            start_date (str): Start of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+            end_date (str): End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
+            stage_name (Union[str, List[str]]): Describes the stage of competition in which a game took place. Accepts a string or list of strings.
+
+        Returns:
+            DataFrame
         """
         game_xgoals = self._get_stats(leagues, type="xgoals", entity="games", **kwargs)
         return game_xgoals

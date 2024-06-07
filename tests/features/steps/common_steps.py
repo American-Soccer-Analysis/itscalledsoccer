@@ -1,4 +1,4 @@
-from behave import *
+from behave import given, when, then
 from pandas import DataFrame, read_json
 from pathlib import Path
 from itscalledsoccer.client import AmericanSoccerAnalysis

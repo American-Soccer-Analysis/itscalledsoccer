@@ -42,7 +42,7 @@ class AmericanSoccerAnalysis:
             ]:
                 self.LOGGER.setLevel(getLevelName(logging_level.upper()))
             else:
-                print(f"Logging level {logging_level} not recognized!")
+                self.LOGGER.info(f"Logging level {logging_level} not recognized!")
 
         self.session = CACHE_SESSION
         self.base_url = self.BASE_URL
@@ -51,7 +51,7 @@ class AmericanSoccerAnalysis:
         self.stadia = self._get_entity("stadia")
         self.managers = self._get_entity("manager")
         self.referees = self._get_entity("referee")
-        print("Finished initializing client")
+        self.LOGGER.info("Finished initializing client")
 
     def _get_entity(self, type: str) -> DataFrame:
         """Gets all the data for a specific type and
@@ -64,7 +64,7 @@ class AmericanSoccerAnalysis:
             DataFrame: _description_
         """
         plural_type = f"{type}s" if type != "stadia" else f"{type}"
-        print(f"Gathering all {plural_type}")
+        self.LOGGER.info(f"Gathering all {plural_type}")
         df = DataFrame([])
         for league in self.LEAGUES:
             url = f"{self.BASE_URL}{league}/{plural_type}"

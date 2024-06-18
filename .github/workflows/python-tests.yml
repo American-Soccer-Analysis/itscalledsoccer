@@ -26,7 +26,6 @@ jobs:
         run: |
           mypy itscalledsoccer
           ruff check itscalledsoccer
-      - name: Behave tests
+      - name: Pytest
         run: |
-          cd tests
-          behave
+          pytest

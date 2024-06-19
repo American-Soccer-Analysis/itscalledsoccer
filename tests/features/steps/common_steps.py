@@ -81,4 +81,4 @@ def step_impl(context, function, args):
     else:
         print("Function not recognized")
         raise NameError
-    context.response = read_json(f.open())
+    context.response = read_json(f.open(encoding='utf-8'))

@@ -19,13 +19,14 @@ class AmericanSoccerAnalysis:
     LOGGER = getLogger(__name__)
 
     def __init__(
-        self, proxies: Optional[dict] = None, logging_level: Optional[str] = "WARNING"
+        self, proxies: Optional[dict] = None, logging_level: Optional[str] = "WARNING", lazy_load: Optional[bool] = True
     ) -> None:
         """Class constructor
 
         Args:
             proxies (Optional[dict], optional): A dictionary containing proxy mappings, see https://docs.python-requests.org/en/latest/user/advanced/#proxies. Defaults to None.
             logging_level (Optional[str], optional): A string representing the logging level of the logger. Defaults to "WARNING".
+            lazy_load (Optional[bool], optional): A boolean indicating whether to lazy load all entity data on initialization. Defaults to True.
         """
         SESSION = requests.session()
         if proxies:
@@ -46,11 +47,22 @@ class AmericanSoccerAnalysis:
 
         self.session = CACHE_SESSION
         self.base_url = self.BASE_URL
-        self.players = self._get_entity("player")
-        self.teams = self._get_entity("team")
-        self.stadia = self._get_entity("stadia")
-        self.managers = self._get_entity("manager")
-        self.referees = self._get_entity("referee")
+        self.lazy_load = lazy_load
+
+        if self.lazy_load:
+            print("Lazy loading enabled. Initializing client without entity data.")
+            self.players = None
+            self.teams = None
+            self.stadia = None
+            self.managers = None
+            self.referees = None
+        else:
+            print("Lazy loading disabled. Initializing client with entity data.")
+            self.players = self._get_entity("player")
+            self.teams = self._get_entity("team")
+            self.stadia = self._get_entity("stadia")
+            self.managers = self._get_entity("manager")
+            self.referees = self._get_entity("referee")
         print("Finished initializing client")
 
     def _get_entity(self, type: str) -> DataFrame:
@@ -392,6 +404,8 @@ class AmericanSoccerAnalysis:
         Returns:
             DataFrame
         """
+        if self.stadia is None:
+            self.stadia = self._get_entity("stadium")
         stadia = self._filter_entity(self.stadia, "stadium", leagues, ids, names)
         return stadia
 
@@ -411,6 +425,8 @@ class AmericanSoccerAnalysis:
         Returns:
             DataFrame
         """
+        if self.referees is None:
+            self.referees = self._get_entity("referee")
         referees = self._filter_entity(self.referees, "referee", leagues, ids, names)
         return referees
 
@@ -430,6 +446,8 @@ class AmericanSoccerAnalysis:
         Returns:
             DataFrame_
         """
+        if self.managers is None:
+            self.managers = self._get_entity("manager")
         managers = self._filter_entity(self.managers, "manager", leagues, ids, names)
         return managers
 
@@ -449,6 +467,8 @@ class AmericanSoccerAnalysis:
         Returns:
             DataFrame_
         """
+        if self.teams is None:
+            self.teams = self._get_entity("team")
         teams = self._filter_entity(self.teams, "team", leagues, ids, names)
         return teams
 
@@ -468,6 +488,8 @@ class AmericanSoccerAnalysis:
         Returns:
             DataFrame_
         """
+        if self.players is None:
+            self.players = self._get_entity("player") 
         players = self._filter_entity(self.players, "player", leagues, ids, names)
         return players
 

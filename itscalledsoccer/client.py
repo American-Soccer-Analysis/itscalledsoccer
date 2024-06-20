@@ -56,15 +56,15 @@ class AmericanSoccerAnalysis:
         self.referees: DataFrame = None
 
         if self.lazy_load:
-            print("Lazy loading enabled. Initializing client without entity data.")
+            self.LOGGER.info("Lazy loading enabled. Initializing client without entity data.")
         else:
-            print("Lazy loading disabled. Initializing client with entity data.")
+            self.LOGGER.info("Lazy loading disabled. Initializing client with entity data.")
             self.players = self._get_entity("player")
             self.teams = self._get_entity("team")
             self.stadia = self._get_entity("stadia")
             self.managers = self._get_entity("manager")
             self.referees = self._get_entity("referee")
-        print("Finished initializing client")
+        self.LOGGER.info("Finished initializing client")
 
     def _get_entity(self, type: str) -> DataFrame:
         """Gets all the data for a specific type and

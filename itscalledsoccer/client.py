@@ -49,13 +49,14 @@ class AmericanSoccerAnalysis:
         self.base_url = self.BASE_URL
         self.lazy_load = lazy_load
 
+        self.players: DataFrame = None
+        self.teams: DataFrame = None
+        self.stadia: DataFrame = None
+        self.managers: DataFrame = None
+        self.referees: DataFrame = None
+
         if self.lazy_load:
             print("Lazy loading enabled. Initializing client without entity data.")
-            self.players = None
-            self.teams = None
-            self.stadia = None
-            self.managers = None
-            self.referees = None
         else:
             print("Lazy loading disabled. Initializing client with entity data.")
             self.players = self._get_entity("player")

@@ -35,7 +35,7 @@ class TestClient:
     def load_mock_data(self, func_name: str):
         path = Path(__file__).parent
         file = Path(path, f"./mocks/{func_name}_payload.json")
-        return read_json(file.open())
+        return read_json(file)
 
     def test_get_player_xgoals(self, init_client):
         self.client = init_client

@@ -406,8 +406,8 @@ class AmericanSoccerAnalysis:
             DataFrame
         """
         if self.stadia is None:
-            self.stadia = self._get_entity("stadium")
-        stadia = self._filter_entity(self.stadia, "stadium", leagues, ids, names)
+            self.stadia = self._get_entity("stadia")
+        stadia = self._filter_entity(self.stadia, "stadia", leagues, ids, names)
         return stadia
 
     def get_referees(

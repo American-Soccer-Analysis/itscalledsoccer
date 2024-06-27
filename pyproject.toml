@@ -30,7 +30,7 @@ dependencies = [
   "rapidfuzz>=3.2.0",
   "pandas>=2.0.3",
 ]
-version = "1.2.0"
+version = "1.2.1"
 
 [project.urls]
 Repository = "https://github.com/American-Soccer-Analysis/itscalledsoccer"

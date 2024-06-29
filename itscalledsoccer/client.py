@@ -7,6 +7,7 @@ import requests
 from cachecontrol import CacheControl
 from cachecontrol.heuristics import ExpiresAfter
 from rapidfuzz import fuzz, process
+from io import StringIO
 
 
 class AmericanSoccerAnalysis:
@@ -300,7 +301,7 @@ class AmericanSoccerAnalysis:
         """
         response = self.session.get(url=url, params=params)
         response.raise_for_status()
-        resp_df = read_json(json.dumps(response.json()))
+        resp_df = read_json(StringIO(json.dumps(response.json())))
         return resp_df
 
     def _get_stats(

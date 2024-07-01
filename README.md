@@ -62,7 +62,7 @@ asa_players = asa_client.get_players(names="Andre")
 
 ## Contributing
 
-Feel free to open an issue or submit a pull request.
+See [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 ## License
 

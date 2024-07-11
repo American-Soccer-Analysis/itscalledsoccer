@@ -20,7 +20,10 @@ class AmericanSoccerAnalysis:
     LOGGER = getLogger(__name__)
 
     def __init__(
-        self, proxies: Optional[dict] = None, logging_level: Optional[str] = "WARNING", lazy_load: Optional[bool] = True
+        self,
+        proxies: Optional[dict] = None,
+        logging_level: Optional[str] = "WARNING",
+        lazy_load: Optional[bool] = True,
     ) -> None:
         """Class constructor
 
@@ -57,9 +60,13 @@ class AmericanSoccerAnalysis:
         self.referees: DataFrame = None
 
         if self.lazy_load:
-            self.LOGGER.info("Lazy loading enabled. Initializing client without entity data.")
+            self.LOGGER.info(
+                "Lazy loading enabled. Initializing client without entity data."
+            )
         else:
-            self.LOGGER.info("Lazy loading disabled. Initializing client with entity data.")
+            self.LOGGER.info(
+                "Lazy loading disabled. Initializing client with entity data."
+            )
             self.players = self._get_entity("player")
             self.teams = self._get_entity("team")
             self.stadia = self._get_entity("stadia")
@@ -491,7 +498,7 @@ class AmericanSoccerAnalysis:
             DataFrame_
         """
         if self.players is None:
-            self.players = self._get_entity("player") 
+            self.players = self._get_entity("player")
         players = self._filter_entity(self.players, "player", leagues, ids, names)
         return players
 

@@ -194,7 +194,7 @@ mypy itscalledsoccer
 ```
 
 
-`itscalledsoccer` [ruff](https://docs.astral.sh/ruff/) for formatting. 
+`itscalledsoccer` uses [ruff](https://docs.astral.sh/ruff/) for formatting. 
 
 ```sh
 ruff check itscalledsoccer

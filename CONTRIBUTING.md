@@ -187,11 +187,18 @@ With the dependencies installed, you're now ready to make your changes. All of t
 
 ##### Linting and formatting
 
-`itscalledsoccer`uses [mypy](https://www.mypy-lang.org/) for static type checking and [ruff](https://docs.astral.sh/ruff/) for formatting. Running both looks similar:
+`itscalledsoccer` uses [mypy](https://www.mypy-lang.org/) for static type checking.
 
 ```sh
 mypy itscalledsoccer
-ruff itscalledsoccer
+```
+
+
+`itscalledsoccer` [ruff](https://docs.astral.sh/ruff/) for formatting. 
+
+```sh
+ruff check itscalledsoccer
+ruff format itscalledsoccer
 ```
 
 ##### Testing

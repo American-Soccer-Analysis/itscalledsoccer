@@ -178,7 +178,7 @@ For more information, see the [venv documentation](https://docs.python.org/3/lib
 The following command will install the appropriate dependencies in the virtual environment you just created.
 
 ```sh
-pip install ".[dev]"
+pip install ".[test]"
 ```
 
 #### Make your changes

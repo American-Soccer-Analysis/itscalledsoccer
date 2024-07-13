@@ -209,6 +209,14 @@ ruff format itscalledsoccer
 pytest
 ```
 
+Whenever you add or modify code, you should ensure that your changes have test coverage. To create a test coverage report, run the below command. 
+
+```sh
+pytest --cov=itscalledsoccer --cov-report=html
+```
+Open htmlcov/index.html in a browser and review the generated coverage report.
+
+
 #### Open a pull request
 
 Once the tests are in good shape and the code has been linted and formatted, you're ready to open a pull request (PR). The [GitHub docs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) provide great instructions on how to do just that.

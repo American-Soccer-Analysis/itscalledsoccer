@@ -36,9 +36,10 @@ version = "1.2.1"
 Repository = "https://github.com/American-Soccer-Analysis/itscalledsoccer"
 
 [project.optional-dependencies]
-test = [
+dev = [
   "types-requests",
   "pytest",
+  "pytest-cov",
   "mypy",
   "ruff",
   "mkdocs",

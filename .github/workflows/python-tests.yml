@@ -26,6 +26,10 @@ jobs:
         run: |
           mypy itscalledsoccer
           ruff check itscalledsoccer
-      - name: Pytest
+      - name: Run Pytest and generate coverage file
         run: |
-          pytest
+          pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=itscalledsoccer tests/ | tee pytest-coverage.txt
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}

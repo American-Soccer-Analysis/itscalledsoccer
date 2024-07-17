@@ -178,7 +178,7 @@ For more information, see the [venv documentation](https://docs.python.org/3/lib
 The following command will install the appropriate dependencies in the virtual environment you just created.
 
 ```sh
-pip install ".[dev]"
+pip install ".[test]"
 ```
 
 #### Make your changes
@@ -208,6 +208,14 @@ ruff format itscalledsoccer
 ```sh
 pytest
 ```
+
+Whenever you add or modify code, you should ensure that your changes have test coverage. To create a test coverage report, run the below command. 
+
+```sh
+pytest --cov=itscalledsoccer --cov-report=html
+```
+Open htmlcov/index.html in a browser and review the generated coverage report.
+
 
 #### Open a pull request
 

@@ -39,6 +39,7 @@ Repository = "https://github.com/American-Soccer-Analysis/itscalledsoccer"
 test = [
   "types-requests",
   "pytest",
+  "pytest-cov",
   "mypy",
   "ruff",
   "mkdocs",

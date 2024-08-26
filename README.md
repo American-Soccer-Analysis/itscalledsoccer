@@ -9,6 +9,7 @@
 ![Python tests](https://github.com/American-Soccer-Analysis/itscalledsoccer/actions/workflows/python-tests.yml/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PyPI download month](https://img.shields.io/pypi/dm/itscalledsoccer.svg)](https://pypi.python.org/pypi/itscalledsoccer/)
+[![codecov](https://codecov.io/github/American-Soccer-Analysis/itscalledsoccer/graph/badge.svg?token=RUWMM7ZLQ2)](https://codecov.io/github/American-Soccer-Analysis/itscalledsoccer)
 <!-- badges: end -->
 
 ---

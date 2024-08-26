@@ -1,3 +1,4 @@
+<!-- omit in toc -->
 # itscalledsoccer
 
 <img src="https://raw.githubusercontent.com/American-Soccer-Analysis/itscalledsoccer-r/main/man/figures/logo.png" align="right" height="175"/>
@@ -19,15 +20,14 @@
 
 ---
 
+<!-- omit in toc -->
 ## Table of Contents
 
-- [itscalledsoccer](#itscalledsoccer)
-  - [Table of Contents](#table-of-contents)
-  - [Background](#background)
-  - [Install](#install)
-  - [Usage](#usage)
-  - [Contributing](#contributing)
-  - [License](#license)
+- [Background](#background)
+- [Install](#install)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Background
 
@@ -37,12 +37,6 @@
 
 ```sh
 pip install itscalledsoccer
-```
-
-To install a development version, clone this repo and run the following command.
-
-```sh
-pip install --editable .
 ```
 
 ## Usage
@@ -59,6 +53,8 @@ Any of the `get_*` methods can be used to retrieve the same data made available 
 # Get all players named "Andre"
 asa_players = asa_client.get_players(names="Andre")
 ```
+
+For more information, check out the [documentation site](https://american-soccer-analysis.github.io/itscalledsoccer/).
 
 ## Contributing
 

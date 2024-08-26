@@ -1,13 +1,13 @@
 import json
+from io import StringIO
 from logging import getLevelName, getLogger
 from typing import Dict, List, Optional, Union
 
-from pandas import DataFrame, read_json, isnull, concat
 import requests
 from cachecontrol import CacheControl
 from cachecontrol.heuristics import ExpiresAfter
+from pandas import DataFrame, concat, isnull, read_json
 from rapidfuzz import fuzz, process
-from io import StringIO
 
 
 class AmericanSoccerAnalysis:

@@ -1,8 +1,10 @@
-from itscalledsoccer.client import AmericanSoccerAnalysis
-from unittest.mock import patch
 from pathlib import Path
+from unittest.mock import patch
+
 from pandas import DataFrame, read_json
 from pytest import fixture
+
+from itscalledsoccer.client import AmericanSoccerAnalysis
 
 
 @fixture(scope="session")

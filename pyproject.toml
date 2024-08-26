@@ -30,13 +30,13 @@ dependencies = [
   "rapidfuzz>=3.2.0",
   "pandas>=2.0.3",
 ]
-version = "1.2.1"
+version = "1.2.2"
 
 [project.urls]
 Repository = "https://github.com/American-Soccer-Analysis/itscalledsoccer"
 
-[project.optional-dependencies]
-test = [
+[tool.uv]
+dev-dependencies = [
   "types-requests",
   "pytest",
   "pytest-cov",
@@ -67,3 +67,4 @@ ignore_missing_imports = true
 
 [tool.ruff.lint]
 ignore = ["E501"]
+extend-select = ["I"]

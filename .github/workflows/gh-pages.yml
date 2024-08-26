@@ -13,7 +13,9 @@ jobs:
           python-version: 3.x
       - name: Set up uv
         # Install a specific uv version using the installer
-        run: curl -LsSf https://astral.sh/uv/0.3.3/install.sh | sh
+        run: |
+          curl -LsSf https://astral.sh/uv/0.3.3/install.sh | sh
+          uv pip install --upgrade setuptools wheel
       - name: Install the project
         run: uv sync --all-extras --dev
       - run: mkdocs gh-deploy --force

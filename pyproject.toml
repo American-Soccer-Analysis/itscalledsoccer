@@ -44,8 +44,7 @@ dev-dependencies = [
   "ruff",
   "mkdocs",
   "mkdocstrings[python]",
-  "mkdocs-material",
-  "setuptools"
+  "mkdocs-material"
 ]
 
 [build-system]

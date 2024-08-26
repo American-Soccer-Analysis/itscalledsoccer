@@ -45,6 +45,7 @@ dev-dependencies = [
   "mkdocs",
   "mkdocstrings[python]",
   "mkdocs-material",
+  "setuptools"
 ]
 
 [build-system]

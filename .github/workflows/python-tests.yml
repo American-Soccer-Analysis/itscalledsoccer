@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
 
     steps:
       - uses: actions/checkout@v4
@@ -20,9 +20,7 @@ jobs:
       - name: Set up uv
         # Install a specific uv version using the installer
         run: |
-          curl -LsSf https://astral.sh/uv/0.3.3/install.sh | sh
-          uv venv
-          uv pip install --upgrade setuptools wheel 
+          curl -LsSf https://astral.sh/uv/0.3.4/install.sh | sh
       - name: Install the project
         run: uv sync --all-extras --dev
       - name: Linting

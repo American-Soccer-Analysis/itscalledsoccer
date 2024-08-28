@@ -21,10 +21,9 @@ All types of contributions are encouraged and valued. See the [Table of Contents
   - [Suggesting Enhancements](#suggesting-enhancements)
   - [Your First Code Contribution](#your-first-code-contribution)
     - [Environment Setup](#environment-setup)
-      - [Install Python](#install-python)
+      - [Install `uv`](#install-uv)
       - [Install git](#install-git)
       - [Create and checkout a branch](#create-and-checkout-a-branch)
-      - [Create and activate a virtual environment](#create-and-activate-a-virtual-environment)
       - [Install development dependencies](#install-development-dependencies)
     - [Make your changes](#make-your-changes)
       - [Linting and formatting](#linting-and-formatting)
@@ -127,9 +126,15 @@ git clone git@github.com:American-Soccer-Analysis/itscalledsoccer.git
 git clone https://github.com/American-Soccer-Analysis/itscalledsoccer.git
 ```
 
-##### Install Python
+##### Install `uv`
 
-Once the repository is successfully cloned, make sure you have Python 3 installed on your system. To check that it's installed correctly, you can run:
+Once the repository is successfully cloned, you'll want to install `uv` on your system. `uv` is an extremely fast Python package and project manager, that can install and manage Python versions. To install it, check out the documentation [here](https://docs.astral.sh/uv/getting-started/installation/). To check that `uv` is installed correctly, run
+
+```sh
+uv --help
+```
+
+And to confirm Python is available, you can run the following:
 
 ```sh
 python --version
@@ -138,8 +143,6 @@ python3 --version
 # On Windows (cmd.exe, with the Python Launcher for Windows):
 py --version
 ```
-
-If you don't have Python already installed, you can download it [here](https://www.python.org/downloads/).
 
 ##### Install git
 
@@ -159,27 +162,15 @@ git branch BRANCH_NAME
 git checkout BRANCH_NAME
 ```
 
-##### Create and activate a virtual environment
-
-You'll want to create a Python virtual environment, which isolates installed dependencies from other projects, to install the dependencies for `itscalledsoccer`
-
-```sh
-python3 -m venv venv
-# Mac/Linux
-. venv/bin/activate
-# Windows
-venv/Scripts/activate
-```
-
-For more information, see the [venv documentation](https://docs.python.org/3/library/venv.html).
-
 ##### Install development dependencies
 
-The following command will install the appropriate dependencies in the virtual environment you just created.
+`uv` automatically creates a Python virtual environment, which isolates installed dependencies from other projects. To install the dependencies for `itscalledsoccer`, run:
 
 ```sh
-pip install ".[test]"
+uv sync --all-extras --dev
 ```
+
+For more information, see the [uv](https://docs.astral.sh/uv/reference/cli/#uv-sync) and [venv](https://docs.python.org/3/library/venv.html) documentation.
 
 #### Make your changes
 
@@ -190,15 +181,14 @@ With the dependencies installed, you're now ready to make your changes. All of t
 `itscalledsoccer` uses [mypy](https://www.mypy-lang.org/) for static type checking.
 
 ```sh
-mypy itscalledsoccer
+uv run mypy itscalledsoccer
 ```
 
-
-`itscalledsoccer` uses [ruff](https://docs.astral.sh/ruff/) for formatting. 
+`itscalledsoccer` uses [ruff](https://docs.astral.sh/ruff/) for formatting.
 
 ```sh
-ruff check itscalledsoccer
-ruff format itscalledsoccer
+uv run ruff check itscalledsoccer
+uv run ruff format itscalledsoccer
 ```
 
 ##### Testing
@@ -206,16 +196,16 @@ ruff format itscalledsoccer
 `itscalledsoccer` uses [pytest](https://docs.pytest.org/en/8.2.x/#) for testing. To run the test suite, run `pytest` from the root directory of the repository.
 
 ```sh
-pytest
+uv run pytest
 ```
 
-Whenever you add or modify code, you should ensure that your changes have test coverage. To create a test coverage report, run the below command. 
+Whenever you add or modify code, you should ensure that your changes have test coverage. To create a test coverage report, run the below command.
 
 ```sh
-pytest --cov=itscalledsoccer --cov-report=html
+uv run pytest --cov=itscalledsoccer --cov-report=html
 ```
-Open htmlcov/index.html in a browser and review the generated coverage report.
 
+Open `htmlcov/index.html` in a browser and review the generated coverage report.
 
 #### Open a pull request
 

@@ -15,7 +15,7 @@ class AmericanSoccerAnalysis:
 
     API_VERSION = "v1"
     BASE_URL = f"https://app.americansocceranalysis.com/api/{API_VERSION}/"
-    LEAGUES = ["nwsl", "mls", "uslc", "usl1", "nasl", "mlsnp"]
+    LEAGUES = ["nwsl", "mls", "uslc", "usl1", "usls", "nasl", "mlsnp"]
     MAX_API_LIMIT = 1000
     LOGGER = getLogger(__name__)
 

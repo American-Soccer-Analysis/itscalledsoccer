@@ -19,4 +19,4 @@ jobs:
           uv pip install --upgrade setuptools wheel
       - name: Install the project
         run: uv sync --all-extras --dev
-      - run: mkdocs gh-deploy --force
+      - run: uv run mkdocs gh-deploy --force

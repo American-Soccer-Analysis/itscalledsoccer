@@ -25,3 +25,5 @@ jobs:
           python -m build
       - name: Publish a Python distribution to PyPi
         uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          attestations: true

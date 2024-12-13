@@ -1,25 +1,22 @@
 <!-- omit in toc -->
 # itscalledsoccer
 
-<img src="https://raw.githubusercontent.com/American-Soccer-Analysis/itscalledsoccer-r/main/man/figures/logo.png" align="right" height="175"/>
+<div align="center">
+    <img src="https://raw.githubusercontent.com/American-Soccer-Analysis/itscalledsoccer-r/main/man/figures/logo.png" align="center" height="175"/>
+</div>
+
+<br>
+
 
 <!-- badges: start -->
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 ![PyPi Version](https://img.shields.io/pypi/v/itscalledsoccer.svg)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/itscalledsoccer)
 ![Python tests](https://github.com/American-Soccer-Analysis/itscalledsoccer/actions/workflows/python-tests.yml/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PyPI download month](https://img.shields.io/pypi/dm/itscalledsoccer.svg)](https://pypi.python.org/pypi/itscalledsoccer/)
 [![codecov](https://codecov.io/github/American-Soccer-Analysis/itscalledsoccer/graph/badge.svg?token=RUWMM7ZLQ2)](https://codecov.io/github/American-Soccer-Analysis/itscalledsoccer)
 <!-- badges: end -->
-
----
-
-:warning: **`itscalledsoccer` has been split up into multiple repositories. If you're looking for the R or JavaScript version, check out the links below** :warning::
-
-- [itscalledsoccer-r](https://github.com/American-Soccer-Analysis/itscalledsoccer-r)
-- [itscalledsoccer-js](https://github.com/American-Soccer-Analysis/itscalledsoccer-js)
-
----
 
 <!-- omit in toc -->
 ## Table of Contents
@@ -27,6 +24,7 @@
 - [Background](#background)
 - [Install](#install)
 - [Usage](#usage)
+- [Other versions](#other-versions)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -56,6 +54,11 @@ asa_players = asa_client.get_players(names="Andre")
 ```
 
 For more information, check out the [documentation site](https://american-soccer-analysis.github.io/itscalledsoccer/).
+
+## Other versions
+
+- [itscalledsoccer-r](https://github.com/American-Soccer-Analysis/itscalledsoccer-r)
+- [itscalledsoccer-js](https://github.com/American-Soccer-Analysis/itscalledsoccer-js)
 
 ## Contributing
 

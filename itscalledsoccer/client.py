@@ -339,9 +339,9 @@ class AmericanSoccerAnalysis:
             self._check_leagues_salaries(leagues)
             if (
                 entity == "teams"
-                and kwargs.get("split_by_teams", None)
-                and kwargs.get("split_by_seasons", None)
-                and kwargs.get("split_by_positions", None)
+                and not kwargs.get("split_by_teams", None)
+                and not kwargs.get("split_by_seasons", None)
+                and not kwargs.get("split_by_positions", None)
             ):
                 kwargs["split_by_teams"] = True
         else:

@@ -510,6 +510,7 @@ class AmericanSoccerAnalysis:
         team_names: Union[str, List[str], None] = None,
         seasons: Union[str, List[str], None] = None,
         stages: Union[str, List[str], None] = None,
+        status: Union[str, List[str], None] = None,
     ) -> DataFrame:
         """Get information related to games
 
@@ -520,6 +521,7 @@ class AmericanSoccerAnalysis:
             team_names (Union[str, List[str], None], optional): a single team name or a list of team names. Defaults to None.
             seasons (Union[str, List[str], None], optional): a single year of a league season or a list of years. Defaults to None.
             stages (Union[str, List[str], None], optional): a single stage of competition in which a game took place or list of stages. Defaults to None.
+            status (Union[str, List[str], None], optional): Describes the status (IE: if it's been played or otherwise) of a game. Can take a single value or a list of values. Valid keywords include: Abandoned, FullTime, PreMatch. Defaults to None.
 
         Returns:
             DataFrame_
@@ -539,6 +541,8 @@ class AmericanSoccerAnalysis:
             query["season_name"] = seasons
         if stages:
             query["stage_name"] = stages
+        if status:
+            query["status"] = status
         if not leagues:
             leagues = self.LEAGUES
 

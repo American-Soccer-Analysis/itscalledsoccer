@@ -46,14 +46,9 @@ from itscalledsoccer.client import AmericanSoccerAnalysis
 asa_client = AmericanSoccerAnalysis()
 ```
 
-Any of the `get_*` methods can be used to retrieve the same data made available in the [American Soccer Analysis app](https://app.americansocceranalysis.com/). Partial matches or abbreviations are accepted for any player or team names. For most methods, arguments _must be named_. A few examples are below.
+Any of the `get_*` methods can be used to retrieve the same data made available in the [American Soccer Analysis app](https://app.americansocceranalysis.com/). Partial matches or abbreviations are accepted for any player or team names. For most methods, arguments _must be named_.
 
-```python
-# Get all players named "Andre"
-asa_players = asa_client.get_players(names="Andre")
-```
-
-For more information, check out the [documentation site](https://american-soccer-analysis.github.io/itscalledsoccer/).
+For more information, check out the [documentation site](https://american-soccer-analysis.github.io/itscalledsoccer/reference).
 
 ## Other versions
 

@@ -10,7 +10,7 @@
 		"ghcr.io/devcontainers/features/github-cli:1": {},
 		"ghcr.io/prulloac/devcontainer-features/pre-commit:1": {},
 		"ghcr.io/hspaans/devcontainer-features/pymarkdownlnt:1": {},
-		"ghcr.io/hspaans/devcontainer-features/pytest:1": {},
+		"ghcr.io/hspaans/devcontainer-features/pytest:2": {},
 		"ghcr.io/va-h/devcontainers-features/uv:1": {}
 	},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

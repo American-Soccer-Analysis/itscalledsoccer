@@ -4,11 +4,23 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
+    groups:
+      pip-deps:
+        patterns:
+          - "*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "monthly"
+    groups:
+      actions:
+        patterns:
+          - "*"
   - package-ecosystem: "devcontainers"
     directory: "/"
     schedule:
       interval: "monthly"
+    groups:
+      devcontainers:
+        patterns:
+          - "*"

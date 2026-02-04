@@ -29,5 +29,5 @@ jobs:
           uv venv
           uv pip install --upgrade setuptools wheel
       - name: Install the project
-        run: uv sync --all-extras --dev
+        run: uv sync
       - run: uv run mkdocs gh-deploy --force

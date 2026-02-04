@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "itscalledsoccer"
 description = "Programmatically interact with the American Soccer Analysis API"
@@ -48,10 +52,6 @@ dev = [
   "mkdocstrings[python]",
   "mkdocs-material"
 ]
-
-[build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta"
 
 [tool.setuptools.exclude-package-data]
 itscalledsoccer = ["tests", "tests.*"]

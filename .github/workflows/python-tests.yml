@@ -1,4 +1,4 @@
-name: Python tests
+name: Python Tests 🐍
 
 on:
   pull_request:
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
 
     steps:
       - name: Harden Runner
@@ -33,7 +33,7 @@ jobs:
         run: uv sync --all-extras --dev
       - name: Linting
         run: |
-          uv run mypy itscalledsoccer
+          uv run ty check itscalledsoccer
           uv run ruff check itscalledsoccer
       - name: Run Pytest and generate coverage file
         run: |

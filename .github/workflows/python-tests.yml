@@ -34,7 +34,7 @@ jobs:
       - name: Linting
         run: |
           . ./.venv/bin/activate
-          uv run ty check
+          ty check
           uv run ruff check itscalledsoccer
       - name: Run Pytest and generate coverage file
         run: |

@@ -33,6 +33,7 @@ jobs:
         run: uv sync
       - name: Linting
         run: |
+          . ./venv/bin/activate
           uv run ty check
           uv run ruff check itscalledsoccer
       - name: Run Pytest and generate coverage file

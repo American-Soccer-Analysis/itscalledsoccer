@@ -9,7 +9,7 @@
 # the `language` matrix defined below to confirm you have the correct set of
 # supported CodeQL languages.
 #
-name: "CodeQL"
+name: "CodeQL 🖥️"
 
 on:
   push:
@@ -37,8 +37,7 @@ jobs:
       matrix:
         language: ["python"]
         # CodeQL supports [ $supported-codeql-languages ]
-        # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
-
+        # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-suppor
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@e3f713f2d8f53843e71c69a996d56f51aa9adfb9 # v2.14.1

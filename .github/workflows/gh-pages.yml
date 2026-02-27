@@ -26,8 +26,9 @@ jobs:
         # Install a specific uv version using the installer
         run: |
           curl -LsSf https://astral.sh/uv/0.3.4/install.sh | sh
-          uv venv
-          uv pip install --upgrade setuptools wheel
-      - name: Install the project
-        run: uv sync
-      - run: uv run mkdocs gh-deploy --force
+      - name: Install the project and
+        run: |
+          uv sync --locked --all-extras --dev
+          . .venv/bin/activate
+      - name: Deploy to GitHub Pages
+        run: uv run mkdocs gh-deploy --force

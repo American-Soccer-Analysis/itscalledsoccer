@@ -35,8 +35,8 @@ jobs:
         run: uv sync --locked --all-extras --dev
       - name: Linting
         run: |
-          . ./.venv/bin/activate
-          uv run ty check
+          . .venv/bin/activate
+          uv run ty check itscalledsoccer
           uv run ruff check itscalledsoccer
       - name: Run Pytest and generate coverage file
         run: |

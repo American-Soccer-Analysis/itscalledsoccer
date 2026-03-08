@@ -22,13 +22,13 @@ jobs:
       - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version: 3.14
-      - name: Set up uv
-        # Install a specific uv version using the installer
-        run: |
-          curl -LsSf https://astral.sh/uv/0.3.4/install.sh | sh
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
       - name: Install the project and
         run: |
-          uv sync --locked --all-extras --dev
+          uv sync --all-extras --dev
           . .venv/bin/activate
       - name: Deploy to GitHub Pages
         run: uv run mkdocs gh-deploy --force

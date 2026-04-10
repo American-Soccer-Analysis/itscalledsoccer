@@ -171,16 +171,14 @@ class AmericanSoccerAnalysis:
             if isinstance(leagues, list):
                 for league in leagues:
                     if league not in self.LEAGUES:
-                        self.LOGGER.info(
-                            f"Leagues are limited only to the following options: {self.LEAGUES}."
+                        raise ValueError(
+                            f"{league} is not a valid league. Must be one of: {self.LEAGUES}"
                         )
-                        raise SystemExit(1)
             else:
                 if leagues not in self.LEAGUES:
-                    self.LOGGER.info(
-                        f"Leagues are limited only to the following options: {self.LEAGUES}."
+                    raise ValueError(
+                        f"{leagues} is not valid. Must be one of: {self.LEAGUES}"
                     )
-                    raise SystemExit(1)
 
     def _check_leagues_salaries(self, leagues: Union[str, List[str], None]) -> None:
         """Validates the leagues parameter for salary searches
@@ -191,12 +189,10 @@ class AmericanSoccerAnalysis:
         if leagues:
             if isinstance(leagues, list):
                 if any([x != "mls" for x in leagues]):
-                    self.LOGGER.info("Only MLS salary data is publicly available.")
-                    raise SystemExit(1)
+                    raise ValueError("Only MLS salary data is publicly available.")
             else:
                 if leagues != "mls":
-                    self.LOGGER.info("Only MLS salary data is publicly available.")
-                    raise SystemExit(1)
+                    raise ValueError("Only MLS salary data is publicly available.")
 
     def _check_ids_names(
         self, ids: Union[str, List[str], None], names: Union[str, List[str], None]
@@ -209,18 +205,15 @@ class AmericanSoccerAnalysis:
             names (str, List[str], None): a single name or list of names
         """
         if ids and names:
-            self.LOGGER.info("Please specify only IDs or names, not both.")
-            raise SystemExit(1)
+            raise ValueError("Please specify only IDs or names, not both.")
 
         if ids:
             if not isinstance(ids, str) and not isinstance(ids, list):
-                self.LOGGER.info("IDs must be passed as a string or list of strings.")
-                raise SystemExit(1)
+                raise ValueError("IDs must be passed as a string or list of strings.")
 
         if names:
             if not isinstance(names, str) and not isinstance(names, list):
-                self.LOGGER.info("Names must be passed as a string or list of names.")
-                raise SystemExit(1)
+                raise ValueError("Names must be passed as a string or list of names.")
 
     def _filter_entity(
         self,

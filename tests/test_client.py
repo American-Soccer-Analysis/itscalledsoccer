@@ -19,7 +19,7 @@ class TestClient:
         assert self.client.API_VERSION == "v1"
         assert self.client.BASE_URL == "https://app.americansocceranalysis.com/api/v1/"
         assert self.client.MAX_API_LIMIT == 1000
-        assert self.client.LEAGUES == ["nwsl", "mls", "uslc", "usl1", "nasl", "mlsnp"]
+        assert self.client.LEAGUES == ["nwsl", "mls", "uslc", "usl1", "usls", "nasl", "mlsnp"]
         assert self.client.LOGGER is not None
         assert self.client.LOGGER.getEffectiveLevel() == 30
 
@@ -165,7 +165,7 @@ class TestClient:
             "itscalledsoccer.client.AmericanSoccerAnalysis._get_entity"
         ) as mock_entity:
             mock_entity.return_value = self.load_mock_data("stadia")
-            self.client = AmericanSoccerAnalysis()
+            self.client = AmericanSoccerAnalysis(lazy_load=False)
             stadia = self.client.get_stadia()
             assert stadia is not None
             assert isinstance(stadia, DataFrame)
@@ -176,7 +176,7 @@ class TestClient:
             "itscalledsoccer.client.AmericanSoccerAnalysis._get_entity"
         ) as mock_entity:
             mock_entity.return_value = self.load_mock_data("referees")
-            self.client = AmericanSoccerAnalysis()
+            self.client = AmericanSoccerAnalysis(lazy_load=False)
             referees = self.client.get_referees()
             assert referees is not None
             assert isinstance(referees, DataFrame)
@@ -187,7 +187,7 @@ class TestClient:
             "itscalledsoccer.client.AmericanSoccerAnalysis._get_entity"
         ) as mock_entity:
             mock_entity.return_value = self.load_mock_data("managers")
-            self.client = AmericanSoccerAnalysis()
+            self.client = AmericanSoccerAnalysis(lazy_load=False)
             managers = self.client.get_managers()
             assert managers is not None
             assert isinstance(managers, DataFrame)
@@ -198,7 +198,7 @@ class TestClient:
             "itscalledsoccer.client.AmericanSoccerAnalysis._get_entity"
         ) as mock_entity:
             mock_entity.return_value = self.load_mock_data("teams")
-            self.client = AmericanSoccerAnalysis()
+            self.client = AmericanSoccerAnalysis(lazy_load=False)
             teams = self.client.get_teams()
             assert teams is not None
             assert isinstance(teams, DataFrame)
@@ -209,7 +209,7 @@ class TestClient:
             "itscalledsoccer.client.AmericanSoccerAnalysis._get_entity"
         ) as mock_entity:
             mock_entity.return_value = self.load_mock_data("players")
-            self.client = AmericanSoccerAnalysis()
+            self.client = AmericanSoccerAnalysis(lazy_load=False)
             players = self.client.get_players()
             assert players is not None
             assert isinstance(players, DataFrame)
@@ -217,10 +217,10 @@ class TestClient:
 
     def test_get_games(self):
         with patch(
-            "itscalledsoccer.client.AmericanSoccerAnalysis._get_entity"
-        ) as mock_entity:
-            mock_entity.return_value = self.load_mock_data("games")
-            self.client = AmericanSoccerAnalysis()
+            "itscalledsoccer.client.AmericanSoccerAnalysis._execute_query"
+        ) as mock_query:
+            mock_query.return_value = self.load_mock_data("games")
+            self.client = AmericanSoccerAnalysis(lazy_load=False)
             games = self.client.get_games()
             assert games is not None
             assert isinstance(games, DataFrame)

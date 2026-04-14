@@ -1,4 +1,3 @@
-from codecs import lookup
 import json
 from io import StringIO
 from logging import getLevelName, getLogger
@@ -6,7 +5,7 @@ from logging import getLevelName, getLogger
 import requests
 from cachecontrol import CacheControl
 from cachecontrol.heuristics import ExpiresAfter
-from pandas import DataFrame, concat, isnull, read_json
+from pandas import DataFrame, concat, read_json
 from rapidfuzz import fuzz, process
 
 
@@ -117,7 +116,7 @@ class AmericanSoccerAnalysis:
 
         if type not in TYPE_MAP:
             raise ValueError(f"Unknown entity type '{type}'.")
-        
+
         attr, name_col, id_col = TYPE_MAP[type]
         lookup = getattr(self, attr)
         names = lookup[name_col].to_list()
@@ -132,14 +131,14 @@ class AmericanSoccerAnalysis:
         else:
             self.LOGGER.info(f"No match found for {name}")
             return ""
-        
+
         matched_id = lookup.loc[lookup[name_col] == name, id_col].iloc[0]
 
         return matched_id
 
     def _convert_names_to_ids(
         self, type: str, names: str | list[str]
-    ) -> str| list[str] | None:
+    ) -> str | list[str] | None:
         """Converts a name or list of names to an id or list of ids
 
         Args:
@@ -771,9 +770,7 @@ class AmericanSoccerAnalysis:
         team_xgoals = self._get_stats(leagues, type="xgoals", entity="teams", **kwargs)
         return team_xgoals
 
-    def get_team_xpass(
-        self, leagues: str | list[str] = LEAGUES, **kwargs
-    ) -> DataFrame:
+    def get_team_xpass(self, leagues: str | list[str] = LEAGUES, **kwargs) -> DataFrame:
         """Retrieves a DataFrame containing team xPass data meeting the specified conditions.
 
         Args:

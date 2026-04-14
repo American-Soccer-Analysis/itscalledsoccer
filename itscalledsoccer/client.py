@@ -27,9 +27,9 @@ class AmericanSoccerAnalysis:
         """Class constructor
 
         Args:
-            proxies (Optional[dict], optional): A dictionary containing proxy mappings, see https://docs.python-requests.org/en/latest/user/advanced/#proxies. Defaults to None.
-            logging_level (Optional[str], optional): A string representing the logging level of the logger. Defaults to "WARNING".
-            lazy_load (Optional[bool], optional): A boolean indicating whether to lazy load all entity data on initialization. Defaults to True.
+            proxies (dict | None): A dictionary containing proxy mappings, see https://docs.python-requests.org/en/latest/user/advanced/#proxies. Defaults to None.
+            logging_level (str | None): A string representing the logging level of the logger. Defaults to "WARNING".
+            lazy_load (bool | None): A boolean indicating whether to lazy load all entity data on initialization. Defaults to True.
         """
         SESSION = requests.session()
         if proxies:
@@ -145,10 +145,10 @@ class AmericanSoccerAnalysis:
 
         Args:
             type (str): type of name
-            names (str,list[str]): a name or list of names
+            names (str | list[str]): a name or list of names
 
         Returns:
-            str or list[str]: the matched ids
+            str | list[str]: the matched ids
         """
         ids: list[str] = []
         if names is None:
@@ -164,7 +164,7 @@ class AmericanSoccerAnalysis:
         """Validates the leagues parameter
 
         Args:
-            leagues (str, list[str], None): league abbreviation or list of league abbreviations
+            leagues (str | list[str] | None): league abbreviation or list of league abbreviations
         """
         if leagues:
             if isinstance(leagues, list):
@@ -183,7 +183,7 @@ class AmericanSoccerAnalysis:
         """Validates the leagues parameter for salary searches
 
         Args:
-            leagues (str, list[str], None): league abbreviation or list of league abbreviations
+            leagues (str | list[str] | None): league abbreviation or list of league abbreviations
         """
         if leagues:
             if isinstance(leagues, list):
@@ -200,8 +200,8 @@ class AmericanSoccerAnalysis:
         they are the right data type.
 
         Args:
-            ids (str, list[str], None): a single id or list of ids
-            names (str, list[str], None): a single name or list of names
+            ids (str | list[str] | None): a single id or list of ids
+            names (str | list[str] | None): a single name or list of names
         """
         if ids and names:
             raise ValueError("Please specify only IDs or names, not both.")
@@ -228,8 +228,8 @@ class AmericanSoccerAnalysis:
             entity_all (DataFrame): a DataFrame containing the complete set of data
             entity_type (str): the type of data
             leagues (str | list[str] | None): league abbreviation or list of league abbreviations
-            ids (str, list[str], None): a single id or list of ids
-            names (str, list[str], None): a single name or list of names
+            ids (str | list[str] | None): a single id or list of ids
+            names (str | list[str] | None): a single name or list of names
         Returns:
             DataFrame
         """
@@ -311,7 +311,7 @@ class AmericanSoccerAnalysis:
         Args:
             type (str): the API endpoint to call
             entity (str): URL query strings
-            leagues (str, list[str], None): league abbreviation or list of league abbreviations
+            leagues (str | list[str] | None): league abbreviation or list of league abbreviations
 
         Keyword Args:
             split_by_teams (bool): Logical indicator to group results by team.
@@ -398,9 +398,9 @@ class AmericanSoccerAnalysis:
         """Get information associated with stadia
 
         Args:
-            leagues (str | list[str] | None, optional): league abbreviation or list of league abbreviations. Defaults to None.
-            ids (str | list[str] | None, optional): a single id or list of ids. Defaults to None.
-            names (str | list[str] | None, optional): a single name or list of names. Defaults to None.
+            leagues (str | list[str] | None): league abbreviation or list of league abbreviations. Defaults to None.
+            ids (str | list[str] | None): a single id or list of ids. Defaults to None.
+            names (str | list[str] | None): a single name or list of names. Defaults to None.
 
         Returns:
             DataFrame
@@ -419,9 +419,9 @@ class AmericanSoccerAnalysis:
         """Get information associated with referees
 
         Args:
-            leagues (str | list[str] | None, optional): league abbreviation or a list of league abbreviations. Defaults to None.
-            ids (str | list[str] | None, optional): a single referee id or a list of referee ids. Defaults to None.
-            names (str | list[str] | None, optional): a single referee name or a list of referee names. Defaults to None.
+            leagues (str | list[str] | None): league abbreviation or a list of league abbreviations. Defaults to None.
+            ids (str | list[str] | None): a single referee id or a list of referee ids. Defaults to None.
+            names (str | list[str] | None): a single referee name or a list of referee names. Defaults to None.
 
         Returns:
             DataFrame
@@ -440,9 +440,9 @@ class AmericanSoccerAnalysis:
         """Get information associated with managers
 
         Args:
-            leagues (str | list[str] | None, optional): league abbreviation or a list of league abbreviations. Defaults to None.
-            ids (str | list[str] | None, optional): a single manager id or a list of manager ids. Defaults to None.
-            names (str | list[str] | None, optional): a single manager name or a list of manager names. Defaults to None.
+            leagues (str | list[str] | None): league abbreviation or a list of league abbreviations. Defaults to None.
+            ids (str | list[str] | None): a single manager id or a list of manager ids. Defaults to None.
+            names (str | list[str] | None): a single manager name or a list of manager names. Defaults to None.
 
         Returns:
             DataFrame_
@@ -461,9 +461,9 @@ class AmericanSoccerAnalysis:
         """Get information associated with teams
 
         Args:
-            leagues (str | list[str] | None, optional): league abbreviation or a list of league abbreviations. Defaults to None.
-            ids (str | list[str] | None, optional): a single team id or a list of team ids. Defaults to None.
-            names (str | list[str] | None, optional): a single team name or a list of team names. Defaults to None.
+            leagues (str | list[str] | None): league abbreviation or a list of league abbreviations. Defaults to None.
+            ids (str | list[str] | None): a single team id or a list of team ids. Defaults to None.
+            names (str | list[str] | None): a single team name or a list of team names. Defaults to None.
 
         Returns:
             DataFrame_
@@ -482,9 +482,9 @@ class AmericanSoccerAnalysis:
         """Get information associated with players
 
         Args:
-            leagues (str | list[str] | None, optional): league abbreviation or a list of league abbreviations. Defaults to None.
-            ids (str | list[str] | None, optional): a single player id or a list of player ids. Defaults to None.
-            names (str | list[str] | None, optional): a single player name or a list of player names. Defaults to None.
+            leagues (str | list[str] | None): league abbreviation or a list of league abbreviations. Defaults to None.
+            ids (str | list[str] | None): a single player id or a list of player ids. Defaults to None.
+            names (str | list[str] | None): a single player name or a list of player names. Defaults to None.
 
         Returns:
             DataFrame_
@@ -507,13 +507,13 @@ class AmericanSoccerAnalysis:
         """Get information related to games
 
         Args:
-            leagues (str | list[str] | None, optional): league abbreviation or a list of league abbreviations. Defaults to None.
-            game_ids (str | list[str] | None, optional): a single game id or a list of game ids. Defaults to None.
-            team_ids (str | list[str] | None, optional): a single team id or a list of team ids. Defaults to None.
-            team_names (str | list[str] | None, optional): a single team name or a list of team names. Defaults to None.
-            seasons (str | list[str] | None, optional): a single year of a league season or a list of years. Defaults to None.
-            stages (str | list[str] | None, optional): a single stage of competition in which a game took place or list of stages. Defaults to None.
-            status (str | list[str] | None, optional): Describes the status (IE: if it's been played or otherwise) of a game. Can take a single value or a list of values. Valid keywords include: Abandoned, FullTime, PreMatch. Defaults to None.
+            leagues (str | list[str] | None): league abbreviation or a list of league abbreviations. Defaults to None.
+            game_ids (str | list[str] | None): a single game id or a list of game ids. Defaults to None.
+            team_ids (str | list[str] | None): a single team id or a list of team ids. Defaults to None.
+            team_names (str | list[str] | None): a single team name or a list of team names. Defaults to None.
+            seasons (str | list[str] | None): a single year of a league season or a list of years. Defaults to None.
+            stages (str | list[str] | None): a single stage of competition in which a game took place or list of stages. Defaults to None.
+            status (str | list[str] | None): Describes the status (IE: if it's been played or otherwise) of a game. Can take a single value or a list of values. Valid keywords include: Abandoned, FullTime, PreMatch. Defaults to None.
 
         Returns:
             DataFrame_
@@ -559,7 +559,7 @@ class AmericanSoccerAnalysis:
         """Retrieves a DataFrame containing player xG data meeting the specified conditions.
 
         Args:
-            leagues (str | list[str], optional): League(s) on which to filter. Accepts a string or list of strings.
+            leagues (str | list[str]): League(s) on which to filter. Accepts a string or list of strings.
 
         Keyword Args:
             minimum_minutes (int): Minimum threshold for sum of minutes played.
@@ -593,7 +593,7 @@ class AmericanSoccerAnalysis:
         """Retrieves a DataFrame containing player xPass data meeting the specified conditions.
 
         Args:
-            leagues (str | list[str], optional): League(s) on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
+            leagues (str | list[str]): League(s) on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
 
         Keyword Args:
             minimum_minutes (int): Minimum threshold for sum of minutes played.
@@ -626,7 +626,7 @@ class AmericanSoccerAnalysis:
         """Retrieves a DataFrame containing player g+ data meeting the specified conditions.
 
         Args:
-            leagues (str | list[str], optional): League(s) on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
+            leagues (str | list[str]): League(s) on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
 
         Keyword Args:
             minimum_minutes (int): Minimum threshold for sum of minutes played.
@@ -659,7 +659,7 @@ class AmericanSoccerAnalysis:
         """Retrieves a DataFrame containing player salary data meeting the specified conditions
 
         Args:
-            leagues (str | list[str], optional): Leagues on which to filter. Accepts a string or list of strings. Defaults to 'mls'.
+            leagues (str | list[str]): Leagues on which to filter. Accepts a string or list of strings. Defaults to 'mls'.
 
         Keyword Args:
             player_ids (str | list[str]): Player IDs on which to filter. Cannot be combined with player_names. Accepts a string or list of strings.
@@ -685,7 +685,7 @@ class AmericanSoccerAnalysis:
         """Retrieves a DataFrame containing goalkeeper xG data meeting the specified conditions.
 
         Args:
-         leagues (str | list[str], optional): League(s) on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
+         leagues (str | list[str]): League(s) on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
 
         Keyword Args:
             minimum_minutes (int): Minimum threshold for sum of minutes played.
@@ -717,7 +717,7 @@ class AmericanSoccerAnalysis:
         """Retrieves a DataFrame containing goalkeeper g+ data meeting the specified conditions.
 
         Args:
-            leagues (str | list[str], optional): League(s) on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
+            leagues (str | list[str]): League(s) on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
 
         Keyword Args:
             minimum_minutes (int): Minimum threshold for sum of minutes played.
@@ -749,7 +749,7 @@ class AmericanSoccerAnalysis:
         """Retrieves a DataFrame containing team xG data meeting the specified conditions.
 
         Args:
-            leagues (str | list[str], optional): Leagues on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
+            leagues (str | list[str]): Leagues on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
 
         Keyword Args:
             team_ids (str | list[str]): Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
@@ -778,7 +778,7 @@ class AmericanSoccerAnalysis:
         """Retrieves a DataFrame containing team xPass data meeting the specified conditions.
 
         Args:
-            leagues (str | list[str], optional): Leagues on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
+            leagues (str | list[str]): Leagues on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
 
         Keyword Args:
             team_ids (str | list[str]): Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
@@ -805,7 +805,7 @@ class AmericanSoccerAnalysis:
         """Retrieves a DataFrame containing team g+ data meeting the specified conditions.
 
         Args:
-            leagues (str | list[str], optional): Leagues on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
+            leagues (str | list[str]): Leagues on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
 
         Keyword Args:
             team_ids (str | list[str]): Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
@@ -831,7 +831,7 @@ class AmericanSoccerAnalysis:
         """Retrieves a DataFrame containing team salary data meeting the specified conditions.
 
         Args:
-            leagues (str | list[str], optional): Leagues on which to filter. Accepts a string or list of strings. Defaults to 'mls'.
+            leagues (str | list[str]): Leagues on which to filter. Accepts a string or list of strings. Defaults to 'mls'.
 
         Keyword Args:
             team_ids (str | list[str]): Team IDs on which to filter. Cannot be combined with team_names. Accepts a string or list of strings.
@@ -855,7 +855,7 @@ class AmericanSoccerAnalysis:
         """Retrieves a DataFrame containing game xG data meeting the specified conditions.
 
         Args:
-            leagues (str | list[str], optional): Leagues on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
+            leagues (str | list[str]): Leagues on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
 
         Keyword Args:
             game_ids (str | list[str]): Game IDs on which to filter. Accepts a string or list of strings.

@@ -1,3 +1,4 @@
+from codecs import lookup
 import json
 from io import StringIO
 from logging import getLevelName, getLogger
@@ -106,24 +107,20 @@ class AmericanSoccerAnalysis:
         """
         min_score = 70
 
-        if type == "player":
-            lookup = self.players
-            names = self.players["player_name"].to_list()
-        elif type == "manager":
-            lookup = self.managers
-            names = self.managers["manager_name"].to_list()
-        elif type == "stadium":
-            lookup = self.stadia
-            names = self.stadia["stadium_name"].to_list()
-        elif type == "referee":
-            lookup = self.referees
-            names = self.referees["referee_name"].to_list()
-        elif type == "team":
-            lookup = self.teams
-            names = self.teams["team_name"].to_list()
+        TYPE_MAP = {
+            "player": ("players", "player_name", "player_id"),
+            "manager": ("managers", "manager_name", "manager_id"),
+            "stadium": ("stadia", "stadium_name", "stadium_id"),
+            "referee": ("referees", "referee_name", "referee_id"),
+            "team": ("teams", "team_name", "team_id"),
+        }
 
-        # Getting back nan from the API for some names
-        names = [n for n in names if isnull(n) is False]
+        if type not in TYPE_MAP:
+            raise ValueError(f"Unknown entity type '{type}'.")
+        
+        attr, name_col, id_col = TYPE_MAP[type]
+        lookup = getattr(self, attr)
+        names = lookup[name_col].to_list()
 
         matches = process.extractOne(name, names, scorer=fuzz.partial_ratio)
         if matches:
@@ -135,7 +132,9 @@ class AmericanSoccerAnalysis:
         else:
             self.LOGGER.info(f"No match found for {name}")
             return ""
-        matched_id = lookup.loc[lookup[f"{type}_name"] == name, f"{type}_id"].iloc[0]
+        
+        matched_id = lookup.loc[lookup[name_col] == name, id_col].iloc[0]
+
         return matched_id
 
     def _convert_names_to_ids(

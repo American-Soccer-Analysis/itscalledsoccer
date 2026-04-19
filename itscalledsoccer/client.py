@@ -339,7 +339,7 @@ class AmericanSoccerAnalysis:
 
         PLAYER_KEYS = {"player_ids", "player_names"}
         TEAM_KEYS = {"team_ids", "team_names"}
-        keys_dict =  kwargs.keys()
+        keys_dict = kwargs.keys()
 
         if PLAYER_KEYS & keys_dict:
             self._check_ids_names(

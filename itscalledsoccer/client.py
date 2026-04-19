@@ -443,7 +443,7 @@ class AmericanSoccerAnalysis:
             names (str | list[str] | None): a single manager name or a list of manager names. Defaults to None.
 
         Returns:
-            DataFrame_
+            DataFrame
         """
         if self.managers is None:
             self.managers = self._get_entity("manager")
@@ -464,7 +464,7 @@ class AmericanSoccerAnalysis:
             names (str | list[str] | None): a single team name or a list of team names. Defaults to None.
 
         Returns:
-            DataFrame_
+            DataFrame
         """
         if self.teams is None:
             self.teams = self._get_entity("team")
@@ -485,7 +485,7 @@ class AmericanSoccerAnalysis:
             names (str | list[str] | None): a single player name or a list of player names. Defaults to None.
 
         Returns:
-            DataFrame_
+            DataFrame
         """
         if self.players is None:
             self.players = self._get_entity("player")
@@ -514,7 +514,7 @@ class AmericanSoccerAnalysis:
             status (str | list[str] | None): Describes the status (IE: if it's been played or otherwise) of a game. Can take a single value or a list of values. Valid keywords include: Abandoned, FullTime, PreMatch. Defaults to None.
 
         Returns:
-            DataFrame_
+            DataFrame
         """
         self._check_leagues(leagues)
         self._check_ids_names(team_ids, team_names)

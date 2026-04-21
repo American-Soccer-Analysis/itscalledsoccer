@@ -337,9 +337,11 @@ class AmericanSoccerAnalysis:
         else:
             self._check_leagues(leagues)
 
-        keys_string = ",".join(list(kwargs.keys()))
+        PLAYER_KEYS = {"player_ids", "player_names"}
+        TEAM_KEYS = {"team_ids", "team_names"}
+        keys_dict = kwargs.keys()
 
-        if "player_" in keys_string:
+        if PLAYER_KEYS & keys_dict:
             self._check_ids_names(
                 kwargs.get("player_ids", None), kwargs.get("player_names", None)
             )
@@ -353,7 +355,7 @@ class AmericanSoccerAnalysis:
                 kwargs["player_id"] = kwargs["player_ids"]
                 kwargs.pop("player_ids")
 
-        if "team_" in keys_string:
+        if TEAM_KEYS & keys_dict:
             self._check_ids_names(
                 kwargs.get("team_ids", None), kwargs.get("team_names", None)
             )

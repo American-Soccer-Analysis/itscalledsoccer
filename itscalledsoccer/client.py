@@ -81,7 +81,8 @@ class AmericanSoccerAnalysis:
             type (str): type of data to get
 
         Returns:
-            DataFrame: _description_
+            DataFrame: All records for the given entity type across all leagues,
+          with a "competition" column indicating the source league.
         """
         plural_type = f"{type}s" if type != "stadia" else f"{type}"
         self.LOGGER.info(f"Gathering all {plural_type}")

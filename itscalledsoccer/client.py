@@ -52,11 +52,11 @@ class AmericanSoccerAnalysis:
         self.base_url = self.BASE_URL
         self.lazy_load = lazy_load
 
-        self.players: DataFrame = DataFrame([])
-        self.teams: DataFrame = DataFrame([])
-        self.stadia: DataFrame = DataFrame([])
-        self.managers: DataFrame = DataFrame([])
-        self.referees: DataFrame = DataFrame([])
+        self.players: DataFrame | None = None
+        self.teams: DataFrame | None = None
+        self.stadia: DataFrame | None = None
+        self.managers: DataFrame | None = None
+        self.referees: DataFrame | None = None
 
         if self.lazy_load:
             self.LOGGER.info(

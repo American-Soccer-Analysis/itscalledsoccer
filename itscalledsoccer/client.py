@@ -31,10 +31,10 @@ class AmericanSoccerAnalysis:
             logging_level (str | None): A string representing the logging level of the logger. Defaults to "WARNING".
             lazy_load (bool | None): A boolean indicating whether to lazy load all entity data on initialization. Defaults to True.
         """
-        SESSION = requests.session()
+        session = requests.session()
         if proxies:
-            SESSION.proxies.update(proxies)
-        CACHE_SESSION = CacheControl(SESSION, heuristic=ExpiresAfter(days=1))
+            session.proxies.update(proxies)
+        cache_session = CacheControl(session, heuristic=ExpiresAfter(days=1))
 
         if logging_level:
             if logging_level.upper() in [
@@ -48,7 +48,7 @@ class AmericanSoccerAnalysis:
             else:
                 self.LOGGER.info(f"Logging level {logging_level} not recognized!")
 
-        self.session = CACHE_SESSION
+        self.session = cache_session
         self.base_url = self.BASE_URL
         self.lazy_load = lazy_load
 

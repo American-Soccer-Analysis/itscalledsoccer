@@ -14,8 +14,9 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/itscalledsoccer)
 ![Python tests](https://github.com/American-Soccer-Analysis/itscalledsoccer/actions/workflows/python-tests.yml/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![PyPI download month](https://img.shields.io/pypi/dm/itscalledsoccer.svg)](https://pypi.python.org/pypi/itscalledsoccer/)
+[![PyPI download month](https://img.shields.io/pypi/dm/itscalledsoccer.svg)](https://pypi.python.org/pypi/itscalledsoccer/)[![OpenSSF Baseline](https://www.bestpractices.dev/projects/9759/baseline)](https://www.bestpractices.dev/projects/9759)
 [![codecov](https://codecov.io/github/American-Soccer-Analysis/itscalledsoccer/graph/badge.svg?token=RUWMM7ZLQ2)](https://codecov.io/github/American-Soccer-Analysis/itscalledsoccer)
+[![OpenSSF Baseline](https://www.bestpractices.dev/projects/9759/baseline)](https://www.bestpractices.dev/projects/9759)
 <!-- badges: end -->
 
 <!-- omit in toc -->

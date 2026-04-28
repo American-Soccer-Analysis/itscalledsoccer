@@ -552,6 +552,8 @@ class AmericanSoccerAnalysis:
 
                 games = concat([games, response])
 
+        if games.empty:
+            return games
         return games.sort_values(by=["date_time_utc"], ascending=False)
 
     def get_player_xgoals(

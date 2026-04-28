@@ -88,7 +88,7 @@ class AmericanSoccerAnalysis:
         self.LOGGER.info(f"Gathering all {plural_type}")
         df = DataFrame([])
         for league in self.LEAGUES:
-            url = f"{self.BASE_URL}{league}/{plural_type}"
+            url = f"{self.base_url}{league}/{plural_type}"
             resp_df = self._execute_query(url, {})
             resp_df = resp_df.assign(competition=league)
             df = concat([df, resp_df], ignore_index=True)

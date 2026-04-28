@@ -1,11 +1,9 @@
-import json
-from io import StringIO
 from logging import getLevelName, getLogger
 
 import requests
 from cachecontrol import CacheControl
 from cachecontrol.heuristics import ExpiresAfter
-from pandas import DataFrame, concat, read_json
+from pandas import DataFrame, concat
 from rapidfuzz import fuzz, process
 
 
@@ -73,33 +71,33 @@ class AmericanSoccerAnalysis:
             self.referees = self._get_entity("referee")
         self.LOGGER.info("Finished initializing client")
 
-    def _get_entity(self, type: str) -> DataFrame:
+    def _get_entity(self, entity_type: str) -> DataFrame:
         """Gets all the data for a specific type and
         stores it in a DataFrame.
 
         Args:
-            type (str): type of data to get
+            entity_type (str): type of data to get
 
         Returns:
             DataFrame: All records for the given entity type across all leagues,
           with a "competition" column indicating the source league.
         """
-        plural_type = f"{type}s" if type != "stadia" else f"{type}"
+        plural_type = f"{entity_type}s" if entity_type != "stadia" else f"{entity_type}"
         self.LOGGER.info(f"Gathering all {plural_type}")
-        df = DataFrame([])
+        frames = []
         for league in self.LEAGUES:
             url = f"{self.base_url}{league}/{plural_type}"
             resp_df = self._execute_query(url, {})
             resp_df = resp_df.assign(competition=league)
-            df = concat([df, resp_df], ignore_index=True)
-        return df
+            frames.append(resp_df)
+        return concat(frames, ignore_index=True) if frames else DataFrame([])
 
-    def _convert_name_to_id(self, type: str, name: str) -> str:
+    def _convert_name_to_id(self, entity_type: str, name: str) -> str:
         """Converts the name of a player, manager, stadium, referee or team
         to their corresponding id.
 
         Args:
-            type (str): type of name to convert
+            entity_type (str): type of name to convert
             name (str): name
 
         Returns:
@@ -115,10 +113,10 @@ class AmericanSoccerAnalysis:
             "team": ("teams", "team_name", "team_id"),
         }
 
-        if type not in TYPE_MAP:
-            raise ValueError(f"Unknown entity type '{type}'.")
+        if entity_type not in TYPE_MAP:
+            raise ValueError(f"Unknown entity type '{entity_type}'.")
 
-        attr, name_col, id_col = TYPE_MAP[type]
+        attr, name_col, id_col = TYPE_MAP[entity_type]
         lookup = getattr(self, attr)
         names = lookup[name_col].to_list()
 
@@ -138,12 +136,12 @@ class AmericanSoccerAnalysis:
         return matched_id
 
     def _convert_names_to_ids(
-        self, type: str, names: str | list[str]
+        self, entity_type: str, names: str | list[str]
     ) -> str | list[str] | None:
         """Converts a name or list of names to an id or list of ids
 
         Args:
-            type (str): type of name
+            entity_type (str): type of name
             names (str | list[str]): a name or list of names
 
         Returns:
@@ -153,10 +151,10 @@ class AmericanSoccerAnalysis:
         if names is None:
             return None
         if isinstance(names, str):
-            return self._convert_name_to_id(type, names)
+            return self._convert_name_to_id(entity_type, names)
         else:
             for n in names:
-                ids.append(self._convert_name_to_id(type, n))
+                ids.append(self._convert_name_to_id(entity_type, n))
             return ids
 
     def _check_leagues(self, leagues: str | list[str] | None) -> None:
@@ -299,16 +297,16 @@ class AmericanSoccerAnalysis:
         """
         response = self.session.get(url=url, params=params)
         response.raise_for_status()
-        resp_df = read_json(StringIO(json.dumps(response.json())))
+        resp_df = DataFrame(response.json())
         return resp_df
 
     def _get_stats(
-        self, leagues: str | list[str], type: str, entity: str, **kwargs
+        self, leagues: str | list[str], stat_type: str, entity: str, **kwargs
     ) -> DataFrame:
         """Handles calls to stats APIs
 
         Args:
-            type (str): the API endpoint to call
+            stat_type (str): the API endpoint to call
             entity (str): URL query strings
             leagues (str | list[str] | None): league abbreviation or list of league abbreviations
 
@@ -326,7 +324,7 @@ class AmericanSoccerAnalysis:
             DataFrame
         """
         self.LOGGER.info(f"get_stats called with {locals()}")
-        if type == "salaries":
+        if stat_type == "salaries":
             self._check_leagues_salaries(leagues)
             if (
                 entity == "teams"
@@ -374,20 +372,21 @@ class AmericanSoccerAnalysis:
             kwargs["game_id"] = kwargs["game_ids"]
             kwargs.pop("game_ids")
 
-        stats = DataFrame([])
         if isinstance(leagues, str):
-            url = f"{self.base_url}{leagues}/{entity}/{type}"
+            stats = DataFrame([])
+            url = f"{self.base_url}{leagues}/{entity}/{stat_type}"
             response = self._execute_query(url, kwargs)
 
             stats = response
         elif isinstance(leagues, list):
+            frames = []
             for league in leagues:
-                url = f"{self.base_url}{league}/{entity}/{type}"
+                url = f"{self.base_url}{league}/{entity}/{stat_type}"
 
                 response = self._execute_query(url, kwargs)
 
-                stats = concat([stats, response])
-
+                frames.append(response)
+            stats = concat(frames, ignore_index=True) if frames else DataFrame([])
         return stats
 
     def get_stadia(
@@ -539,19 +538,20 @@ class AmericanSoccerAnalysis:
         if not leagues:
             leagues = self.LEAGUES
 
-        games = DataFrame([])
         if isinstance(leagues, str):
+            games = DataFrame([])
             games_url = f"{self.base_url}{leagues}/games"
             response = self._execute_query(games_url, query)
 
             games = response
         elif isinstance(leagues, list):
+            frames = []
             for league in leagues:
                 games_url = f"{self.base_url}{league}/games"
                 response = self._execute_query(games_url, query)
 
-                games = concat([games, response])
-
+                frames.append(response)
+            games = concat(frames, ignore_index=True) if frames else DataFrame([])
         if games.empty:
             return games
         return games.sort_values(by=["date_time_utc"], ascending=False)
@@ -586,7 +586,7 @@ class AmericanSoccerAnalysis:
             DataFrame
         """
         player_xgoals = self._get_stats(
-            leagues, type="xgoals", entity="players", **kwargs
+            leagues, stat_type="xgoals", entity="players", **kwargs
         )
         return player_xgoals
 
@@ -619,7 +619,7 @@ class AmericanSoccerAnalysis:
             DataFrame
         """
         player_xpass = self._get_stats(
-            leagues, type="xpass", entity="players", **kwargs
+            leagues, stat_type="xpass", entity="players", **kwargs
         )
         return player_xpass
 
@@ -652,7 +652,7 @@ class AmericanSoccerAnalysis:
             DataFrame
         """
         player_goals_added = self._get_stats(
-            leagues, type="goals-added", entity="players", **kwargs
+            leagues, stat_type="goals-added", entity="players", **kwargs
         )
         return player_goals_added
 
@@ -678,7 +678,7 @@ class AmericanSoccerAnalysis:
             DataFrame
         """
         player_salaries = self._get_stats(
-            leagues, type="salaries", entity="players", **kwargs
+            leagues, stat_type="salaries", entity="players", **kwargs
         )
         return player_salaries
 
@@ -710,7 +710,7 @@ class AmericanSoccerAnalysis:
             DataFrame
         """
         goalkeeper_xgoals = self._get_stats(
-            leagues, type="xgoals", entity="goalkeepers", **kwargs
+            leagues, stat_type="xgoals", entity="goalkeepers", **kwargs
         )
         return goalkeeper_xgoals
 
@@ -742,7 +742,7 @@ class AmericanSoccerAnalysis:
             DataFrame
         """
         goalkeeper_goals_added = self._get_stats(
-            leagues, type="goals-added", entity="goalkeepers", **kwargs
+            leagues, stat_type="goals-added", entity="goalkeepers", **kwargs
         )
         return goalkeeper_goals_added
 
@@ -772,7 +772,7 @@ class AmericanSoccerAnalysis:
         Returns:
             DataFrame
         """
-        team_xgoals = self._get_stats(leagues, type="xgoals", entity="teams", **kwargs)
+        team_xgoals = self._get_stats(leagues, stat_type="xgoals", entity="teams", **kwargs)
         return team_xgoals
 
     def get_team_xpass(self, leagues: str | list[str] = LEAGUES, **kwargs) -> DataFrame:
@@ -797,7 +797,7 @@ class AmericanSoccerAnalysis:
         Returns:
             DataFrame
         """
-        team_xpass = self._get_stats(leagues, type="xpass", entity="teams", **kwargs)
+        team_xpass = self._get_stats(leagues, stat_type="xpass", entity="teams", **kwargs)
         return team_xpass
 
     def get_team_goals_added(
@@ -822,7 +822,7 @@ class AmericanSoccerAnalysis:
             DataFrame
         """
         team_goals_added = self._get_stats(
-            leagues, type="goals-added", entity="teams", **kwargs
+            leagues, stat_type="goals-added", entity="teams", **kwargs
         )
         return team_goals_added
 
@@ -846,7 +846,7 @@ class AmericanSoccerAnalysis:
             DataFrame
         """
         team_salaries = self._get_stats(
-            leagues, type="salaries", entity="teams", **kwargs
+            leagues, stat_type="salaries", entity="teams", **kwargs
         )
         return team_salaries
 
@@ -868,5 +868,5 @@ class AmericanSoccerAnalysis:
         Returns:
             DataFrame
         """
-        game_xgoals = self._get_stats(leagues, type="xgoals", entity="games", **kwargs)
+        game_xgoals = self._get_stats(leagues, stat_type="xgoals", entity="games", **kwargs)
         return game_xgoals

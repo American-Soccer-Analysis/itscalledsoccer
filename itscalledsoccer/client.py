@@ -274,12 +274,14 @@ class AmericanSoccerAnalysis:
 
         if isinstance(response, DataFrame):
             offset = self.MAX_API_LIMIT
-
+            
+            frames = []
             while len(temp_response.index) == self.MAX_API_LIMIT:
                 params["offset"] = str(offset)
                 temp_response = self._single_request(url, params)
-                response = concat([response, temp_response], ignore_index=True)
+                frames.append(temp_response)
                 offset = offset + self.MAX_API_LIMIT
+            response = concat([response] + frames, ignore_index=True) if frames else response
 
         return response
 

@@ -274,14 +274,16 @@ class AmericanSoccerAnalysis:
 
         if isinstance(response, DataFrame):
             offset = self.MAX_API_LIMIT
-            
+
             frames = []
             while len(temp_response.index) == self.MAX_API_LIMIT:
                 params["offset"] = str(offset)
                 temp_response = self._single_request(url, params)
                 frames.append(temp_response)
                 offset = offset + self.MAX_API_LIMIT
-            response = concat([response] + frames, ignore_index=True) if frames else response
+            response = (
+                concat([response] + frames, ignore_index=True) if frames else response
+            )
 
         return response
 
@@ -774,7 +776,9 @@ class AmericanSoccerAnalysis:
         Returns:
             DataFrame
         """
-        team_xgoals = self._get_stats(leagues, stat_type="xgoals", entity="teams", **kwargs)
+        team_xgoals = self._get_stats(
+            leagues, stat_type="xgoals", entity="teams", **kwargs
+        )
         return team_xgoals
 
     def get_team_xpass(self, leagues: str | list[str] = LEAGUES, **kwargs) -> DataFrame:
@@ -799,7 +803,9 @@ class AmericanSoccerAnalysis:
         Returns:
             DataFrame
         """
-        team_xpass = self._get_stats(leagues, stat_type="xpass", entity="teams", **kwargs)
+        team_xpass = self._get_stats(
+            leagues, stat_type="xpass", entity="teams", **kwargs
+        )
         return team_xpass
 
     def get_team_goals_added(
@@ -870,5 +876,7 @@ class AmericanSoccerAnalysis:
         Returns:
             DataFrame
         """
-        game_xgoals = self._get_stats(leagues, stat_type="xgoals", entity="games", **kwargs)
+        game_xgoals = self._get_stats(
+            leagues, stat_type="xgoals", entity="games", **kwargs
+        )
         return game_xgoals

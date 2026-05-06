@@ -56,7 +56,7 @@ The API is **free and public** — no authentication required.
 | `nwsl` | National Women's Soccer League |
 | `uslc` | USL Championship |
 | `usl1` | USL League One |
-| `usls` | USL League Two |
+| `usls` | USL Super League |
 | `nasl` | North American Soccer League (historical) |
 | `mlsnp` | MLS Next Pro |
 
@@ -69,7 +69,7 @@ The API is **free and public** — no authentication required.
 ## Features
 
 - **15 API methods** covering players, teams, games, and advanced statistics
-- **Fuzzy name matching** — search by partial names or abbreviations ("LAFC", "Vela")
+- **Fuzzy name matching** — search by partial names or abbreviations ("LA", "Vela")
 - **Type hints** — full type annotations on all public methods
 - **Consistent interface** — same patterns across all 7 leagues
 
@@ -106,13 +106,9 @@ asa = AmericanSoccerAnalysis()
 # Get all USLC players
 uslc_players = asa.get_players(leagues="uslc")
 
-# Search by team abbreviation
-lou_players = asa.get_players(leagues="uslc", team_names="LOU")
-
 # Get Expected Goals (xG) data for 2023
 xg_data = asa.get_player_xgoals(
     leagues="uslc",
-    team_names="LOU",
     season_name="2023"
 )
 ```
@@ -134,6 +130,9 @@ teams = asa.get_teams(leagues=["uslc", "nwsl"])
 stadia = asa.get_stadia()
 managers = asa.get_managers(leagues="uslc")
 referees = asa.get_referees(leagues=["uslc", "mls"])
+
+# Filter games by team
+usl_2024_games = asa.get_games(leagues="uslc", team_names="Louisville City", seasons="2024")
 ```
 
 **Available entities:** players, teams, stadia, managers, referees
@@ -144,10 +143,7 @@ referees = asa.get_referees(leagues=["uslc", "mls"])
 
 ```python
 # Get games for a specific league and season
-uslc_2024_games = asa.get_games(leagues="uslc", season_name="2024)
-
-# Filter by team
-lou_games = asa.get_games(leagues="uslc", team_names="LOU")
+uslc_2024_games = asa.get_games(leagues="uslc", seasons="2024")
 ```
 
 ---
@@ -161,7 +157,6 @@ Expected Goals measures the quality of shot chances a player creates or faces.
 ```python
 xg = asa.get_player_xgoals(
     leagues="uslc",
-    team_names="LOU",
     season_name="2025",
     minimum_minutes=900
 )
@@ -176,7 +171,6 @@ Expected Pass measures pass difficulty and creative play value.
 ```python
 xpass = asa.get_player_xpass(
     leagues="uslc",
-    team_names="LOU",
     minimum_minutes=900
 )
 ```
@@ -188,7 +182,6 @@ Goals Added measures total value contribution across all actions.
 ```python
 gplus = asa.get_player_goals_added(
     leagues="uslc",
-    team_names="LOU",
     above_replacement=True
 )
 ```
@@ -227,16 +220,13 @@ team_salaries = asa.get_team_salaries(
 
 ### Fuzzy Name Matching
 
-Search by partial names, initials, or abbreviations (70% similarity threshold):
+Search by partial names, initials, or abbreviations. Returns only the best match:
 
 ```python
 # All of these match "Carlos Vela"
 asa.get_players(names="Carlos Vela")
-asa.get_players(names="Vela")
-asa.get_players(names="Carlos")
 
-# Team abbreviations
-asa.get_teams(names="LAFC")
+# Team names
 asa.get_teams(names="LA")
 ```
 
@@ -257,8 +247,8 @@ The reference includes:
 - **Why is my query slow?** Large queries may take a moment. Subsequent identical queries are cached.
 - **What do the metrics mean?** 
   - **xG:** Shot quality (0-1 per shot)
-  - **xPass:** Pass value (expected assists)
-  - **g+:** Net value in goals (positive = above average)
+  - **xPass:** Pass completion probability (0-1)
+  - **g+:** Measures a player's total on-ball contribution in attack and defense
 
 For detailed methodology, see [American Soccer Analysis](https://app.americansocceranalysis.com/).
 

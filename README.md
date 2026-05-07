@@ -1,3 +1,4 @@
+<!-- omit in toc -->
 # itscalledsoccer
 
 <div align="center">
@@ -22,13 +23,19 @@
 - [Background](#background)
 - [Features](#features)
 - [Installation](#installation)
+  - [Stable Release](#stable-release)
+  - [Development Version](#development-version)
 - [Quick Start](#quick-start)
 - [Usage Examples](#usage-examples)
   - [Entities](#entities)
   - [Games](#games)
   - [Player Statistics](#player-statistics)
+    - [Expected Goals (xG)](#expected-goals-xg)
+    - [Expected Pass (xPass)](#expected-pass-xpass)
+    - [Goals Added (g+)](#goals-added-g)
   - [Team Statistics](#team-statistics)
 - [Advanced Usage](#advanced-usage)
+  - [Fuzzy Name Matching](#fuzzy-name-matching)
 - [API Reference](#api-reference)
 - [Other Versions](#other-versions)
 - [Contributing](#contributing)
@@ -130,9 +137,6 @@ teams = asa.get_teams(leagues=["uslc", "nwsl"])
 stadia = asa.get_stadia()
 managers = asa.get_managers(leagues="uslc")
 referees = asa.get_referees(leagues=["uslc", "mls"])
-
-# Filter games by team
-usl_2024_games = asa.get_games(leagues="uslc", team_names="Louisville City", seasons="2024")
 ```
 
 **Available entities:** players, teams, stadia, managers, referees
@@ -144,6 +148,9 @@ usl_2024_games = asa.get_games(leagues="uslc", team_names="Louisville City", sea
 ```python
 # Get games for a specific league and season
 uslc_2024_games = asa.get_games(leagues="uslc", seasons="2024")
+
+# Filter by team
+lou_games = asa.get_games(leagues="uslc", team_names="Louisville City")
 ```
 
 ---
@@ -223,7 +230,7 @@ team_salaries = asa.get_team_salaries(
 Search by partial names, initials, or abbreviations. Returns only the best match:
 
 ```python
-# All of these match "Carlos Vela"
+# Player names
 asa.get_players(names="Carlos Vela")
 
 # Team names
@@ -245,7 +252,7 @@ The reference includes:
 
 - **No API key needed?** Correct — the API is public and free.
 - **Why is my query slow?** Large queries may take a moment. Subsequent identical queries are cached.
-- **What do the metrics mean?** 
+- **What do the metrics mean?**
   - **xG:** Shot quality (0-1 per shot)
   - **xPass:** Pass completion probability (0-1)
   - **g+:** Measures a player's total on-ball contribution in attack and defense

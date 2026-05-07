@@ -118,6 +118,9 @@ class AmericanSoccerAnalysis:
 
         attr, name_col, id_col = TYPE_MAP[entity_type]
         lookup = getattr(self, attr)
+        if lookup is None:
+            lookup = self._get_entity(entity_type)
+            setattr(self, attr, lookup)
         names = lookup[name_col].to_list()
 
         matches = process.extractOne(name, names, scorer=fuzz.partial_ratio)

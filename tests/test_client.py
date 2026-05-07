@@ -240,6 +240,22 @@ class TestClient:
 
         assert player_id == "p1"
 
+    def test_convert_name_to_id_lazy_loads_missing_entity(self):
+        self.client = AmericanSoccerAnalysis()
+        teams = DataFrame(
+            [
+                {"team_id": "t1", "team_name": "LAFC", "competition": "mls"},
+                {"team_id": "t2", "team_name": "NYCFC", "competition": "mls"},
+            ]
+        )
+
+        with patch.object(self.client, "_get_entity", return_value=teams) as mock_get_entity:
+            team_id = self.client._convert_name_to_id("team", "LAFC")
+
+        assert team_id == "t1"
+        assert self.client.teams is teams
+        mock_get_entity.assert_called_once_with("team")
+
     def test_convert_names_to_ids_with_list(self):
         self.client = AmericanSoccerAnalysis()
         self.client.teams = DataFrame(

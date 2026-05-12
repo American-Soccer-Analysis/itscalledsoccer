@@ -6,6 +6,7 @@ from pandas import DataFrame, read_json
 from pytest import fixture
 
 from itscalledsoccer.client import AmericanSoccerAnalysis
+from itscalledsoccer import AmericanSoccerAnalysis as ASAFromPackage
 
 
 @fixture(scope="session")
@@ -15,14 +16,18 @@ def init_client(self):
 
 
 class TestClient:
+    def test_import_from_package_init(self):
+        assert ASAFromPackage is AmericanSoccerAnalysis
+        assert ASAFromPackage.__name__ == "AmericanSoccerAnalysis"
+
     def test_init(self, init_client):
         self.client = init_client
         assert self.client.API_VERSION == "v1"
         assert self.client.BASE_URL == "https://app.americansocceranalysis.com/api/v1/"
         assert self.client.MAX_API_LIMIT == 1000
         assert self.client.LEAGUES == ["nwsl", "mls", "uslc", "usl1", "usls", "nasl", "mlsnp"]
-        assert self.client.LOGGER is not None
-        assert self.client.LOGGER.getEffectiveLevel() == 30
+        assert self.client.logger is not None
+        assert self.client.logger.getEffectiveLevel() == 30
 
     @patch("itscalledsoccer.client.AmericanSoccerAnalysis._get_entity")
     def test_proxy(self, mock_entity):
@@ -33,7 +38,99 @@ class TestClient:
     @patch("itscalledsoccer.client.AmericanSoccerAnalysis._get_entity")
     def test_logging_level(self, mock_entity):
         self.client = AmericanSoccerAnalysis(logging_level="DEBUG")
-        assert self.client.LOGGER.getEffectiveLevel() == 10
+        assert self.client.logger.getEffectiveLevel() == 10
+
+    @patch("itscalledsoccer.client.AmericanSoccerAnalysis._get_entity")
+    def test_logger_isolation_different_instances(self, mock_entity):
+        client1 = AmericanSoccerAnalysis(logging_level="DEBUG")
+        client2 = AmericanSoccerAnalysis(logging_level="WARNING")
+        
+        assert client1.logger is not client2.logger
+        assert client1.logger.getEffectiveLevel() == 10
+        assert client2.logger.getEffectiveLevel() == 30
+
+    @patch("itscalledsoccer.client.AmericanSoccerAnalysis._get_entity")
+    def test_logger_names_unique_per_instance(self, mock_entity):
+        client1 = AmericanSoccerAnalysis()
+        client2 = AmericanSoccerAnalysis()
+        
+        assert client1.logger.name != client2.logger.name
+        assert str(id(client1)) in client1.logger.name
+        assert str(id(client2)) in client2.logger.name
+
+    @patch("itscalledsoccer.client.AmericanSoccerAnalysis._get_entity")
+    def test_logger_isolation_logging_levels_independent(self, mock_entity):
+        client1 = AmericanSoccerAnalysis(logging_level="DEBUG")
+        client2 = AmericanSoccerAnalysis(logging_level="ERROR")
+        client3 = AmericanSoccerAnalysis(logging_level="INFO")
+        
+        assert client1.logger.getEffectiveLevel() == 10
+        assert client2.logger.getEffectiveLevel() == 40
+        assert client3.logger.getEffectiveLevel() == 20
+
+    @patch("itscalledsoccer.client.HTTPAdapter")
+    @patch("itscalledsoccer.client.AmericanSoccerAnalysis._get_entity")
+    def test_retry_strategy_configuration(self, mock_entity, mock_http_adapter_class):
+        with patch("itscalledsoccer.client.Retry") as mock_retry_class:
+            mock_retry_instance = mock_retry_class.return_value
+            
+            self.client = AmericanSoccerAnalysis()
+            
+            # Verify Retry was instantiated with correct parameters
+            mock_retry_class.assert_called_once_with(
+                total=3,
+                backoff_factor=0.5,
+                status_forcelist=[429, 500, 502, 503, 504],
+                allowed_methods=["GET"],
+            )
+            
+            # Verify HTTPAdapter was instantiated with the retry strategy
+            mock_http_adapter_class.assert_called_once_with(max_retries=mock_retry_instance)
+
+    @patch("itscalledsoccer.client.AmericanSoccerAnalysis._get_entity")
+    def test_retry_strategy_defaults(self, mock_entity):
+        # Verify that the retry strategy is set with expected defaults
+        self.client = AmericanSoccerAnalysis()
+        
+        # The session should be a CacheControl instance wrapping a requests session
+        assert self.client.session is not None
+        assert hasattr(self.client.session, 'get')
+
+    @patch("itscalledsoccer.client.AmericanSoccerAnalysis._get_entity")
+    def test_request_timeout_default(self, mock_entity):
+        self.client = AmericanSoccerAnalysis()
+        assert self.client.request_timeout == 30
+
+    @patch("itscalledsoccer.client.AmericanSoccerAnalysis._get_entity")
+    def test_request_timeout_custom(self, mock_entity):
+        custom_timeout = 60
+        self.client = AmericanSoccerAnalysis(request_timeout=custom_timeout)
+        assert self.client.request_timeout == custom_timeout
+
+    def test_request_timeout_applied_to_request(self, init_client):
+        self.client = init_client
+        with patch.object(self.client.session, 'get') as mock_get:
+            mock_get.return_value.json.return_value = [{"value": 1}]
+            self.client._single_request("http://example.com/api", {})
+            
+            # Verify timeout was passed to the get request
+            mock_get.assert_called_once()
+            args, kwargs = mock_get.call_args
+            assert kwargs['timeout'] == 30
+
+    def test_request_timeout_custom_applied_to_request(self):
+        with patch("itscalledsoccer.client.AmericanSoccerAnalysis._get_entity"):
+            custom_timeout = 45
+            self.client = AmericanSoccerAnalysis(request_timeout=custom_timeout)
+            
+            with patch.object(self.client.session, 'get') as mock_get:
+                mock_get.return_value.json.return_value = [{"value": 1}]
+                self.client._single_request("http://example.com/api", {})
+                
+                # Verify custom timeout was passed to the get request
+                mock_get.assert_called_once()
+                args, kwargs = mock_get.call_args
+                assert kwargs['timeout'] == custom_timeout
 
     def load_mock_data(self, func_name: str):
         path = Path(__file__).parent
@@ -351,3 +448,151 @@ class TestClient:
         mock_convert.assert_called_once_with("team", "LAFC")
         args, _ = mock_execute.call_args
         assert args[1]["team_id"] == ["t1"]
+
+    def test_convert_names_to_ids_with_none(self):
+        self.client = AmericanSoccerAnalysis()
+        result = self.client._convert_names_to_ids("player", None)
+        assert result is None
+
+    def test_convert_names_to_ids_with_list(self):
+        self.client = AmericanSoccerAnalysis()
+        self.client.players = DataFrame(
+            [
+                {"player_id": "p1", "player_name": "Alex Morgan", "competition": "mls"},
+                {"player_id": "p2", "player_name": "Megan Rapinoe", "competition": "nwsl"},
+            ]
+        )
+
+        player_ids = self.client._convert_names_to_ids("player", ["Alex Morgan", "Megan Rapinoe"])
+
+        assert player_ids == ["p1", "p2"]
+
+    def test_check_leagues_with_list(self):
+        self.client = AmericanSoccerAnalysis()
+
+        # Should not raise
+        self.client._check_leagues(["mls", "nwsl"])
+
+    def test_check_leagues_with_list_invalid(self, init_client):
+        self.client = init_client
+
+        with pytest.raises(ValueError, match="is not a valid league"):
+            self.client._check_leagues(["mls", "invalid_league"])
+
+    def test_check_ids_names_with_invalid_ids_type(self, init_client):
+        self.client = init_client
+
+        with pytest.raises(ValueError, match="IDs must be passed as a string or list of strings"):
+            self.client._check_ids_names(123, None)
+
+    def test_check_ids_names_with_invalid_names_type(self, init_client):
+        self.client = init_client
+
+        with pytest.raises(ValueError, match="Names must be passed as a string or list of names"):
+            self.client._check_ids_names(None, 123)
+
+    def test_filter_entity_by_ids_and_leagues(self, init_client):
+        self.client = init_client
+        self.client.teams = DataFrame(
+            [
+                {"team_id": "t1", "team_name": "LAFC", "competition": "mls"},
+                {"team_id": "t2", "team_name": "Portland Timbers", "competition": "mls"},
+                {"team_id": "t3", "team_name": "Angel City", "competition": "nwsl"},
+            ]
+        )
+
+        filtered = self.client._filter_entity(
+            self.client.teams, "team", ["mls"], ids="t1"
+        )
+
+        assert len(filtered) == 1
+        assert filtered.iloc[0]["team_id"] == "t1"
+
+    def test_filter_entity_with_list_ids(self, init_client):
+        self.client = init_client
+        self.client.teams = DataFrame(
+            [
+                {"team_id": "t1", "team_name": "LAFC", "competition": "mls"},
+                {"team_id": "t2", "team_name": "Portland Timbers", "competition": "mls"},
+                {"team_id": "t3", "team_name": "Angel City", "competition": "nwsl"},
+            ]
+        )
+
+        filtered = self.client._filter_entity(
+            self.client.teams, "team", ["mls"], ids=["t1", "t2"]
+        )
+
+        assert len(filtered) == 2
+        assert list(filtered["team_id"]) == ["t1", "t2"]
+
+    def test_filter_entity_no_filters(self, init_client):
+        self.client = init_client
+        self.client.teams = DataFrame(
+            [
+                {"team_id": "t1", "team_name": "LAFC", "competition": "mls"},
+                {"team_id": "t2", "team_name": "Portland Timbers", "competition": "mls"},
+                {"team_id": "t3", "team_name": "Angel City", "competition": "nwsl"},
+            ]
+        )
+
+        filtered = self.client._filter_entity(
+            self.client.teams, "team", None
+        )
+
+        assert len(filtered) == 3
+
+    def test_execute_query_with_string_list_params(self):
+        self.client = AmericanSoccerAnalysis()
+
+        first = DataFrame([{"value": 1}, {"value": 2}])
+
+        with patch.object(self.client, "_single_request", return_value=first) as mock_single:
+            result = self.client._execute_query("http://example.com/api", {"ids": ["a", "b"]})
+
+        assert mock_single.call_count == 1
+        args, _ = mock_single.call_args
+        assert args[1]["ids"] == "a,b"
+
+    def test_get_team_xgoals(self, init_client):
+        self.client = init_client
+        with patch(
+            "itscalledsoccer.client.AmericanSoccerAnalysis._get_stats"
+        ) as mock_stats:
+            mock_stats.return_value = self.load_mock_data("teams_xgoals")
+            data = self.client.get_team_xgoals()
+            assert data is not None
+            assert isinstance(data, DataFrame)
+            assert len(data) >= 2
+
+    def test_get_team_xpass(self, init_client):
+        self.client = init_client
+        with patch(
+            "itscalledsoccer.client.AmericanSoccerAnalysis._get_stats"
+        ) as mock_stats:
+            mock_stats.return_value = self.load_mock_data("teams_xpass")
+            data = self.client.get_team_xpass()
+            assert data is not None
+            assert isinstance(data, DataFrame)
+            assert len(data) >= 2
+
+    def test_get_team_goals_added(self, init_client):
+        self.client = init_client
+        with patch(
+            "itscalledsoccer.client.AmericanSoccerAnalysis._get_stats"
+        ) as mock_stats:
+            mock_stats.return_value = self.load_mock_data("teams_goals_added")
+            data = self.client.get_team_goals_added()
+            assert data is not None
+            assert isinstance(data, DataFrame)
+            assert len(data) >= 2
+
+    def test_get_game_xgoals(self, init_client):
+        self.client = init_client
+        with patch(
+            "itscalledsoccer.client.AmericanSoccerAnalysis._get_stats"
+        ) as mock_stats:
+            mock_stats.return_value = self.load_mock_data("games_xgoals")
+            data = self.client.get_game_xgoals()
+            assert data is not None
+            assert isinstance(data, DataFrame)
+            assert len(data) >= 2

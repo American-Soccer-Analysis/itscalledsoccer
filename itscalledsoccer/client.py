@@ -1,10 +1,12 @@
-from logging import getLevelName, getLogger
+from logging import getLogger
 
 import requests
 from cachecontrol import CacheControl
 from cachecontrol.heuristics import ExpiresAfter
 from pandas import DataFrame, concat
 from rapidfuzz import fuzz, process
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 
 class AmericanSoccerAnalysis:
@@ -14,13 +16,13 @@ class AmericanSoccerAnalysis:
     BASE_URL = f"https://app.americansocceranalysis.com/api/{API_VERSION}/"
     LEAGUES = ["nwsl", "mls", "uslc", "usl1", "usls", "nasl", "mlsnp"]
     MAX_API_LIMIT = 1000
-    LOGGER = getLogger(__name__)
 
     def __init__(
         self,
         proxies: dict | None = None,
         logging_level: str | None = "WARNING",
         lazy_load: bool | None = True,
+        request_timeout: int = 30,
     ) -> None:
         """Class constructor
 
@@ -32,7 +34,21 @@ class AmericanSoccerAnalysis:
         session = requests.session()
         if proxies:
             session.proxies.update(proxies)
+
+        retry_strategy = Retry(
+            total=3,  # Total number of retries
+            backoff_factor=0.5,  # Exponential backoff: 0.5s, 1s, 2s
+            status_forcelist=[429, 500, 502, 503, 504],  # HTTP codes to retry
+            allowed_methods=["GET"],  # Only retry GET requests
+        )
+
+        adapter = HTTPAdapter(max_retries=retry_strategy)
+        session.mount("https://", adapter)
+        session.mount("http://", adapter)
+
         cache_session = CacheControl(session, heuristic=ExpiresAfter(days=1))
+
+        self.logger = getLogger(f"{__name__}.{id(self)}")
 
         if logging_level:
             if logging_level.upper() in [
@@ -42,13 +58,14 @@ class AmericanSoccerAnalysis:
                 "ERROR",
                 "CRITICAL",
             ]:
-                self.LOGGER.setLevel(getLevelName(logging_level.upper()))
+                self.logger.setLevel(logging_level.upper())
             else:
-                self.LOGGER.info(f"Logging level {logging_level} not recognized!")
+                self.logger.info(f"Logging level {logging_level} not recognized!")
 
         self.session = cache_session
         self.base_url = self.BASE_URL
         self.lazy_load = lazy_load
+        self.request_timeout = request_timeout
 
         self.players: DataFrame | None = None
         self.teams: DataFrame | None = None
@@ -57,11 +74,11 @@ class AmericanSoccerAnalysis:
         self.referees: DataFrame | None = None
 
         if self.lazy_load:
-            self.LOGGER.info(
+            self.logger.info(
                 "Lazy loading enabled. Initializing client without entity data."
             )
         else:
-            self.LOGGER.info(
+            self.logger.info(
                 "Lazy loading disabled. Initializing client with entity data."
             )
             self.players = self._get_entity("player")
@@ -69,7 +86,7 @@ class AmericanSoccerAnalysis:
             self.stadia = self._get_entity("stadia")
             self.managers = self._get_entity("manager")
             self.referees = self._get_entity("referee")
-        self.LOGGER.info("Finished initializing client")
+        self.logger.info("Finished initializing client")
 
     def _get_entity(self, entity_type: str) -> DataFrame:
         """Gets all the data for a specific type and
@@ -83,7 +100,7 @@ class AmericanSoccerAnalysis:
           with a "competition" column indicating the source league.
         """
         plural_type = f"{entity_type}s" if entity_type != "stadia" else f"{entity_type}"
-        self.LOGGER.info(f"Gathering all {plural_type}")
+        self.logger.info(f"Gathering all {plural_type}")
         frames = []
         for league in self.LEAGUES:
             url = f"{self.base_url}{league}/{plural_type}"
@@ -128,10 +145,10 @@ class AmericanSoccerAnalysis:
             if matches[1] >= min_score:
                 name = matches[0]
             else:
-                self.LOGGER.info(f"No match found for {name} due to score")
+                self.logger.info(f"No match found for {name} due to score")
                 return ""
         else:
-            self.LOGGER.info(f"No match found for {name}")
+            self.logger.info(f"No match found for {name}")
             return ""
 
         matched_id = lookup.loc[lookup[name_col] == name, id_col].iloc[0]
@@ -302,7 +319,9 @@ class AmericanSoccerAnalysis:
         Returns:
             DataFrame
         """
-        response = self.session.get(url=url, params=params)
+        response = self.session.get(
+            url=url, params=params, timeout=self.request_timeout
+        )
         response.raise_for_status()
         resp_df = DataFrame(response.json())
         return resp_df
@@ -330,7 +349,7 @@ class AmericanSoccerAnalysis:
         Returns:
             DataFrame
         """
-        self.LOGGER.info(f"get_stats called with {locals()}")
+        self.logger.info(f"get_stats called with {locals()}")
         if stat_type == "salaries":
             self._check_leagues_salaries(leagues)
             if (
@@ -507,7 +526,7 @@ class AmericanSoccerAnalysis:
         game_ids: str | list[str] | None = None,
         team_ids: str | list[str] | None = None,
         team_names: str | list[str] | None = None,
-        seasons: str | list[str] | None = None,
+        season_name: str | list[str] | None = None,
         stages: str | list[str] | None = None,
         status: str | list[str] | None = None,
     ) -> DataFrame:
@@ -518,7 +537,7 @@ class AmericanSoccerAnalysis:
             game_ids (str | list[str] | None): a single game id or a list of game ids. Defaults to None.
             team_ids (str | list[str] | None): a single team id or a list of team ids. Defaults to None.
             team_names (str | list[str] | None): a single team name or a list of team names. Defaults to None.
-            seasons (str | list[str] | None): a single year of a league season or a list of years. Defaults to None.
+            season_name (str | list[str] | None): a single year of a league season or a list of years. Defaults to None.
             stages (str | list[str] | None): a single stage of competition in which a game took place or list of stages. Defaults to None.
             status (str | list[str] | None): Describes the status (IE: if it's been played or otherwise) of a game. Can take a single value or a list of values. Valid keywords include: Abandoned, FullTime, PreMatch. Defaults to None.
 
@@ -536,8 +555,8 @@ class AmericanSoccerAnalysis:
             query["team_id"] = self._convert_names_to_ids("team", team_names)
         if team_ids:
             query["team_id"] = team_ids
-        if seasons:
-            query["season_name"] = seasons
+        if season_name:
+            query["season_name"] = season_name
         if stages:
             query["stage_name"] = stages
         if status:

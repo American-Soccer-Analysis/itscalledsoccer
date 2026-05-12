@@ -18,6 +18,7 @@
 [![codecov](https://codecov.io/gh/American-Soccer-Analysis/itscalledsoccer/graph/badge.svg?token=RUWMM7ZLQ2)](https://codecov.io/gh/American-Soccer-Analysis/itscalledsoccer)
 <!-- badges: end -->
 
+<!-- omit in toc -->
 ## Table of Contents
 
 - [Background](#background)
@@ -57,15 +58,15 @@ The API is **free and public** — no authentication required.
 
 **Supported leagues:**
 
-| Code | League |
-|------|--------|
-| `mls` | Major League Soccer |
-| `nwsl` | National Women's Soccer League |
-| `uslc` | USL Championship |
-| `usl1` | USL League One |
-| `usls` | USL Super League |
-| `nasl` | North American Soccer League (historical) |
-| `mlsnp` | MLS Next Pro |
+| Code    | League                                    |
+| ------- | ----------------------------------------- |
+| `mls`   | Major League Soccer                       |
+| `nwsl`  | National Women's Soccer League            |
+| `uslc`  | USL Championship                          |
+| `usl1`  | USL League One                            |
+| `usls`  | USL Super League                          |
+| `nasl`  | North American Soccer League (historical) |
+| `mlsnp` | MLS Next Pro                              |
 
 **Useful links:**
 - Full API documentation: [american-soccer-analysis.github.io/itscalledsoccer/reference](https://american-soccer-analysis.github.io/itscalledsoccer/reference)
@@ -105,7 +106,7 @@ pip install -e ".[dev]"
 ## Quick Start
 
 ```python
-from itscalledsoccer.client import AmericanSoccerAnalysis
+from itscalledsoccer import AmericanSoccerAnalysis
 
 # Initialize client (no authentication required)
 asa = AmericanSoccerAnalysis()

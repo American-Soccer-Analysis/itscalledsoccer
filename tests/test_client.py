@@ -7,6 +7,13 @@ from pytest import fixture
 
 from itscalledsoccer.client import AmericanSoccerAnalysis
 from itscalledsoccer import AmericanSoccerAnalysis as ASAFromPackage
+from itscalledsoccer.errors import (
+    ConflictingParametersError,
+    InvalidLeagueError,
+    InvalidParameterFormatError,
+    InvalidSeasonError,
+    SalaryDataError,
+)
 
 
 @fixture(scope="session")
@@ -19,6 +26,16 @@ class TestClient:
     def test_import_from_package_init(self):
         assert ASAFromPackage is AmericanSoccerAnalysis
         assert ASAFromPackage.__name__ == "AmericanSoccerAnalysis"
+
+    def test_custom_exceptions_exported_from_package(self):
+        import itscalledsoccer
+        
+        assert hasattr(itscalledsoccer, 'InvalidLeagueError')
+        assert hasattr(itscalledsoccer, 'SalaryDataError')
+        assert hasattr(itscalledsoccer, 'ConflictingParametersError')
+        assert hasattr(itscalledsoccer, 'InvalidParameterFormatError')
+        assert hasattr(itscalledsoccer, 'InvalidEntityTypeError')
+        assert hasattr(itscalledsoccer, 'ASAError')
 
     def test_init(self, init_client):
         self.client = init_client
@@ -369,19 +386,19 @@ class TestClient:
     def test_check_leagues_invalid(self, init_client):
         self.client = init_client
 
-        with pytest.raises(ValueError, match="is not valid"):
+        with pytest.raises(InvalidLeagueError, match="is not valid"):
             self.client._check_leagues("invalid_league")
 
     def test_check_leagues_salaries_invalid(self, init_client):
         self.client = init_client
 
-        with pytest.raises(ValueError, match="Only MLS salary data is publicly available"):
+        with pytest.raises(SalaryDataError, match="Only MLS salary data is publicly available"):
             self.client._check_leagues_salaries("nwsl")
 
     def test_check_ids_names_both_values(self, init_client):
         self.client = init_client
 
-        with pytest.raises(ValueError, match="only IDs or names"):
+        with pytest.raises(ConflictingParametersError, match="only IDs or names"):
             self.client._check_ids_names("123", "Jane Doe")
 
     def test_filter_entity_by_names_and_leagues(self, init_client):
@@ -476,20 +493,63 @@ class TestClient:
     def test_check_leagues_with_list_invalid(self, init_client):
         self.client = init_client
 
-        with pytest.raises(ValueError, match="is not a valid league"):
+        with pytest.raises(InvalidLeagueError, match="is not a valid league"):
             self.client._check_leagues(["mls", "invalid_league"])
 
     def test_check_ids_names_with_invalid_ids_type(self, init_client):
         self.client = init_client
 
-        with pytest.raises(ValueError, match="IDs must be passed as a string or list of strings"):
+        with pytest.raises(InvalidParameterFormatError, match="IDs must be passed as a string or list of strings"):
             self.client._check_ids_names(123, None)
 
     def test_check_ids_names_with_invalid_names_type(self, init_client):
         self.client = init_client
 
-        with pytest.raises(ValueError, match="Names must be passed as a string or list of names"):
+        with pytest.raises(InvalidParameterFormatError, match="Names must be passed as a string or list of names"):
             self.client._check_ids_names(None, 123)
+
+    def test_check_season_name_none(self, init_client):
+        self.client = init_client
+        
+        # Should not raise
+        self.client._check_season_name(None)
+
+    def test_check_season_name_valid_single(self, init_client):
+        self.client = init_client
+        
+        # Should not raise for valid years
+        self.client._check_season_name("2023")
+        self.client._check_season_name("2013")
+
+    def test_check_season_name_valid_list(self, init_client):
+        self.client = init_client
+        
+        # Should not raise for list of valid years
+        self.client._check_season_name(["2020", "2021", "2022"])
+
+    def test_check_season_name_before_2013_single(self, init_client):
+        self.client = init_client
+
+        with pytest.raises(InvalidSeasonError, match="Data is only available from 2013 onward"):
+            self.client._check_season_name("2012")
+
+    def test_check_season_name_before_2013_list(self, init_client):
+        self.client = init_client
+
+        with pytest.raises(InvalidSeasonError, match="Data is only available from 2013 onward"):
+            self.client._check_season_name(["2020", "2012"])
+
+    def test_check_season_name_invalid_format(self, init_client):
+        self.client = init_client
+
+        with pytest.raises(InvalidParameterFormatError, match="Season must be a valid year"):
+            self.client._check_season_name("not_a_year")
+
+    def test_check_season_name_invalid_format_list(self, init_client):
+        self.client = init_client
+
+        with pytest.raises(InvalidParameterFormatError, match="Season must be a valid year"):
+            self.client._check_season_name(["2020", "invalid"])
 
     def test_filter_entity_by_ids_and_leagues(self, init_client):
         self.client = init_client

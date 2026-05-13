@@ -8,6 +8,15 @@ from rapidfuzz import fuzz, process
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
+from itscalledsoccer.errors import (
+    ConflictingParametersError,
+    InvalidEntityTypeError,
+    InvalidLeagueError,
+    InvalidParameterFormatError,
+    InvalidSeasonError,
+    SalaryDataError,
+)
+
 
 class AmericanSoccerAnalysis:
     """Wrapper around the ASA Shiny API"""
@@ -131,7 +140,7 @@ class AmericanSoccerAnalysis:
         }
 
         if entity_type not in TYPE_MAP:
-            raise ValueError(f"Unknown entity type '{entity_type}'.")
+            raise InvalidEntityTypeError(f"Unknown entity type '{entity_type}'.")
 
         attr, name_col, id_col = TYPE_MAP[entity_type]
         lookup = getattr(self, attr)
@@ -187,12 +196,12 @@ class AmericanSoccerAnalysis:
             if isinstance(leagues, list):
                 for league in leagues:
                     if league not in self.LEAGUES:
-                        raise ValueError(
+                        raise InvalidLeagueError(
                             f"{league} is not a valid league. Must be one of: {self.LEAGUES}"
                         )
             else:
                 if leagues not in self.LEAGUES:
-                    raise ValueError(
+                    raise InvalidLeagueError(
                         f"{leagues} is not valid. Must be one of: {self.LEAGUES}"
                     )
 
@@ -205,10 +214,10 @@ class AmericanSoccerAnalysis:
         if leagues:
             if isinstance(leagues, list):
                 if any([x != "mls" for x in leagues]):
-                    raise ValueError("Only MLS salary data is publicly available.")
+                    raise SalaryDataError("Only MLS salary data is publicly available.")
             else:
                 if leagues != "mls":
-                    raise ValueError("Only MLS salary data is publicly available.")
+                    raise SalaryDataError("Only MLS salary data is publicly available.")
 
     def _check_ids_names(
         self, ids: str | list[str] | None, names: str | list[str] | None
@@ -221,15 +230,44 @@ class AmericanSoccerAnalysis:
             names (str | list[str] | None): a single name or list of names
         """
         if ids and names:
-            raise ValueError("Please specify only IDs or names, not both.")
+            raise ConflictingParametersError(
+                "Please specify only IDs or names, not both."
+            )
 
         if ids:
             if not isinstance(ids, str) and not isinstance(ids, list):
-                raise ValueError("IDs must be passed as a string or list of strings.")
+                raise InvalidParameterFormatError(
+                    "IDs must be passed as a string or list of strings."
+                )
 
         if names:
             if not isinstance(names, str) and not isinstance(names, list):
-                raise ValueError("Names must be passed as a string or list of names.")
+                raise InvalidParameterFormatError(
+                    "Names must be passed as a string or list of names."
+                )
+
+    def _check_season_name(self, season_name: str | list[str] | None) -> None:
+        """Validates the season_name parameter to ensure data is available (2013 onward).
+
+        Args:
+            season_name (str | list[str] | None): season year(s) to validate
+        """
+        if season_name is None:
+            return
+
+        seasons = season_name if isinstance(season_name, list) else [season_name]
+
+        for season in seasons:
+            try:
+                year = int(season)
+                if year < 2013:
+                    raise InvalidSeasonError(
+                        f"Data is only available from 2013 onward. Requested season: {year}"
+                    )
+            except ValueError:
+                raise InvalidParameterFormatError(
+                    f"Season must be a valid year. Received: {season}"
+                )
 
     def _filter_entity(
         self,

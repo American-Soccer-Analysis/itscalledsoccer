@@ -286,6 +286,29 @@ class TestClient:
             assert isinstance(stadia, DataFrame)
             assert len(stadia) >= 2
 
+    @pytest.mark.parametrize("lazy_load", [True, False])
+    @pytest.mark.parametrize("filter_key, column", [
+        ("ids", "stadium_id"),
+        ("names", "stadium_name"),
+    ])
+    @pytest.mark.parametrize("multiple", [True, False])
+    def test_get_stadia_filters(self, lazy_load, filter_key, column, multiple):
+        stadia = self.load_mock_data("stadia").iloc[:3].assign(
+            competition=["mls", "nwsl", "mls"]
+        )
+        selected = stadia[column].tolist() if multiple else stadia[column].iloc[0]
+        expected = stadia.iloc[[0, 2]] if multiple else stadia.iloc[[0]]
+
+        with patch(
+            "itscalledsoccer.client.AmericanSoccerAnalysis._get_entity",
+            return_value=stadia,
+        ):
+            client = AmericanSoccerAnalysis(lazy_load=lazy_load)
+            result = client.get_stadia(leagues="mls", **{filter_key: selected})
+
+        assert result.equals(expected)
+        assert client.stadia.equals(stadia)
+
     def test_get_referees(self):
         with patch(
             "itscalledsoccer.client.AmericanSoccerAnalysis._get_entity"

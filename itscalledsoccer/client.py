@@ -471,7 +471,7 @@ class AmericanSoccerAnalysis:
         """
         if self.stadia is None:
             self.stadia = self._get_entity("stadia")
-        stadia = self._filter_entity(self.stadia, "stadia", leagues, ids, names)
+        stadia = self._filter_entity(self.stadia, "stadium", leagues, ids, names)
         return stadia
 
     def get_referees(

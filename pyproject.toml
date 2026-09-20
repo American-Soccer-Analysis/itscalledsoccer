@@ -51,7 +51,8 @@ dev = [
   "mkdocs",
   "mkdocstrings[python]",
   "mkdocs-material",
-  "pandas-stubs"
+  "pandas-stubs",
+  "commitizen>=4.8.3",
 ]
 
 [tool.setuptools.exclude-package-data]
@@ -60,3 +61,9 @@ itscalledsoccer = ["tests", "tests.*"]
 [tool.ruff.lint]
 ignore = ["E501"]
 extend-select = ["I"]
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "2.1.0"
+tag_format = "v$version"
+message_length_limit = 100

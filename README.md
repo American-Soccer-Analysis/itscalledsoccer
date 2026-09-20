@@ -36,7 +36,7 @@
     - [Goals Added (g+)](#goals-added-g)
   - [Team Statistics](#team-statistics)
 - [Advanced Usage](#advanced-usage)
-  - [Fuzzy Name Matching](#fuzzy-name-matching)
+  - [Substring Name Matching](#substring-name-matching)
 - [API Reference](#api-reference)
 - [Other Versions](#other-versions)
 - [Contributing](#contributing)
@@ -77,7 +77,7 @@ The API is **free and public** — no authentication required.
 ## Features
 
 - **15 API methods** covering players, teams, games, and advanced statistics
-- **Fuzzy name matching** — search by partial names or abbreviations ("LA", "Vela")
+- **Substring name matching** — search by partial names or abbreviations ("LA", "Vela")
 - **Type hints** — full type annotations on all public methods
 - **Consistent interface** — same patterns across all 7 leagues
 
@@ -99,7 +99,7 @@ cd itscalledsoccer
 pip install -e ".[dev]"
 ```
 
-**Requirements:** Python 3.10+, `requests`, `pandas`, `cachecontrol`, `rapidfuzz`
+**Requirements:** Python 3.10+, `requests`, `pandas`, `cachecontrol`
 
 ---
 
@@ -226,9 +226,9 @@ team_salaries = asa.get_team_salaries(
 
 ## Advanced Usage
 
-### Fuzzy Name Matching
+### Substring Name Matching
 
-Search by partial names, initials, or abbreviations. Returns only the best match:
+Search by case-insensitive substrings. Returns the first matching entity:
 
 ```python
 # Player names

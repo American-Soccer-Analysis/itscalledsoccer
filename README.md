@@ -71,6 +71,8 @@ The API is **free and public** — no authentication required.
 **Useful links:**
 - Full API documentation: [american-soccer-analysis.github.io/itscalledsoccer/reference](https://american-soccer-analysis.github.io/itscalledsoccer/reference)
 - Web app: [app.americansocceranalysis.com](https://app.americansocceranalysis.com/)
+- Release notes: [CHANGELOG.md](./CHANGELOG.md)
+- Security policy: [SECURITY.md](./SECURITY.md)
 
 ---
 

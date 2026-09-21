@@ -393,6 +393,30 @@ class TestClient:
         assert self.client.teams is teams
         mock_get_entity.assert_called_once_with("team")
 
+    def test_convert_name_to_id_uses_case_insensitive_substring_matching(self):
+        self.client = AmericanSoccerAnalysis()
+        self.client.players = DataFrame(
+            [
+                {"player_id": "p1", "player_name": "Alex Morgan", "competition": "nwsl"},
+            ]
+        )
+
+        player_id = self.client._convert_name_to_id("player", "mOrGaN")
+
+        assert player_id == "p1"
+
+    def test_convert_name_to_id_does_not_use_fuzzy_matching(self):
+        self.client = AmericanSoccerAnalysis()
+        self.client.players = DataFrame(
+            [
+                {"player_id": "p1", "player_name": "Alex Morgan", "competition": "nwsl"},
+            ]
+        )
+
+        player_id = self.client._convert_name_to_id("player", "Alex Morgn")
+
+        assert player_id == ""
+
     def test_convert_names_to_ids_with_list(self):
         self.client = AmericanSoccerAnalysis()
         self.client.teams = DataFrame(

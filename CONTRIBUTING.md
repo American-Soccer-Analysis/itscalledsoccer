@@ -221,7 +221,33 @@ We use [`Material for MkDocs`](https://squidfunk.github.io/mkdocs-material/) to 
 
 ### Commit Messages
 
-We aim to follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for our commit messages.
+We use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages. [Commitizen](https://commitizen-tools.github.io/commitizen/) creates and validates commit messages through a local [pre-commit](https://pre-commit.com/) hook. Install the tools and hooks after cloning:
+
+```sh
+uv tool install commitizen
+uv tool install pre-commit
+pre-commit install --hook-type commit-msg
+```
+
+Use `cz commit` (or `cz c`) to create a commit interactively.
+
+Each commit must use this format:
+
+```text
+<type>[optional scope]: <description> [optional issue reference]
+```
+
+Use one of these types: `build`, `chore`, `ci`, `docs`, `feat`, `fix`, `perf`, `refactor`, `revert`, `style`, or `test`. Keep the description imperative, lowercase, and without a trailing period.
+
+When a commit is associated with a GitHub issue, append the issue number at the end in parentheses:
+
+```text
+feat: add substring name matching (#123)
+fix(client): handle empty entity names (#456)
+docs: clarify installation requirements
+```
+
+The issue reference is optional for commits that are not associated with a GitHub issue. Issue references must be the final text in the commit subject.
 
 <!-- omit in toc -->
 ## Attribution

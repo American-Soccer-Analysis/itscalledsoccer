@@ -4,7 +4,6 @@ import requests
 from cachecontrol import CacheControl
 from cachecontrol.heuristics import ExpiresAfter
 from pandas import DataFrame, concat
-from rapidfuzz import fuzz, process
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
@@ -129,8 +128,6 @@ class AmericanSoccerAnalysis:
         Returns:
           str: the matched id
         """
-        min_score = 70
-
         TYPE_MAP = {
             "player": ("players", "player_name", "player_id"),
             "manager": ("managers", "manager_name", "manager_id"),
@@ -149,17 +146,16 @@ class AmericanSoccerAnalysis:
             setattr(self, attr, lookup)
         names = lookup[name_col].to_list()
 
-        matches = process.extractOne(name, names, scorer=fuzz.partial_ratio)
-        if matches:
-            if matches[1] >= min_score:
-                name = matches[0]
-            else:
-                self.logger.info(f"No match found for {name} due to score")
-                return ""
-        else:
+        matched_names = [
+            candidate
+            for candidate in names
+            if name.casefold() in candidate.casefold()
+        ]
+        if not matched_names:
             self.logger.info(f"No match found for {name}")
             return ""
 
+        name = matched_names[0]
         matched_id = lookup.loc[lookup[name_col] == name, id_col].iloc[0]
 
         return matched_id

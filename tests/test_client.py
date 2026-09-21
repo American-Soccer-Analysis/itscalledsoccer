@@ -1,8 +1,10 @@
 from pathlib import Path
 from unittest.mock import patch
 
+import json
+
 import pytest
-from pandas import DataFrame, read_json
+import polars as pl
 from pytest import fixture
 
 from itscalledsoccer.client import AmericanSoccerAnalysis
@@ -152,7 +154,22 @@ class TestClient:
     def load_mock_data(self, func_name: str):
         path = Path(__file__).parent
         file = Path(path, f"./mocks/{func_name}_payload.json")
-        return read_json(file)
+        with file.open() as payload:
+            records = json.load(payload)
+        columns = {
+            key: [record.get(key) for record in records]
+            for key in {key for record in records for key in record}
+        }
+        return pl.DataFrame(
+            {
+                key: pl.Series(key, values, dtype=pl.Object)
+                if len({type(value) for value in values if value is not None}) > 1
+                else values
+                for key, values in columns.items()
+            },
+            infer_schema_length=None,
+            strict=False,
+        )
 
     def test_get_player_xgoals(self, init_client):
         self.client = init_client
@@ -162,7 +179,7 @@ class TestClient:
             mock_stats.return_value = self.load_mock_data("players_xgoals")
             data = self.client.get_player_xgoals()
             assert data is not None
-            assert isinstance(data, DataFrame)
+            assert isinstance(data, pl.DataFrame)
             assert len(data) >= 2
 
     def test_get_player_xpass(self, init_client):
@@ -173,7 +190,7 @@ class TestClient:
             mock_stats.return_value = self.load_mock_data("players_xpass")
             data = self.client.get_player_xpass()
             assert data is not None
-            assert isinstance(data, DataFrame)
+            assert isinstance(data, pl.DataFrame)
             assert len(data) >= 2
 
     def test_get_player_goals_added(self, init_client):
@@ -184,7 +201,7 @@ class TestClient:
             mock_stats.return_value = self.load_mock_data("players_goals_added")
             data = self.client.get_player_goals_added()
             assert data is not None
-            assert isinstance(data, DataFrame)
+            assert isinstance(data, pl.DataFrame)
             assert len(data) >= 2
 
     def test_get_player_salaries(self, init_client):
@@ -195,7 +212,7 @@ class TestClient:
             mock_stats.return_value = self.load_mock_data("players_salaries")
             data = self.client.get_player_salaries()
             assert data is not None
-            assert isinstance(data, DataFrame)
+            assert isinstance(data, pl.DataFrame)
             assert len(data) >= 2
 
     def test_get_goalkeeper_xgoals(self, init_client):
@@ -206,7 +223,7 @@ class TestClient:
             mock_stats.return_value = self.load_mock_data("goalkeepers_xgoals")
             data = self.client.get_goalkeeper_xgoals()
             assert data is not None
-            assert isinstance(data, DataFrame)
+            assert isinstance(data, pl.DataFrame)
             assert len(data) >= 2
 
     def test_get_goalkeeper_goals_added(self, init_client):
@@ -217,7 +234,7 @@ class TestClient:
             mock_stats.return_value = self.load_mock_data("goalkeepers_goals_added")
             data = self.client.get_goalkeeper_goals_added()
             assert data is not None
-            assert isinstance(data, DataFrame)
+            assert isinstance(data, pl.DataFrame)
             assert len(data) >= 2
 
     def test_get_team_xgoals(self, init_client):
@@ -228,7 +245,7 @@ class TestClient:
             mock_stats.return_value = self.load_mock_data("teams_xgoals")
             data = self.client.get_team_xgoals()
             assert data is not None
-            assert isinstance(data, DataFrame)
+            assert isinstance(data, pl.DataFrame)
             assert len(data) >= 2
 
     def test_get_team_xpass(self, init_client):
@@ -239,7 +256,7 @@ class TestClient:
             mock_stats.return_value = self.load_mock_data("teams_xpass")
             data = self.client.get_team_xpass()
             assert data is not None
-            assert isinstance(data, DataFrame)
+            assert isinstance(data, pl.DataFrame)
             assert len(data) >= 2
 
     def test_get_team_goals_added(self, init_client):
@@ -250,7 +267,7 @@ class TestClient:
             mock_stats.return_value = self.load_mock_data("teams_goals_added")
             data = self.client.get_team_goals_added()
             assert data is not None
-            assert isinstance(data, DataFrame)
+            assert isinstance(data, pl.DataFrame)
             assert len(data) >= 2
 
     def test_get_team_salaries(self, init_client):
@@ -261,7 +278,7 @@ class TestClient:
             mock_stats.return_value = self.load_mock_data("teams_salaries")
             data = self.client.get_team_salaries()
             assert data is not None
-            assert isinstance(data, DataFrame)
+            assert isinstance(data, pl.DataFrame)
             assert len(data) >= 2
 
     def test_get_game_xgoals(self, init_client):
@@ -272,7 +289,7 @@ class TestClient:
             mock_stats.return_value = self.load_mock_data("games_xgoals")
             data = self.client.get_game_xgoals()
             assert data is not None
-            assert isinstance(data, DataFrame)
+            assert isinstance(data, pl.DataFrame)
             assert len(data) >= 2
 
     def test_get_stadia(self):
@@ -283,7 +300,7 @@ class TestClient:
             self.client = AmericanSoccerAnalysis(lazy_load=False)
             stadia = self.client.get_stadia()
             assert stadia is not None
-            assert isinstance(stadia, DataFrame)
+            assert isinstance(stadia, pl.DataFrame)
             assert len(stadia) >= 2
 
     @pytest.mark.parametrize("lazy_load", [True, False])
@@ -293,11 +310,15 @@ class TestClient:
     ])
     @pytest.mark.parametrize("multiple", [True, False])
     def test_get_stadia_filters(self, lazy_load, filter_key, column, multiple):
-        stadia = self.load_mock_data("stadia").iloc[:3].assign(
-            competition=["mls", "nwsl", "mls"]
+        stadia = self.load_mock_data("stadia").head(3).with_columns(
+            pl.Series("competition", ["mls", "nwsl", "mls"])
         )
-        selected = stadia[column].tolist() if multiple else stadia[column].iloc[0]
-        expected = stadia.iloc[[0, 2]] if multiple else stadia.iloc[[0]]
+        selected = (
+            stadia.get_column(column).to_list()
+            if multiple
+            else stadia.get_column(column).item(0)
+        )
+        expected = stadia[[0, 2]] if multiple else stadia.head(1)
 
         with patch(
             "itscalledsoccer.client.AmericanSoccerAnalysis._get_entity",
@@ -317,7 +338,7 @@ class TestClient:
             self.client = AmericanSoccerAnalysis(lazy_load=False)
             referees = self.client.get_referees()
             assert referees is not None
-            assert isinstance(referees, DataFrame)
+            assert isinstance(referees, pl.DataFrame)
             assert len(referees) >= 2
 
     def test_get_managers(self):
@@ -328,7 +349,7 @@ class TestClient:
             self.client = AmericanSoccerAnalysis(lazy_load=False)
             managers = self.client.get_managers()
             assert managers is not None
-            assert isinstance(managers, DataFrame)
+            assert isinstance(managers, pl.DataFrame)
             assert len(managers) >= 2
 
     def test_get_teams(self):
@@ -339,7 +360,7 @@ class TestClient:
             self.client = AmericanSoccerAnalysis(lazy_load=False)
             teams = self.client.get_teams()
             assert teams is not None
-            assert isinstance(teams, DataFrame)
+            assert isinstance(teams, pl.DataFrame)
             assert len(teams) >= 2
 
     def test_get_players(self):
@@ -350,7 +371,7 @@ class TestClient:
             self.client = AmericanSoccerAnalysis(lazy_load=False)
             players = self.client.get_players()
             assert players is not None
-            assert isinstance(players, DataFrame)
+            assert isinstance(players, pl.DataFrame)
             assert len(players) >= 2
 
     def test_get_games(self):
@@ -361,12 +382,12 @@ class TestClient:
             self.client = AmericanSoccerAnalysis(lazy_load=False)
             games = self.client.get_games()
             assert games is not None
-            assert isinstance(games, DataFrame)
+            assert isinstance(games, pl.DataFrame)
             assert len(games) >= 2
 
     def test_convert_names_to_ids_with_string(self):
         self.client = AmericanSoccerAnalysis()
-        self.client.players = DataFrame(
+        self.client.players = pl.DataFrame(
             [
                 {"player_id": "p1", "player_name": "Alex Morgan", "competition": "mls"},
                 {"player_id": "p2", "player_name": "Megan Rapinoe", "competition": "nwsl"},
@@ -379,7 +400,7 @@ class TestClient:
 
     def test_convert_name_to_id_lazy_loads_missing_entity(self):
         self.client = AmericanSoccerAnalysis()
-        teams = DataFrame(
+        teams = pl.DataFrame(
             [
                 {"team_id": "t1", "team_name": "LAFC", "competition": "mls"},
                 {"team_id": "t2", "team_name": "NYCFC", "competition": "mls"},
@@ -395,7 +416,7 @@ class TestClient:
 
     def test_convert_name_to_id_uses_case_insensitive_substring_matching(self):
         self.client = AmericanSoccerAnalysis()
-        self.client.players = DataFrame(
+        self.client.players = pl.DataFrame(
             [
                 {"player_id": "p1", "player_name": "Alex Morgan", "competition": "nwsl"},
             ]
@@ -407,7 +428,7 @@ class TestClient:
 
     def test_convert_name_to_id_does_not_use_fuzzy_matching(self):
         self.client = AmericanSoccerAnalysis()
-        self.client.players = DataFrame(
+        self.client.players = pl.DataFrame(
             [
                 {"player_id": "p1", "player_name": "Alex Morgan", "competition": "nwsl"},
             ]
@@ -419,7 +440,7 @@ class TestClient:
 
     def test_convert_names_to_ids_with_list(self):
         self.client = AmericanSoccerAnalysis()
-        self.client.teams = DataFrame(
+        self.client.teams = pl.DataFrame(
             [
                 {"team_id": "t1", "team_name": "LAFC", "competition": "mls"},
                 {"team_id": "t2", "team_name": "NYCFC", "competition": "mls"},
@@ -450,7 +471,7 @@ class TestClient:
 
     def test_filter_entity_by_names_and_leagues(self, init_client):
         self.client = init_client
-        self.client.teams = DataFrame(
+        self.client.teams = pl.DataFrame(
             [
                 {"team_id": "t1", "team_name": "LAFC", "competition": "mls"},
                 {"team_id": "t2", "team_name": "Portland Timbers", "competition": "mls"},
@@ -463,14 +484,14 @@ class TestClient:
         )
 
         assert len(filtered) == 1
-        assert filtered.iloc[0]["team_id"] == "t1"
+        assert filtered.get_column("team_id").item(0) == "t1"
 
     def test_execute_query_handles_list_params_and_pagination(self):
         self.client = AmericanSoccerAnalysis()
         self.client.MAX_API_LIMIT = 2
 
-        first = DataFrame([{"value": 1}, {"value": 2}])
-        second = DataFrame([{"value": 3}])
+        first = pl.DataFrame([{"value": 1}, {"value": 2}])
+        second = pl.DataFrame([{"value": 3}])
 
         def side_effect(url, params):
             return first if "offset" not in params else second
@@ -488,7 +509,7 @@ class TestClient:
         with patch(
             "itscalledsoccer.client.AmericanSoccerAnalysis._execute_query"
         ) as mock_execute:
-            mock_execute.return_value = DataFrame([{"team_id": "t1"}])
+            mock_execute.return_value = pl.DataFrame([{"team_id": "t1"}])
             self.client.get_team_salaries()
 
         assert mock_execute.call_count == 1
@@ -502,7 +523,7 @@ class TestClient:
         ) as mock_convert, patch(
             "itscalledsoccer.client.AmericanSoccerAnalysis._execute_query"
         ) as mock_execute:
-            mock_execute.return_value = DataFrame(
+            mock_execute.return_value = pl.DataFrame(
                 [
                     {"game_id": "g1", "date_time_utc": "2026-01-01T00:00:00Z"}
                 ]
@@ -520,7 +541,7 @@ class TestClient:
 
     def test_convert_names_to_ids_with_list(self):
         self.client = AmericanSoccerAnalysis()
-        self.client.players = DataFrame(
+        self.client.players = pl.DataFrame(
             [
                 {"player_id": "p1", "player_name": "Alex Morgan", "competition": "mls"},
                 {"player_id": "p2", "player_name": "Megan Rapinoe", "competition": "nwsl"},
@@ -600,7 +621,7 @@ class TestClient:
 
     def test_filter_entity_by_ids_and_leagues(self, init_client):
         self.client = init_client
-        self.client.teams = DataFrame(
+        self.client.teams = pl.DataFrame(
             [
                 {"team_id": "t1", "team_name": "LAFC", "competition": "mls"},
                 {"team_id": "t2", "team_name": "Portland Timbers", "competition": "mls"},
@@ -613,11 +634,11 @@ class TestClient:
         )
 
         assert len(filtered) == 1
-        assert filtered.iloc[0]["team_id"] == "t1"
+        assert filtered.get_column("team_id").item(0) == "t1"
 
     def test_filter_entity_with_list_ids(self, init_client):
         self.client = init_client
-        self.client.teams = DataFrame(
+        self.client.teams = pl.DataFrame(
             [
                 {"team_id": "t1", "team_name": "LAFC", "competition": "mls"},
                 {"team_id": "t2", "team_name": "Portland Timbers", "competition": "mls"},
@@ -634,7 +655,7 @@ class TestClient:
 
     def test_filter_entity_no_filters(self, init_client):
         self.client = init_client
-        self.client.teams = DataFrame(
+        self.client.teams = pl.DataFrame(
             [
                 {"team_id": "t1", "team_name": "LAFC", "competition": "mls"},
                 {"team_id": "t2", "team_name": "Portland Timbers", "competition": "mls"},
@@ -651,7 +672,7 @@ class TestClient:
     def test_execute_query_with_string_list_params(self):
         self.client = AmericanSoccerAnalysis()
 
-        first = DataFrame([{"value": 1}, {"value": 2}])
+        first = pl.DataFrame([{"value": 1}, {"value": 2}])
 
         with patch.object(self.client, "_single_request", return_value=first) as mock_single:
             result = self.client._execute_query("http://example.com/api", {"ids": ["a", "b"]})
@@ -668,7 +689,7 @@ class TestClient:
             mock_stats.return_value = self.load_mock_data("teams_xgoals")
             data = self.client.get_team_xgoals()
             assert data is not None
-            assert isinstance(data, DataFrame)
+            assert isinstance(data, pl.DataFrame)
             assert len(data) >= 2
 
     def test_get_team_xpass(self, init_client):
@@ -679,7 +700,7 @@ class TestClient:
             mock_stats.return_value = self.load_mock_data("teams_xpass")
             data = self.client.get_team_xpass()
             assert data is not None
-            assert isinstance(data, DataFrame)
+            assert isinstance(data, pl.DataFrame)
             assert len(data) >= 2
 
     def test_get_team_goals_added(self, init_client):
@@ -690,7 +711,7 @@ class TestClient:
             mock_stats.return_value = self.load_mock_data("teams_goals_added")
             data = self.client.get_team_goals_added()
             assert data is not None
-            assert isinstance(data, DataFrame)
+            assert isinstance(data, pl.DataFrame)
             assert len(data) >= 2
 
     def test_get_game_xgoals(self, init_client):
@@ -701,5 +722,5 @@ class TestClient:
             mock_stats.return_value = self.load_mock_data("games_xgoals")
             data = self.client.get_game_xgoals()
             assert data is not None
-            assert isinstance(data, DataFrame)
+            assert isinstance(data, pl.DataFrame)
             assert len(data) >= 2

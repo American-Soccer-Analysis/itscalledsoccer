@@ -1,9 +1,9 @@
 from logging import getLogger
 
+import polars as pl
 import requests
 from cachecontrol import CacheControl
 from cachecontrol.heuristics import ExpiresAfter
-from pandas import DataFrame, concat
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
@@ -15,6 +15,23 @@ from itscalledsoccer.errors import (
     InvalidSeasonError,
     SalaryDataError,
 )
+
+
+def _dataframe_from_json(records: list[dict]) -> pl.DataFrame:
+    columns = {
+        key: [record.get(key) for record in records]
+        for key in {key for record in records for key in record}
+    }
+    return pl.DataFrame(
+        {
+            key: pl.Series(key, values, dtype=pl.Object)
+            if len({type(value) for value in values if value is not None}) > 1
+            else values
+            for key, values in columns.items()
+        },
+        infer_schema_length=None,
+        strict=False,
+    )
 
 
 class AmericanSoccerAnalysis:
@@ -75,11 +92,11 @@ class AmericanSoccerAnalysis:
         self.lazy_load = lazy_load
         self.request_timeout = request_timeout
 
-        self.players: DataFrame | None = None
-        self.teams: DataFrame | None = None
-        self.stadia: DataFrame | None = None
-        self.managers: DataFrame | None = None
-        self.referees: DataFrame | None = None
+        self.players: pl.DataFrame | None = None
+        self.teams: pl.DataFrame | None = None
+        self.stadia: pl.DataFrame | None = None
+        self.managers: pl.DataFrame | None = None
+        self.referees: pl.DataFrame | None = None
 
         if self.lazy_load:
             self.logger.info(
@@ -96,15 +113,15 @@ class AmericanSoccerAnalysis:
             self.referees = self._get_entity("referee")
         self.logger.info("Finished initializing client")
 
-    def _get_entity(self, entity_type: str) -> DataFrame:
+    def _get_entity(self, entity_type: str) -> pl.DataFrame:
         """Gets all the data for a specific type and
-        stores it in a DataFrame.
+        stores it in a pl.DataFrame.
 
         Args:
             entity_type (str): type of data to get
 
         Returns:
-            DataFrame: All records for the given entity type across all leagues,
+            pl.DataFrame: All records for the given entity type across all leagues,
           with a "competition" column indicating the source league.
         """
         plural_type = f"{entity_type}s" if entity_type != "stadia" else f"{entity_type}"
@@ -113,9 +130,9 @@ class AmericanSoccerAnalysis:
         for league in self.LEAGUES:
             url = f"{self.base_url}{league}/{plural_type}"
             resp_df = self._execute_query(url, {})
-            resp_df = resp_df.assign(competition=league)
+            resp_df = resp_df.with_columns(pl.lit(league).alias("competition"))
             frames.append(resp_df)
-        return concat(frames, ignore_index=True) if frames else DataFrame([])
+        return pl.concat(frames) if frames else pl.DataFrame()
 
     def _convert_name_to_id(self, entity_type: str, name: str) -> str:
         """Converts the name of a player, manager, stadium, referee or team
@@ -156,7 +173,7 @@ class AmericanSoccerAnalysis:
             return ""
 
         name = matched_names[0]
-        matched_id = lookup.loc[lookup[name_col] == name, id_col].iloc[0]
+        matched_id = lookup.filter(pl.col(name_col) == name).get_column(id_col).item(0)
 
         return matched_id
 
@@ -267,22 +284,22 @@ class AmericanSoccerAnalysis:
 
     def _filter_entity(
         self,
-        entity_all: DataFrame,
+        entity_all: pl.DataFrame,
         entity_type: str,
         leagues: str | list[str] | None,
         ids: str | list[str] | None = None,
         names: str | list[str] | None = None,
-    ) -> DataFrame:
-        """Filters a DataFrame based on the arguments given.
+    ) -> pl.DataFrame:
+        """Filters a pl.DataFrame based on the arguments given.
 
         Args:
-            entity_all (DataFrame): a DataFrame containing the complete set of data
+            entity_all (pl.DataFrame): a pl.DataFrame containing the complete set of data
             entity_type (str): the type of data
             leagues (str | list[str] | None): league abbreviation or list of league abbreviations
             ids (str | list[str] | None): a single id or list of ids
             names (str | list[str] | None): a single name or list of names
         Returns:
-            DataFrame
+            pl.DataFrame
         """
         self._check_leagues(leagues)
         self._check_ids_names(ids, names)
@@ -300,16 +317,16 @@ class AmericanSoccerAnalysis:
             converted_ids = [converted_ids]
 
         if leagues:
-            entity = entity[entity["competition"].isin(leagues)]
+            entity = entity.filter(pl.col("competition").is_in(leagues))
 
         if converted_ids:
-            entity = entity[entity[f"{entity_type}_id"].isin(converted_ids)]
+            entity = entity.filter(pl.col(f"{entity_type}_id").is_in(converted_ids))
 
         return entity
 
     def _execute_query(
         self, url: str, params: dict[str, str | list[str] | None]
-    ) -> DataFrame:
+    ) -> pl.DataFrame:
         """Executes a query while handling the max number of responses from the API
 
         Args:
@@ -317,7 +334,7 @@ class AmericanSoccerAnalysis:
             params (dict[str, str | list[str] | None): URL query strings
 
         Returns:
-            DataFrame
+            pl.DataFrame
         """
         for k, v in params.items():
             if isinstance(v, list):
@@ -326,24 +343,24 @@ class AmericanSoccerAnalysis:
         temp_response = self._single_request(url, params)
         response = temp_response
 
-        if isinstance(response, DataFrame):
+        if isinstance(response, pl.DataFrame):
             offset = self.MAX_API_LIMIT
 
             frames = []
-            while len(temp_response.index) == self.MAX_API_LIMIT:
+            while temp_response.height == self.MAX_API_LIMIT:
                 params["offset"] = str(offset)
                 temp_response = self._single_request(url, params)
                 frames.append(temp_response)
                 offset = offset + self.MAX_API_LIMIT
             response = (
-                concat([response] + frames, ignore_index=True) if frames else response
+                pl.concat([response] + frames) if frames else response
             )
 
         return response
 
     def _single_request(
         self, url: str, params: dict[str, str | list[str] | None]
-    ) -> DataFrame:
+    ) -> pl.DataFrame:
         """Handles single call to the API
 
         Args:
@@ -351,18 +368,18 @@ class AmericanSoccerAnalysis:
             params (dict[str, str | list[str] | None): URL query strings
 
         Returns:
-            DataFrame
+            pl.DataFrame
         """
         response = self.session.get(
             url=url, params=params, timeout=self.request_timeout
         )
         response.raise_for_status()
-        resp_df = DataFrame(response.json())
+        resp_df = _dataframe_from_json(response.json())
         return resp_df
 
     def _get_stats(
         self, leagues: str | list[str], stat_type: str, entity: str, **kwargs
-    ) -> DataFrame:
+    ) -> pl.DataFrame:
         """Handles calls to stats APIs
 
         Args:
@@ -381,7 +398,7 @@ class AmericanSoccerAnalysis:
             game_ids (str | list[str]): Game IDs on which to filter. Accepts a string or list of strings.
 
         Returns:
-            DataFrame
+            pl.DataFrame
         """
         self.logger.info(f"get_stats called with {locals()}")
         if stat_type == "salaries":
@@ -433,7 +450,7 @@ class AmericanSoccerAnalysis:
             kwargs.pop("game_ids")
 
         if isinstance(leagues, str):
-            stats = DataFrame([])
+            stats = pl.DataFrame()
             url = f"{self.base_url}{leagues}/{entity}/{stat_type}"
             response = self._execute_query(url, kwargs)
 
@@ -446,7 +463,7 @@ class AmericanSoccerAnalysis:
                 response = self._execute_query(url, kwargs)
 
                 frames.append(response)
-            stats = concat(frames, ignore_index=True) if frames else DataFrame([])
+            stats = pl.concat(frames) if frames else pl.DataFrame()
         return stats
 
     def get_stadia(
@@ -454,7 +471,7 @@ class AmericanSoccerAnalysis:
         leagues: str | list[str] | None = None,
         ids: str | list[str] | None = None,
         names: str | list[str] | None = None,
-    ) -> DataFrame:
+    ) -> pl.DataFrame:
         """Get information associated with stadia
 
         Args:
@@ -463,7 +480,7 @@ class AmericanSoccerAnalysis:
             names (str | list[str] | None): a single name or list of names. Defaults to None.
 
         Returns:
-            DataFrame
+            pl.DataFrame
         """
         if self.stadia is None:
             self.stadia = self._get_entity("stadia")
@@ -475,7 +492,7 @@ class AmericanSoccerAnalysis:
         leagues: str | list[str] | None = None,
         ids: str | list[str] | None = None,
         names: str | list[str] | None = None,
-    ) -> DataFrame:
+    ) -> pl.DataFrame:
         """Get information associated with referees
 
         Args:
@@ -484,7 +501,7 @@ class AmericanSoccerAnalysis:
             names (str | list[str] | None): a single referee name or a list of referee names. Defaults to None.
 
         Returns:
-            DataFrame
+            pl.DataFrame
         """
         if self.referees is None:
             self.referees = self._get_entity("referee")
@@ -496,7 +513,7 @@ class AmericanSoccerAnalysis:
         leagues: str | list[str] | None = None,
         ids: str | list[str] | None = None,
         names: str | list[str] | None = None,
-    ) -> DataFrame:
+    ) -> pl.DataFrame:
         """Get information associated with managers
 
         Args:
@@ -505,7 +522,7 @@ class AmericanSoccerAnalysis:
             names (str | list[str] | None): a single manager name or a list of manager names. Defaults to None.
 
         Returns:
-            DataFrame
+            pl.DataFrame
         """
         if self.managers is None:
             self.managers = self._get_entity("manager")
@@ -517,7 +534,7 @@ class AmericanSoccerAnalysis:
         leagues: str | list[str] | None = None,
         ids: str | list[str] | None = None,
         names: str | list[str] | None = None,
-    ) -> DataFrame:
+    ) -> pl.DataFrame:
         """Get information associated with teams
 
         Args:
@@ -526,7 +543,7 @@ class AmericanSoccerAnalysis:
             names (str | list[str] | None): a single team name or a list of team names. Defaults to None.
 
         Returns:
-            DataFrame
+            pl.DataFrame
         """
         if self.teams is None:
             self.teams = self._get_entity("team")
@@ -538,7 +555,7 @@ class AmericanSoccerAnalysis:
         leagues: str | list[str] | None = None,
         ids: str | list[str] | None = None,
         names: str | list[str] | None = None,
-    ) -> DataFrame:
+    ) -> pl.DataFrame:
         """Get information associated with players
 
         Args:
@@ -547,7 +564,7 @@ class AmericanSoccerAnalysis:
             names (str | list[str] | None): a single player name or a list of player names. Defaults to None.
 
         Returns:
-            DataFrame
+            pl.DataFrame
         """
         if self.players is None:
             self.players = self._get_entity("player")
@@ -563,7 +580,7 @@ class AmericanSoccerAnalysis:
         season_name: str | list[str] | None = None,
         stages: str | list[str] | None = None,
         status: str | list[str] | None = None,
-    ) -> DataFrame:
+    ) -> pl.DataFrame:
         """Get information related to games
 
         Args:
@@ -576,7 +593,7 @@ class AmericanSoccerAnalysis:
             status (str | list[str] | None): Describes the status (IE: if it's been played or otherwise) of a game. Can take a single value or a list of values. Valid keywords include: Abandoned, FullTime, PreMatch. Defaults to None.
 
         Returns:
-            DataFrame
+            pl.DataFrame
         """
         self._check_leagues(leagues)
         self._check_ids_names(team_ids, team_names)
@@ -599,7 +616,7 @@ class AmericanSoccerAnalysis:
             leagues = self.LEAGUES
 
         if isinstance(leagues, str):
-            games = DataFrame([])
+            games = pl.DataFrame()
             games_url = f"{self.base_url}{leagues}/games"
             response = self._execute_query(games_url, query)
 
@@ -611,15 +628,15 @@ class AmericanSoccerAnalysis:
                 response = self._execute_query(games_url, query)
 
                 frames.append(response)
-            games = concat(frames, ignore_index=True) if frames else DataFrame([])
-        if games.empty:
+            games = pl.concat(frames) if frames else pl.DataFrame()
+        if games.is_empty():
             return games
-        return games.sort_values(by=["date_time_utc"], ascending=False)
+        return games.sort("date_time_utc", descending=True)
 
     def get_player_xgoals(
         self, leagues: str | list[str] = LEAGUES, **kwargs
-    ) -> DataFrame:
-        """Retrieves a DataFrame containing player xG data meeting the specified conditions.
+    ) -> pl.DataFrame:
+        """Retrieves a pl.DataFrame containing player xG data meeting the specified conditions.
 
         Args:
             leagues (str | list[str]): League(s) on which to filter. Accepts a string or list of strings.
@@ -643,7 +660,7 @@ class AmericanSoccerAnalysis:
             general_position (str | list[str]): Describes the most common position played by each player over the specified period of time. Valid keywords include: 'GK', 'CB', 'FB', 'DM', 'CM', 'AM', 'W', and 'ST'. Accepts a string or list of strings.
 
         Returns:
-            DataFrame
+            pl.DataFrame
         """
         player_xgoals = self._get_stats(
             leagues, stat_type="xgoals", entity="players", **kwargs
@@ -652,8 +669,8 @@ class AmericanSoccerAnalysis:
 
     def get_player_xpass(
         self, leagues: str | list[str] = LEAGUES, **kwargs
-    ) -> DataFrame:
-        """Retrieves a DataFrame containing player xPass data meeting the specified conditions.
+    ) -> pl.DataFrame:
+        """Retrieves a pl.DataFrame containing player xPass data meeting the specified conditions.
 
         Args:
             leagues (str | list[str]): League(s) on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
@@ -676,7 +693,7 @@ class AmericanSoccerAnalysis:
             general_position (str | list[str]): Describes the most common position played by each player over the specified period of time. Valid keywords include: 'GK', 'CB', 'FB', 'DM', 'CM', 'AM', 'W', and 'ST'. Accepts a string or list of strings.
 
         Returns:
-            DataFrame
+            pl.DataFrame
         """
         player_xpass = self._get_stats(
             leagues, stat_type="xpass", entity="players", **kwargs
@@ -685,8 +702,8 @@ class AmericanSoccerAnalysis:
 
     def get_player_goals_added(
         self, leagues: str | list[str] = LEAGUES, **kwargs
-    ) -> DataFrame:
-        """Retrieves a DataFrame containing player g+ data meeting the specified conditions.
+    ) -> pl.DataFrame:
+        """Retrieves a pl.DataFrame containing player g+ data meeting the specified conditions.
 
         Args:
             leagues (str | list[str]): League(s) on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
@@ -709,7 +726,7 @@ class AmericanSoccerAnalysis:
             above_replacement (bool): Logical indicator to compare players against replacement-level values. This will only return aggregated g+ values, rather than disaggregated g+ values by action type.
 
         Returns:
-            DataFrame
+            pl.DataFrame
         """
         player_goals_added = self._get_stats(
             leagues, stat_type="goals-added", entity="players", **kwargs
@@ -718,8 +735,8 @@ class AmericanSoccerAnalysis:
 
     def get_player_salaries(
         self, leagues: str | list[str] = "mls", **kwargs
-    ) -> DataFrame:
-        """Retrieves a DataFrame containing player salary data meeting the specified conditions
+    ) -> pl.DataFrame:
+        """Retrieves a pl.DataFrame containing player salary data meeting the specified conditions
 
         Args:
             leagues (str | list[str]): Leagues on which to filter. Accepts a string or list of strings. Defaults to 'mls'.
@@ -735,7 +752,7 @@ class AmericanSoccerAnalysis:
             end_date (str): End of a date range. Must be a string in YYYY-MM-DD format. Cannot be combined with season_name.
 
         Returns:
-            DataFrame
+            pl.DataFrame
         """
         player_salaries = self._get_stats(
             leagues, stat_type="salaries", entity="players", **kwargs
@@ -744,8 +761,8 @@ class AmericanSoccerAnalysis:
 
     def get_goalkeeper_xgoals(
         self, leagues: str | list[str] = LEAGUES, **kwargs
-    ) -> DataFrame:
-        """Retrieves a DataFrame containing goalkeeper xG data meeting the specified conditions.
+    ) -> pl.DataFrame:
+        """Retrieves a pl.DataFrame containing goalkeeper xG data meeting the specified conditions.
 
         Args:
          leagues (str | list[str]): League(s) on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
@@ -767,7 +784,7 @@ class AmericanSoccerAnalysis:
             stage_name (str | list[str]): Describes the stage of competition in which a game took place. Accepts a string or list of strings.
 
         Returns:
-            DataFrame
+            pl.DataFrame
         """
         goalkeeper_xgoals = self._get_stats(
             leagues, stat_type="xgoals", entity="goalkeepers", **kwargs
@@ -776,8 +793,8 @@ class AmericanSoccerAnalysis:
 
     def get_goalkeeper_goals_added(
         self, leagues: str | list[str] = LEAGUES, **kwargs
-    ) -> DataFrame:
-        """Retrieves a DataFrame containing goalkeeper g+ data meeting the specified conditions.
+    ) -> pl.DataFrame:
+        """Retrieves a pl.DataFrame containing goalkeeper g+ data meeting the specified conditions.
 
         Args:
             leagues (str | list[str]): League(s) on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
@@ -799,7 +816,7 @@ class AmericanSoccerAnalysis:
             above_replacement (bool): Logical indicator to compare players against replacement-level values. This will only return aggregated g+ values, rather than disaggregated g+ values by action type.
 
         Returns:
-            DataFrame
+            pl.DataFrame
         """
         goalkeeper_goals_added = self._get_stats(
             leagues, stat_type="goals-added", entity="goalkeepers", **kwargs
@@ -808,8 +825,8 @@ class AmericanSoccerAnalysis:
 
     def get_team_xgoals(
         self, leagues: str | list[str] = LEAGUES, **kwargs
-    ) -> DataFrame:
-        """Retrieves a DataFrame containing team xG data meeting the specified conditions.
+    ) -> pl.DataFrame:
+        """Retrieves a pl.DataFrame containing team xG data meeting the specified conditions.
 
         Args:
             leagues (str | list[str]): Leagues on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
@@ -830,15 +847,15 @@ class AmericanSoccerAnalysis:
             stage_name (str | list[str]): Describes the stage of competition in which a game took place. Accepts a string or list of strings.
 
         Returns:
-            DataFrame
+            pl.DataFrame
         """
         team_xgoals = self._get_stats(
             leagues, stat_type="xgoals", entity="teams", **kwargs
         )
         return team_xgoals
 
-    def get_team_xpass(self, leagues: str | list[str] = LEAGUES, **kwargs) -> DataFrame:
-        """Retrieves a DataFrame containing team xPass data meeting the specified conditions.
+    def get_team_xpass(self, leagues: str | list[str] = LEAGUES, **kwargs) -> pl.DataFrame:
+        """Retrieves a pl.DataFrame containing team xPass data meeting the specified conditions.
 
         Args:
             leagues (str | list[str]): Leagues on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
@@ -857,7 +874,7 @@ class AmericanSoccerAnalysis:
             stage_name (str | list[str]): Describes the stage of competition in which a game took place. Accepts a string or list of strings.
 
         Returns:
-            DataFrame
+            pl.DataFrame
         """
         team_xpass = self._get_stats(
             leagues, stat_type="xpass", entity="teams", **kwargs
@@ -866,8 +883,8 @@ class AmericanSoccerAnalysis:
 
     def get_team_goals_added(
         self, leagues: str | list[str] = LEAGUES, **kwargs
-    ) -> DataFrame:
-        """Retrieves a DataFrame containing team g+ data meeting the specified conditions.
+    ) -> pl.DataFrame:
+        """Retrieves a pl.DataFrame containing team g+ data meeting the specified conditions.
 
         Args:
             leagues (str | list[str]): Leagues on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
@@ -883,7 +900,7 @@ class AmericanSoccerAnalysis:
             gamestate_trunc (int | list[int]): Integer (score differential) value between -2 and 2, inclusive. Gamestates more extreme than -2 and 2 have been included with -2 and 2, respectively. Accepts a number or list of numbers.
 
         Returns:
-            DataFrame
+            pl.DataFrame
         """
         team_goals_added = self._get_stats(
             leagues, stat_type="goals-added", entity="teams", **kwargs
@@ -892,8 +909,8 @@ class AmericanSoccerAnalysis:
 
     def get_team_salaries(
         self, leagues: str | list[str] = "mls", **kwargs
-    ) -> DataFrame:
-        """Retrieves a DataFrame containing team salary data meeting the specified conditions.
+    ) -> pl.DataFrame:
+        """Retrieves a pl.DataFrame containing team salary data meeting the specified conditions.
 
         Args:
             leagues (str | list[str]): Leagues on which to filter. Accepts a string or list of strings. Defaults to 'mls'.
@@ -907,7 +924,7 @@ class AmericanSoccerAnalysis:
             split_by_positions (bool): Logical indicator to group results by positions. Results must be grouped by at least one of teams, positions, or seasons.
 
         Returns:
-            DataFrame
+            pl.DataFrame
         """
         team_salaries = self._get_stats(
             leagues, stat_type="salaries", entity="teams", **kwargs
@@ -916,8 +933,8 @@ class AmericanSoccerAnalysis:
 
     def get_game_xgoals(
         self, leagues: str | list[str] = LEAGUES, **kwargs
-    ) -> DataFrame:
-        """Retrieves a DataFrame containing game xG data meeting the specified conditions.
+    ) -> pl.DataFrame:
+        """Retrieves a pl.DataFrame containing game xG data meeting the specified conditions.
 
         Args:
             leagues (str | list[str]): Leagues on which to filter. Accepts a string or list of strings. Defaults to LEAGUES.
@@ -930,7 +947,7 @@ class AmericanSoccerAnalysis:
             stage_name (str | list[str]): Describes the stage of competition in which a game took place. Accepts a string or list of strings.
 
         Returns:
-            DataFrame
+            pl.DataFrame
         """
         game_xgoals = self._get_stats(
             leagues, stat_type="xgoals", entity="games", **kwargs

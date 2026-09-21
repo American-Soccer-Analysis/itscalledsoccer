@@ -33,7 +33,7 @@ classifiers = [
 dependencies = [
   "requests>=2.31.0",
   "CacheControl>=0.13.1",
-  "pandas>=2.1.0",
+  "polars>=1.0.0",
 ]
 version = "2.2.0"
 
@@ -50,7 +50,7 @@ dev = [
   "mkdocs",
   "mkdocstrings[python]",
   "mkdocs-material",
-  "pandas-stubs"
+  "polars"
 ]
 
 [tool.setuptools.exclude-package-data]

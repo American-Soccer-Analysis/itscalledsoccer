@@ -28,7 +28,9 @@ All types of contributions are encouraged and valued. See the [Table of Contents
     - [Make your changes](#make-your-changes)
       - [Linting and formatting](#linting-and-formatting)
       - [Testing](#testing)
+      - [Building the package](#building-the-package)
     - [Open a pull request](#open-a-pull-request)
+  - [Releasing](#releasing)
   - [Improving The Documentation](#improving-the-documentation)
 - [Styleguides](#styleguides)
   - [Commit Messages](#commit-messages)
@@ -193,25 +195,57 @@ uv run ruff format itscalledsoccer
 
 ##### Testing
 
-`itscalledsoccer` uses [pytest](https://docs.pytest.org/en/8.2.x/#) for testing. To run the test suite, run `pytest` from the root directory of the repository.
+`itscalledsoccer` uses [pytest](https://docs.pytest.org/en/8.2.x/#) for testing. The test suite runs on every supported Python version in pull-request CI.
 
 ```sh
 uv run pytest
 ```
 
-Whenever you add or modify code, you should ensure that your changes have test coverage. To create a test coverage report, run the below command.
+Whenever you add or modify code, add or update test coverage. To create a terminal and HTML coverage report, run:
 
 ```sh
-uv run pytest --cov=itscalledsoccer --cov-report=html
+uv run pytest --cov=itscalledsoccer --cov-report=term-missing --cov-report=html
 ```
 
 Open `htmlcov/index.html` in a browser and review the generated coverage report.
+
+CI also publishes XML coverage results to
+[Codecov](https://codecov.io/gh/American-Soccer-Analysis/itscalledsoccer).
+
+##### Building the package
+
+Validate that the source distribution and wheel can be built before opening a
+pull request:
+
+```sh
+uv build
+```
 
 #### Open a pull request
 
 Once the tests are in good shape and the code has been linted and formatted, you're ready to open a pull request (PR). The [GitHub docs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) provide great instructions on how to do just that.
 
 Once the PR is open, one of the `itscalledsoccer` maintainers will approve the CI workflow run if needed and review the code.
+
+### Releasing
+
+Releases are published from GitHub Releases to PyPI using the trusted-publishing
+workflow. Maintainers should:
+
+1. Update the project version in `pyproject.toml` and
+   `[tool.commitizen].version`.
+2. Run `uv lock`, `uv build`, `uv run pytest`, `uv run ruff check itscalledsoccer`,
+   and `uv run ty check itscalledsoccer`.
+3. Move the relevant entries from `CHANGELOG.md` into a dated version section
+   and include security fixes under `Security`.
+4. Commit the release changes using Conventional Commits, create a matching
+   `v<version>` tag, and push the tag.
+5. Create and publish a GitHub Release for that tag. The published release
+   triggers `.github/workflows/pypi-publish.yml`.
+
+Release notes are maintained in [`CHANGELOG.md`](./CHANGELOG.md), and the
+security response and supported versions are documented in
+[`SECURITY.md`](./SECURITY.md).
 
 ### Improving The Documentation
 

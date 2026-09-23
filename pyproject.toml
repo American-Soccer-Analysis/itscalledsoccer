@@ -32,9 +32,9 @@ classifiers = [
 dependencies = [
   "requests>=2.31.0",
   "CacheControl>=0.13.1",
-  "pandas>=2.1.0",
+  "polars>=1.0.0",
 ]
-version = "2.2.0"
+version = "2.3.0"
 
 [project.urls]
 Repository = "https://github.com/American-Soccer-Analysis/itscalledsoccer"
@@ -49,8 +49,8 @@ dev = [
   "mkdocs",
   "mkdocstrings[python]",
   "mkdocs-material",
-  "pandas-stubs",
-  "commitizen>=4.8.3",
+  "polars",
+  "commitizen>=4.8.3"
 ]
 
 [tool.setuptools.exclude-package-data]

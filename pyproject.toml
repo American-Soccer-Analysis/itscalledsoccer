@@ -34,7 +34,7 @@ dependencies = [
   "CacheControl>=0.13.1",
   "polars>=1.0.0",
 ]
-version = "2.2.0"
+version = "2.3.0"
 
 [project.urls]
 Repository = "https://github.com/American-Soccer-Analysis/itscalledsoccer"

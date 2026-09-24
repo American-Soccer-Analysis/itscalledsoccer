@@ -457,6 +457,12 @@ class TestClient:
         with pytest.raises(InvalidLeagueError, match="is not valid"):
             self.client._check_leagues("invalid_league")
 
+    def test_check_leagues_invalid_type(self, init_client):
+        self.client = init_client
+
+        with pytest.raises(InvalidParameterFormatError, match="string or list of strings"):
+            self.client._check_leagues(123)
+
     def test_check_leagues_salaries_invalid(self, init_client):
         self.client = init_client
 
@@ -612,6 +618,12 @@ class TestClient:
 
         with pytest.raises(InvalidParameterFormatError, match="Season must be a valid year"):
             self.client._check_season_name("not_a_year")
+
+    def test_check_season_name_invalid_type(self, init_client):
+        self.client = init_client
+
+        with pytest.raises(InvalidParameterFormatError, match="Season must be a valid year"):
+            self.client._check_season_name(2023)
 
     def test_check_season_name_invalid_format_list(self, init_client):
         self.client = init_client

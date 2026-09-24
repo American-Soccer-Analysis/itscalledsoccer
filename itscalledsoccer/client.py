@@ -4,6 +4,7 @@ import polars as pl
 import requests
 from cachecontrol import CacheControl
 from cachecontrol.heuristics import ExpiresAfter
+from pydantic import ValidationError
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
@@ -14,6 +15,11 @@ from itscalledsoccer.errors import (
     InvalidParameterFormatError,
     InvalidSeasonError,
     SalaryDataError,
+)
+from itscalledsoccer.validation import (
+    QueryParameters,
+    SeasonParameters,
+    validation_error_message,
 )
 
 
@@ -205,18 +211,22 @@ class AmericanSoccerAnalysis:
         Args:
             leagues (str | list[str] | None): league abbreviation or list of league abbreviations
         """
-        if leagues:
-            if isinstance(leagues, list):
-                for league in leagues:
-                    if league not in self.LEAGUES:
-                        raise InvalidLeagueError(
-                            f"{league} is not a valid league. Must be one of: {self.LEAGUES}"
-                        )
-            else:
-                if leagues not in self.LEAGUES:
-                    raise InvalidLeagueError(
-                        f"{leagues} is not valid. Must be one of: {self.LEAGUES}"
+        try:
+            QueryParameters(leagues=leagues)
+        except ValidationError as exc:
+            raise InvalidParameterFormatError(validation_error_message(exc)) from exc
+
+        league_values = leagues if isinstance(leagues, list) else [leagues]
+        for league in league_values:
+            if league is not None and league not in self.LEAGUES:
+                if isinstance(leagues, list):
+                    message = (
+                        f"{league} is not a valid league. "
+                        f"Must be one of: {self.LEAGUES}"
                     )
+                else:
+                    message = f"{league} is not valid. Must be one of: {self.LEAGUES}"
+                raise InvalidLeagueError(message)
 
     def _check_leagues_salaries(self, leagues: str | list[str] | None) -> None:
         """Validates the leagues parameter for salary searches
@@ -224,13 +234,11 @@ class AmericanSoccerAnalysis:
         Args:
             leagues (str | list[str] | None): league abbreviation or list of league abbreviations
         """
+        self._check_leagues(leagues)
         if leagues:
-            if isinstance(leagues, list):
-                if any([x != "mls" for x in leagues]):
-                    raise SalaryDataError("Only MLS salary data is publicly available.")
-            else:
-                if leagues != "mls":
-                    raise SalaryDataError("Only MLS salary data is publicly available.")
+            league_values = leagues if isinstance(leagues, list) else [leagues]
+            if any(league != "mls" for league in league_values):
+                raise SalaryDataError("Only MLS salary data is publicly available.")
 
     def _check_ids_names(
         self, ids: str | list[str] | None, names: str | list[str] | None
@@ -242,22 +250,18 @@ class AmericanSoccerAnalysis:
             ids (str | list[str] | None): a single id or list of ids
             names (str | list[str] | None): a single name or list of names
         """
-        if ids and names:
-            raise ConflictingParametersError(
-                "Please specify only IDs or names, not both."
-            )
-
-        if ids:
-            if not isinstance(ids, str) and not isinstance(ids, list):
-                raise InvalidParameterFormatError(
-                    "IDs must be passed as a string or list of strings."
-                )
-
-        if names:
-            if not isinstance(names, str) and not isinstance(names, list):
-                raise InvalidParameterFormatError(
-                    "Names must be passed as a string or list of names."
-                )
+        try:
+            QueryParameters(ids=ids, names=names)
+        except ValidationError as exc:
+            if ids and names:
+                raise ConflictingParametersError(
+                    "Please specify only IDs or names, not both."
+                ) from exc
+            label = "IDs" if ids is not None else "Names"
+            raise InvalidParameterFormatError(
+                f"{label} must be passed as a string or list of "
+                f"{'strings' if ids is not None else 'names'}."
+            ) from exc
 
     def _check_season_name(self, season_name: str | list[str] | None) -> None:
         """Validates the season_name parameter to ensure data is available (2013 onward).
@@ -265,22 +269,13 @@ class AmericanSoccerAnalysis:
         Args:
             season_name (str | list[str] | None): season year(s) to validate
         """
-        if season_name is None:
-            return
-
-        seasons = season_name if isinstance(season_name, list) else [season_name]
-
-        for season in seasons:
-            try:
-                year = int(season)
-                if year < 2013:
-                    raise InvalidSeasonError(
-                        f"Data is only available from 2013 onward. Requested season: {year}"
-                    )
-            except ValueError:
-                raise InvalidParameterFormatError(
-                    f"Season must be a valid year. Received: {season}"
-                )
+        try:
+            SeasonParameters(season_name=season_name)
+        except ValidationError as exc:
+            message = validation_error_message(exc)
+            if message.startswith("Data is only available"):
+                raise InvalidSeasonError(message) from exc
+            raise InvalidParameterFormatError(message) from exc
 
     def _filter_entity(
         self,

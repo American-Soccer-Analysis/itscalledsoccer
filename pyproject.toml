@@ -33,8 +33,9 @@ dependencies = [
   "requests>=2.31.0",
   "CacheControl>=0.13.1",
   "polars>=1.0.0",
+  "pydantic>=2.0.0",
 ]
-version = "2.3.0"
+version = "2.4.0"
 
 [project.urls]
 Repository = "https://github.com/American-Soccer-Analysis/itscalledsoccer"
@@ -62,6 +63,6 @@ extend-select = ["I"]
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "2.1.0"
+version = "2.4.0"
 tag_format = "v$version"
 message_length_limit = 100

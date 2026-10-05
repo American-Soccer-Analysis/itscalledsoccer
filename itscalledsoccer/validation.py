@@ -5,12 +5,20 @@ from typing import Any
 from pydantic import (
     BaseModel,
     ConfigDict,
-    ValidationError,
+    ValidationInfo,
     field_validator,
     model_validator,
 )
 
+from itscalledsoccer.errors import (
+    ConflictingParametersError,
+    InvalidLeagueError,
+    InvalidParameterFormatError,
+    InvalidSeasonError,
+)
+
 StringOrStrings = str | list[str] | None
+VALID_LEAGUES = ("nwsl", "mls", "uslc", "usl1", "usls", "nasl", "mlsnp")
 
 
 class QueryParameters(BaseModel):
@@ -41,12 +49,51 @@ class QueryParameters(BaseModel):
         mode="before",
     )
     @classmethod
-    def validate_string_or_strings(cls, value: Any) -> StringOrStrings:
+    def validate_string_or_strings(
+        cls, value: Any, info: ValidationInfo
+    ) -> StringOrStrings:
         if value is None or isinstance(value, str):
-            return value
-        if isinstance(value, list) and all(isinstance(item, str) for item in value):
-            return value
-        raise ValueError("must be a string or list of strings")
+            values = [value] if value is not None else []
+        elif isinstance(value, list) and all(isinstance(item, str) for item in value):
+            values = value
+        else:
+            field_labels = {
+                "ids": "IDs",
+                "game_ids": "IDs",
+                "team_ids": "IDs",
+                "player_ids": "IDs",
+                "names": "Names",
+                "team_names": "Names",
+                "player_names": "Names",
+                "leagues": "Leagues",
+                "season_name": "Season",
+            }
+            label = field_labels.get(info.field_name or "", "Parameter")
+            value_description = (
+                "list of names"
+                if info.field_name in {"names", "team_names", "player_names"}
+                else "list of strings"
+            )
+            raise InvalidParameterFormatError(
+                f"{label} must be passed as a string or {value_description}."
+            )
+
+        if info.field_name == "leagues":
+            valid_leagues = (info.context or {}).get("valid_leagues", VALID_LEAGUES)
+            for league in values:
+                if (isinstance(value, list) or league) and league not in valid_leagues:
+                    if isinstance(value, list):
+                        message = (
+                            f"{league} is not a valid league. "
+                            f"Must be one of: {list(valid_leagues)}"
+                        )
+                    else:
+                        message = (
+                            f"{league} is not valid. "
+                            f"Must be one of: {list(valid_leagues)}"
+                        )
+                    raise InvalidLeagueError(message)
+        return value
 
     @model_validator(mode="after")
     def validate_id_name_pairs(self) -> "QueryParameters":
@@ -56,12 +103,14 @@ class QueryParameters(BaseModel):
             ("team_ids", "team_names", "team IDs or names"),
         ):
             if getattr(self, ids_field) and getattr(self, names_field):
-                raise ValueError(f"Please specify only {label}, not both.")
+                raise ConflictingParametersError(
+                    f"Please specify only {label}, not both."
+                )
         return self
 
 
 class SeasonParameters(BaseModel):
-    """Validates season values supported by the API."""
+    """Validates season years and names supported by the API."""
 
     model_config = ConfigDict(strict=True)
 
@@ -70,30 +119,36 @@ class SeasonParameters(BaseModel):
     @field_validator("season_name", mode="before")
     @classmethod
     def validate_season_type(cls, value: Any) -> StringOrStrings:
-        if value is None or isinstance(value, str):
-            seasons = [] if value is None else [value]
-        elif isinstance(value, list) and all(isinstance(item, str) for item in value):
-            seasons = value
+        if value is None:
+            return None
+        if isinstance(value, int) and not isinstance(value, bool):
+            seasons = [str(value)]
+            normalized_value: StringOrStrings = seasons[0]
+        elif isinstance(value, str):
+            seasons = [value]
+            normalized_value = value
+        elif isinstance(value, list) and all(
+            isinstance(item, str)
+            or (isinstance(item, int) and not isinstance(item, bool))
+            for item in value
+        ):
+            seasons = [str(item) for item in value]
+            normalized_value = seasons
         else:
-            raise ValueError("Season must be a valid year.")
+            raise InvalidParameterFormatError(
+                "Season must be a string, integer, or list of strings or integers."
+            )
 
         for season in seasons:
             try:
                 year = int(season)
-            except ValueError as exc:
-                raise ValueError(
-                    f"Season must be a valid year. Received: {season}"
-                ) from exc
+            except ValueError:
+                if len(season) >= 7 and season[:4].isdigit() and season[4] == "-":
+                    year = int(season[:4])
+                else:
+                    continue
             if year < 2013:
-                raise ValueError(
+                raise InvalidSeasonError(
                     f"Data is only available from 2013 onward. Requested season: {year}"
                 )
-        return value
-
-
-def validation_error_message(error: ValidationError) -> str:
-    """Return a concise, stable message for the client's public exceptions."""
-
-    return "; ".join(
-        str(item["msg"]).removeprefix("Value error, ") for item in error.errors()
-    )
+        return normalized_value

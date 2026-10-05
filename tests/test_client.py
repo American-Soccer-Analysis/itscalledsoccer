@@ -1,14 +1,13 @@
+import json
 from pathlib import Path
 from unittest.mock import patch
 
-import json
-
-import pytest
 import polars as pl
+import pytest
 from pytest import fixture
 
-from itscalledsoccer.client import AmericanSoccerAnalysis
 from itscalledsoccer import AmericanSoccerAnalysis as ASAFromPackage
+from itscalledsoccer.client import AmericanSoccerAnalysis
 from itscalledsoccer.errors import (
     ConflictingParametersError,
     InvalidLeagueError,
@@ -385,6 +384,16 @@ class TestClient:
             assert isinstance(games, pl.DataFrame)
             assert len(games) >= 2
 
+    def test_get_games_normalizes_integer_season(self):
+        with patch(
+            "itscalledsoccer.client.AmericanSoccerAnalysis._execute_query"
+        ) as mock_query:
+            mock_query.return_value = pl.DataFrame()
+            self.client = AmericanSoccerAnalysis()
+            self.client.get_games(leagues="mls", season_name=2023)
+
+        assert mock_query.call_args.args[1]["season_name"] == "2023"
+
     def test_convert_names_to_ids_with_string(self):
         self.client = AmericanSoccerAnalysis()
         self.client.players = pl.DataFrame(
@@ -438,7 +447,7 @@ class TestClient:
 
         assert player_id == ""
 
-    def test_convert_names_to_ids_with_list(self):
+    def test_convert_team_names_to_ids_with_list(self):
         self.client = AmericanSoccerAnalysis()
         self.client.teams = pl.DataFrame(
             [
@@ -545,7 +554,7 @@ class TestClient:
         result = self.client._convert_names_to_ids("player", None)
         assert result is None
 
-    def test_convert_names_to_ids_with_list(self):
+    def test_convert_player_names_to_ids_with_list(self):
         self.client = AmericanSoccerAnalysis()
         self.client.players = pl.DataFrame(
             [
@@ -601,6 +610,13 @@ class TestClient:
         # Should not raise for list of valid years
         self.client._check_season_name(["2020", "2021", "2022"])
 
+    def test_check_season_name_accepts_integer_years_and_names(self, init_client):
+        self.client = init_client
+
+        assert self.client._check_season_name(2023) == "2023"
+        assert self.client._check_season_name("2025-26") == "2025-26"
+        assert self.client._check_season_name(["2023", 2024]) == ["2023", "2024"]
+
     def test_check_season_name_before_2013_single(self, init_client):
         self.client = init_client
 
@@ -613,23 +629,25 @@ class TestClient:
         with pytest.raises(InvalidSeasonError, match="Data is only available from 2013 onward"):
             self.client._check_season_name(["2020", "2012"])
 
-    def test_check_season_name_invalid_format(self, init_client):
+    def test_check_season_name_before_2013_season_name(self, init_client):
         self.client = init_client
 
-        with pytest.raises(InvalidParameterFormatError, match="Season must be a valid year"):
-            self.client._check_season_name("not_a_year")
+        with pytest.raises(InvalidSeasonError, match="Data is only available from 2013 onward"):
+            self.client._check_season_name("2012-13")
+
+    def test_check_season_name_accepts_named_seasons(self, init_client):
+        self.client = init_client
+
+        assert self.client._check_season_name("not_a_year") == "not_a_year"
 
     def test_check_season_name_invalid_type(self, init_client):
         self.client = init_client
 
-        with pytest.raises(InvalidParameterFormatError, match="Season must be a valid year"):
-            self.client._check_season_name(2023)
+        with pytest.raises(InvalidParameterFormatError, match="Season must be"):
+            self.client._check_season_name(True)
 
-    def test_check_season_name_invalid_format_list(self, init_client):
-        self.client = init_client
-
-        with pytest.raises(InvalidParameterFormatError, match="Season must be a valid year"):
-            self.client._check_season_name(["2020", "invalid"])
+        with pytest.raises(InvalidParameterFormatError, match="Season must be"):
+            self.client._check_season_name(["2020", False])
 
     def test_filter_entity_by_ids_and_leagues(self, init_client):
         self.client = init_client
@@ -687,52 +705,8 @@ class TestClient:
         first = pl.DataFrame([{"value": 1}, {"value": 2}])
 
         with patch.object(self.client, "_single_request", return_value=first) as mock_single:
-            result = self.client._execute_query("http://example.com/api", {"ids": ["a", "b"]})
+            self.client._execute_query("http://example.com/api", {"ids": ["a", "b"]})
 
         assert mock_single.call_count == 1
         args, _ = mock_single.call_args
         assert args[1]["ids"] == "a,b"
-
-    def test_get_team_xgoals(self, init_client):
-        self.client = init_client
-        with patch(
-            "itscalledsoccer.client.AmericanSoccerAnalysis._get_stats"
-        ) as mock_stats:
-            mock_stats.return_value = self.load_mock_data("teams_xgoals")
-            data = self.client.get_team_xgoals()
-            assert data is not None
-            assert isinstance(data, pl.DataFrame)
-            assert len(data) >= 2
-
-    def test_get_team_xpass(self, init_client):
-        self.client = init_client
-        with patch(
-            "itscalledsoccer.client.AmericanSoccerAnalysis._get_stats"
-        ) as mock_stats:
-            mock_stats.return_value = self.load_mock_data("teams_xpass")
-            data = self.client.get_team_xpass()
-            assert data is not None
-            assert isinstance(data, pl.DataFrame)
-            assert len(data) >= 2
-
-    def test_get_team_goals_added(self, init_client):
-        self.client = init_client
-        with patch(
-            "itscalledsoccer.client.AmericanSoccerAnalysis._get_stats"
-        ) as mock_stats:
-            mock_stats.return_value = self.load_mock_data("teams_goals_added")
-            data = self.client.get_team_goals_added()
-            assert data is not None
-            assert isinstance(data, pl.DataFrame)
-            assert len(data) >= 2
-
-    def test_get_game_xgoals(self, init_client):
-        self.client = init_client
-        with patch(
-            "itscalledsoccer.client.AmericanSoccerAnalysis._get_stats"
-        ) as mock_stats:
-            mock_stats.return_value = self.load_mock_data("games_xgoals")
-            data = self.client.get_game_xgoals()
-            assert data is not None
-            assert isinstance(data, pl.DataFrame)
-            assert len(data) >= 2

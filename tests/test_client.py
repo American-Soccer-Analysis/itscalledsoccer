@@ -28,6 +28,29 @@ class TestClient:
         assert ASAFromPackage is AmericanSoccerAnalysis
         assert ASAFromPackage.__name__ == "AmericanSoccerAnalysis"
 
+    def test_get_entity_concatenates_different_league_columns(self):
+        self.client = AmericanSoccerAnalysis()
+        self.client.LEAGUES = ["mls", "nwsl"]
+        responses = iter(
+            [
+                pl.DataFrame({"player_id": ["p1"], "rating": [1]}),
+                pl.DataFrame(
+                    {"player_id": ["p2"], "rating": [1.5], "extra": ["value"]}
+                ),
+            ]
+        )
+
+        with patch.object(
+            self.client, "_execute_query", side_effect=lambda url, params: next(responses)
+        ):
+            players = self.client._get_entity("player")
+
+        assert players.columns == ["player_id", "rating", "competition", "extra"]
+        assert players["player_id"].to_list() == ["p1", "p2"]
+        assert players["rating"].to_list() == [1.0, 1.5]
+        assert players["competition"].to_list() == ["mls", "nwsl"]
+        assert players["extra"].to_list() == [None, "value"]
+
     def test_custom_exceptions_exported_from_package(self):
         import itscalledsoccer
         

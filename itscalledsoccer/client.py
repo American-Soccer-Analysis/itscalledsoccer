@@ -133,7 +133,7 @@ class AmericanSoccerAnalysis:
             resp_df = self._execute_query(url, {})
             resp_df = resp_df.with_columns(pl.lit(league).alias("competition"))
             frames.append(resp_df)
-        return pl.concat(frames) if frames else pl.DataFrame()
+        return pl.concat(frames, how="diagonal_relaxed") if frames else pl.DataFrame()
 
     def _convert_name_to_id(self, entity_type: str, name: str) -> str:
         """Converts the name of a player, manager, stadium, referee or team

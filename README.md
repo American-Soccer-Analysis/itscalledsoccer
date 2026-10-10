@@ -101,7 +101,7 @@ cd itscalledsoccer
 pip install -e ".[dev]"
 ```
 
-**Requirements:** Python 3.10+, `requests`, `polars`, `cachecontrol`
+**Requirements:** Python 3.10+, `requests`, `polars`, `cachecontrol`, `pydantic`
 
 ---
 

@@ -8,12 +8,13 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
 from itscalledsoccer.errors import (
-    ConflictingParametersError,
     InvalidEntityTypeError,
-    InvalidLeagueError,
-    InvalidParameterFormatError,
-    InvalidSeasonError,
     SalaryDataError,
+)
+from itscalledsoccer.validation import (
+    VALID_LEAGUES,
+    QueryParameters,
+    SeasonParameters,
 )
 
 
@@ -39,7 +40,7 @@ class AmericanSoccerAnalysis:
 
     API_VERSION = "v1"
     BASE_URL = f"https://app.americansocceranalysis.com/api/{API_VERSION}/"
-    LEAGUES = ["nwsl", "mls", "uslc", "usl1", "usls", "nasl", "mlsnp"]
+    LEAGUES = list(VALID_LEAGUES)
     MAX_API_LIMIT = 1000
 
     def __init__(
@@ -132,7 +133,7 @@ class AmericanSoccerAnalysis:
             resp_df = self._execute_query(url, {})
             resp_df = resp_df.with_columns(pl.lit(league).alias("competition"))
             frames.append(resp_df)
-        return pl.concat(frames) if frames else pl.DataFrame()
+        return pl.concat(frames, how="diagonal_relaxed") if frames else pl.DataFrame()
 
     def _convert_name_to_id(self, entity_type: str, name: str) -> str:
         """Converts the name of a player, manager, stadium, referee or team
@@ -205,18 +206,9 @@ class AmericanSoccerAnalysis:
         Args:
             leagues (str | list[str] | None): league abbreviation or list of league abbreviations
         """
-        if leagues:
-            if isinstance(leagues, list):
-                for league in leagues:
-                    if league not in self.LEAGUES:
-                        raise InvalidLeagueError(
-                            f"{league} is not a valid league. Must be one of: {self.LEAGUES}"
-                        )
-            else:
-                if leagues not in self.LEAGUES:
-                    raise InvalidLeagueError(
-                        f"{leagues} is not valid. Must be one of: {self.LEAGUES}"
-                    )
+        QueryParameters.model_validate(
+            {"leagues": leagues}, context={"valid_leagues": self.LEAGUES}
+        )
 
     def _check_leagues_salaries(self, leagues: str | list[str] | None) -> None:
         """Validates the leagues parameter for salary searches
@@ -224,13 +216,11 @@ class AmericanSoccerAnalysis:
         Args:
             leagues (str | list[str] | None): league abbreviation or list of league abbreviations
         """
+        self._check_leagues(leagues)
         if leagues:
-            if isinstance(leagues, list):
-                if any([x != "mls" for x in leagues]):
-                    raise SalaryDataError("Only MLS salary data is publicly available.")
-            else:
-                if leagues != "mls":
-                    raise SalaryDataError("Only MLS salary data is publicly available.")
+            league_values = leagues if isinstance(leagues, list) else [leagues]
+            if any(league != "mls" for league in league_values):
+                raise SalaryDataError("Only MLS salary data is publicly available.")
 
     def _check_ids_names(
         self, ids: str | list[str] | None, names: str | list[str] | None
@@ -242,45 +232,22 @@ class AmericanSoccerAnalysis:
             ids (str | list[str] | None): a single id or list of ids
             names (str | list[str] | None): a single name or list of names
         """
-        if ids and names:
-            raise ConflictingParametersError(
-                "Please specify only IDs or names, not both."
-            )
+        QueryParameters(ids=ids, names=names)
 
-        if ids:
-            if not isinstance(ids, str) and not isinstance(ids, list):
-                raise InvalidParameterFormatError(
-                    "IDs must be passed as a string or list of strings."
-                )
-
-        if names:
-            if not isinstance(names, str) and not isinstance(names, list):
-                raise InvalidParameterFormatError(
-                    "Names must be passed as a string or list of names."
-                )
-
-    def _check_season_name(self, season_name: str | list[str] | None) -> None:
-        """Validates the season_name parameter to ensure data is available (2013 onward).
+    def _check_season_name(
+        self, season_name: str | int | list[str | int] | None
+    ) -> str | list[str] | None:
+        """Validates and normalizes a season name or year.
 
         Args:
-            season_name (str | list[str] | None): season year(s) to validate
+            season_name (str | int | list[str | int] | None): season name(s) or year(s)
+
+        Returns:
+            str | list[str] | None: normalized season name(s) or year(s)
         """
-        if season_name is None:
-            return
-
-        seasons = season_name if isinstance(season_name, list) else [season_name]
-
-        for season in seasons:
-            try:
-                year = int(season)
-                if year < 2013:
-                    raise InvalidSeasonError(
-                        f"Data is only available from 2013 onward. Requested season: {year}"
-                    )
-            except ValueError:
-                raise InvalidParameterFormatError(
-                    f"Season must be a valid year. Received: {season}"
-                )
+        return SeasonParameters.model_validate(
+            {"season_name": season_name}
+        ).season_name
 
     def _filter_entity(
         self,
@@ -401,6 +368,8 @@ class AmericanSoccerAnalysis:
             pl.DataFrame
         """
         self.logger.info(f"get_stats called with {locals()}")
+        if "season_name" in kwargs:
+            kwargs["season_name"] = self._check_season_name(kwargs["season_name"])
         if stat_type == "salaries":
             self._check_leagues_salaries(leagues)
             if (
@@ -577,7 +546,7 @@ class AmericanSoccerAnalysis:
         game_ids: str | list[str] | None = None,
         team_ids: str | list[str] | None = None,
         team_names: str | list[str] | None = None,
-        season_name: str | list[str] | None = None,
+        season_name: str | int | list[str | int] | None = None,
         stages: str | list[str] | None = None,
         status: str | list[str] | None = None,
     ) -> pl.DataFrame:
@@ -588,7 +557,7 @@ class AmericanSoccerAnalysis:
             game_ids (str | list[str] | None): a single game id or a list of game ids. Defaults to None.
             team_ids (str | list[str] | None): a single team id or a list of team ids. Defaults to None.
             team_names (str | list[str] | None): a single team name or a list of team names. Defaults to None.
-            season_name (str | list[str] | None): a single year of a league season or a list of years. Defaults to None.
+            season_name (str | int | list[str | int] | None): season name(s) or year(s). Defaults to None.
             stages (str | list[str] | None): a single stage of competition in which a game took place or list of stages. Defaults to None.
             status (str | list[str] | None): Describes the status (IE: if it's been played or otherwise) of a game. Can take a single value or a list of values. Valid keywords include: Abandoned, FullTime, PreMatch. Defaults to None.
 
@@ -597,6 +566,7 @@ class AmericanSoccerAnalysis:
         """
         self._check_leagues(leagues)
         self._check_ids_names(team_ids, team_names)
+        validated_season_name = self._check_season_name(season_name)
 
         query: dict[str, str | list[str] | None] = {}
 
@@ -606,8 +576,8 @@ class AmericanSoccerAnalysis:
             query["team_id"] = self._convert_names_to_ids("team", team_names)
         if team_ids:
             query["team_id"] = team_ids
-        if season_name:
-            query["season_name"] = season_name
+        if validated_season_name:
+            query["season_name"] = validated_season_name
         if stages:
             query["stage_name"] = stages
         if status:

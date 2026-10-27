@@ -56,6 +56,9 @@
 
 The API is **free and public** — no authentication required.
 
+Data returned by this API is licensed under
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+
 **Supported leagues:**
 
 | Code    | League                                    |

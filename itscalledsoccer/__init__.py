@@ -10,8 +10,8 @@ from itscalledsoccer.errors import (
 )
 
 __all__ = [
-    "AmericanSoccerAnalysis",
     "ASAError",
+    "AmericanSoccerAnalysis",
     "ConflictingParametersError",
     "InvalidEntityTypeError",
     "InvalidLeagueError",

@@ -1,4 +1,5 @@
 from logging import getLogger
+from typing import ClassVar
 
 import polars as pl
 import requests
@@ -40,7 +41,7 @@ class AmericanSoccerAnalysis:
 
     API_VERSION = "v1"
     BASE_URL = f"https://app.americansocceranalysis.com/api/{API_VERSION}/"
-    LEAGUES = list(VALID_LEAGUES)
+    LEAGUES: ClassVar[list[str]] = list(VALID_LEAGUES)
     MAX_API_LIMIT = 1000
 
     def __init__(

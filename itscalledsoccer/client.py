@@ -165,9 +165,7 @@ class AmericanSoccerAnalysis:
         names = lookup[name_col].to_list()
 
         matched_names = [
-            candidate
-            for candidate in names
-            if name.casefold() in candidate.casefold()
+            candidate for candidate in names if name.casefold() in candidate.casefold()
         ]
         if not matched_names:
             self.logger.info(f"No match found for {name}")
@@ -245,9 +243,7 @@ class AmericanSoccerAnalysis:
         Returns:
             str | list[str] | None: normalized season name(s) or year(s)
         """
-        return SeasonParameters.model_validate(
-            {"season_name": season_name}
-        ).season_name
+        return SeasonParameters.model_validate({"season_name": season_name}).season_name
 
     def _filter_entity(
         self,
@@ -319,9 +315,7 @@ class AmericanSoccerAnalysis:
                 temp_response = self._single_request(url, params)
                 frames.append(temp_response)
                 offset = offset + self.MAX_API_LIMIT
-            response = (
-                pl.concat([response] + frames) if frames else response
-            )
+            response = pl.concat([response] + frames) if frames else response
 
         return response
 
@@ -824,7 +818,9 @@ class AmericanSoccerAnalysis:
         )
         return team_xgoals
 
-    def get_team_xpass(self, leagues: str | list[str] = LEAGUES, **kwargs) -> pl.DataFrame:
+    def get_team_xpass(
+        self, leagues: str | list[str] = LEAGUES, **kwargs
+    ) -> pl.DataFrame:
         """Retrieves a pl.DataFrame containing team xPass data meeting the specified conditions.
 
         Args:
